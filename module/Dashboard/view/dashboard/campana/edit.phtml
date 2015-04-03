@@ -1,0 +1,492 @@
+<?php
+$directorio = $dir_image . "\\..\\..\\public\\";
+$id_campana = $this->form->get('id_campana')->getValue();
+if (file_exists($directorio . "img\\" . $id_campana . "\\small")) {
+    $ficheros = scandir($directorio . "img\\" . $id_campana . "\\small");
+} else {
+    $ficheros = array();
+}
+if (file_exists($directorio . "img\\" . $id_campana . "\\small2")) {
+    $ficheros2 = scandir($directorio . "img\\" . $id_campana . "\\small2");
+} else {
+    $ficheros2 = array();
+}
+$contador = -1;
+?>
+<?php echo $this->form()->openTag($this->form); ?>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h4 class="panel-title">Modificación de Campaña</h4>
+    </div>
+    <div class="panel-body">
+        <!--div class="form-group">
+            <label for="id_campana" class="col-lg-2 control-label">Identificador :</label>
+            <div class="col-lg-8">
+                
+            </div>
+        </div-->
+        
+        <div class="form-group">
+            <label for="subtitulo" class="col-lg-2 control-label">Título Portada :</label>
+            <div class="col-lg-8">
+                <?php echo $this->formRow($this->form->get('subtitulo')); ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="titulo" class="col-lg-2 control-label">Título Detalle:</label>
+            <div class="col-lg-8">
+                <?php echo $this->formRow($this->form->get('titulo')); ?>
+                <?php echo $this->formRow($this->form->get('id_campana')); ?>
+            </div>
+        </div>
+        <!--div class="form-group">
+            <label for="descripcion" class="col-lg-2 control-label">Descripción :</label>
+            <div class="col-lg-8">
+                <?php// echo $this->formRow($this->form->get('descripcion')); ?>
+            </div>
+        </div-->
+
+        <div class="form-group">
+            <label for="sobre_campana" class="col-lg-2 control-label">Sobre Campaña :</label>
+            <div class="col-lg-8">
+                <?php echo $this->formRow($this->form->get('sobre_campana')); ?>
+                <div class="edit-texto" id="div_sobre_campana" data-toggle="sobre_campana" data-description="Sobre Campaña"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="observaciones" class="col-lg-2 control-label">Lo que debes saber :</label>
+            <div class="col-lg-8">
+                <?php echo $this->formRow($this->form->get('observaciones')); ?>
+                <div class="edit-texto" id="div_observaciones" data-toggle="observaciones" data-description="Lo que debes saber"></div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="id_empresa" class="col-lg-2 control-label">Empresa :</label>
+            <div class="col-lg-8">
+                <?php echo $this->formRow($this->form->get('id_empresa')); ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="fecha_inicio" class="col-lg-2 control-label">Fecha Inicio :</label>
+            <div class="col-lg-2">
+                <div class="input-group date" id='fecha_inicio'>
+                    <?php echo $this->formRow($this->form->get('fecha_inicio')); ?>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="hora_inicio" class="col-lg-2 control-label">Hora Inicio :</label>
+            <div class="col-lg-2">
+                <div class="input-group date" id='hora_inicio'>
+                    <?php echo $this->formRow($this->form->get('hora_inicio')); ?>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-time"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="fecha_final" class="col-lg-2 control-label">Fecha Final :</label>
+            <div class="col-lg-2">
+                <div class="input-group date" id='fecha_final'>
+                    <?php echo $this->formRow($this->form->get('fecha_final')); ?>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="hora_final" class="col-lg-2 control-label">Hora Final :</label>
+            <div class="col-lg-2">
+                <div class="input-group date" id='hora_final'>
+                    <?php echo $this->formRow($this->form->get('hora_final')); ?>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-time"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="fecha_validez" class="col-lg-2 control-label">Fecha Validez :</label>
+            <div class="col-lg-2">
+                <div class="input-group date" id='fecha_validez'>
+                    <?php echo $this->formRow($this->form->get('fecha_validez')); ?>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="categoria" class="col-lg-2 control-label">Categoría :</label>
+            <div class="col-lg-8">
+                <input type="hidden" id="id_categoria" name="id_categoria" value="">
+                <select id="example-dataprovider-optgroups" multiple="multiple">
+                    <?php
+                    $grupo = '';
+                    foreach ($categorias as $categoria) {
+                        if ($categoria['categoria'] != $grupo) {
+                            if ($grupo != '') {
+                                ?>        
+                                </optgroup>
+                            <?php } ?>
+                            <optgroup label="<?php echo $categoria['categoria']; ?>">
+                            <?php } ?>
+                            <option value="<?php echo $categoria['id_sub_categoria']; ?>" <?php if ($categoria['sel'] == '1') echo 'selected'; ?>><?php echo $categoria['subcategoria']; ?></option>
+                            <?php
+                            $grupo = $categoria['categoria'];
+                        }
+                        if ($grupo != '') {
+                            ?>
+                        </optgroup>
+                        <?php
+                    }
+                    ?>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="image-file2" class="col-lg-2 control-label">Imagen Portada :</label>
+            <div class="col-lg-8">
+                <input id="image-file2" name="image-file2" type="file" multiple=true class="file" data-upload-url="../../../../campana/upload2" data-max-file-count="1">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="image-file" class="col-lg-2 control-label">Imagenes Detalle :</label>
+            <div class="col-lg-8">
+                <input id="image-file" name="image-file" type="file" multiple=true class="file" data-upload-url="../../../../campana/upload" data-max-file-count="10">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="fecha_validez" class="col-lg-2 control-label">Opciones Venta:</label>
+            <div class="col-lg-8" >
+                <div class="well">
+                
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered" id="js-tabla-opciones">
+                        <thead >
+                            <tr class="btn-danger">
+                                <th>#</th>
+                                <th>Descripción</th>
+                                <th>Precio regular</th>
+                                <th>Precio especial</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $contador = 0;
+                            foreach ($opciones as $opcion) {
+                                $contador++;
+                                ?>
+                            <tr class="warning">
+                                    <td><span class="badge"><?php echo $contador; ?></span></td>
+                                    <td><div id="descripcion<?php echo $opcion['id_campana_opcion']; ?>"><?php echo $opcion['descripcion']; ?></div></td>
+                                    <td><?php echo $opcion['precio_regular']; ?></td>
+                                    <td><?php echo $opcion['precio_especial']; ?></td>
+                                    <td><div class="btn btn-warning" onclick="javascript:edicionOpcion('<?php echo $opcion['id_campana_opcion']; ?>', '<?php echo $opcion['id_campana']; ?>')" title="Modificar opción de venta"><span class="glyphicon glyphicon-edit"></span></div></td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+                    <div class="btn btn-warning" onclick="javascript:nuevaOpcion()" title='Nueva opción de venta'><samp class=" glyphicon glyphicon-file"></samp> Nueva Opción de venta</div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-offset-2 col-lg-7">
+                <?php echo $this->formRow($this->form->get('submit')); ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /INCLUDE THIS SECTION FOR USING MODAL DIALOG -->
+<?php echo $this->form()->closeTag(); ?>
+<div id="content" class="hide"></div>
+<!-- INCLUDE THIS SECTION FOR USING MODAL DIALOG -->
+<div class="modal fade" id="modalEditor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Opción - Campaña</h4>
+            </div>
+            <div class="modal-body" style="height:580px">
+                <form>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">Descripción:</label>
+                        <div class="col-xs-13"> 
+                            <div id="divEditor"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="precio_regular" class="col-lg-4 control-label">Precio Regular:</label>
+                        <div class="col-xs-9"> 
+                            <input type="hidden" class="form-control" name="pk_campana_opcion" id="pk_campana_opcion" value="">
+                            <input type="hidden" class="form-control" name="pk_campana" id="pk_campana" value="">
+                            <input type="text" class="form-control" name="precio_regular" id="precio_regular" value="">
+                            <span class="help-block with-errors"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="precio_especial" class="col-lg-4 control-label">Precio Especial:</label>
+                        <div class="col-xs-9"> 
+                            <input type="text" class="form-control" name="precio_especial" id="precio_especial" value="">
+                            <span class="help-block with-errors"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                <button class="btn btn-primary" onclick="javascript:grabaOpcion();"> &nbsp; Ok &nbsp; </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Editor HTML -->
+<div id="contentText" class="hide"></div>
+<div class="modal fade" id="modalEditorText" tabindex="-1" role="dialog" aria-labelledby="myModalLabelText" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" style="height:460px">
+                <form>
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label" id="descripcionText"></label>
+                        <input type="hidden" id="textId" value="">
+                        <div class="col-xs-13"> 
+                            <div id="divEditorText"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                <button class="btn btn-primary" onclick="javascript:grabaOpcionText();"> &nbsp; Ok &nbsp; </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var editor;
+
+    $("#image-file").fileinput({
+    uploadUrl: "' . Url::to(['../../../../campana/upload']) . '",
+            maxFileCount: 10,
+            overwriteInitial: false,
+            initialPreview: [
+<?php
+foreach ($ficheros as $file) {
+    if ($file == '.' || $file == '..')
+        continue;
+    ?>
+                '<img src="/img/<?php echo $id_campana; ?>/small/<?php echo $file; ?>" class="file-preview-image">',
+<?php } ?>
+            ],
+            initialPreviewConfig: [
+<?php
+foreach ($ficheros as $file) {
+    if ($file == '.' || $file == '..')
+        continue;
+    ?>
+                {caption: "<?php echo $file; ?>", width: "50px", url:"../../../../campana/uploaddelete", key:'<?php echo $file; ?>'},
+<?php } ?>
+            ],
+    });
+    
+    $("#image-file2").fileinput({
+    uploadUrl: "' . Url::to(['../../../../campana/upload2']) . '",
+            maxFileCount: 1,
+            overwriteInitial: true,
+            initialPreview: [
+<?php
+foreach ($ficheros2 as $file) {
+    if ($file == '.' || $file == '..')
+        continue;
+    ?>
+                '<img src="/img/<?php echo $id_campana; ?>/small2/<?php echo $file; ?>" class="file-preview-image">',
+<?php } ?>
+            ],
+            initialPreviewConfig: [
+<?php
+foreach ($ficheros2 as $file) {
+    if ($file == '.' || $file == '..')
+        continue;
+    ?>
+                {caption: "<?php echo $file; ?>", width: "50px", url:"../../../../campana/uploaddelete2", key:'<?php echo $file; ?>'},
+<?php } ?>
+            ],
+    });
+    
+    $(document).ready(function() {
+
+        $('#image-file2').on('fileuploaded', function(event, file, previewId, index, reader) {
+           //$('#image-file2').fileinput('clear');
+           $('#image-file2').fileinput('refresh',{overwriteInitial: true,initialPreview:['<img src="/img/<?php echo $id_campana; ?>/small2/image1.jpg" class="file-preview-image">'],initialPreviewConfig:[{caption: "image1.jpg", width: "50px", url:"../../../../campana/uploaddelete2", key:'image1.jpg'}]});
+        });
+        $('#image-file2').on('filedeleted', function(event, file, previewId, index, reader) {
+           $('#image-file2').fileinput('clear');
+           //$('#image-file2').fileinput('reset');
+           //alert('hola');
+           //$('#image-file2').fileinput('refresh',{overwriteInitial: true,initialPreview:[],initialPreviewConfig:[]});
+        });
+        
+        
+
+
+        $('#fecha_inicio,#fecha_final,#fecha_validez').datetimepicker({
+            format: 'yyyy-mm-dd',
+            language: 'es',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+
+        });
+
+        $('#hora_inicio,#hora_final').datetimepicker({
+            format: 'hh:ii:ss',
+            language: 'es',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 1,
+            minView: 0,
+            maxView: 1,
+            forceParse: 0
+
+        });
+
+        $('#content').liveEdit({
+            modal_id: 'divEditor',
+            height: 380,
+            css: ['/css/bootstrap.min.css', '/css/bootstrap_extend.css'] /* Apply bootstrap css into the editing area */,
+            groups: [
+                ["group1", "", ["Bold", "Italic", "Underline", "ForeColor", "RemoveFormat"]],
+                ["group2", "", ["Bullets", "Numbering", "Indent", "Outdent"]],
+                ["group3", "", ["Paragraph", "FontSize", "FontDialog", "TextDialog"]],
+                ["group4", "", ["LinkDialog"]],
+                        //["group4", "", ["LinkDialog", "ImageDialog", "TableDialog", "Emoticons", "Snippets"]],
+                        /*["group5", "", ["Undo", "Redo", "SourceDialog"]]*/
+            ] /* Toolbar configuration */
+        });
+
+        $('#contentText').liveEdit({
+            modal_id: 'divEditorText',
+            height: 400,
+            css: ['/css/bootstrap.min.css', '/css/bootstrap_extend.css'] /* Apply bootstrap css into the editing area */,
+            groups: [
+                ["group1", "", ["Bold", "Italic", "Underline", "ForeColor", "RemoveFormat"]],
+                ["group2", "", ["Bullets", "Numbering", "Indent", "Outdent"]],
+                ["group3", "", ["Paragraph", "FontSize", "FontDialog", "TextDialog"]],
+                ["group4", "", ["LinkDialog"]],
+                        //["group4", "", ["LinkDialog", "ImageDialog", "TableDialog", "Emoticons", "Snippets"]],
+                        /*["group5", "", ["Undo", "Redo", "SourceDialog"]]*/
+            ] /* Toolbar configuration */
+        });
+
+        $('#div_sobre_campana').html($('#sobre_campana').val());
+        $('#div_observaciones').html($('#observaciones').val());
+
+        $(".edit-texto").click(function () {
+            var id = $(this).attr('data-toggle');
+            var ds = $(this).attr('data-description');
+
+            $('#textId').val(id);
+            $('#contentText').html($('#' + id).val());
+            $('#contentText').data('liveEdit').startedit();
+            $('#descripcionText').html(ds + ' :');
+            $('#modalEditorText').modal('show');
+        });
+
+    });
+
+    function edicionOpcion(id_opcion, id_campana) {
+        $.ajax({
+            type: "POST",
+            url: "/dashboard/campana/editopcion",
+            data: {opcion: id_opcion, campana: id_campana},
+            success: function (data) {
+                var datos = $.parseJSON(data);
+                if (datos[0]) {
+                    $('#content').html(datos[0].descripcion);
+                    $('#precio_regular').val(datos[0].precio_regular);
+                    $('#precio_especial').val(datos[0].precio_especial);
+                    $('#pk_campana').val(datos[0].id_campana);
+                    $('#pk_campana_opcion').val(datos[0].id_campana_opcion);
+                    $('#content').data('liveEdit').startedit();
+                    $('#modalEditor').modal('show');
+                }
+            }
+        });
+    }
+
+    function nuevaOpcion() {
+        $('#content').html('');
+        $('#precio_regular').val('0.00');
+        $('#precio_especial').val('0.00');
+        $('#pk_campana').val('<?php echo $id_campana; ?>');
+        $('#pk_campana_opcion').val('');
+        $('#content').data('liveEdit').startedit();
+        $('#modalEditor').modal('show');
+    }
+
+    function grabaOpcion() {
+
+        var id_campana = $('#pk_campana').val();
+        var id_campana_opcion = $('#pk_campana_opcion').val();
+        var descripcion = $('#content').data('liveEdit').getXHTMLBody();
+        var precio_regular = $('#precio_regular').val();
+        var precio_especial = $('#precio_especial').val();
+
+        $.ajax({
+            type: "POST",
+            url: "/dashboard/campana/saveopcion",
+            data: {id_campana: id_campana, id_campana_opcion: id_campana_opcion, descripcion: descripcion, precio_regular: precio_regular, precio_especial: precio_especial},
+            success: function (data) {
+                var datos = $.parseJSON(data)
+                if (datos) {
+                    $('#descripcion' + id_campana_opcion).html(descripcion);
+                    if (datos.resultado == 'I') {
+                        $('#js-tabla-opciones tr:last').after('<tr><td></td><td><div id="descripcion' + datos.id + '">' + descripcion + '</div></td><td>' + precio_regular + '</td><td>' + precio_especial + '</td><td><div class="btn btn-success" onclick="javascript:edicionOpcion(\'' + datos.id + '\',\'' + id_campana + '\')">Editar</div></td></tr>');
+                    }
+                    $('#modalEditor').modal('hide');
+
+                }
+            }
+        });
+    }
+
+    function grabaOpcionText() {
+
+        var id_div = $('#textId').val();
+        var descripcion = $('#contentText').data('liveEdit').getXHTMLBody();
+
+        $('#' + id_div).val(descripcion);
+        $('#div_' + id_div).html(descripcion);
+
+        $('#modalEditorText').modal('hide');
+    }
+
+    $('#example-dataprovider-optgroups').multiselect({
+        enableFiltering: true,
+        onChange: function (element, checked) {
+            $('#id_categoria').val($('#example-dataprovider-optgroups').val());
+        }
+    });
+    //$('#example-dataprovider-optgroups').multiselect('dataprovider', optgroups);
+
+
+
+</script>

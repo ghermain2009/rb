@@ -1,0 +1,64 @@
+Groupon	www.migroupon.com cerronparker@oneperutravel.com validaone14
+
+http://grouponclone.contus.com/
+http://www.alstrasoft.com/products.htm
+http://www.agriya.com/products/groupon-clone
+
+
+
+Al validar en numero del cupon se muestra el cupon original enviado.
+En validacion cuando la fecha de la promocion a vencido y el cupon o ha sido validado.
+Si cambia de fecha sera una nueva campaña.
+Empresa tiene un gerente general y un contacto
+generar codigo de cupon : algoritmo para el numero.
+
+
+La bajada : descripcion corta de la promocion y del establecimiento
+Detalle de la Oferta: La oferta incluye
+Video.
+Lo que debes saber
+
+Verificar api de google para la firma de documentos
+
+Solicitar a Miguel el formato escaneado del contrato firmado wue debera tener los mismos campos utilizados en la campaña.
+
+Administrador de Cuenta tiene aproximadamente 30 establecimientos
+
+Datos del Ejecutivo (Nombre , dni, numero de cuenta, comison,  puede ser por volumen de compra, ya se de validados.
+
+Asocias a los establecimientos.
+
+El realiza el contrato y deberia haber un area de produccion que suba las promociones.
+
+Multioferta, de una campaña se da a varias miniofertas.
+
+
+booking .com
+
+https://www.groupon.com/login?ref=%2Fdeals%2Fga-bk-omni-bedford-springs-resort-7%2Fconfirmation%3Fcheck_in%3D2014-12-20%26check_out%3D2014-12-22%26getaways_booking_option%3D40963%26pledge_id%3D12097593
+
+
+
+
+http://www.jqueryrain.com/page/6/?s=images
+https://support.google.com/maps/answer/3544418?hl=es
+http://www.lawebera.es/como-hacer/ejemplos-html-xhml/ejemplo-maquetacion-pagina-web-ii.php
+https://packagist.org/packages/facebook/facebook-sdk-php-zf2
+https://code.google.com/p/php-image/
+http://iscelialejandro.wordpress.com/2011/04/21/zfimage-una-libreria-para-manipular-imagenes-con-zend-framework/
+http://getbootstrap.com/javascript/#popovers
+https://github.com/ThaDafinser/ZfcDatagrid
+
+http://www.jqplot.com/deploy/dist/examples/dashboardWidget.html
+http://librosweb.es/bootstrap_3/capitulo_4/utilidades.html
+http://getbootstrap.com/components/#wells
+
+gemerar static maps
+http://gmaps-samples.googlecode.com/svn/trunk/simplewizard/makestaticmap.html
+http://www.portalscreen.com/2014-06/reloj-de-colores-con-css-y-javascript.html
+
+
+http://volumedrive.com/
+https://cloud.digitalocean.com/droplets
+
+http://stackoverflow.com/questions/26515991/chrome-err-cache-miss 

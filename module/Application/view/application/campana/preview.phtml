@@ -1,0 +1,208 @@
+<?php
+$directorio = $dir_image . "\\..\\..\\public\\";
+
+foreach ($data as $detalle) {
+    $fecha_final = $detalle['fecha_final'];
+    ?>
+
+    <div style="display:inline-block;">
+        <div class="box_center-titulo"><h4><?php echo $detalle['titulo']; ?></h4></div>
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="width:745px;display:inline-block;">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <?php
+                $ficheros = scandir($directorio . "img\\" . $detalle['id_campana'] . "\\small");
+                $contador = -1;
+                foreach ($ficheros as $file) {
+                    if ($file == '.' || $file == '..')
+                        continue;
+                    $contador++;
+                    ?>
+                    <li data-target="#carousel-example-generic" data-slide-to="<?php echo $contador; ?>" <?php if ($contador == 0) { ?> class="active" <?php } ?>></li>
+                    <?php
+                }
+                ?>
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <?php
+                $contador = -1;
+                foreach ($ficheros as $file) {
+                    if ($file == '.' || $file == '..')
+                        continue;
+                    $contador++;
+                    ?>
+                    <div class="item<?php if ($contador == 0) { ?>  active<?php } ?>">
+                        <img src="../../img/<?php echo $detalle['id_campana']; ?>/small/<?php echo $file; ?>" alt="...">
+                        <div class="carousel-caption"></div>
+                    </div>
+                    <?php
+                }
+                ?>
+            </div>
+            <!-- Controls -->
+            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+
+        </div>
+
+        <?php
+        $cantidad = 0;
+        $total = count($data_o);
+        $opciones_saber = array();
+        foreach ($data_o as $opciones) {
+            $cantidad++;
+            if ($cantidad == 1) {
+                ?>
+
+                <div class="sticky_details" id="detalle_precio"> 
+                    <div class="box_center_d">
+                        <span class="text">Precio S/.</span>
+                        <span class="priceBuy"><?php echo $opciones['precio_especial']; ?></span>
+                    </div>
+
+                    <!-- P1_Comprar -->
+                    <?php if ($total == 1) { ?>
+                        <a data-id="10699" data-opcion="1" href="../../campana/formulariopago/<?php echo base64_encode($opciones['id_campana']); ?>/<?php echo base64_encode($opciones['id_campana_opcion']); ?>" title="Comprar" class="btn btn_buy_action">Comprar</a>
+                    <?php } else { ?> 
+                        <button type="button" class="btn btn_buy_action" data-toggle="modal" data-target="#exampleModal" >Comprar</button>
+                    <?php } ?>
+                    <ul class="discount_information">
+                        <li><span>Precio Regular</span>
+                            <div class="value">
+                                <s>S/.<?php echo $opciones['precio_regular']; ?></s>
+                            </div>
+                        </li>
+                        <li><span>Descuento</span>
+                            <div class="value"><?php echo $opciones['descuento']; ?>%</div>
+                        </li>
+                        <li><span>Ahorro</span>
+                            <div class="value">S/.<?php echo $opciones['ahorro']; ?></div>
+                        </li>
+                    </ul>
+                    <!--p class="sold_campaignsp">Se han vendido <b><?php //echo $opciones['vendidos']; ?> </b>ofertas</p>
+
+                    <div class="time_campaigns">
+                        <div class="name">La oferta finaliza en</div>
+                        <div class="result"><i class="fa fa-clock-o"></i>&nbsp;&nbsp;&nbsp;<span id='cntdwn'></span></div>
+                    </div-->
+                    <!--http://bit.ly/1h0Emr6-->
+                    <!--div data-title="48 Cortes de Makis en Asakusa Sushi Bar - Restaurante" data-url="http://bit.ly/1Hvy0XP" data-email="http://ofertop.pe/48-cortes-makis-asakusa-sushi-restaurante--1-10699.html">
+                        <ul class="share_buttons" >
+                            <li><span >Comparte:</span></li>
+                            <li><a href="javascript:shareFacebook();" title="Comparte en Facebook" class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></a></li>
+                            <li><a target="_blank" title="Comparte en Twitter" class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="javascript:;" title="Comparte en Google+" class="btn btn-social-icon btn-google-plus"><i class="fa fa-google-plus"></i>></a></li>
+                            <li><a href="javascript:;" title="Comparte por email" class="mail addthis_button_email"></a></li>
+                        </ul>
+                    </div-->                
+                </div>
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="exampleModalLabel">Elija su promoción</h4>
+                            </div>
+                            <div class="modal-body">
+                                <?php
+                                $opciones_saber[] = $opciones['descripcion'];
+                               }
+                               ?>
+                                <div class="modal-content">
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-group">
+                                            <label for="message-text" class="col-lg-9 control-label"><span class="text-opcion">OPCIÓN <?php echo $cantidad;?> :</span> <b><?php echo $opciones['descripcion']; ?></b><span class="text-precio">Precio Regular : <?php echo $opciones['precio_regular']; ?> - <?php echo $opciones['descuento']; ?> % - Ahorra : <?php echo $opciones['ahorro']; ?></span></label>
+                                            <a data-id="10699" data-opcion="1" href="../../campana/formulariopago/<?php echo base64_encode($opciones['id_campana']); ?>/<?php echo base64_encode($opciones['id_campana_opcion']); ?>" title="Comprar" class="btn btn_buy_action btn-sm">S/. <?php echo $opciones['precio_especial']; ?></a>
+                                        </div>
+                                    </form>
+                                </div>
+                            <?php
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="display:inline-block;">
+        <div class="box_center">
+            <div id="wrapper">
+                <!-- Nav tabs -->
+                <div class="" id="content" >
+                    <div id="menu" >
+                <ul class="tabmenudetalle">
+                    <li><a href="javascript:;" class="reftab" data-tab="taboferta"><ta class="btn btn-google-plus"><i class="glyphicon glyphicon-thumbs-up"></i></ta>  Todo sobre la oferta</a></li>
+                    <li><a href="javascript:;" class="reftab" data-tab="tabsaber"><ta class="btn btn-google-plus"><i class="glyphicon glyphicon-eye-open"></i></ta>  Lo que debes saber</a></li>
+                    <li><a href="javascript:;" class="reftab" data-tab="tabempresa"><ta class="btn btn-google-plus"><i class="glyphicon glyphicon-home"></i></ta>  La Empresa</a></li>
+                </ul>
+                        <ul class="company_hasMap2">
+                                <li><hr class="separador"></li>
+                            </ul>
+                    </div>
+                <!-- Tab panes -->
+                
+                    <div id="taboferta" >
+                        <?php echo $detalle['sobre_campana']; ?>
+                        <hr class="separador">
+                    </div>
+                    <div id="tabsaber">
+                        <h2><ta class="btn btn-google-plus"><i class="glyphicon glyphicon-eye-open"></i></ta>  <fo>Lo que debes saber</fo></h2>
+                        <?php echo $detalle['observaciones']; ?>
+                        <hr class="separador">
+                    </div>
+                    
+                    <div id="tabempresa">
+                        <h2><ta class="btn btn-google-plus"><i class="glyphicon glyphicon-home"></i></ta>  <fo>La Empresa</fo></h2>
+                        <?php foreach ($data_e as $empresa) { ?>
+                            <h2><?php echo $empresa["razon_social"]; ?></h2>
+                            <ul class="company_hasMap">
+                                <li>
+                                    <p class="company_value"><?php echo $empresa["descripcion"]; ?></p>
+                                    <ul class="company_hasMap">
+                                        <?php if (isset($empresa["direccion_comercial"])) { ?>
+                                            <li>
+                                                <div class="company_title">Dirección:</div>
+                                                <div class="company_value"><?php echo $empresa["direccion_comercial"]; ?></div>
+                                            </li>
+                                        <?php } ?>
+                                        <li>
+                                            <div class="company_title">Sitio Web:</div>                               
+                                            <div class="company_value">
+                                                <a href="<?php echo $empresa["web_site"]; ?>" title="<?php echo $empresa["razon_social"]; ?>" target="_blank"><?php echo $empresa["web_site"]; ?></a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <ul class="company_hasMap">
+                                        <li>
+                                            <div class="company_title">Horario:</div>           
+                                            <div class="company_value"><?php echo $empresa["horario"]; ?></dev>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="map_container">
+                                    <div data-title="ASTROM TRADING.CO " data-content="CLL. LOS LIRIOS  NRO. 158 DPTO. 201 URB. CASUARINAS SUR (ALT. DE LA CDRA 5 DE LA AV INGENIEROS) LIMA - LIMA - SANTIAGO DE SURCO--OTROS-LIMA">
+                                        <div id="map"></div>
+                                        <img id="companyMap" src="<?php echo $empresa["ubicacion_gps"]; ?>">
+                                    </div>
+                                </li>
+                            </ul>  
+                            <ul class="company_hasMap2">
+                                <li><hr class="separador"></li>
+                            </ul>
+                        <?php } ?>
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+?>

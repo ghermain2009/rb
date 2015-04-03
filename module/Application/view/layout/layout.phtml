@@ -1,0 +1,491 @@
+<?php echo $this->doctype(); ?>
+
+<?php
+
+use Zend\Session\Container;
+
+$user_session = new Container('user');
+
+/*
+
+  $serviceLocator = $this->getApplication()->getServiceManager();
+  $campanaTable = $serviceLocator->get('Dashboard\Model\CupcampanaTable');
+  $datos = $campanaTable->getMenu();
+
+  var_dump($datos); */
+?>
+
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle('ZF2 ' . $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php
+        echo $this->headMeta()
+                ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+                ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        //->appendHttpEquiv('Pragma', 'no-cache')
+        //->appendHttpEquiv('Expires', '-1')
+        ?>
+
+        <!-- Le styles -->
+        <?php
+        echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+                ->prependStylesheet($this->basePath() . '/css/style.css')
+                ->prependStylesheet($this->basePath() . '/css/style-op.css')
+                ->prependStylesheet($this->basePath() . '/css/docs.css')
+                ->prependStylesheet($this->basePath() . '/css/bootstrap-theme.min.css')
+                ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')
+                ->prependStylesheet($this->basePath() . '/css/bootstrap-social.css')
+                ->prependStylesheet($this->basePath() . '/css/font-awesome.css')
+        ?>
+
+        <!-- Scripts -->
+        <?php
+        echo $this->headScript()
+                ->prependFile($this->basePath() . '/js/bootstrap.min.js')
+                ->prependFile($this->basePath() . '/js/jquery.lazyload.js')
+                ->prependFile($this->basePath() . '/js/jquery.min.js')
+                ->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+                ->prependFile($this->basePath() . '/js/html5shiv.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+        ;
+        ?>
+    </head>
+    <body>
+        <div class="top_bar" id="headerContainer">
+            <div  class="container">
+                <a href="javascript:;" title="mostrar categorias" class="btn_options"></a>
+                <a href="javascript:;" title="mostrar opciones de usuario" class="btn_user"></a>
+                <span class="logo" id="logo"></span>
+                <div class="btn-group oferta">
+                    <a id="btnSubscribe" href="javascript:;" title="Quiero recibir ofertas" class="btn btn-danger btn-sm">Quiero recibir ofertas <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+                </div>
+
+
+                <div class="btn-group login">
+                    <!--btn-github btn-sm-->
+                    <button type="button" class="btn btn-github btn-sm"><?php
+                        if (isset($user_session->username))
+                            echo 'Hola ' . $user_session->nombre;
+                        else
+                            echo 'Iniciar Session';
+                        ?></button>
+                    <button id="boton_login" type="button" class="btn btn-github btn-sm dropdown-toggle" >
+                        <span class="caret"></span>
+                    </button>
+                    <div id="formlogin_menu" class="dropdown-menu formlogin" >
+                        <?php if (!isset($user_session->username)) { ?>
+                            <!--form id="frmlogin" role="form" action="/campana/pago" method="POST"-->
+                            <form id="frmlogin" name="frmlogin" role="form" validate>
+                                <div>
+                                    <a class="btn btn-block btn-social btn-facebook" href="javascript:loginFacebook();">
+                                        <i class="fa fa-facebook"></i> Conectar con Facebook
+                                    </a>
+                                    <hr class="special2">
+                                    <div class="form-group">
+                                        <div>
+                                            <input type="email" class="form-control" name="email_menu" id="email_menu" value="" maxlength="50" required placeholder="Email">
+                                            <span for="email" class="help-block with-errors"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div>
+                                            <input type="password" class="form-control" name="clave_menu" id="clave_menu" value="" maxlength="20" required placeholder="Contraseña">
+                                            <span for="password" class="help-block with-errors"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="text_olvido clave">
+                                            <a href="javascript:postfunction('/campana', 'recuperar');">¿Olvidaste tu contraseña?</a>
+                                        </div>
+                                        <div class="text_olvido">
+                                            <div class="col-xs-3">
+                                                <!--button type="button" class="btn btn-danger"  id="valida_ingreso_menu">Ingresar</button-->
+                                                <input type="submit" class="btn btn-danger"  value="Ingresar">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="text_olvido">
+                                            ¿No tienes una cuenta? <a href="javascript:postfunction('/campana', 'registrar');">Registrate</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        <?php } else { ?>
+                            <form name="frmlogin" role="form" action="/campana/pago" method="POST" data-parsley-validate>
+                                <div>
+                                    <div class="form-group">
+                                        <b><?php echo $user_session->nombre . ' ' . $user_session->apellido; ?></b>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group">
+                                        <a class="btn btn-danger btn-sm" id="cerrar_session">Cerrar Sessión</a>
+                                    </div>
+
+                                </div>
+                            </form>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="cabecera_contenedor">
+            <div class="container">
+                <div class="ofertas_donde">
+                    <div class="tit_ofertas">Ofertas en</div>
+                    <div style="display: inline-block">
+                        <select class="btn btn-lg btn-github" id="ofertas_localidad" data-toggle="popover"                             
+                                data-content="">
+                            <option>Guayaquil</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="ofertas_siguenos">
+                    <ul class="share_buttons" >
+                        <li><span>Siguenos en: </span></li>
+                        <li><a href="javascript:;" title="Comparte en Facebook" class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></a></li>
+                        <li><a target="_blank" title="Comparte en Twitter" class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="javascript:;" title="Comparte en Google+" class="btn btn-social-icon btn-google-plus"><i class="fa fa-google-plus"></i>></a></li>
+                        <li><a href="javascript:;" title="Comparte por email" class="mail addthis_button_email"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-inverse" role="navigation" id="cabecera_menu">
+            <div class="container" id="cabecera_menu_container">
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav" >
+                        <li><a href="<?php echo $this->url('home') ?>">Oferta del Día</a></li>
+                    </ul>
+                    <?php
+                    echo $this->navigation('navigationhome')
+                            ->menu()
+                            ->setPartial('layout/menuhome')
+                            ->render();
+                    ?>
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+        <div class="container">
+            <?php echo $this->content; ?>
+        </div>
+        <!-- /container -->
+        <div id="fb-root"></div>
+        <div class="footer_buenisimo" >
+
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">¿Cómo Funciona?</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div>Cada día en Buenisimo Perú seleccionamos con esmero los mejores servicios, productos, espectáculos y viajes para ti.</div>
+                            <div>Los restaurantes con las cartas más deliciosas, los tratamientos que ayudarán y beneficiarán a tu cuerpo, los espectáculos más interesantes y los viajes que siempre has soñado. Contamos con los que más saben y el resultado son miles de usuarios satisfechos cada día.</div>
+                            <div>Compra el producto o servicio que más desees, el más exclusivo, atractivo, emocionante puedes comprar con Tarjeta de Crédito o sin ella, solo escoge el medio de pago que mas te convenga!</div>
+                            <div>En Cuponazo Perú conocemos los locales más exclusivos y gozamos de la confianza de nuestros Socios que saben que trabajamos bien.</div>
+                            <div>Todo esto hace que podamos ofrecer los mejores productos y servicios a precios increíbles para ti!!!</div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="footer-line">
+            <div class="container">
+                <footer>
+                    <a href="http://ofertop.pe" alt="Logo Ofertop"><div class="logo_footer"></div></a>
+                    <div class="box_center">
+                        <div class="box_center">
+                            <div class="col_footer contact">
+                                <h3>De Interés</h3>
+                                <ul>
+                                    <li><a href="/interes" title="Sobre Buenisimo">Sobre Buenisimo</a></li>
+                                    <li><a href="/interes/comofunciona">¿Cómo funciona?</a></li>
+                                    <li><a href="/interes/preguntasfrecuentes" title="Preguntas frecuentes">Preguntas frecuentes</a></li>
+                                    <li><a href="/interes/terminosycondiciones" title="Términos y Condiciones">Términos y Condiciones</a></li>
+                                    <li><a href="/interes/contactanos" title="Contáctanos">Contáctanos</a></li>
+                                    <li><a href="/interes/politicasdeprivacidad" title="Políticas de Privacidad">Políticas de Privacidad</a></li>
+                                    <li><a href="/interes/mapadesitio" title="Mapa del sitio">Mapa del sitio</a></li>
+                                </ul>
+                            </div>
+                            <div class="col_footer contact">
+                                <h3>Socios Buenisimo</h3>
+                                <ul>
+                                    <li><a href="/dashboard" title="Ingresa a tu cuenta de socio">Ingresa a tu cuenta de socio</a></li>
+                                    <!--li><a href="/paginas/contacto-retailer" title="Contáctanos" class="inline_modal">Contáctenos</a></li-->
+                                </ul>
+                            </div>
+                            <div class="col_footer contactanos">
+                                <h3>Contáctanos</h3>
+                                <ul>
+                                    <li>
+                                        <span class="btn-social-icon btn-lg btn-github"><i class="fa fa-phone"></i></span>
+                                        <div>3-115-115</div>
+                                    </li>
+                                    <li>
+                                        <span class="btn-social-icon btn-lg btn-github"><i class="fa fa-envelope"></i></span>
+                                        <div><a href="mailto:clientes@ofertop.pe" title="clientes@ofertop.pe">clientes@buenisimo.ec</a><br/><a href="mailto:socios@buenisimo.ec" title="socios@buenisimo.ec">socios@buenisimo.ec</a></div>
+                                    </li>
+                                    <li>
+                                        <span class="btn-social-icon btn-lg btn-github"><i class="fa fa-clock-o"></i></span>
+                                        <div>L-V 8:00 - 20:00<br>S-D/F 10:00 - 14:00</div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col_footer social">
+                                <h3>Síguenos en</h3>
+                                <ul>
+                                    <li>
+                                        <span class="btn-social-icon btn-lg btn-github"><i class="fa fa-facebook"></i></span>
+                                        <a href="https://www.facebook.com/OferTOPLima" get="_blank" title="OferTOPLima">BuenisimoEcuador</a>
+                                    </li>
+                                    <li>
+                                        <span class="btn-social-icon btn-lg btn-github"><i class="fa fa-twitter"></i></span>
+                                        <a href="https://www.facebook.com/OferTOPLima" target="_blank" title="OferTOPLima">@BuenisimoEcuador</a>
+                                    </li>
+                                    <li>
+                                        <span class="btn-social-icon btn-lg btn-github"><i class="fa fa-google-plus"></i></span>
+                                        <a href="https://www.facebook.com/OferTOPLima" target="_blank" title="OferTOPLima">BuenisimoEcuador</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <hr class="footer-line">
+                        <div style="display:none" class="goToWeb">
+                            <a href="/interes/version?url=Lw==" title="Ir la versión Web">Ver versión Web</a>
+                        </div>
+                        <div class="payment_methods"><span>Compras 100% seguras con:</span>
+                            <a href="https://pagoefectivo.pe/" title="Pago Efectivo" target="_blank" class="payment pe"></a>
+                            <a href="http://www.companiaperuanademediosdepago.pe/visanet_new/home.html" title="Visa" target="_blank" class="payment visa"></a>
+                            <a href="http://www.companiaperuanademediosdepago.pe/visa.htm" title="Verified by Visa" target="_blank" class="payment verified"></a>
+                            <a href="http://www.mastercard.com/pe/consumidores/index.html" title="MasterCard" target="_blank" class="payment master"></a>
+                            <a href="http://www.mastercard.com/us/personal/es/servicios/codigodeseguridad/" title="MasterCard Secure Code" target="_blank" class="payment secure"></a>
+                            <a href="http://www.visanet.com.pe/promovbv/bancos.html" title="Afiliate Verified by Visa" target="_blank" class="payment afiliate"></a>
+                            <p>Autorizados por Visa para realizar transacciones electrónicas</p>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+
+        <?php echo $this->inlineScript() ?>
+        <form name='envio' id='envio' method="post">
+            <input type="hidden" name="id" id="id" />
+            <input type="hidden" name="op" id="op" />
+            <input type="hidden" name="fl" id="fl" />
+        </form>
+    </body>
+</html>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        var altura = $("#cabecera_menu").offset().top;
+
+        $(window).scroll(function () {
+
+            if ($(window).scrollTop() >= altura) {
+                $("#headerContainer").css("top", "0px");
+                $("#cabecera_contenedor").css("top", "36px");
+                $("#cabecera_menu").css("top", "30px");
+
+                $("#headerContainer").css("position", "fixed");
+                $("#cabecera_contenedor").css("position", "fixed");
+                $("#cabecera_menu").css("position", "fixed");
+
+                $("#headerContainer").css("z-index", "57");
+                $("#cabecera_contenedor").css("z-index", "56");
+                $("#cabecera_menu").css("z-index", "50");
+
+                $("#cabecera_contenedor").css("width", "100%");
+                $("#cabecera_menu").css("width", "100%");
+
+                $("#cabecera_contenedor").css("display", "none");
+
+                $("#cabecera_menu_container").attr('class', 'container segundo');
+                $("#logo").attr('class', 'logo2');
+            } else {
+                $("#cabecera_contenedor").css("top", "36px");
+                $("#cabecera_menu").css("top", "120px");
+
+                $("#cabecera_contenedor").css("position", "absolute");
+                $("#cabecera_menu").css("position", "static");
+
+                $("#cabecera_contenedor").css("display", "");
+
+                $("#cabecera_menu_container").attr('class', 'container');
+                $("#logo").attr('class', 'logo');
+            }
+
+        });
+
+        $("#frmlogin").submit(function (e) {
+
+            e.preventDefault();
+
+            var email = $("#email_menu").val();
+            var password = $("#clave_menu").val();
+
+            if (email != "" && password != "") {
+                $.ajax({
+                    type: "POST",
+                    url: "/campana/cliente",
+                    data: {email: email, password: password},
+                    success: function (data) {
+                        var cliente = $.parseJSON(data);
+                        if (cliente[0]) {
+                            if (cliente[0].validar == '1') {
+                                postfunction('', '');
+                            } else {
+                                if (cliente[0].validar == '2') {
+                                    alert('Password no coincide.');
+                                } else {
+                                    alert('Usuario no registrado.');
+                                }
+                            }
+                        } else {
+                            alert('Tuvimos problemas para procesar su solicitud.');
+                        }
+                    }
+                });
+            } else {
+                alert('Ingrese usuario y password.');
+            }
+            ;
+        });
+
+        $("#cerrar_session").click(function () {
+            $.ajax({
+                type: "POST",
+                url: "/campana/cerrarsession",
+                success: function (data) {
+                    postfunction('', '');
+                }
+            });
+        });
+
+        var data = "<b>¡Buenisimo!</b> descubre las mejores ofertas.";
+        $('#ofertas_localidad').popover({placement: 'right', content: data, html: true});
+        $('#ofertas_localidad').popover('show');
+
+        $("#boton_login").click(function () {
+            $("#formlogin_menu").css("display", "block");
+        });
+
+        $("#formlogin_menu").mouseleave(function () {
+            $(this).hide();
+        });
+
+        $(".nav.navbar-nav li").mouseover(function () {
+            $(this).addClass('open');
+        });
+        
+        $(".nav.navbar-nav li").mouseleave(function () {
+            $(this).removeClass('open');
+        });
+
+    });
+
+    function postfunction(controller, action, p1, p2, p3) {
+        if (p1 === undefined)
+            p1 = null;
+        if (p2 === undefined)
+            p2 = null;
+        if (p3 === undefined)
+            p3 = null;
+
+        var url = controller + "/" + action;
+
+        $("#id").val(p1);
+        $("#op").val(p2);
+        $("#fl").val(p3);
+        $('#envio').attr('action', url);
+        $('#envio').submit();
+
+    }
+
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '319813151551526',
+            cookie: true, // enable cookies to allow the server to access 
+            xfbml: true, // parse social plugins on this page
+            version: 'v2.1', // use version 2.1
+            scopes: ["publish_actions"]
+        });
+    };
+
+    // Load the SDK asynchronously
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id))
+            return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/es_LA/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+
+    }(document, 'script', 'facebook-jssdk'));
+
+    function loginFacebook() {
+        FB.login(function (response) {
+            if (response.status === 'connected')
+                testAPI();
+        });
+    }
+
+    function shareFacebook() {
+        FB.ui(
+                {
+                    method: 'share',
+                    href: 'https://developers.facebook.com/docs/',
+                },
+                function (response) {
+                    if (response && !response.error_code) {
+                        alert('Posting completed.');
+                    } else {
+                        alert('Error while posting.');
+                    }
+                }
+        );
+    }
+
+    function testAPI() {
+        FB.api('/me', function (response) {
+            var email = response.email;
+            var fname = response.first_name;
+            var lname = response.last_name;
+            var sex;
+            if (response.gender === 'male')
+                sex = 'M';
+            else
+                sex = 'F';
+
+            verifyUser(email, fname, lname, sex);
+        });
+    }
+
+    function verifyUser(email, fname, lname, sex) {
+
+        $.ajax({
+            type: "POST",
+            url: "/campana/cliente",
+            data: {email: email, fname: fname, lname: lname, sex: sex, facebook: '1'},
+            success: function (data) {
+                var cliente = $.parseJSON(data);
+                if (cliente[0]) {
+                    if (cliente[0].validar == '1') {
+                        postfunction('', '');
+                    }
+                }
+            }
+        });
+
+    }
+
+
+
+</script>

@@ -1,0 +1,91 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle('ZF2 ' . $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php
+        echo $this->headMeta()
+                ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+                ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <!-- Le styles -->
+        <?php
+        echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+                ->prependStylesheet($this->basePath() . '/css/bootstrap-multiselect.css')
+                ->prependStylesheet($this->basePath() . 'http://fonts.googleapis.com/css?family=Abel')
+                ->prependStylesheet($this->basePath() . '/css/bootstrap_extend.css')
+                ->prependStylesheet($this->basePath() . '/css/fileinput.min.css')
+                ->prependStylesheet($this->basePath() . '/css/bootstrap-datetimepicker.min.css')
+                ->prependStylesheet($this->basePath() . '/css/style-op.css')
+                ->prependStylesheet($this->basePath() . '/css/style-ma.css')
+                ->prependStylesheet($this->basePath() . '/css/editor.bootstrap.css')
+                ->prependStylesheet($this->basePath() . '/css/dataTables.bootstrap.css')
+                ->prependStylesheet($this->basePath() . '/css/dataTables.tableTools.css')
+                ->prependStylesheet($this->basePath() . '/css/bootstrap-theme.min.css')
+                ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')
+        ;
+        ?>
+
+        <!-- Scripts -->
+        <?php
+        echo $this->headScript()
+                
+                
+                ->prependFile($this->basePath() . '/js/bootstrap-multiselect.js')
+                ->prependFile($this->basePath() . '/js/webfont.js')
+                ->prependFile($this->basePath() . 'http://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js')
+                ->prependFile($this->basePath() . '/js/innovamanager.js')
+                ->prependFile($this->basePath() . '/js/innovaeditor.js')
+                ->prependFile($this->basePath() . '/js/fileinput.min.js')
+                ->prependFile($this->basePath() . '/js/moment.min.js')
+                ->prependFile($this->basePath() . '/js/editor.bootstrap.js')
+                ->prependFile($this->basePath() . '/js/dataTables.bootstrap.js')
+                ->prependFile($this->basePath() . '/js/dataTables.editor.min.js')
+                ->prependFile($this->basePath() . '/js/dataTables.tableTools.min.js')
+                ->prependFile($this->basePath() . '/js/jquery.dataTables.min.js')
+                ->prependFile($this->basePath() . '/js/locales/bootstrap-datetimepicker.es.js')
+                ->prependFile($this->basePath() . '/js/bootstrap-datetimepicker.js')
+                ->prependFile($this->basePath() . '/js/bootstrap.min.js')
+                ->prependFile($this->basePath() . '/js/jquery.min.js')
+                ->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+                ->prependFile($this->basePath() . '/js/html5shiv.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+        ;
+        ?>
+     
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <!--                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                    <a class="navbar-brand" href="<?php echo $this->url('dashboard') ?>"><img src="<?php echo $this->basePath('img/zf2-logo.png') ?>" alt="Zend Framework 2"/>&nbsp;<?php echo $this->translate('Skeleton Application') ?></a>
+                                </div>-->
+                <!--/menu -->
+                <div class="collapse navbar-collapse">
+                    <?php
+                    echo $this->navigation('navigation')
+                            ->menu()
+                            ->setPartial('layout/menu')
+                            ->render();
+                    ?>
+                </div>
+                <!--/end menu -->
+            </div>
+        </nav>
+        <div class="container">
+        <?php echo $this->content; ?>
+            <footer>
+                <hr>
+                <p>&copy; 2005 - <?php echo date('Y') ?> by Zend Technologies Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
+            </footer>
+        </div> <!-- /container -->
+<?php echo $this->inlineScript() ?>
+    </body>
+</html>

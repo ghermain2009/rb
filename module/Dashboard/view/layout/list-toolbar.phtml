@@ -1,0 +1,71 @@
+<?php
+//echo $this->controllerName();
+switch ($this->controllerName()) {
+    case 'Dashboard\Controller\Role' :
+        $titulo = "Administración de Roles";
+        $enlace = "Nuevo Rol";
+        break;
+    case 'Dashboard\Controller\Campana' :
+        $titulo = "Administración de Campañas";
+        $enlace = "Nueva Campaña";
+        break;
+    case 'Dashboard\Controller\Empresa' :
+        $titulo = "Administración de Empresas";
+        $enlace = "Nueva Empresa";
+        break;
+    default :
+        $titulo = "";
+        break;
+}
+?>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <div>
+            <div class="btn-group">
+                <span class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Registrar nueva campaña">
+                    <h4><?php echo $titulo; ?> <span class="caret"></span></h4>
+                </span>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="javascript:nuevo();"><?php echo $enlace; ?></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Preview Campaña</h4>
+            </div>
+            <div class="modal-body" id="previewCampana">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function nuevo() {
+        $("#btnAdd").click();
+    }
+    function visualizar(campana){
+        $.ajax({
+            type: "POST",
+            url: "/campana/preview",
+            data: {id: campana},
+            success: function (data) {
+                $('#previewCampana').html(data);
+                $('#myModal').modal('show');
+            }
+        });
+        
+        
+    } 
+</script>
+<div style="display: none">
+    <button name="btnAdd" id="btnAdd" class="btn-primary" value="add" data-toggle='tooltip' data-placement='left' title='Regitrar Nueva Campaña'><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Nuevo</button>
+</div>
