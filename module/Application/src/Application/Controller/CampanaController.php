@@ -302,10 +302,24 @@ class CampanaController extends AbstractActionController {
         $serviceLocator = $this->getServiceLocator();
         $config = $serviceLocator->get('Config');
         $dir_image = $config['constantes']['dir_image'];
-
-        $ruta_int = $dir_image . "\\..\\..\\public\\img\\".$campana."\\";
-        $ruta = $dir_image . "\\..\\..\\public\\img\\".$campana."\\small\\";
-        //$new = $dir_image . "\\..\\..\\public\\img\\".$campana."\\small\\image1.jpg";
+        $sep_path = $config['constantes']['sep_path'];
+        
+        $ruta_int = $dir_image . 
+                    $sep_path . 
+                    ".." .
+                    $sep_path .
+                    ".." .
+                    $sep_path .
+                    "public" .
+                    $sep_path .
+                    "img" .
+                    $sep_path .
+                    $campana .
+                    $sep_path;
+        
+        $ruta = $ruta_int .
+                "small" .
+                $sep_path;
         
         if (!file_exists($ruta_int)) mkdir($ruta_int);
         if (!file_exists($ruta)) mkdir($ruta);
@@ -351,9 +365,24 @@ class CampanaController extends AbstractActionController {
         $serviceLocator = $this->getServiceLocator();
         $config = $serviceLocator->get('Config');
         $dir_image = $config['constantes']['dir_image'];
+        $sep_path = $config['constantes']['sep_path'];
 
-        $ruta = $dir_image . "\\..\\..\\public\\img\\".$campana."\\small\\".$nombre_file;
-        
+        $ruta = $dir_image . 
+                $sep_path . 
+                ".." .
+                $sep_path .
+                ".." .
+                $sep_path .
+                "public" .
+                $sep_path .
+                "img" .
+                $sep_path .
+                $campana .
+                $sep_path .
+                "small" .
+                $sep_path .
+                $nombre_file;
+                
         if(unlink($ruta)) {
             $datos = array();
         } else {
@@ -372,10 +401,24 @@ class CampanaController extends AbstractActionController {
         $serviceLocator = $this->getServiceLocator();
         $config = $serviceLocator->get('Config');
         $dir_image = $config['constantes']['dir_image'];
+        $sep_path = $config['constantes']['sep_path'];
 
-        $ruta_int = $dir_image . "\\..\\..\\public\\img\\".$campana."\\";
-        $ruta = $dir_image . "\\..\\..\\public\\img\\".$campana."\\small2\\";
-        $name = $dir_image . "\\..\\..\\public\\img\\".$campana."\\small2\\image1.jpg";
+        $ruta_int = $dir_image . 
+                    $sep_path . 
+                    ".." .
+                    $sep_path .
+                    ".." .
+                    $sep_path .
+                    "public" .
+                    $sep_path .
+                    "img" .
+                    $sep_path .
+                    $campana .
+                    $sep_path;
+        
+        $ruta = $ruta_int .
+                "small2" .
+                $sep_path;
         
         if (!file_exists($ruta_int)) mkdir($ruta_int);
         if (!file_exists($ruta)) mkdir($ruta);
@@ -421,8 +464,23 @@ class CampanaController extends AbstractActionController {
         $serviceLocator = $this->getServiceLocator();
         $config = $serviceLocator->get('Config');
         $dir_image = $config['constantes']['dir_image'];
+        $sep_path = $config['constantes']['sep_path'];
 
-        $ruta = $dir_image . "\\..\\..\\public\\img\\".$campana."\\small2\\image1.jpg";
+        $ruta = $dir_image . 
+                    $sep_path . 
+                    ".." .
+                    $sep_path .
+                    ".." .
+                    $sep_path .
+                    "public" .
+                    $sep_path .
+                    "img" .
+                    $sep_path .
+                    $campana .
+                    $sep_path .
+                    "small2" .
+                    $sep_path .
+                    "image1.jpg";
         
         if(unlink($ruta)) {
             $datos = array();

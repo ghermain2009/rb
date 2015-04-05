@@ -117,8 +117,7 @@ class CampanaController extends AbstractActionController {
 
         $config = $serviceLocator->get('Config');
         $dir_image = $config['constantes']['dir_image'];
-
-
+        $sep_path = $config['constantes']['sep_path'];
 
         $campanaId = $this->params('id');
 
@@ -126,7 +125,8 @@ class CampanaController extends AbstractActionController {
         $edit_campana->id = $campanaId;
 
         $request = $this->getRequest();
-        $viewmodel = new ViewModel(array('dir_image' => $dir_image));
+        $viewmodel = new ViewModel(array('dir_image' => $dir_image,
+                                         'sep_path' => $sep_path));
         $sl = $this->getServiceLocator();
         $empresaTable = $sl->get('Dashboard\Model\GenempresaTable');
         $campanaTable = $sl->get('Dashboard\Model\CupcampanaTable');

@@ -1,13 +1,26 @@
 <?php
-$directorio = $dir_image . "\\..\\..\\public\\";
 $id_campana = $this->form->get('id_campana')->getValue();
-if (file_exists($directorio . "img\\" . $id_campana . "\\small")) {
-    $ficheros = scandir($directorio . "img\\" . $id_campana . "\\small");
+
+$directorio = $dir_image . 
+              $sep_path .
+              ".." .
+              $sep_path .
+              ".." .
+              $sep_path .
+              "public" .
+              $sep_path .
+              "img" .
+              $sep_path .
+              $id_campana .
+              $sep_path;
+
+if (file_exists($directorio . "small")) {
+    $ficheros = scandir($directorio . "small");
 } else {
     $ficheros = array();
 }
-if (file_exists($directorio . "img\\" . $id_campana . "\\small2")) {
-    $ficheros2 = scandir($directorio . "img\\" . $id_campana . "\\small2");
+if (file_exists($directorio . "small2")) {
+    $ficheros2 = scandir($directorio . "small2");
 } else {
     $ficheros2 = array();
 }
