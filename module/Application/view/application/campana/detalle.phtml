@@ -1,5 +1,14 @@
 <?php
-$directorio = $dir_image . "\\..\\..\\public\\";
+$directorio = $dir_image . 
+              $sep_path .
+              ".." .
+              $sep_path .
+              ".." .
+              $sep_path .
+              "public" .
+              $sep_path .
+              "img" .
+              $sep_path;
 
 foreach ($data as $detalle) {
     $fecha_final = $detalle['fecha_final'];
@@ -11,7 +20,10 @@ foreach ($data as $detalle) {
             <!-- Indicators -->
             <ol class="carousel-indicators">
                 <?php
-                $ficheros = scandir($directorio . "img\\" . $detalle['id_campana'] . "\\small");
+                $ficheros = scandir($directorio . 
+                                    $detalle['id_campana'] .
+                                    $sep_path .
+                                    "small");
                 $contador = -1;
                 foreach ($ficheros as $file) {
                     if ($file == '.' || $file == '..')

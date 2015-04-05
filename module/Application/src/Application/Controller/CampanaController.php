@@ -31,6 +31,7 @@ class CampanaController extends AbstractActionController {
 
         $config = $serviceLocator->get('Config');
         $dir_image = $config['constantes']['dir_image'];
+        $sep_path = $config['constantes']['sep_path'];
 
         $campanaTable = $serviceLocator->get('Dashboard\Model\CupcampanaTable');
         $empresaTable = $serviceLocator->get('Dashboard\Model\GenempresaTable');
@@ -46,7 +47,8 @@ class CampanaController extends AbstractActionController {
             'data_p' => $data_p,
             'data_e' => $data_e,
             'id' => $id,
-            'dir_image' => $dir_image));
+            'dir_image' => $dir_image,
+            'sep_path' => $sep_path));
     }
 
     public function formulariopagoAction() {
