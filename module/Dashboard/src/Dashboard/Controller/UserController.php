@@ -91,7 +91,7 @@ class UserController extends AbstractActionController
         $col->setWidth(25);
         $grid->addColumn($col);
         
-        $editBtn = new Column\Action\Button();
+        /*$editBtn = new Column\Action\Button();
         $editBtn->setLabel('Edit');
         $editBtn->setAttribute('class', 'btn btn-primary');
         $editBtn->setAttribute('href', '/dashboard/user/edit/id/' . $editBtn->getRowIdPlaceholder());
@@ -99,7 +99,23 @@ class UserController extends AbstractActionController
         $delBtn = new Column\Action\Button();
         $delBtn->setLabel('Delete');
         $delBtn->setAttribute('class', 'btn btn-danger');
+        $delBtn->setAttribute('href', '/dashboard/user/delete/id/' . $delBtn->getRowIdPlaceholder());*/
+        
+        $editBtn = new Column\Action\Button();
+        $editBtn->setLabel(' ');
+        $editBtn->setAttribute('class', 'btn btn-primary glyphicon glyphicon-edit');
+        $editBtn->setAttribute('href', '/dashboard/user/edit/id/' . $editBtn->getRowIdPlaceholder());
+        $editBtn->setAttribute('data-toggle', 'tooltip');
+        $editBtn->setAttribute('data-placement', 'left');
+        $editBtn->setAttribute('title', 'Editar Usuario');
+        
+        $delBtn = new Column\Action\Button();
+        $delBtn->setLabel(' ');
+        $delBtn->setAttribute('class', 'btn btn-danger glyphicon glyphicon-trash');
         $delBtn->setAttribute('href', '/dashboard/user/delete/id/' . $delBtn->getRowIdPlaceholder());
+        $delBtn->setAttribute('data-toggle', 'tooltip');
+        $delBtn->setAttribute('data-placement', 'left');
+        $delBtn->setAttribute('title', 'Eliminar Usuario');
         
         $col = new Column\Action();
         $col->addAction($editBtn);

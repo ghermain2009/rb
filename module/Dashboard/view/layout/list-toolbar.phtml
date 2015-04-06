@@ -1,6 +1,10 @@
 <?php
 //echo $this->controllerName();
 switch ($this->controllerName()) {
+    case 'Dashboard\Controller\User' :
+        $titulo = "Administración de Usuarios";
+        $enlace = "Nuevo Usuario";
+        break;
     case 'Dashboard\Controller\Role' :
         $titulo = "Administración de Roles";
         $enlace = "Nuevo Rol";

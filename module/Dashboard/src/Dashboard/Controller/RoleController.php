@@ -71,22 +71,38 @@ class RoleController extends AbstractActionController
         
         $col = new Column\Select('name', 'r');
         $col->setLabel('Rol');
-        $col->setWidth(25);
+        $col->setWidth(75);
         $grid->addColumn($col);
         
-        $editBtn = new Column\Action\Button();
+        /*$editBtn = new Column\Action\Button();
         $editBtn->setLabel('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar');
         $editBtn->setAttribute('class', 'btn btn-primary');
-        $editBtn->setAttribute('href', '/dashboard/role/edit/id/' . $editBtn->getRowIdPlaceholder());
+        $editBtn->setAttribute('href', '/dashboard/role/edit/id/' . $editBtn->getRowIdPlaceholder());*/
         
-        $delBtn = new Column\Action\Button();
+        $editBtn = new Column\Action\Button();
+        $editBtn->setLabel(' ');
+        $editBtn->setAttribute('class', 'btn btn-primary glyphicon glyphicon-edit');
+        $editBtn->setAttribute('href', '/dashboard/role/edit/id/' . $editBtn->getRowIdPlaceholder());
+        $editBtn->setAttribute('data-toggle', 'tooltip');
+        $editBtn->setAttribute('data-placement', 'left');
+        $editBtn->setAttribute('title', 'Editar Role');
+        
+        /*$delBtn = new Column\Action\Button();
         $delBtn->setLabel('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Borrar');
         $delBtn->setAttribute('class', 'btn btn-danger');
+        $delBtn->setAttribute('href', '/dashboard/role/delete/id/' . $delBtn->getRowIdPlaceholder());*/
+        
+        $delBtn = new Column\Action\Button();
+        $delBtn->setLabel(' ');
+        $delBtn->setAttribute('class', 'btn btn-danger glyphicon glyphicon-trash');
         $delBtn->setAttribute('href', '/dashboard/role/delete/id/' . $delBtn->getRowIdPlaceholder());
+        $delBtn->setAttribute('data-toggle', 'tooltip');
+        $delBtn->setAttribute('data-placement', 'left');
+        $delBtn->setAttribute('title', 'Eliminar Role');
 
         
         $col = new Column\Action();
-        $col->setLabel('');
+        //$col->setLabel('Acciones');
         $col->addAction($editBtn);
         $col->addAction($delBtn);
         $grid->addColumn($col);

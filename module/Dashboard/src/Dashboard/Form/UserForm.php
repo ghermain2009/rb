@@ -21,38 +21,49 @@ class UserForm extends Form
         }
         
         $this->setAttribute('method', 'post');
+        
+        $this->add(array(
+            'name' => 'full_name',
+            'attributes' => array(
+                'type'  => 'text',
+            ),
+            /*'options' => array(
+                'label' => 'Usuario',
+            ),*/
+        ));
+        
         $this->add(array(
             'name' => 'username',
             'attributes' => array(
                 'type'  => 'text',
             ),
-            'options' => array(
+            /*'options' => array(
                 'label' => 'Usuario',
-            ),
+            ),*/
         ));
         $this->add(array(
             'name' => 'password',
             'attributes' => array(
                 'type'  => 'password',
             ),
-            'options' => array(
+            /*'options' => array(
                 'label' => 'Clave',
-            ),
+            ),*/
         ));
         $this->add(array(
             'name' => 'email',
             'attributes' => array(
                 'type'  => 'email',
             ),
-            'options' => array(
+            /*'options' => array(
                 'label' => 'Email',
-            ),
+            ),*/
         ));
         $this->add(array(
             'type' => 'Zend\Form\Element\Select',
             'name' => 'role_id',
             'options' => array(
-                'label' => 'Role',
+                /*'label' => 'Role',*/
                 'value_options' => $selRol,
              ),
         ));
