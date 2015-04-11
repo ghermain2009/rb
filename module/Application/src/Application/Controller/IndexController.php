@@ -17,9 +17,15 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
+        $serviceLocator = $this->getServiceLocator();
+        $config = $serviceLocator->get('config');
+        $constantes = $config['constantes'];
+        
         $user_session = new Container('user');
         
-        $serviceLocator = $this->getServiceLocator();
+        $user_session->facebook = array('id' => $constantes["id_facebook"],
+                                        've' => $constantes["ve_facebook"]);
+        
         $campanaTable = $serviceLocator->get('Dashboard\Model\CupcampanaTable');
         $datos = $campanaTable->getCampanasAll();
         
@@ -37,7 +43,8 @@ class IndexController extends AbstractActionController
         
         return new ViewModel(array('data' => $data, 
                                    'dataG' => $dataG,
-                                   'user_session' => $user_session));
+                                   'user_session' => $user_session
+                                   ));
     }
     
     

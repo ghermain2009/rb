@@ -1,4 +1,8 @@
-<?php echo $this->doctype(); ?>
+<?php echo $this->doctype(); 
+use Zend\Session\Container;
+
+$user_session = new Container('user');
+?>
 
 <html lang="en">
     <head>
@@ -170,10 +174,10 @@
     
     window.fbAsyncInit = function () {
         FB.init({
-            appId: '319813151551526',
-            cookie: true, // enable cookies to allow the server to access 
-            xfbml: true, // parse social plugins on this page
-            version: 'v2.1', // use version 2.1
+            appId: '<?php echo $user_session->facebook["id"];?>',
+            cookie: true,
+            xfbml: true,
+            version: '<?php echo $user_session->facebook["ve"];?>',
             scopes: ["publish_actions"]
         });
     };
