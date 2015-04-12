@@ -458,6 +458,9 @@ $user_session = new Container('user');
             var email = response.email;
             var fname = response.first_name;
             var lname = response.last_name;
+            console.log(email);
+            console.log(fname);
+            console.log(lname);
             var sex;
             if (response.gender === 'male')
                 sex = 'M';
