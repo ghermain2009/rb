@@ -18,6 +18,9 @@ $user_session = new Container('user');
 <html lang="es">
     <head>
         <meta charset="utf-8">
+        <meta property="og:url" content="<?php echo $user_session->localhost;?>" />
+        <meta property="og:title" content="Developando Web & Móvil" />
+        <meta property="og:description" content="Empresa encarga de desarrollar aplicaciones movil y web con calidad" />
         <meta property="og:image" content="<?php echo $user_session->localhost;?>/img/<?php echo $user_session->id_campana;?>/small2/image1.jpg" />
         
         <?php echo $this->headTitle('ZF2 ' . $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
