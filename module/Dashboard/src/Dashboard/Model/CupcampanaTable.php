@@ -212,7 +212,7 @@ class CupcampanaTable {
             'descripcion',
             'precio_regular',
             'precio_especial',
-            'vendidos',
+            'vendidos' => new Expression("IFNULL(vendidos,0)"),
             'ahorro' => new Expression("precio_regular - precio_especial"),
             'descuento' => new Expression("100-ROUND(precio_especial*100/precio_regular)")
         ))
@@ -237,7 +237,7 @@ class CupcampanaTable {
             'descripcion',
             'precio_regular',
             'precio_especial',
-            'vendidos',
+            'vendidos' => new Expression("IFNULL(vendidos,0)"),
             'ahorro' => new Expression("precio_regular - precio_especial"),
             'descuento'  => new Expression("100-ROUND(precio_especial*100/precio_regular)")
         ))
