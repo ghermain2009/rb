@@ -45,7 +45,8 @@ foreach ($data as $detalle) {
                     $contador++;
                     ?>
                     <div class="item<?php if ($contador == 0) { ?>  active<?php } ?>">
-                        <img src="../../img/<?php echo $detalle['id_campana']; ?>/small/<?php echo $file; ?>" alt="...">
+                        <div style="width: 745px;height: 420px;background-image: url('../../img/<?php echo $detalle['id_campana']; ?>/small/<?php echo $file; ?>'); background-size: 745px 420px;"></div>
+                        <!--img src= alt="..." width="745" height="420"-->
                         <div class="carousel-caption"></div>
                     </div>
                     <?php
