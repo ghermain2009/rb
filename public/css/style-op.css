@@ -314,9 +314,9 @@ a:hover {
 }
 
 .sticky_details {
-    width: 250px;
+    width: 240px;
     display:inline-block;
-    margin: 40px;
+    margin: 20px;
     vertical-align: top;
 }
 
