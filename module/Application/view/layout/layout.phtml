@@ -446,7 +446,7 @@ $user_session = new Container('user');
         FB.ui(
                 {
                     method: 'share',
-                    href: 'https://developers.facebook.com/docs/',
+                    href: '<?php echo $user_session->localhost;?>/campana/detalle/<?php echo base64_encode($user_session->id_campana);?>',
                 },
                 function (response) {
                     if (response && !response.error_code) {
