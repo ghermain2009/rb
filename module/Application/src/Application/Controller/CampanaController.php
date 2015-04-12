@@ -26,12 +26,17 @@ class CampanaController extends AbstractActionController {
         
         //$identificador = $this->params()->fromPost("id", null);
         $id = base64_decode($this->params()->fromRoute("id", null));
-
+        
         $serviceLocator = $this->getServiceLocator();
 
         $config = $serviceLocator->get('Config');
         $dir_image = $config['constantes']['dir_image'];
         $sep_path = $config['constantes']['sep_path'];
+        $localhost = $config['constantes']['localhost'];
+        
+        $user_session = new Container('user');
+        $user_session->id_campana = $id;
+        $user_session->localhost = $localhost;
 
         $campanaTable = $serviceLocator->get('Dashboard\Model\CupcampanaTable');
         $empresaTable = $serviceLocator->get('Dashboard\Model\GenempresaTable');
