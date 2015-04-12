@@ -311,7 +311,7 @@ foreach ($data_p as $dato) {
         var altura_maximo = $("#wrapper").offset().top;
 
         $(window).scroll(function () {
-
+            $("#detalle_precio").css("left", "970px");
             if ($(window).scrollTop() >= altura_precio) {
                 if ($(window).scrollTop() <= altura_maximo - 150) {
                     $("#detalle_precio").css("top", "100px");
