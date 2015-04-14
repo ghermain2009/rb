@@ -87,9 +87,8 @@ class CampanaController extends AbstractActionController {
     }
 
     public function pagoAction() {
-        $datos = $this->params()->fromPost();
 
-        // var_dump($datos);
+        $datos = $this->params()->fromPost();
 
         $serviceLocator = $this->getServiceLocator();
 
@@ -99,7 +98,13 @@ class CampanaController extends AbstractActionController {
         $cuponTable = $serviceLocator->get('Dashboard\Model\CupcuponTable');
         $resultado = $cuponTable->addCupon($datos);
 
-
+        $config = $serviceLocator->get('config');
+        $postURL = $config["tarjetas"];
+        
+        $url = $postURL[$datos['metodo']]['url'];
+        $usuario = $postURL[$datos['metodo']]['user'];
+        $password = $postURL[$datos['metodo']]['pass'];
+        
         //$this->layout('layout/layout_pago');
         //return new ViewModel(array('datos' => $datos));
         //$this->redirect()->toRoute('route',array('action' => 'name'), array('param => 1'));
@@ -107,7 +112,7 @@ class CampanaController extends AbstractActionController {
         //
         //;
 
-        $url = "http://visapago.ec";
+        //$url = "http://visapago.ec";
 
         //$url = "http://www.google.com";
 
@@ -119,13 +124,15 @@ class CampanaController extends AbstractActionController {
         $request->setMethod('POST'); //uncomment this if the POST is used
         $request->getPost()->set('operacion', $resultado);
         $request->getPost()->set('monto', $datos['PriceTotal']);
+        $request->getPost()->set('usuario', $usuario);
+        $request->getPost()->set('password', $password);
 
         $client = new Client;
 
         $client->setAdapter("Zend\Http\Client\Adapter\Curl");
 
         $response = $client->dispatch($request);
-
+        
         return $response;
 
         //eturn $this->redirect()->toUrl('http://visapago.ec',$datos);
@@ -224,8 +231,13 @@ class CampanaController extends AbstractActionController {
     }
 
     public function pagorequestAction() {
-        $orden = $this->params()->fromRoute("id", null);
-        $estado = $this->params()->fromRoute("op", null);
+        $datos = $this->params()->fromPost();
+        
+        /*$orden = $this->params()->fromRoute("id", null);
+        $estado = $this->params()->fromRoute("op", null);*/
+        
+        $orden = $datos["transaccion"];
+        $estado = $datos["estado"];
 
         $serviceLocator = $this->getServiceLocator();
         $cuponTable = $serviceLocator->get('Dashboard\Model\CupcuponTable');
