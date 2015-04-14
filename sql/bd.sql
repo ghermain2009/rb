@@ -167,7 +167,7 @@ INSERT INTO `gen_categoria` (`id_categoria`, `descripcion`) VALUES
 (6,	'Servicios');
 
 CREATE TABLE `gen_empresa` (
-  `id_empresa` int(11) NOT NULL,
+  `id_empresa` int(11) NOT NULL AUTO_INCREMENT,
   `razon_social` varchar(150) NOT NULL,
   `registro_contribuyente` varchar(25) NOT NULL,
   `direccion_facturacion` varchar(150) NOT NULL,
