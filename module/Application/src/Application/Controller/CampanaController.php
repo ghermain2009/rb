@@ -231,6 +231,7 @@ class CampanaController extends AbstractActionController {
     }
 
     public function pagorequestAction() {
+        
         $datos = $this->params()->fromPost();
         
         $orden = $datos["transaccion"];
@@ -247,8 +248,6 @@ class CampanaController extends AbstractActionController {
             $campanaopcionTable = $serviceLocator->get('Dashboard\Model\CupcampanaopcionTable');
             $campanaopcionTable->updCantidadVendidos($opcion_campana['id_campana'], $opcion_campana['id_campana_opcion'], $opcion_campana['cantidad']);
         }
-
-        $datos = array('orden' => $orden, 'estado' => $estado);
 
         $url = $localhost."/campana/cuponbuenaso";
 
@@ -304,7 +303,7 @@ class CampanaController extends AbstractActionController {
     }
 
     public function cuponbuenasoAction() {
-        $datos = $this->params()->fromRoute();
+        $datos = $this->params()->fromPost();
         var_dump($datos);
         return new ViewModel();
     }
