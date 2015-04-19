@@ -233,17 +233,15 @@ class CampanaController extends AbstractActionController {
     public function pagorequestAction() {
         $datos = $this->params()->fromPost();
         
-        /*$orden = $this->params()->fromRoute("id", null);
-        $estado = $this->params()->fromRoute("op", null);*/
-        
         $orden = $datos["transaccion"];
         $estado = $datos["estado"];
 
         $serviceLocator = $this->getServiceLocator();
+        
+        $config = $serviceLocator->get('Config');
+        $localhost = $config['constantes']['localhost'];
         $cuponTable = $serviceLocator->get('Dashboard\Model\CupcuponTable');
         $opcion_campana = $cuponTable->updEstadoVenta($orden, $estado);
-
-        //var_dump($opcion_campana);
 
         if ($estado == '3') {
             $campanaopcionTable = $serviceLocator->get('Dashboard\Model\CupcampanaopcionTable');
@@ -252,16 +250,14 @@ class CampanaController extends AbstractActionController {
 
         $datos = array('orden' => $orden, 'estado' => $estado);
 
-        $url = "http://buenisimo.ec/campana/cuponbuenaso";
-
-        //$url = "http://www.google.com";
+        $url = $localhost."/campana/cuponbuenaso";
 
         $request = new Request;
         $request->getHeaders()->addHeaders([
             'Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8'
         ]);
         $request->setUri($url);
-        $request->setMethod('POST'); //uncomment this if the POST is used
+        $request->setMethod('POST'); 
         $request->getPost()->set('orden', $orden);
         $request->getPost()->set('estado', $estado);
 
