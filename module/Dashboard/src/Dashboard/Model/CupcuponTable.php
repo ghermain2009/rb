@@ -12,6 +12,7 @@ use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Predicate\Between;
+use Zend\Stdlib\ArrayUtils;
 
 /**
  * Description of CupcuponTable
@@ -34,6 +35,48 @@ class CupcuponTable {
     public function fetchAll() {
         $resultSet = $this->tableGateway->select();
         return $resultSet;
+    }
+    
+    public function getCupon($orden) {
+
+        $sql = new Sql($this->tableGateway->adapter);
+                
+        $select = $sql->select();
+
+        $select->columns(array(
+            'id_cupon',
+            'codigo_cupon',
+            'id_campana',
+            'id_campana_opcion',
+            'cantidad',
+            'precio_total',
+            'fecha_compra' => new Expression("date_format(fecha_compra,'%d-%m-%Y')")
+        ))
+        ->from('cup_cupon')
+        ->join('cup_campana', new Expression("cup_cupon.id_campana = cup_campana.id_campana"),
+                array(
+                   'sobre_campana',
+                   'saber' => 'observaciones',
+                   'fecha_validez' => new Expression("date_format(fecha_validez,'%d-%m-%Y')")
+                ))        
+        ->join('cup_campana_opcion', new Expression("cup_cupon.id_campana = cup_campana_opcion.id_campana and "
+                                                  . "cup_cupon.id_campana_opcion = cup_campana_opcion.id_campana_opcion"),
+                array('campana_descripcion' => 'descripcion'
+                    ))
+        ->join('gen_empresa', new Expression("cup_campana.id_empresa = gen_empresa.id_empresa"),
+                array('razon_social',
+                      'ubicacion_gps',
+                      'horario',
+                      'web_site',
+                      'descripcion_empresa' => 'descripcion',
+                      'direccion' => new Expression("case when ifnull(direccion_comercial,'') = '' then direccion_facturacion else direccion_comercial end ")
+                    ))
+        ->where(array('id_cupon' => $orden));
+        
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $result = $statement->execute();
+
+        return ArrayUtils::iteratorToArray($result);
     }
 
     public function addCupon($datos) {
@@ -70,7 +113,9 @@ class CupcuponTable {
 
     public function updEstadoVenta($orden, $estado) {
 
-        $set = array('id_estado_compra' => $estado);
+        $set = array('id_estado_compra' => $estado,
+                     'fecha_compra' => new Expression("NOW()")
+                    );
         $where = array('id_cupon' => $orden);
 
         $rs = $this->tableGateway->update($set, $where);

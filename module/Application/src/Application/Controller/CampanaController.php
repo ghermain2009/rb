@@ -304,8 +304,13 @@ class CampanaController extends AbstractActionController {
 
     public function cuponbuenasoAction() {
         $datos = $this->params()->fromPost();
-        var_dump($datos);
-        return new ViewModel();
+        
+        $serviceLocator = $this->getServiceLocator();
+        $cuponTable = $serviceLocator->get('Dashboard\Model\CupcuponTable');
+        $datosCupon = $cuponTable->getCupon($datos["orden"]);
+
+        return new ViewModel(array('datos' => $datosCupon[0]));
+        
     }
 
     public function uploadAction() {
