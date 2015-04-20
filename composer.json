@@ -13,6 +13,7 @@
         "zendframework/zend-developer-tools": "dev-master",
         "thadafinser/zfc-datagrid": "dev-master",
         "zendframework/zend-session" : "2.3.*@dev",
-        "zendframework/zend-eventmanager": "2.3.*@dev"
+        "zendframework/zend-eventmanager": "2.3.*@dev",
+        "dino/dompdf-module": "dev-master"
      }
 }

@@ -7,6 +7,7 @@ return array(
         'Business', // Empresas
         'ZfcDatagrid', // DataGrid Module
         'ZendDeveloperTools', // This is a tool to debug
+        'DOMPDFModule',
     ),
     
      // These are various options for the listeners attached to the ModuleManager
