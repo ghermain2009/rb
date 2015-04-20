@@ -318,9 +318,9 @@ class CampanaController extends AbstractActionController {
         $datosCupon = $cuponTable->getCupon($datos["orden"]);
         $datosArray = $datosCupon[0];
         $variados = new Variados($serviceLocator);
-        $docPDF = $variados->obtenerCuponPdf($datosArray);
+        //$docPDF = $variados->obtenerCuponPdf($datosArray);
         
-        $email = 'ghermain@gmail.com';
+        //$email = 'ghermain@gmail.com';
 
         if(!empty($email)) {
             
