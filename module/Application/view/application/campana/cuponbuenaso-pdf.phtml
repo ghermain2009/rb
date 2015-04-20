@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <title>Documento PDF</title>
+        <style type="text/css">
+            .letra-cupon{
+                font-family: arial;
+                font-size: 20px;
+                font-weight: bold;
+                text-align: right
+            }
+
+            .letra-cupon-min {
+                font-family: arial;
+                font-size: 14px;
+                font-weight: bold;
+                text-align: right
+            }
+
+            .borde-cupon-externo{
+                border-style:solid;
+                border-width: 4px;
+                width: 100%;
+                background-color: #ffffff;
+
+            }
+
+            .borde-cupon-interno{
+                width: 95%;
+            }
+
+            .linea-cupon{
+                border-bottom-style:solid;
+                border-bottom-width:2px
+            }
+            
+            .logo-fijo {
+                width: 120px; 
+                height: 100px;
+                background-image: url('../../../../img/logo_buenisimo.png');
+                padding:10px;
+            }
+            
+        </style>
+    </head>
+    <body>
+<div>
+    <table class="borde-cupon-externo">
+        <tr>
+            <td align="center">
+                <div>
+                <table class="borde-cupon-interno">
+                    <tr>
+                        <td><div class="logo-fijo"></div></td>
+                        <td><div class="letra-cupon"><p>Número de Cupón: <?php echo $codigo_cupon;?><br>Válido por <?php echo $cantidad;?> cupone(s)</p></div></td>
+                    </tr>
+                    <tr style="border-bottom-style:solid; border-bottom-width:2px">
+                        <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td><img src="../../../../img/<?php echo $id_campana; ?>/small2/image1.jpg"></td>
+                        <td><div><p class="letra-cupon">Tu compra en Rebueno:<br><?php echo $campana_descripcion;?></p>
+                                <p class="letra-cupon-min">Fecha Compra : <?php echo $fecha_compra;?></p>
+                                <?php if( !empty($fecha_validez) ) { ?>
+                                <p class="letra-cupon-min">Fecha Válidez : <?php echo $fecha_validez;?></p>
+                                <?php } ?>
+                            </div></td>
+                    </tr>
+                    <tr style="border-bottom-style:solid; border-bottom-width:2px">
+                        <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><p><b>La oferta incluye:</b><br><?php echo $sobre_campana;?></p></td>
+                    </tr>
+                    <tr style="border-bottom-style:solid; border-bottom-width:2px">
+                        <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><p><b>Nuestro Proveedor:</b></p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div>
+                            <table>
+                                <tr><td colspan="2"><?php echo $razon_social;?></td></tr>
+                                <tr><td><?php echo $descripcion_empresa;?></td><td rowspan="7"><img id="companyMap" src="<?php echo $ubicacion_gps;?>"></td></tr>
+                                <tr><td><b>Sitio Web:</b></td></tr>
+                                <tr><td><?php echo $web_site;?></td></tr>
+                                <tr><td><b>Dirección:</b></td></tr>
+                                <tr><td><?php echo $direccion;?></td></tr>
+                                <tr><td><b>Horario:</b></td></tr>
+                                <tr><td><?php echo $horario;?></td></tr>
+                            </table>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+    
+</div>
+    </body>
+</html>

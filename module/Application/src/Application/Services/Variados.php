@@ -22,27 +22,34 @@ class Variados {
         $this->serviceLocator = $seviceLocator;
     }
     
-    public function obtenerDocumentoPdf($codigoEmpresa,$tipoDocumento, $nroDocumento, $fechaEmision, $montoTotal)
+    public function obtenerCuponPdf($datos)
     {
         $sl = $this->serviceLocator;
         
-        $config = $sl->get('config');
+        $documentoPdf = new PdfModel();
+        $documentoPdf->setOption('filename', 'documento.pdf');
+        $documentoPdf->setOption('paperOrientation', 'portrait');
+        $documentoPdf->setVariables(array(
+            'codigo_cupon' => $datos["codigo_cupon"],
+            'cantidad' => $datos["cantidad"],
+            'id_campana' => $datos["id_campana"],
+            'campana_descripcion' => $datos["campana_descripcion"],
+            'fecha_compra' => $datos["fecha_compra"],
+            'fecha_validez' => $datos["fecha_validez"],
+            'sobre_campana' => $datos["sobre_campana"],
+            'razon_social' => $datos["razon_social"],
+            'descripcion_empresa' => $datos["descripcion_empresa"],
+            'ubicacion_gps' => $datos["ubicacion_gps"],
+            'web_site' => $datos["web_site"],
+            'direccion' => $datos["direccion"],
+            'horario' => $datos["horario"]
+        ));
         
-        $params['is_https'] = $config['is_https'];
-        $params['dir_cert'] = $config['rutas']['dir_cert'];
-        $params['dir_repo'] = $config['rutas']['dir_repo'];
-        $params['codigo_empresa'] = $codigoEmpresa;
-        $params['tipo_documento'] = $tipoDocumento;
-        $params['nro_documento'] = $nroDocumento; 
-        $params['fecha_emision'] = Fechas::obtenerDMYFormat(str_replace('-','/',substr($fechaEmision,0,10)));
-        $params['monto_total'] = $montoTotal;
         
-        $docCabTable = $sl->get('Application\Model\DocelectronicocabTable');
-        //$docCabTable->fetchAll();
-        //$docCabTable::Tranportes_CDS
-        $documentoPdf = $docCabTable->obtenerDocumentoElectronicoPDF($params);
+        
+        
         $documentoPdf->setTerminal(true);
-        $documentoPdf->setTemplate('application/documento-electronico/documento-pdf.phtml');
+        $documentoPdf->setTemplate('application/campana/cuponbuenaso-pdf.phtml');
         $htmlPdf = $sl->get('viewPdfrenderer')->getHtmlRenderer()->render($documentoPdf);
         $engine = $sl->get('viewPdfrenderer')->getEngine();
         // Cargamos el HTML en DOMPDF
@@ -51,7 +58,6 @@ class Variados {
         // Obtenemos el PDF en memoria
         $pdfCode = $engine->output();
 
-        //$this->enviarMail($pdfCode);
-        return base64_encode($pdfCode);
+        return $pdfCode;
     }
 }
