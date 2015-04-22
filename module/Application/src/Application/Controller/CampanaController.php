@@ -256,7 +256,7 @@ class CampanaController extends AbstractActionController {
         $datosCupon = $cuponTable->getCupon($orden);
         $datosArray = $datosCupon[0];
         $variados = new Variados($serviceLocator);
-        $variados->obtenerCuponPdf($datosArray);
+        //$variados->obtenerCuponPdf($datosArray);
         /********************/
 
         $url = $localhost."/campana/cuponbuenaso";
