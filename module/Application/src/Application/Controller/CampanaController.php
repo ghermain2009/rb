@@ -21,12 +21,7 @@ use Zend\File\Transfer\Adapter\Http;
 use Zend\Filter\File\Rename;
 
 use Application\Services\Variados;
-use Zend\Mail\Message;
-use Zend\Mail\Transport\Smtp as SmtpTransport;
-use Zend\Mime\Message as MimeMessage;
-use Zend\Mime\Part as MimePart;
-use Zend\Mime\Mime;
-use Zend\Mail\Transport\SmtpOptions;
+
 
 class CampanaController extends AbstractActionController {
 
@@ -256,6 +251,13 @@ class CampanaController extends AbstractActionController {
             $campanaopcionTable = $serviceLocator->get('Dashboard\Model\CupcampanaopcionTable');
             $campanaopcionTable->updCantidadVendidos($opcion_campana['id_campana'], $opcion_campana['id_campana_opcion'], $opcion_campana['cantidad']);
         }
+        
+        /*Enviamos el correo*/
+        $datosCupon = $cuponTable->getCupon($orden);
+        $datosArray = $datosCupon[0];
+        $variados = new Variados($serviceLocator);
+        $variados->obtenerCuponPdf($datosArray);
+        /********************/
 
         $url = $localhost."/campana/cuponbuenaso";
 
@@ -267,10 +269,13 @@ class CampanaController extends AbstractActionController {
         $request->setMethod('POST'); 
         $request->getPost()->set('orden', $orden);
         $request->getPost()->set('estado', $estado);
-
-        $client = new Client;
-
-        $client->setAdapter("Zend\Http\Client\Adapter\Curl");
+        
+        $confCurl = array(
+            'adapter'   => 'Zend\Http\Client\Adapter\Curl',
+            'curloptions' => array(CURLOPT_CONNECTTIMEOUT => 0)
+        );
+        
+        $client = new Client($url, $confCurl);
 
         $response = $client->dispatch($request);
 
@@ -317,70 +322,9 @@ class CampanaController extends AbstractActionController {
         $cuponTable = $serviceLocator->get('Dashboard\Model\CupcuponTable');
         $datosCupon = $cuponTable->getCupon($datos["orden"]);
         $datosArray = $datosCupon[0];
-        $variados = new Variados($serviceLocator);
-        //$docPDF = $variados->obtenerCuponPdf($datosArray);
+        //$variados = new Variados($serviceLocator);
+        //$variados->obtenerCuponPdf($datosArray);
         
-        //$email = 'ghermain@gmail.com';
-
-        if(!empty($email)) {
-            
-            $message = new Message();
-            $message->addTo($email)
-                    ->addFrom('cupones@rebueno.com')
-                    ->setSubject('Un cuponazo Rebueno ...‏');
-
-            $transport = new SmtpTransport();
-            $options = new SmtpOptions(array(
-                'name' => 'smtp.gmail.com',
-                'host' => 'smtp.gmail.com',
-                'port' => '587',
-                'connection_class' => 'login',
-                'connection_config' => array(
-                    'ssl' => 'tls',
-                    'username' => 'ghermain@gmail.com',
-                    'password' => 'GENENIOR'
-                ),
-            ));
-
-            /*$resolver = new TemplateMapResolver();
-            $resolver->setMap(array(
-                'mailLayout' => __DIR__ . '/../../../../Application/view/application/cliente/emailclave.phtml'
-            ));
-
-            $rendered = new PhpRenderer();
-            $rendered->setResolver($resolver);
-
-            $viewModel = new ViewModel();
-            $viewModel->setTemplate('mailLayout')->setVariables(array(
-                'nombre' => $nombre,
-                'token' => $token
-            ));
-
-            $content = $rendered->render($viewModel);
-
-            $html = new MimePart($content);
-            $html->type = "text/html";*/
-            
-            $attachment = new MimePart($docPDF);
-            $attachment->type = 'application/pdf';
-            $attachment->filename = 'cuponaso-rebueno.pdf';
-            $attachment->disposition = Mime::DISPOSITION_ATTACHMENT;
-            $attachment->encoding = Mime::ENCODING_BASE64;
-
-            $body = new MimeMessage();
-            //$body->addPart($html);
-            $body->addPart($attachment);
-            //$body->
-            
-            $message->setBody($body);
-
-            $transport->setOptions($options);
-            $transport->send($message);
-
-        }
-
-        
-
         return new ViewModel(array('datos' => $datosArray));
         
     }
