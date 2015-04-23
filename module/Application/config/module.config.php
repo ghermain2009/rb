@@ -59,6 +59,17 @@ return array(
                     ),
                 ),
             ),
+            'phpinfo' => array(
+                //'type' => 'Zend\Mvc\Router\Http\Literal',
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/index/:action',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action'     => 'phpinfo',
+                    ),
+                ),
+            ),
             'home' => array(
                 'type'    => 'Literal',
                 'options' => array(

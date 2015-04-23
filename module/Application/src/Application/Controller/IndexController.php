@@ -47,7 +47,10 @@ class IndexController extends AbstractActionController
                                    ));
     }
     
-    
+    public function phpinfoAction()
+    {
+        return new ViewModel();
+    }
     
     
 }
