@@ -63,7 +63,7 @@ foreach ($data as $detalle) {
 
                 <div class="sticky_details" id="detalle_precio"> 
                     <div class="box_center_d">
-                        <span class="text">Precio S/.</span>
+                        <span class="text">Precio <?php echo $moneda['simbolo'];?></span>
                         <span class="priceBuy"><?php echo $opciones['precio_especial']; ?></span>
                     </div>
 
@@ -76,14 +76,14 @@ foreach ($data as $detalle) {
                     <ul class="discount_information">
                         <li><span>Precio Regular</span>
                             <div class="value">
-                                <s>S/.<?php echo $opciones['precio_regular']; ?></s>
+                                <s><?php echo $moneda['simbolo'];?><?php echo $opciones['precio_regular']; ?></s>
                             </div>
                         </li>
                         <li><span>Descuento</span>
                             <div class="value"><?php echo $opciones['descuento']; ?>%</div>
                         </li>
                         <li><span>Ahorro</span>
-                            <div class="value">S/.<?php echo $opciones['ahorro']; ?></div>
+                            <div class="value"><?php echo $moneda['simbolo'];?><?php echo $opciones['ahorro']; ?></div>
                         </li>
                     </ul>
                     <!--p class="sold_campaignsp">Se han vendido <b><?php //echo $opciones['vendidos']; ?> </b>ofertas</p>
@@ -119,7 +119,7 @@ foreach ($data as $detalle) {
                                     <form class="form-horizontal" role="form">
                                         <div class="form-group">
                                             <label for="message-text" class="col-lg-9 control-label"><span class="text-opcion">OPCIÓN <?php echo $cantidad;?> :</span> <b><?php echo $opciones['descripcion']; ?></b><span class="text-precio">Precio Regular : <?php echo $opciones['precio_regular']; ?> - <?php echo $opciones['descuento']; ?> % - Ahorra : <?php echo $opciones['ahorro']; ?></span></label>
-                                            <a data-id="10699" data-opcion="1" href="../../campana/formulariopago/<?php echo base64_encode($opciones['id_campana']); ?>/<?php echo base64_encode($opciones['id_campana_opcion']); ?>" title="Comprar" class="btn btn_buy_action btn-sm">S/. <?php echo $opciones['precio_especial']; ?></a>
+                                            <a data-id="10699" data-opcion="1" href="../../campana/formulariopago/<?php echo base64_encode($opciones['id_campana']); ?>/<?php echo base64_encode($opciones['id_campana_opcion']); ?>" title="Comprar" class="btn btn_buy_action btn-sm"><?php echo $moneda['simbolo'];?> <?php echo $opciones['precio_especial']; ?></a>
                                         </div>
                                     </form>
                                 </div>

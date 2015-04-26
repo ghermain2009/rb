@@ -36,6 +36,7 @@ class CampanaController extends AbstractActionController {
         $dir_image = $config['constantes']['dir_image'];
         $sep_path = $config['constantes']['sep_path'];
         $localhost = $config['constantes']['localhost'];
+        $moneda = $config['moneda'];
         
         $user_session = new Container('user');
         $user_session->id_campana = $id;
@@ -56,7 +57,9 @@ class CampanaController extends AbstractActionController {
             'data_e' => $data_e,
             'id' => $id,
             'dir_image' => $dir_image,
-            'sep_path' => $sep_path));
+            'sep_path' => $sep_path,
+            'moneda' => $moneda,
+            ));
     }
 
     public function formulariopagoAction() {
@@ -68,6 +71,9 @@ class CampanaController extends AbstractActionController {
 
         $serviceLocator = $this->getServiceLocator();
         $campanaTable = $serviceLocator->get('Dashboard\Model\CupcampanaTable');
+        $config = $serviceLocator->get('config');
+        
+        $moneda = $config['moneda'];
 
         $data_o = $campanaTable->getCampanaOpcionId($op);
 
@@ -85,7 +91,9 @@ class CampanaController extends AbstractActionController {
             'fl' => $fl,
             'em' => $em,
             'data_o' => $data_o,
-            'user_session' => $user_session));
+            'user_session' => $user_session,
+            'moneda' => $moneda,
+                ));
         //}
     }
 
@@ -149,10 +157,16 @@ class CampanaController extends AbstractActionController {
 
         $serviceLocator = $this->getServiceLocator();
         $campanaTable = $serviceLocator->get('Dashboard\Model\CupcampanaTable');
+        $config = $serviceLocator->get('config');
+                
         $data = $campanaTable->getCampanaCategoria($id,$op);
+        
+        $moneda = $config['moneda'];
 
         return new ViewModel(array('data' => $data, 
-                                   'subcategoria' => $op));
+                                   'subcategoria' => $op,
+                                   'moneda' => $moneda,
+            ));
     }
 
     public function cerrarsessionAction() {
@@ -534,7 +548,9 @@ class CampanaController extends AbstractActionController {
         $serviceLocator = $this->getServiceLocator();
 
         $config = $serviceLocator->get('Config');
+        
         $dir_image = $config['constantes']['dir_image'];
+        $moneda = $config['moneda'];
 
         $campanaTable = $serviceLocator->get('Dashboard\Model\CupcampanaTable');
         $empresaTable = $serviceLocator->get('Dashboard\Model\GenempresaTable');
@@ -550,7 +566,9 @@ class CampanaController extends AbstractActionController {
             'data_p' => $data_p,
             'data_e' => $data_e,
             'id' => $id,
-            'dir_image' => $dir_image));
+            'dir_image' => $dir_image,
+            'moneda' => $moneda,
+            ));
         
         $viewmodel->setTerminal(true);
 

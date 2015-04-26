@@ -20,6 +20,7 @@ class IndexController extends AbstractActionController
         $serviceLocator = $this->getServiceLocator();
         $config = $serviceLocator->get('config');
         $constantes = $config['constantes'];
+        $moneda = $config['moneda'];
         
         $user_session = new Container('user');
         
@@ -43,7 +44,8 @@ class IndexController extends AbstractActionController
         
         return new ViewModel(array('data' => $data, 
                                    'dataG' => $dataG,
-                                   'user_session' => $user_session
+                                   'user_session' => $user_session,
+                                   'moneda' => $moneda,
                                    ));
     }
     

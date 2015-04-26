@@ -25,7 +25,7 @@ foreach ($data as $dato) {
                         <a href="/campana/detalle/<?php echo base64_encode($dato['id_campana']); ?>" target="_self" title="<?php echo $dato['subtitulo']; ?>" class="description"><?php echo $dato['subtitulo']; ?></a>
                     </h3>
                     <div class="tar">
-                        <s>S/. <?php echo $dato['precio_regular']; ?></s>        <span class="price">S/. <?php echo $dato['precio_especial']; ?></span>
+                        <s><?php echo $moneda['simbolo'];?> <?php echo $dato['precio_regular']; ?></s>        <span class="price"><?php echo $moneda['simbolo'];?> <?php echo $dato['precio_especial']; ?></span>
                         <a class="btn btn_small" href="/campana/detalle/<?php echo base64_encode($dato['id_campana']); ?>" title="Ver oferta">Ver oferta »</a>
                     </div>
                     <p class="sold_campaigns">Vendidos: <?php echo $dato['vendidos']; ?> ofertas</p>

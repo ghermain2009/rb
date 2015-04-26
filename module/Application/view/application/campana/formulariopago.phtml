@@ -206,7 +206,7 @@
                         <input type="hidden" name="IdOpcion" id="IdOpcion" value="<?php echo base64_encode($op); ?>">
                         <input type="hidden" name="PriceUnit" id="PriceUnit" value="<?php echo $dato['precio_especial']; ?>">
                         <input type="hidden" name="PriceTotal" id="PriceTotal" value="<?php echo $dato['precio_especial']; ?>">
-                        <span id="lblPriceUnit" class="price_subtotal">S/. <?php echo $dato['precio_especial']; ?></span>
+                        <span id="lblPriceUnit" class="price_subtotal"><?php echo $moneda['simbolo'];?> <?php echo $dato['precio_especial']; ?></span>
                         <span class="form_quantity">
                             <span>Cant: </span>
                             <input class="text_cantidad" type="text" name="cantidad" id="txtQuantity" value="1" required="" data-parsley-trigger="change focusin keyup" data-parsley-min="1" data-parsley-min-message="Debe comprar un mínimo de 1" data-parsley-max="10" data-parsley-max-message="Debe comprar un máximo de 10" maxlength="3" data-parsley-type="digits" data-parsley-required-message="Ingrese una cantidad." data-parsley-errors-container=".error_quantity">                </span>
@@ -216,13 +216,13 @@
                     <span class="ico_alert"></span>
                     <span class="error_quantity"></span>
                 </div>
-                <div class="subtotal"><br><b>Sub total: </b><span id="lblSubtotal" class="price_subtotal">S/. <?php echo $dato['precio_especial']; ?></span></div>
-                <div class="subtotal"><br><b>Total: </b><span id="lblTotal" class="price">S/. <?php echo $dato['precio_especial']; ?></span>
+                <div class="subtotal"><br><b>Sub total: </b><span id="lblSubtotal" class="price_subtotal"><?php echo $moneda['simbolo'];?> <?php echo $dato['precio_especial']; ?></span></div>
+                <div class="subtotal"><br><b>Total: </b><span id="lblTotal" class="price"><?php echo $moneda['simbolo'];?> <?php echo $dato['precio_especial']; ?></span>
                 </div>
                 <div class="offer_alert hide">
                     <span class="ico"></span>
                     <span class="text">Al efectuar la compra, tu nuevo saldo de crédito OferTOP será de <br>
-                        <b id="lblRemainingCredit">S/. 0</b></span>
+                        <b id="lblRemainingCredit"><?php echo $moneda['simbolo'];?> 0</b></span>
                 </div>
             </div>
         </div>
@@ -264,8 +264,8 @@
             $total = $precio * $cantidad;
             $total_fixed = parseFloat($total).toFixed(2);
             $("#PriceTotal").val($total_fixed);
-            $("#lblSubtotal").html('S/. ' + $total_fixed);
-            $("#lblTotal").html('S/. ' + $total_fixed);
+            $("#lblSubtotal").html('<?php echo $moneda['simbolo'];?> ' + $total_fixed);
+            $("#lblTotal").html('<?php echo $moneda['simbolo'];?> ' + $total_fixed);
         });
 
         $("#valida_cancelar").click(function () {
