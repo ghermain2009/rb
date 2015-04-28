@@ -79,12 +79,12 @@ class CupcuponTable {
         return ArrayUtils::iteratorToArray($result);
     }
 
-    public function addCupon($datos) {
+    public function addCupon($datos,$sl) {
 
 
         if (isset($datos)) {
 
-            $codigo_cupon = $this->getCodigoCupon();
+            $codigo_cupon = $this->_getCodigoCupon($sl);
 
             $sql = new Sql($this->tableGateway->adapter);
 
@@ -140,9 +140,39 @@ class CupcuponTable {
         return $cantidad;
     }
 
-    private function getCodigoCupon() {
-        return '7676767889';
+    private function _getCodigoCupon($sl) {
+        
+        if(!empty($sl)) {
+            $config = $sl->get('Config');
+            $prefijo = $config['constantes']['prefijo'];
+        } else {
+            $prefijo = 'OPT';
+        }
+        
+        $codigo = $prefijo .
+                  '-' .
+                  $this->_desordenarNumero(date('YmdHis')) .
+                  '-' .
+                  rand(0, 9);
+                  
+        return $codigo;
     }
+    
+    private function _desordenarNumero($cadena) {
+        $posi = 0;
+        $cadenanueva = substr($cadena, $posi + 10, 2) .
+                       substr($cadena, $posi , 2) .
+                       substr($cadena, $posi + 8, 2) .
+                       substr($cadena, $posi + 6, 2) .
+                       substr($cadena, $posi + 2, 1) .
+                       '-' .
+                       substr($cadena, $posi + 3, 1) .
+                       substr($cadena, $posi + 12, 2) .
+                       substr($cadena, $posi + 4, 2);
+        
+        return $cadenanueva;
+    }
+    
 
     public function validarCupon($cadena, $tipo) {
         $aCupones = explode(",", $cadena);

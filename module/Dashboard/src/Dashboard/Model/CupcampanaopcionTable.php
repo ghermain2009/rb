@@ -66,7 +66,8 @@ class CupcampanaopcionTable {
                     'id_campana',
                     'descripcion',
                     'precio_regular',
-                    'precio_especial'
+                    'precio_especial',
+                    'comision'
                 ))
                 ->from('cup_campana_opcion')
                 ->where(array('id_campana' => $id_campana));
@@ -87,7 +88,8 @@ class CupcampanaopcionTable {
                     'id_campana',
                     'descripcion',
                     'precio_regular',
-                    'precio_especial'
+                    'precio_especial',
+                    'comision'
                 ))
                 ->from('cup_campana_opcion')
                 ->where(array('id_campana_opcion' => $id_opcion, 'id_campana' => $id_campana));
@@ -109,6 +111,7 @@ class CupcampanaopcionTable {
                 'descripcion' => (isset($datos['descripcion'])) ? $datos['descripcion'] : null,
                 'precio_regular' => (isset($datos['precio_regular'])) ? $datos['precio_regular'] : null,
                 'precio_especial' => (isset($datos['precio_especial'])) ? $datos['precio_especial'] : null,
+                'comision' => (isset($datos['comision'])) ? $datos['comision'] : null,
             ));
 
             $statement = $sql->prepareStatementForSqlObject($insert);
@@ -121,7 +124,8 @@ class CupcampanaopcionTable {
             
             $set = array('descripcion' => (isset($datos['descripcion'])) ? $datos['descripcion'] : null,
                          'precio_regular' => (isset($datos['precio_regular'])) ? $datos['precio_regular'] : null,
-                         'precio_especial' => (isset($datos['precio_especial'])) ? $datos['precio_especial'] : null);
+                         'precio_especial' => (isset($datos['precio_especial'])) ? $datos['precio_especial'] : null,
+                         'comision' => (isset($datos['comision'])) ? $datos['comision'] : null);
             
             $where = array('id_campana_opcion' => (isset($datos['id_campana_opcion'])) ? $datos['id_campana_opcion'] : null,
                            'id_campana' => (isset($datos['id_campana'])) ? $datos['id_campana'] : null);

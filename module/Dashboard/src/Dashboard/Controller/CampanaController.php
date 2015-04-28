@@ -226,12 +226,14 @@ class CampanaController extends AbstractActionController {
         $descripcion = $this->params()->fromPost("descripcion", null);
         $precio_regular = $this->params()->fromPost("precio_regular", null);
         $precio_especial = $this->params()->fromPost("precio_especial", null);
+        $comision = $this->params()->fromPost("comision", null);
 
         $data = array('id_campana_opcion' => $id_campana_opcion,
             'id_campana' => $id_campana,
             'descripcion' => $descripcion,
             'precio_regular' => $precio_regular,
-            'precio_especial' => $precio_especial
+            'precio_especial' => $precio_especial,
+            'comision' => $comision
         );
 
         $serviceLocator = $this->getServiceLocator();

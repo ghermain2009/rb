@@ -107,7 +107,7 @@ class CampanaController extends AbstractActionController {
         $resultado = $clienteTable->addCliente($datos);
 
         $cuponTable = $serviceLocator->get('Dashboard\Model\CupcuponTable');
-        $resultado = $cuponTable->addCupon($datos);
+        $resultado = $cuponTable->addCupon($datos,$serviceLocator);
 
         $config = $serviceLocator->get('config');
         $postURL = $config["tarjetas"];

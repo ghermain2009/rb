@@ -188,6 +188,7 @@ $contador = -1;
                                 <th>Descripción</th>
                                 <th>Precio regular</th>
                                 <th>Precio especial</th>
+                                <th>Comisión</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -202,6 +203,7 @@ $contador = -1;
                                     <td><div id="descripcion<?php echo $opcion['id_campana_opcion']; ?>"><?php echo $opcion['descripcion']; ?></div></td>
                                     <td><?php echo $opcion['precio_regular']; ?></td>
                                     <td><?php echo $opcion['precio_especial']; ?></td>
+                                    <td><?php echo $opcion['comision']; ?></td>
                                     <td><div class="btn btn-warning" onclick="javascript:edicionOpcion('<?php echo $opcion['id_campana_opcion']; ?>', '<?php echo $opcion['id_campana']; ?>')" title="Modificar opción de venta"><span class="glyphicon glyphicon-edit"></span></div></td>
                                 </tr>
                             <?php } ?>
@@ -255,6 +257,13 @@ $contador = -1;
                             <span class="help-block with-errors"></span>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="comision" class="col-lg-4 control-label">Comisión:</label>
+                        <div class="col-xs-9"> 
+                            <input type="text" class="form-control" name="comision" id="comision" value="">
+                            <span class="help-block with-errors"></span>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -269,7 +278,7 @@ $contador = -1;
 <div class="modal fade" id="modalEditorText" tabindex="-1" role="dialog" aria-labelledby="myModalLabelText" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-body" style="height:460px">
+            <div class="modal-body" style="height:400px">
                 <form>
                     <div class="form-group">
                         <label class="col-lg-4 control-label" id="descripcionText"></label>
@@ -436,6 +445,7 @@ foreach ($ficheros2 as $file) {
                     $('#content').html(datos[0].descripcion);
                     $('#precio_regular').val(datos[0].precio_regular);
                     $('#precio_especial').val(datos[0].precio_especial);
+                    $('#comision').val(datos[0].comision);
                     $('#pk_campana').val(datos[0].id_campana);
                     $('#pk_campana_opcion').val(datos[0].id_campana_opcion);
                     $('#content').data('liveEdit').startedit();
@@ -449,6 +459,7 @@ foreach ($ficheros2 as $file) {
         $('#content').html('');
         $('#precio_regular').val('0.00');
         $('#precio_especial').val('0.00');
+        $('#comision').val('0.00');
         $('#pk_campana').val('<?php echo $id_campana; ?>');
         $('#pk_campana_opcion').val('');
         $('#content').data('liveEdit').startedit();
@@ -462,17 +473,19 @@ foreach ($ficheros2 as $file) {
         var descripcion = $('#content').data('liveEdit').getXHTMLBody();
         var precio_regular = $('#precio_regular').val();
         var precio_especial = $('#precio_especial').val();
+        var comision = $('#comision').val();
 
         $.ajax({
             type: "POST",
             url: "/dashboard/campana/saveopcion",
-            data: {id_campana: id_campana, id_campana_opcion: id_campana_opcion, descripcion: descripcion, precio_regular: precio_regular, precio_especial: precio_especial},
+            data: {id_campana: id_campana, id_campana_opcion: id_campana_opcion, descripcion: descripcion, precio_regular: precio_regular, precio_especial: precio_especial, comision: comision},
             success: function (data) {
                 var datos = $.parseJSON(data)
+                alert(datos);
                 if (datos) {
                     $('#descripcion' + id_campana_opcion).html(descripcion);
                     if (datos.resultado == 'I') {
-                        $('#js-tabla-opciones tr:last').after('<tr><td></td><td><div id="descripcion' + datos.id + '">' + descripcion + '</div></td><td>' + precio_regular + '</td><td>' + precio_especial + '</td><td><div class="btn btn-success" onclick="javascript:edicionOpcion(\'' + datos.id + '\',\'' + id_campana + '\')">Editar</div></td></tr>');
+                        $('#js-tabla-opciones tr:last').after('<tr><td></td><td><div id="descripcion' + datos.id + '">' + descripcion + '</div></td><td>' + precio_regular + '</td><td>' + precio_especial + '</td><td>' + comision + '</td><td><div class="btn btn-success" onclick="javascript:edicionOpcion(\'' + datos.id + '\',\'' + id_campana + '\')">Editar</div></td></tr>');
                     }
                     $('#modalEditor').modal('hide');
 

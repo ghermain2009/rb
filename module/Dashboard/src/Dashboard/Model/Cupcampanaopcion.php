@@ -20,7 +20,8 @@ class Cupcampanaopcion {
     public $cantidad;
     public $vendidos;
     public $id_campana;
-    
+    public $comision;
+            
     function getId_campana_opcion() {
         return $this->id_campana_opcion;
     }
@@ -47,6 +48,10 @@ class Cupcampanaopcion {
 
     function getId_campana() {
         return $this->id_campana;
+    }
+    
+    function getComision() {
+        return $this->comision;
     }
 
     function setId_campana_opcion($id_campana_opcion) {
@@ -76,6 +81,10 @@ class Cupcampanaopcion {
     function setId_campana($id_campana) {
         $this->id_campana = $id_campana;
     }
+    
+    function setComision($comision) {
+        $this->comision = $comision;
+    }
 
     public function exchangeArray($data)
     {
@@ -87,6 +96,7 @@ class Cupcampanaopcion {
         $this->cantidad = (isset($data['cantidad'])) ? $data['cantidad'] : null;
         $this->vendidos = (isset($data['vendidos'])) ? $data['vendidos'] : null;
         $this->id_campana = (isset($data['id_campana'])) ? $data['id_campana'] : null;
+        $this->comision = (isset($data['comision'])) ? $data['comision'] : null;
          
     }
  
