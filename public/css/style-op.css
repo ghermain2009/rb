@@ -145,7 +145,7 @@ a:hover {
     font-family:gotham-medium, 'arial', 'sans-serif';
     font-size: 15px;
     font-weight: bold;
-    color:#cc1316;
+    color:#fdaf06;
     padding-left: 8px;
     padding-right: 8px;
 }
@@ -154,7 +154,7 @@ a:hover {
     font-family:gotham-medium, 'arial', 'sans-serif';
     font-size: 25px;
     //font-weight: bold;
-    color:#cc1316;
+    color:#fdaf06;
     padding-left: 8px;
     padding-right: 8px;
 }
@@ -162,7 +162,7 @@ a:hover {
 .price_subtotal {
     font-family:gotham-medium, 'arial', 'sans-serif';
     font-size: 14px;
-    color:#cc1316;
+    color:#fdaf06;
     padding-left: 8px;
     padding-right: 8px;
 }
