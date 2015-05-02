@@ -74,14 +74,14 @@
     font-size: 20px;
     color:white;
     //background-color: #cc1316;
-    background-color: #A8CF45;
+    background-color: #5cba51;
     position: relative;
     top: -45px;
     padding-top: 8px;
     padding-bottom: 8px;
     padding-left: 8px;
     padding-right: 8px;
-    filter:alpha(opacity=85); opacity:0.85;
+    //filter:alpha(opacity=95); opacity:0.95;
 }
 
 .description {
@@ -123,7 +123,7 @@ a:hover {
     font-family:gotham-medium, 'arial', 'sans-serif';
     font-size: 20px;
     color:white;
-    background-color: #cc1316;
+    background-color: #6ddd5f;
     padding-top: 4px;
     padding-bottom: 4px;
     padding-left: 80px;
@@ -131,7 +131,7 @@ a:hover {
 }
 
 .btn.btn_buy_action:hover {
-    background-color: #ae2224;
+    background-color: #57b04c;
 }
 
 .tar {
@@ -754,7 +754,17 @@ h4 {
     margin: 0px;
     position: absolute;
     top:0px;
-    background-color: #e3d6c4;
+    background-color: #fdaf06;
+}
+
+.top_bar_move {
+    width: 100%;
+    height: 35px;
+    padding: 0px;
+    margin: 0px;
+    position: absolute;
+    top:0px;
+    background-color: #ffffff;
 }
 
 #cabecera_contenedor {
@@ -763,48 +773,50 @@ h4 {
     margin: 0px;
     position: absolute;
     top:36px !important;
-    background-color: #f4f3ef;
+    //background-color: #f4f3ef;
+    background-color: #ffffff;
     //height: 100px;
 }
 
 .logo {
-    width: 120px; 
-    height: 100px;
-    background-image: url('../img/logo_buenisimo.png');
+    width: 204px; 
+    height: 75px;
+    background-image: url('../img/logo_rebueno.png');
     z-index: 8;
     position: absolute;
     padding: 0px;
     margin: 0px;
-    top:12px;
+    margin-left: 30px;
+    top:40px;
     //background-size: 50% 50%;
 }
 
 .logo-fijo {
-    width: 120px; 
-    height: 100px;
-    background-image: url('../img/logo_buenisimo.png');
+    width: 204px; 
+    height: 75px;
+    background-image: url('../img/logo_rebueno.png');
 }
 
 
 
 .logo2 {
-    width: 60px; 
-    height: 50px;
-    background-image: url('../img/logo_buenisimo.png');
+    width: 102px; 
+    height: 38px;
+    background-image: url('../img/logo_rebueno.png');
     z-index: 8;
     position: absolute;
     padding: 0px;
     margin: 0px;
     top:0px;
-    background-size: 60px 50px;
+    background-size: 102px 38px;
 }
 
 .logo3 {
-    width: 90px; 
-    height: 75px;
-    background-image: url('../img/logo_buenisimo.png');
+    width: 153px; 
+    height: 56px;
+    background-image: url('../img/logo_rebueno.png');
     z-index: 8;
-    background-size: 90px 75px;
+    background-size: 153px 56px;
 }
 
 .panel-title {
@@ -818,7 +830,7 @@ h4 {
     margin: 0px;
     top:2px;
     float: right;
-    right: 100px;
+    right: 120px;
 }
 
 .btn-group.oferta {
@@ -827,7 +839,7 @@ h4 {
     margin: 0px;
     top:2px;
     float: left;
-    left:130px;
+    left:710px;
 }
 
 .dropdown-menu.formlogin {
@@ -842,28 +854,32 @@ h4 {
 
 .popover {
     background-color: #ffffff;
-    color: #ae2224;
+    color: #96d032;
     width: 120px;
     font-size: 12px;
     text-align: center;
 }
 
 .ofertas_donde {
-    margin-left: 150px;
+    margin-left: 250px;
     margin-top: 18px;
     display: inline-block;
+    vertical-align: bottom;
 }
 
 .tit_ofertas {
     display: inline-block;
-    font-size: 20px;
+    font-size: 17px;
     font-family: gotham-medium, 'arial', 'sans-serif';
-    width: 130px;
+    width: 100px;
+    position:relative;
+    top:17px;
 }
 
 .ofertas_siguenos {
     display: inline-block;
     float: right;
+    margin-right: 90px;
     vertical-align: middle;
 }
 
@@ -1057,4 +1073,64 @@ h4 {
 .en-linea.mapa {
     width: 29%;
     vertical-align: top;
+}
+
+.btn.btn-rebueno {
+    background-color: #72e564 !important;
+    font-weight: bold;
+    border-color: #ccc;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    
+    background-color: #96d032;
+    background-image: -moz-linear-gradient(top, #72e564, #53b546);
+    background-image: -ms-linear-gradient(top, #72e564, #53b546);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#72e564), to(#53b546));
+    background-image: -webkit-linear-gradient(top, #72e564, #53b546);
+    background-image: -o-linear-gradient(top, #72e564, #53b546);
+    background-image: linear-gradient(top, #72e564, #53b546);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#72e564', endColorstr='#53b546', GradientType=0);
+    border-color: #53b546 #53b546 #802420;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    *background-color: #53b546;
+    /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+
+.btn.btn-rebueno.active {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.btn.btn-rebueno,
+.btn.btn-rebueno:hover {
+    color: #ffffff;
+    //text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+.carrusel-principal {
+    background-image:  url('../img/back_rebueno.png');
+    background-repeat: repeat-x;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 220px;
+    margin: 0px;
+    width: 100%;
+   // background-size: 20px 200px;
+}
+
+.carousel.slide.enlinea {
+    display: inline-block !important;
+    margin-right: 40px;
+}
+
+.carousel.slide.enlinead {
+    display: inline-block !important;
+}
+
+.item.derecha {
+    -webkit-transition: 3.5s ease-in-out left !important;
+    -moz-transition: 3.5s ease-in-out left !important;
+    -o-transition: 3.5s ease-in-out left !important;
+    transition: 3.5s ease-in-out left !important;
 }

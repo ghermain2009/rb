@@ -63,7 +63,7 @@ $user_session = new Container('user');
                 <a href="javascript:;" title="mostrar opciones de usuario" class="btn_user"></a>
                 <span class="logo" id="logo"></span>
                 <div class="btn-group oferta">
-                    <a id="btnSubscribe" href="javascript:;" title="Quiero recibir ofertas" class="btn btn-danger btn-sm">Quiero recibir ofertas <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+                    <a id="btnSubscribe" href="javascript:;" title="Quiero recibir ofertas" class="btn btn-rebueno btn-sm">Quiero recibir ofertas <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
                 </div>
 
 
@@ -172,6 +172,73 @@ $user_session = new Container('user');
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
+        <div class="carrusel-principal">
+            <div id="carousel-example-generic" class="carousel slide enlinea" data-ride="carousel" style="width:745px;">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="5"></li>
+                </ol>
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <img src="img/banner/bnr_bg_bsi_1_1.jpg" alt="...">
+                        <div class="carousel-caption"></div>
+                    </div>
+                    <div class="item">
+                        <img src="img/banner/bnr_bg_bsi_1_2.jpg" alt="...">
+                        <div class="carousel-caption"></div>
+                    </div>
+                    <div class="item">
+                        <img src="img/banner/bnr_bg_bsi_1_3.jpg" alt="...">
+                        <div class="carousel-caption"></div>
+                    </div>
+                    <div class="item">
+                        <img src="img/banner/bnr_bg_bsi_1_4.jpg" alt="...">
+                        <div class="carousel-caption"></div>
+                    </div>
+                    <div class="item">
+                        <img src="img/banner/bnr_bg_bsi_1_5.jpg" alt="...">
+                        <div class="carousel-caption"></div>
+                    </div>
+                    <div class="item">
+                        <img src="img/banner/bnr_bg_bsi_1_6.jpg" alt="...">
+                        <div class="carousel-caption"></div>
+                    </div>
+                </div>
+                <!-- Controls -->
+                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+            <div id="carousel-example-derecha" class="carousel slide enlinead" data-ride="carousel" style="width:240px;">
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    <div class="item derecha active">
+                        <img src="img/banner_derecha/bnr_bg_bsi_1_0.jpg" alt="...">
+                    </div>
+                    <div class="item derecha">
+                        <img src="img/banner_derecha/bnr_bg_bsi_1_1.jpg" alt="...">
+                    </div>
+                    <div class="item derecha">
+                        <img src="img/banner_derecha/bnr_bg_bsi_1_2.jpg" alt="...">
+                    </div>
+                    <div class="item derecha">
+                        <img src="img/banner_derecha/bnr_bg_bsi_1_3.jpg" alt="...">
+                    </div>
+                </div>
+                
+            </div>
+        </div>
         <div class="container">
             <?php echo $this->content; ?>
         </div>
@@ -313,6 +380,8 @@ $user_session = new Container('user');
 
                 $("#cabecera_menu_container").attr('class', 'container segundo');
                 $("#logo").attr('class', 'logo2');
+                
+                $("#headerContainer").attr('class', 'top_bar_move');
             } else {
                 $("#cabecera_contenedor").css("top", "36px");
                 $("#cabecera_menu").css("top", "120px");
@@ -324,6 +393,8 @@ $user_session = new Container('user');
 
                 $("#cabecera_menu_container").attr('class', 'container');
                 $("#logo").attr('class', 'logo');
+                
+                $("#headerContainer").attr('class', 'top_bar');
             }
 
         });
@@ -373,7 +444,7 @@ $user_session = new Container('user');
             });
         });
 
-        var data = "<b>¡Buenisimo!</b> descubre las mejores ofertas.";
+        var data = "<b>¡Rebueno!</b> descubre las mejores ofertas.";
         $('#ofertas_localidad').popover({placement: 'right', content: data, html: true});
         $('#ofertas_localidad').popover('show');
 

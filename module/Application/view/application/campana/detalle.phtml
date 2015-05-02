@@ -151,9 +151,9 @@ foreach ($data as $detalle) {
                 <div class="" id="content" >
                     <div id="menu" >
                 <ul class="tabmenudetalle">
-                    <li><a href="javascript:;" class="reftab" data-tab="taboferta"><ta class="btn btn-google-plus"><i class="glyphicon glyphicon-thumbs-up"></i></ta>  Todo sobre la oferta</a></li>
-                    <li><a href="javascript:;" class="reftab" data-tab="tabsaber"><ta class="btn btn-google-plus"><i class="glyphicon glyphicon-eye-open"></i></ta>  Lo que debes saber</a></li>
-                    <li><a href="javascript:;" class="reftab" data-tab="tabempresa"><ta class="btn btn-google-plus"><i class="glyphicon glyphicon-home"></i></ta>  La Empresa</a></li>
+                    <li><a href="javascript:;" class="reftab" data-tab="taboferta"><ta class="btn btn-rebueno"><i class="glyphicon glyphicon-thumbs-up"></i></ta>  Todo sobre la oferta</a></li>
+                    <li><a href="javascript:;" class="reftab" data-tab="tabsaber"><ta class="btn btn-rebueno"><i class="glyphicon glyphicon-eye-open"></i></ta>  Lo que debes saber</a></li>
+                    <li><a href="javascript:;" class="reftab" data-tab="tabempresa"><ta class="btn btn-rebueno"><i class="glyphicon glyphicon-home"></i></ta>  La Empresa</a></li>
                 </ul>
                         <ul class="company_hasMap2">
                                 <li><hr class="separador"></li>
@@ -166,13 +166,13 @@ foreach ($data as $detalle) {
                         <hr class="separador">
                     </div>
                     <div id="tabsaber">
-                        <h2><ta class="btn btn-google-plus"><i class="glyphicon glyphicon-eye-open"></i></ta>  <fo>Lo que debes saber</fo></h2>
+                        <h2><ta class="btn btn-rebueno"><i class="glyphicon glyphicon-eye-open"></i></ta>  <fo>Lo que debes saber</fo></h2>
                         <?php echo $detalle['observaciones']; ?>
                         <hr class="separador">
                     </div>
                     
                     <div id="tabempresa">
-                        <h2><ta class="btn btn-google-plus"><i class="glyphicon glyphicon-home"></i></ta>  <fo>La Empresa</fo></h2>
+                        <h2><ta class="btn btn-rebueno"><i class="glyphicon glyphicon-home"></i></ta>  <fo>La Empresa</fo></h2>
                         <?php foreach ($data_e as $empresa) { ?>
                             <h2><?php echo $empresa["razon_social"]; ?></h2>
                             <ul class="company_hasMap">
@@ -335,6 +335,8 @@ foreach ($data_p as $dato) {
                 $("#detalle_precio").css("position", "absolute");
                 $("#detalle_precio").css("z-index", "1");
             }
+            
+            
         });
 
         $(".reftab").click(function () {
@@ -343,6 +345,8 @@ foreach ($data_p as $dato) {
             scroll = $('#' + id ).offset().top - 100;
             $(window).scrollTop(scroll);
         });
+        
+        $(".carrusel-principal").css("display","none");
         
 
 
