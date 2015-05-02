@@ -1134,3 +1134,7 @@ h4 {
     -o-transition: 3.5s ease-in-out left !important;
     transition: 3.5s ease-in-out left !important;
 }
+
+.modal {
+  z-index: 10050;
+}
