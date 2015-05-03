@@ -16,7 +16,7 @@ foreach ($data as $detalle) {
 
     <div style="display:inline-block;">
         <div class="box_center-titulo"><h4><?php echo $detalle['titulo']; ?></h4></div>
-        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="width:745px;display:inline-block;">
+        <div id="carousel-detalle-promocion" class="carousel slide" data-ride="carousel" style="width:745px;display:inline-block;">
             <!-- Indicators -->
             <ol class="carousel-indicators">
                 <?php
@@ -30,7 +30,7 @@ foreach ($data as $detalle) {
                         continue;
                     $contador++;
                     ?>
-                    <li data-target="#carousel-example-generic" data-slide-to="<?php echo $contador; ?>" <?php if ($contador == 0) { ?> class="active" <?php } ?>></li>
+                    <li data-target="#carousel-detalle-promocion" data-slide-to="<?php echo $contador; ?>" <?php if ($contador == 0) { ?> class="active" <?php } ?>></li>
                     <?php
                 }
                 ?>
@@ -54,11 +54,11 @@ foreach ($data as $detalle) {
                 ?>
             </div>
             <!-- Controls -->
-            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <a class="left carousel-control" href="#carousel-detalle-promocion" role="button" data-slide="prev">
                 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
             </a>
-            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <a class="right carousel-control" href="#carousel-detalle-promocion" role="button" data-slide="next">
                 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
             </a>
