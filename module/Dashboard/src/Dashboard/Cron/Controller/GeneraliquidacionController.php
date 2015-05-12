@@ -8,7 +8,7 @@ use Zend\Db\Sql\Expression;
 
 class GeneraliquidacionController extends AbstractActionController
 {
-    public function generaLiquidacionAction()
+    public function generaliquidacionAction()
     {
        $view = new ViewModel();
        //$view->setTerminal(true);
