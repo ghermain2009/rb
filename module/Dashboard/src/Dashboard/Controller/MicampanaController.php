@@ -53,7 +53,7 @@ class MicampanaController extends AbstractActionController {
         return $viewmodel;
     }
     
-    public function detalleValidadoAction() {
+    public function detallevalidadoAction() {
         
         $id_empresa = base64_decode($this->params()->fromRoute("empresa", null));
         
