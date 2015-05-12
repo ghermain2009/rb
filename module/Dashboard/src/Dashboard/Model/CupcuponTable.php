@@ -11,6 +11,7 @@ namespace Dashboard\Model;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Expression;
+use Zend\Db\Sql\Predicate\In;
 use Zend\Db\Sql\Predicate\Between;
 use Zend\Stdlib\ArrayUtils;
 
@@ -267,7 +268,9 @@ class CupcuponTable {
                       'descripcion_empresa' => 'descripcion',
                       'direccion' => new Expression("case when ifnull(direccion_comercial,'') = '' then direccion_facturacion else direccion_comercial end ")
                     ))
-        ->where(array('id_estado_compra' => '5'));
+        ->where(new In('id_estado_compra', array('5','7')));
+        
+        
         
         $statement = $sql->prepareStatementForSqlObject($select);
         $result = $statement->execute();
@@ -284,6 +287,7 @@ class CupcuponTable {
         $select = $sql->select();
         
         $select->columns(array(
+            'id_cupon',
             'id_campana', 
             'id_campana_opcion',
             'fecha_validacion',
@@ -304,4 +308,34 @@ class CupcuponTable {
         
     }
     
+    public function updCupon($set, $where) {
+        
+        $rs = $this->tableGateway->update($set, $where);
+        
+        return $rs;
+        
+    }
+    
+    public function getHistorialEmpresa($id_empresa) {
+
+        $sql = new Sql($this->tableGateway->adapter);
+                
+        $select = $sql->select();
+
+        $select->columns(array(
+            'validados' => new Expression("count(1)"),
+            'cantidad_pagados' => new Expression("sum(case when id_estado_compra = '7' then 1 else 0 end)"),
+            'total_pagados' => new Expression("sum(case when id_estado_compra = '7' then precio_total else 0 end)")
+        ))
+        ->from('cup_cupon')
+        ->join('cup_campana', new Expression("cup_cupon.id_campana = cup_campana.id_campana and "
+                                           . "cup_campana.id_empresa = $id_empresa"),
+                array())
+        ->where(new In('id_estado_compra', array('5','7')));
+        
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $result = $statement->execute();
+
+        return ArrayUtils::iteratorToArray($result);
+    }
 }

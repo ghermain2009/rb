@@ -13,6 +13,7 @@ use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Predicate\NotIn;
 use Zend\Authentication\AuthenticationService;
+use Zend\Stdlib\ArrayUtils;
 /**
  * Description of CupliquidacionTable
  *
@@ -54,23 +55,63 @@ class CupliquidacionTable {
         return $select;
     }
     
-    public function getPreLiquidacion($id_campana) {
+    public function addPreLiquidacion($id_campana) {
         
-        $fecha_liquidacion = date('%Y-%m-%d %H:%i:%s');
-
         $sql = new Sql($this->tableGateway->adapter);
 
         $insert = $sql->insert('cup_liquidacion')->values(array(
-            'fecha_liquidacion' => $fecha_liquidacion,
+            'fecha_liquidacion' => new Expression("NOW()"),
             'id_campana' => $id_campana,
             'estado_liquidacion' => '1'
         ));
 
         $statement = $sql->prepareStatementForSqlObject($insert);
-
+        
         $result = $statement->execute()->getGeneratedValue();
-
+        
         return $result; /* Se inserto Informacion */
         
+    }
+    
+    public function updPreLiquidacion($set, $where) {
+        
+        $rs = $this->tableGateway->update($set, $where);
+        
+        return $rs;
+        
+    }
+    
+    public function getLiquidaciones($id_empresa, $cantidad = 0) {
+
+        $sql = new Sql($this->tableGateway->adapter);
+                
+        $select = $sql->select();
+
+        $select->columns(array(
+            'id_liquidacion',
+            'fecha_liquidacion' => new Expression("date_format(fecha_liquidacion,'%d-%m-%Y')"),
+            'cantidad_cupones',
+            'total_importe',
+            'comision',
+            'impuesto',
+            'total_liquidacion',
+            'estado_liquidacion',
+            'id_campana'
+        ))
+        ->from('cup_liquidacion');
+        
+        if( $cantidad > 0 ) { 
+            $select->limit($cantidad); 
+        }
+        
+        $select->join('cup_campana', new Expression("cup_liquidacion.id_campana = cup_campana.id_campana and "
+                                           . "cup_campana.id_empresa = $id_empresa"),
+                array());
+        //->where(new In('id_estado_compra', array('5','7')));
+        
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $result = $statement->execute();
+
+        return ArrayUtils::iteratorToArray($result);
     }
 }

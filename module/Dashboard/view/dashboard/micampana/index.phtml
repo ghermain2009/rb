@@ -154,30 +154,24 @@
                                 <div id="payments" class="tab-pane active" role="tabpanel" aria-labelledby="headingTwo">
                                     <div class="panel-default validados">
                                         <table class="table-hover total">
-                                            <tr>
-                                                <td class="bttooltip">
-                                                    <a href="http://www.migroupon.com/admin/deals/view/1002350709" data-toggle="tooltip" data-placement="right" data-original-title="Ver esta Liquidación">5969314</a>
-                                                </td>
-                                                <td class="bttooltip" data-toggle="tooltip" data-placement="top" data-original-title="Fecha de emisión">13-02-2015</td>
-                                                <td class="bttooltip" data-toggle="tooltip" data-placement="top" data-original-title="Total">PEN S/. 0,00</td>
-                                                <td class="bttooltip">
-                                                    <button type="button" class="btn btn-chiqui" id="valida_multiple"><span class="glyphicon glyphicon-download"></span> Descargar</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="bttooltip">
-                                                    <a href="http://www.migroupon.com/admin/deals/view/1002350709" data-toggle="tooltip" data-placement="right" data-original-title="Ver esta Liquidación">5969314</a>
-                                                </td>
-                                                <td class="bttooltip" data-toggle="tooltip" data-placement="top" data-original-title="Fecha de emisión">13-02-2015</td>
-                                                <td class="bttooltip" data-toggle="tooltip" data-placement="top" data-original-title="Total">PEN S/. 0,00</td>
-                                                <td class="bttooltip">
-                                                    <button type="button" class="btn btn-chiqui" id="valida_multiple"><span class="glyphicon glyphicon-download"></span> Descargar</button>
-                                                </td>
-                                            </tr>
-
+                                            <?php $cantidadL = count($liquidaciones);
+                                              if( $cantidadL > 0 ) { 
+                                                 for($i=0; $i<$cantidadL; $i++ ) { ?>
+                                                    <tr>
+                                                        <td class="bttooltip">
+                                                            <a href="http://www.migroupon.com/admin/deals/view/1002350709" data-toggle="tooltip" data-placement="right" data-original-title="Ver esta Liquidación"><?php echo $liquidaciones[$i]['id_liquidacion'];?></a>
+                                                        </td>
+                                                        <td class="bttooltip" data-toggle="tooltip" data-placement="top" data-original-title="Fecha de emisión"><?php echo $liquidaciones[$i]['fecha_liquidacion'];?></td>
+                                                        <td class="bttooltip" data-toggle="tooltip" data-placement="top" data-original-title="Total">DOL $ <?php echo $liquidaciones[$i]['total_liquidacion'];?></td>
+                                                        <td class="bttooltip">
+                                                            <button type="button" class="btn btn-chiqui" id="valida_multiple"><span class="glyphicon glyphicon-download"></span> Descargar</button>
+                                                        </td>
+                                                    </tr>
+                                        <?php    }
+                                              } ?>
                                         </table>
                                         <div class="moduleFooter">
-                                            <a href="http://www.migroupon.com/admin/coupons/index">Ver listado completo de CupoRebuenos validados</a>
+                                            <a href="../micampana/detalleliquidacion/<?php echo base64_encode($id_empresa);?>">Ver listado completo de CupoRebuenos validados</a>
                                         </div>
 
                                     </div>
@@ -217,7 +211,7 @@
                                             <div class="carousel-inner">
                                                 <div class="item active">
                                                     <span class="data-history data-validated boxGraphic">
-                                                        <span class="number">631</span>
+                                                        <span class="number"><?php echo $historial[0]['validados'];?></span>
                                                         <span class="detailSlide">
                                                             <img src="./Mi Groupon · Admin_files/icono_cupon.png">
                                                             <span>CupoRebuenos validados</span>
@@ -226,7 +220,7 @@
                                                 </div>
                                                 <div class="item">
                                                     <span class="data-history data-payed boxGraphic">
-                                                        <span class="number">598</span>
+                                                        <span class="number"><?php echo $historial[0]['cantidad_pagados'];?></span>
                                                         <span class="detailSlide">
                                                             <img src="./Mi Groupon · Admin_files/icono_cupon_paid.png">
                                                             <span>CupoRebuenos pagados</span>
@@ -235,7 +229,7 @@
                                                 </div>
                                                 <div class="item">
                                                     <span class="data-history data-total boxGraphic">
-                                                        <span class="number">PEN S/. 114.551</span>
+                                                        <span class="number">DOL $ <?php echo $historial[0]['total_pagados'];?></span>
                                                         <span class="detailSlide">
                                                             <img src="./Mi Groupon · Admin_files/icono_all_payments.png">
                                                             <span>Monto total pagado</span>
@@ -275,7 +269,7 @@
                             </div>
                             <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
                                 <div class="panel-default validados-carrusel">
-                                    <div class="titulo-campana">1 Campaña Activa</div>
+                                    <div class="titulo-campana"><?php echo count($datosCampana);?> Campaña Activa</div>
                                     <table class="table-bordered activa" id="activecampaignTable" data-campaignid="20150126006C000000wBOMWIA4" style="cursor: pointer;">
                                         <tr>
                                             <td class="bttooltipp cabecera">Activa desde</td>

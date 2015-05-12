@@ -289,13 +289,13 @@ class CupcampanaTable {
         return $stmt->execute()->getGeneratedValue();
     }
     
-    public function getCampana($userId)
+    public function getCampana($id)
     {
         $sql = new Sql($this->tableGateway->getAdapter());
         $select = $sql
                   ->select()
                   ->from(array('c' => 'cup_campana'))
-                  ->where(array('c.id_campana' => $userId));
+                  ->where(array('c.id_campana' => $id));
 
         $stmt = $sql->prepareStatementForSqlObject($select);
         
@@ -331,4 +331,30 @@ class CupcampanaTable {
         return $results;
 
     }
+    
+    public function getCampanaActiva($id_empresa)
+    {
+        $sql = new Sql($this->tableGateway->getAdapter());
+        $select = $sql->select()
+        /*$select->columns(array(
+                    'categoria' => 'descripcion',
+                    'id_categoria',
+                    'cantidad' => new Expression("count(1)")
+                ))*/
+                  ->from('cup_campana')
+                  /*->join('gen_sub_categoria', new Expression("gen_categoria.id_categoria = gen_sub_categoria.id_categoria"), 
+                            array('subcategoria' => 'descripcion', 
+                                  'id_sub_categoria')
+                    )*/
+                  ->where(array('cup_campana.id_empresa' => $id_empresa))
+                  ->where(new Expression("NOW() <= cup_campana.fecha_final"));
+
+        
+        $stmt = $sql->prepareStatementForSqlObject($select);
+        
+        $results = $stmt->execute(); 
+        
+        return $results;
+    }
+    
 }

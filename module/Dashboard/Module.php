@@ -34,7 +34,8 @@ use Dashboard\Model\Cupcupon;
 use Dashboard\Model\CupcuponTable;
 use Dashboard\Model\Cupliquidacion;
 use Dashboard\Model\CupliquidacionTable;
-
+use Dashboard\Model\Cupliquidacioncupon;
+use Dashboard\Model\CupliquidacioncuponTable;
 use Dashboard\Model\Genempresa;
 use Dashboard\Model\GenempresaTable;
 
@@ -203,6 +204,19 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
                         $rsPrototype = new ResultSet();
                         $rsPrototype->setArrayObjectPrototype(new Cupliquidacion());
                         $tableGateway = new TableGateway('cup_liquidacion', $adapter, null, $rsPrototype);
+                        return $tableGateway;
+                    },
+                            
+                    'Dashboard\Model\CupliquidacioncuponTable' => function($sl){
+                        $gateway = $sl->get('CupliquidacioncuponTableGateway');
+                        $table = new CupliquidacioncuponTable($gateway);
+                        return $table;
+                    },
+                    'CupliquidacioncuponTableGateway' => function($sl) {
+                        $adapter = $sl->get('Zend\Db\Adapter\Adapter');
+                        $rsPrototype = new ResultSet();
+                        $rsPrototype->setArrayObjectPrototype(new Cupliquidacioncupon());
+                        $tableGateway = new TableGateway('cup_liquidacion_cupon', $adapter, null, $rsPrototype);
                         return $tableGateway;
                     },
                             

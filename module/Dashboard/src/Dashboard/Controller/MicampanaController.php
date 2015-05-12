@@ -25,8 +25,13 @@ class MicampanaController extends AbstractActionController {
         $serviceLocator = $this->getServiceLocator();
         $empresaTable = $serviceLocator->get('Dashboard\Model\GenempresaTable');
         $cuponTable = $serviceLocator->get('Dashboard\Model\CupcuponTable');
+        $liquidacionTable = $serviceLocator->get('Dashboard\Model\CupliquidacionTable');
+        $campanaTable = $serviceLocator->get('Dashboard\Model\CupcampanaTable');
         $datosEmpresa = $empresaTable->getEmpresa($id_empresa);
         $datosCuponV = $cuponTable->getCuponValidado($id_empresa,3);
+        $datosHistorial = $cuponTable->getHistorialEmpresa($id_empresa);
+        $datosLiquidacion = $liquidacionTable->getLiquidaciones($id_empresa,3);
+        $datosCampana = $campanaTable->getCampanaActiva($id_empresa);
         
         $nombre_empresa = $datosEmpresa[0]['razon_social'];
         
@@ -34,7 +39,10 @@ class MicampanaController extends AbstractActionController {
         
         return new ViewModel(array('id_empresa' => $id_empresa,
                                    'nombre_empresa' => $nombre_empresa,
-                                   'cupon_validado' => $datosCuponV
+                                   'cupon_validado' => $datosCuponV,
+                                   'liquidaciones' => $datosLiquidacion,
+                                   'historial' => $datosHistorial,
+                                   'datosCampana' => $datosCampana
                                   ));
     }
 
@@ -63,5 +71,17 @@ class MicampanaController extends AbstractActionController {
         
         return new ViewModel(array('id_empresa' => $id_empresa,
                                    'cupon_validado' => $datosCuponV));
+    }
+    
+    public function detalleliquidacionAction() {
+        
+        $id_empresa = base64_decode($this->params()->fromRoute("empresa", null));
+        
+        $serviceLocator = $this->getServiceLocator();
+        $liquidacionTable = $serviceLocator->get('Dashboard\Model\CupliquidacionTable');
+        $datosLiquidacion = $liquidacionTable->getLiquidaciones($id_empresa,0);
+        
+        return new ViewModel(array('id_empresa' => $id_empresa,
+                                   'liquidaciones' => $datosLiquidacion));
     }
 }

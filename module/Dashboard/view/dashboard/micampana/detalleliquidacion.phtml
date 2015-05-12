@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
 
-            <div><h3><b></b></h3>
+            <div>
                 <div class="paneles"> 
                     
                     <div class="panel-group collap" id="accordion" role="tablist" aria-multiselectable="true" >
@@ -103,7 +103,7 @@
                         </div>
                     </div>
                 </div>
-                <h3><b>Cupones Válidados</b></h3>
+                <h3><b>Pagos</b></h3>
                 <div class="paneles">   
                     <div class="panel-group grafico" id="accordionTree" role="tablist" aria-multiselectable="true">
                         <div class="panel panel-default">
@@ -116,25 +116,23 @@
                                 <div class="panel-default detvalidados">
                                     <table class="table-hover total">
                                         <tr>
-                                            <td class="bttooltipdv  titulo">Código CupoRebueno</td>
-                                            <td class="bttooltipdv  titulo">Fecha Validación</td>
+                                            <td class="bttooltipdv  titulo">Número de Liquidación</td>
                                             <td class="bttooltipdv  titulo">N° Publicación</td>
-                                            <td class="bttooltipdv  titulo">Fecha Publicación</td>
-                                            <td class="bttooltipdv  titulo">Precio Total</td>
-                                            <td class="bttooltipdv  titulo">Monto Pagado</td>
+                                            <td class="bttooltipdv  titulo">Fecha Emisión</td>
+                                            <td class="bttooltipdv  titulo">Cantidad de CupoRebuenos</td>
+                                            <td class="bttooltipdv  titulo">Total</td>
+                                            <td class="bttooltipdv  titulo"></td>
                                         </tr>
-                                        <?php $cantidad = count($cupon_validado);
+                                        <?php $cantidad = count($liquidaciones);
                                               if( $cantidad > 0 ) { 
                                                  for($i=0; $i<$cantidad; $i++ ) { ?>
                                                     <tr>
-                                                        <td class="bttooltipdv"><?php echo $cupon_validado[$i]['codigo_cupon'];?></td>
-                                                        <td class="bttooltipdv"><?php echo $cupon_validado[$i]['fecha_validacion'];?></td>
-                                                        <td class="bttooltipdv">
-                                                            <a href="http://www.migroupon.com/admin/deals/view/1002350709" data-toggle="tooltip" data-placement="right" data-original-title="Ver esta Publicación"><?php echo $cupon_validado[$i]['id_campana'];?></a>
-                                                        </td>
-                                                        <td class="bttooltipdv"><?php echo $cupon_validado[$i]['fecha_inicio'];?></td>
-                                                        <td class="bttooltipdv"><?php echo $cupon_validado[$i]['precio_total'];?></td>
-                                                        <td class="bttooltipdv"><?php echo $cupon_validado[$i]['precio_total'];?></td>
+                                                        <td class="bttooltipdv"><a href="http://www.migroupon.com/admin/deals/view/1002350709" data-toggle="tooltip" data-placement="right" data-original-title="Ver esta Liquidación"><?php echo $liquidaciones[$i]['id_liquidacion'];?></a></td>
+                                                        <td class="bttooltipdv"><?php echo $liquidaciones[$i]['id_campana'];?></td>
+                                                        <td class="bttooltipdv"><?php echo $liquidaciones[$i]['fecha_liquidacion'];?></td>
+                                                        <td class="bttooltipdv"><?php echo $liquidaciones[$i]['cantidad_cupones'];?></td>
+                                                        <td class="bttooltipdv">DOL $ <?php echo $liquidaciones[$i]['total_liquidacion'];?></td>
+                                                        <td class="bttooltipdv">&nbsp;</td>
                                                     </tr>
                                         <?php    }
                                               } ?>

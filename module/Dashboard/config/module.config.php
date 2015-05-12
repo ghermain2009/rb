@@ -304,6 +304,17 @@ return array(
                     ),
                 ),
             ),
+            'dash_detalleliquidacion' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/micampana/detalleliquidacion[/:empresa]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Dashboard\Controller',
+                        'controller' => 'micampana',
+                        'action' => 'detalleliquidacion',
+                    ),
+                ),
+            ),
             'dash_cron' => array(
                 'type' => 'Literal',
                 'options' => array(

@@ -37,4 +37,18 @@ class CupliquidacioncuponTable {
         $resultSet = $this->tableGateway->select();
         return $resultSet;
     }
+    
+    public function addLiquidacionCupon($row) {
+        
+        $sql = new Sql($this->tableGateway->adapter);
+
+        $insert = $sql->insert('cup_liquidacion_cupon')->values($row);
+
+        $statement = $sql->prepareStatementForSqlObject($insert);
+
+        $result = $statement->execute();
+
+        return $result; /* Se inserto Informacion */
+        
+    }
 }
