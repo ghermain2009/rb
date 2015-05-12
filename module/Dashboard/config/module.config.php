@@ -315,6 +315,17 @@ return array(
                     ),
                 ),
             ),
+            'dash_historiacampanas' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/micampana/historiacampanas[/:empresa]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Dashboard\Controller',
+                        'controller' => 'micampana',
+                        'action' => 'historiacampanas',
+                    ),
+                ),
+            ),
             'dash_cron' => array(
                 'type' => 'Literal',
                 'options' => array(

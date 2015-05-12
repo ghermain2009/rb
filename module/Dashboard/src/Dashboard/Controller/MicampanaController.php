@@ -84,4 +84,16 @@ class MicampanaController extends AbstractActionController {
         return new ViewModel(array('id_empresa' => $id_empresa,
                                    'liquidaciones' => $datosLiquidacion));
     }
+    
+    public function historiacampanasAction() {
+        
+        $id_empresa = base64_decode($this->params()->fromRoute("empresa", null));
+        
+        $serviceLocator = $this->getServiceLocator();
+        $campanaTable = $serviceLocator->get('Dashboard\Model\CupcampanaTable');
+        $datosCampana = $campanaTable->getCampanaActiva($id_empresa);
+        
+        return new ViewModel(array('id_empresa' => $id_empresa,
+                                   'campanas' => $datosCampana));
+    }
 }

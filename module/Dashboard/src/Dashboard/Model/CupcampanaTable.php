@@ -332,29 +332,54 @@ class CupcampanaTable {
 
     }
     
-    public function getCampanaActiva($id_empresa)
+    /*public function getCampanaActiva($id_empresa)
     {
         $sql = new Sql($this->tableGateway->getAdapter());
         $select = $sql->select()
-        /*$select->columns(array(
-                    'categoria' => 'descripcion',
-                    'id_categoria',
-                    'cantidad' => new Expression("count(1)")
-                ))*/
                   ->from('cup_campana')
-                  /*->join('gen_sub_categoria', new Expression("gen_categoria.id_categoria = gen_sub_categoria.id_categoria"), 
-                            array('subcategoria' => 'descripcion', 
-                                  'id_sub_categoria')
-                    )*/
                   ->where(array('cup_campana.id_empresa' => $id_empresa))
                   ->where(new Expression("NOW() <= cup_campana.fecha_final"));
+
+        $stmt = $sql->prepareStatementForSqlObject($select);
+        
+        $results = $stmt->execute(); 
+        
+        return $results;
+    }*/
+    
+    
+    public function getCampanaActiva($id_empresa)
+    {
+        $sql = new Sql($this->tableGateway->getAdapter());
+        $select = $sql->select();
+        
+        $select->columns(array(
+                    'id_campana',
+                    'fecha_inicio' => new Expression("date_format(fecha_inicio,'%d-%m-%Y')"),
+                    'fecha_final' => new Expression("date_format(fecha_final,'%d-%m-%Y')"),
+                    'descripcion',
+                    'vendidos' => new Expression("count(1)"),
+                    'validados' => new Expression("sum(case when cup_cupon.id_estado_compra in ('5','7') then 1 else 0 end)"), 
+                    'pagados' => new Expression("sum(case when cup_cupon.id_estado_compra in ('7') then 1 else 0 end)")
+                ))
+                  ->from('cup_campana')
+                  ->join('cup_cupon', new Expression("cup_campana.id_campana = cup_cupon.id_campana and cup_cupon.id_estado_compra in ('3','5','7')"), 
+                            array()
+                    )
+                  ->where(array('cup_campana.id_empresa' => $id_empresa))
+                  ->where(new Expression("NOW() <= cup_campana.fecha_final"));
+       
+        $select->group(array('cup_campana.id_campana'));
+        $select->group(array('cup_campana.fecha_inicio'));
+        $select->group(array('cup_campana.fecha_final'));
+        $select->group(array('cup_campana.descripcion'));
 
         
         $stmt = $sql->prepareStatementForSqlObject($select);
         
         $results = $stmt->execute(); 
         
-        return $results;
+        return ArrayUtils::iteratorToArray($results);
     }
     
 }

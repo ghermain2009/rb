@@ -213,7 +213,7 @@
                                                     <span class="data-history data-validated boxGraphic">
                                                         <span class="number"><?php echo $historial[0]['validados'];?></span>
                                                         <span class="detailSlide">
-                                                            <img src="./Mi Groupon · Admin_files/icono_cupon.png">
+                                                            <img src="../../img/icono_cupon.png">
                                                             <span>CupoRebuenos validados</span>
                                                         </span>
                                                     </span>
@@ -222,7 +222,7 @@
                                                     <span class="data-history data-payed boxGraphic">
                                                         <span class="number"><?php echo $historial[0]['cantidad_pagados'];?></span>
                                                         <span class="detailSlide">
-                                                            <img src="./Mi Groupon · Admin_files/icono_cupon_paid.png">
+                                                            <img src="../../img/icono_cupon_paid.png">
                                                             <span>CupoRebuenos pagados</span>
                                                         </span>
                                                     </span>
@@ -231,7 +231,7 @@
                                                     <span class="data-history data-total boxGraphic">
                                                         <span class="number">DOL $ <?php echo $historial[0]['total_pagados'];?></span>
                                                         <span class="detailSlide">
-                                                            <img src="./Mi Groupon · Admin_files/icono_all_payments.png">
+                                                            <img src="../../img/icono_all_payments.png">
                                                             <span>Monto total pagado</span>
                                                         </span>
                                                     </span>
@@ -269,7 +269,8 @@
                             </div>
                             <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
                                 <div class="panel-default validados-carrusel">
-                                    <div class="titulo-campana"><?php echo count($datosCampana);?> Campaña Activa</div>
+                                    <?php $cantidadC = count($datosCampana);?>
+                                    <div class="titulo-campana"><?php echo $cantidadC;?> Campaña Activa</div>
                                     <table class="table-bordered activa" id="activecampaignTable" data-campaignid="20150126006C000000wBOMWIA4" style="cursor: pointer;">
                                         <tr>
                                             <td class="bttooltipp cabecera">Activa desde</td>
@@ -277,15 +278,19 @@
                                             <td class="bttooltipp cabecera">Ubicación</td>
                                             <td class="bttooltipp cabecera">CupoRebuenos vendidos</td>
                                         </tr>
+                                        <?php if( $cantidadC > 0 ) { 
+                                                 for($i=0; $i<$cantidadC; $i++ ) { ?>
                                         <tr data-toggle="tooltip" data-placement="top" data-original-title="Revisa el detalle de esta campaña">
-                                            <td class="bttooltipp">26-01-2015</td>
-                                            <td class="bttooltipp">17-02-2015</td>
-                                            <td class="bttooltipp">Lima,</td>
-                                            <td class="bttooltipp">39</td>
+                                            <td class="bttooltipp"><?php echo $datosCampana[0]['fecha_inicio'];?></td>
+                                            <td class="bttooltipp"><?php echo $datosCampana[0]['fecha_final'];?></td>
+                                            <td class="bttooltipp">Guayaquil</td>
+                                            <td class="bttooltipp"><?php echo $datosCampana[0]['vendidos'];?></td>
                                         </tr>
+                                                 <?php } 
+                                        } ?>
                                     </table>
                                     <div class="moduleFooter">
-                                        <a href="http://www.migroupon.com/admin/campaigns/index">Ver listado histórico de campañas</a>
+                                        <a href="../micampana/historiacampanas/<?php echo base64_encode($id_empresa);?>">Ver listado histórico de campañas</a>
                                     </div>
                                 </div>
                             </div>
