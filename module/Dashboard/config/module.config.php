@@ -269,7 +269,7 @@ return array(
                     ),
                 ),
             ),
-            //mi campana
+            //campana
             'dash_campana' => array(
                 'type' => 'Literal',
                 'options' => array(
@@ -278,6 +278,40 @@ return array(
                         '__NAMESPACE__' => 'Dashboard\Controller',
                         'controller' => 'campana',
                         'action' => 'index',
+                    ),
+                ),
+            ),
+            //mi campana
+            'dash_micampana' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/micampana/cupon',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Dashboard\Controller',
+                        'controller' => 'micampana',
+                        'action' => 'cupon',
+                    ),
+                ),
+            ),
+            'dash_detallevalidado' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/micampana/detallevalidado[/:empresa]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Dashboard\Controller',
+                        'controller' => 'micampana',
+                        'action' => 'detallevalidado',
+                    ),
+                ),
+            ),
+            'dash_cron' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/cron/generaliquidacion',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Dashboard\Cron\Controller',
+                        'controller' => 'generaliquidacion',
+                        'action' => 'generaliquidacion',
                     ),
                 ),
             ),
@@ -311,6 +345,7 @@ return array(
             'Dashboard\Controller\Campana' => 'Dashboard\Controller\CampanaController',
             'Dashboard\Controller\Empresa' => 'Dashboard\Controller\EmpresaController',
             'Dashboard\Controller\Micampana' => 'Dashboard\Controller\MicampanaController',
+            'Dashboard\Cron\Controller\Generaliquidacion' => 'Dashboard\Cron\Controller\GeneraliquidacionController',
         ),
     ),
     'view_manager' => array(

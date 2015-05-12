@@ -174,7 +174,7 @@ class CupcuponTable {
     }
     
 
-    public function validarCupon($cadena, $tipo) {
+    public function validarCupon($id_empresa, $cadena, $tipo) {
         $aCupones = explode(",", $cadena);
         $aValidar = array();
         foreach ($aCupones as $cupon) {
@@ -183,26 +183,34 @@ class CupcuponTable {
 
             $select = $sql->select();
 
-            $select->columns(array('cantidad' => new Expression("count(1)")))
-                    ->from(array('c' => 'cup_cupon'))
-                    ->where(array('c.codigo_cupon' => $cupon, 'c.id_estado_compra' => '3'));
+            $select->columns(array('estado' => 'id_estado_compra'))
+                    ->from('cup_cupon')
+                    ->join('cup_campana', new
+                            Expression("cup_cupon.id_campana = cup_campana.id_campana and "
+                            . "cup_campana.id_empresa = $id_empresa"),
+                            array())        
+                    ->where(array('cup_cupon.codigo_cupon' => $cupon));
 
             $stmt = $sql->prepareStatementForSqlObject($select);
 
             $results = $stmt->execute();
 
-            $valido = -1;
+            $valido = 0;
             foreach ($results as $exito) {
-                $valido = $exito['cantidad'];
+                if($exito['estado'] == '3' ) { $valido = 1; }
+                if($exito['estado'] == '5' ) { $valido = 2; }
             }
 
             if ($valido == 1 && $tipo == 'V') {
+                
+                $fecha_validacion = date("Y-m-d H:i:s");
                 
                 $sql = new Sql($this->tableGateway->getAdapter());
                 $select = $sql
                         ->update()
                         ->table('cup_cupon')
-                        ->set(array('id_estado_compra' => '5'))
+                        ->set(array('id_estado_compra' => '5',
+                                    'fecha_validacion' => $fecha_validacion))
                         ->where(array('codigo_cupon' => $cupon));
 
                 $stmt = $sql->prepareStatementForSqlObject($select);
@@ -211,10 +219,89 @@ class CupcuponTable {
 
             }
 
-            $aValidar[] = array('cupon' => $cupon, 'cantidad' => $valido, 'tipo' => $tipo);
+            $aValidar[] = array('cupon' => $cupon, 'valido' => $valido, 'tipo' => $tipo);
         }
 
         return $aValidar;
     }
+    
+    public function getCuponValidado($id_empresa, $cantidad = 0) {
 
+        $sql = new Sql($this->tableGateway->adapter);
+                
+        $select = $sql->select();
+
+        $select->columns(array(
+            'id_cupon',
+            'codigo_cupon',
+            'id_campana',
+            'id_campana_opcion',
+            'cantidad',
+            'precio_total',
+            'fecha_compra' => new Expression("date_format(fecha_compra,'%d-%m-%Y')"),
+            'fecha_validacion' => new Expression("date_format(fecha_validacion,'%d-%m-%Y')")
+        ))
+        ->from('cup_cupon');
+        
+        if( $cantidad > 0 ) { 
+            $select->limit($cantidad); 
+        }
+        
+        $select->join('cup_campana', new Expression("cup_cupon.id_campana = cup_campana.id_campana and "
+                                           . "cup_campana.id_empresa = $id_empresa"),
+                array(
+                   'sobre_campana',
+                   'saber' => 'observaciones',
+                   'fecha_validez' => new Expression("date_format(fecha_validez,'%d-%m-%Y')"),
+                    'fecha_inicio' => new Expression("date_format(fecha_inicio,'%d-%m-%Y')")
+                ))        
+        ->join('cup_campana_opcion', new Expression("cup_cupon.id_campana = cup_campana_opcion.id_campana and "
+                                                  . "cup_cupon.id_campana_opcion = cup_campana_opcion.id_campana_opcion"),
+                array('campana_descripcion' => 'descripcion'
+                    ))
+        ->join('gen_empresa', new Expression("cup_campana.id_empresa = gen_empresa.id_empresa"),
+                array('razon_social',
+                      'ubicacion_gps',
+                      'horario',
+                      'web_site',
+                      'descripcion_empresa' => 'descripcion',
+                      'direccion' => new Expression("case when ifnull(direccion_comercial,'') = '' then direccion_facturacion else direccion_comercial end ")
+                    ))
+        ->where(array('id_estado_compra' => '5'));
+        
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $result = $statement->execute();
+
+        return ArrayUtils::iteratorToArray($result);
+    }
+    
+    public function getCuponesxLiquidar() {
+
+        $fecha = '11/05/2015';
+        
+        $sql = new Sql($this->tableGateway->adapter);
+                
+        $select = $sql->select();
+        
+        $select->columns(array(
+            'id_campana', 
+            'id_campana_opcion',
+            'fecha_validacion',
+            'codigo_cupon', 
+            'cantidad', 
+            'precio_unitario', 
+            'precio_total'
+        ))->from('cup_cupon')
+        ->where(array('cup_cupon.id_estado_compra' => '5'))
+        ->where->addPredicate(new Between('fecha_validacion', new Expression("STR_TO_DATE('".$fecha." 00:00:00','%d/%m/%Y %H:%i:%s')"), new Expression("STR_TO_DATE('".$fecha." 23:59:59','%d/%m/%Y %H:%i:%s')")));
+
+        $select->order(array('cup_cupon.id_campana', 'cup_cupon.id_campana_opcion', 'cup_cupon.fecha_validacion'));
+        
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $result = $statement->execute();
+
+        return ArrayUtils::iteratorToArray($result);
+        
+    }
+    
 }

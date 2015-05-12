@@ -1,25 +1,32 @@
 
 <?php
+
 if (count($datos) == 1) {
     foreach ($datos as $mensaje) {
 
-        if ($mensaje['cantidad'] == 0) {
+        if ($mensaje['valido'] == 0) {
             $mensaje = "Código no existe.";
             $clase = 'alert-danger';
             $error = 'Error!';
         } else {
-            if ($mensaje['tipo'] == 'C') {
-                $mensaje = "Código válido.";
-                $clase = 'alert-info';
-                $error = 'Consulta!';
+            if ($mensaje['valido'] == 2) {
+                $mensaje = "Código ya fue válidado anteriomente.";
+                $clase = 'alert-success';
+                $error = 'Mensaje!';
             } else {
-                $mensaje = "Código fue válidado correctamente.";
-                $clase = 'alert-warning';
-                $error = 'Validación!';
+                if ($mensaje['tipo'] == 'C') {
+                    $mensaje = "Código válido.";
+                    $clase = 'alert-info';
+                    $error = 'Consulta!';
+                } else {
+                    $mensaje = "Código fue válidado correctamente.";
+                    $clase = 'alert-warning';
+                    $error = 'Validación!';
+                }
             }
         }
         ?>    
-        <div class="alert <?php echo $clase; ?> alert-dismissible" role="alert">
+        <div class="alert <?php echo $clase; ?>" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <strong><?php echo $error; ?></strong> <?php echo $mensaje; ?>
         </div>
@@ -29,7 +36,7 @@ if (count($datos) == 1) {
     $validados = "";
     $noencontrados = "";
     foreach ($datos as $mensaje) {
-        if ($mensaje['cantidad'] == 0) {
+        if ($mensaje['valido'] == 0 || $mensaje['valido'] == 2 ) {
             if ($noencontrados == '') {
                 $noencontrados = $mensaje['cupon'];
             } else {

@@ -53,4 +53,24 @@ class CupliquidacionTable {
         
         return $select;
     }
+    
+    public function getPreLiquidacion($id_campana) {
+        
+        $fecha_liquidacion = date('%Y-%m-%d %H:%i:%s');
+
+        $sql = new Sql($this->tableGateway->adapter);
+
+        $insert = $sql->insert('cup_liquidacion')->values(array(
+            'fecha_liquidacion' => $fecha_liquidacion,
+            'id_campana' => $id_campana,
+            'estado_liquidacion' => '1'
+        ));
+
+        $statement = $sql->prepareStatementForSqlObject($insert);
+
+        $result = $statement->execute()->getGeneratedValue();
+
+        return $result; /* Se inserto Informacion */
+        
+    }
 }

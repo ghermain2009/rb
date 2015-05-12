@@ -145,7 +145,8 @@ class EmpresaController extends AbstractActionController {
             }
         } else {
             $empresaData = $empresaTable->getEmpresa($empresaId);
-            foreach ($empresaData as $empresa) {
+            $empresa = $empresaData[0];
+            //foreach ($empresaData as $empresa) {
                 $form->get('id_empresa')->setValue($empresa['id_empresa']);
                 $form->get('razon_social')->setValue($empresa['razon_social']);
                 $form->get('registro_contribuyente')->setValue($empresa['registro_contribuyente']);
@@ -158,7 +159,7 @@ class EmpresaController extends AbstractActionController {
                 $form->get('numero_cuenta')->setValue($empresa['numero_cuenta']);
                 $form->get('descripcion')->setValue($empresa['descripcion']);
                 $form->get('id_operador')->setValue($empresa['id_operador']);
-            }
+            //}
         }
 
 //        $opciones = $empresaOpcionTable->getOpcionxCampanaAll($empresaId);

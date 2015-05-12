@@ -63,19 +63,19 @@ class GenempresaTable
         return $select;
     }
     
-    public function getEmpresa($userId)
+    public function getEmpresa($id_empresa)
     {
         $sql = new Sql($this->tableGateway->getAdapter());
         $select = $sql
                   ->select()
                   ->from(array('c' => 'gen_empresa'))
-                  ->where(array('c.id_empresa' => $userId));
+                  ->where(array('c.id_empresa' => $id_empresa));
 
         $stmt = $sql->prepareStatementForSqlObject($select);
         
         $results = $stmt->execute(); 
         
-        return $results;
+        return ArrayUtils::iteratorToArray($results);
     }
     
     public function editEmpresa($set, $where)
