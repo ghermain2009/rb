@@ -299,7 +299,7 @@ class CupcuponTable {
         ))->from('cup_cupon')
         ->where(array('cup_cupon.id_estado_compra' => '5'))
         //->where->addPredicate(new Between('fecha_validacion', new Expression("STR_TO_DATE('".$fecha." 00:00:00','%d/%m/%Y %H:%i:%s')"), new Expression("NOW()")));
-        ->where->addPredicate(new Between('fecha_validacion', new Expression("STR_TO_DATE('".$fecha." 00:00:00','%d/%m/%Y %H:%i:%s')"), new Expression("STR_TO_DATE('".$fechaF." 00:00:00','%d/%m/%Y %H:%i:%s')")));
+        ->where->addPredicate(new Between('fecha_validacion', new Expression("STR_TO_DATE('".$fecha." 00:00:00','%d/%m/%Y %H:%i:%s')"), new Expression("STR_TO_DATE('".$fechaF." 23:59:59','%d/%m/%Y %H:%i:%s')")));
 
         $select->order(array('cup_cupon.id_campana', 'cup_cupon.id_campana_opcion', 'cup_cupon.fecha_validacion'));
         
