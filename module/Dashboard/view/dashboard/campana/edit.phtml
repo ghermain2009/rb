@@ -481,7 +481,7 @@ foreach ($ficheros2 as $file) {
             data: {id_campana: id_campana, id_campana_opcion: id_campana_opcion, descripcion: descripcion, precio_regular: precio_regular, precio_especial: precio_especial, comision: comision},
             success: function (data) {
                 var datos = $.parseJSON(data)
-                alert(datos);
+                //alert(datos);
                 if (datos) {
                     $('#descripcion' + id_campana_opcion).html(descripcion);
                     if (datos.resultado == 'I') {
