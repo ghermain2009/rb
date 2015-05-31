@@ -34,12 +34,12 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="<?php echo $this->url('dashboard') ?>"><img src="<?php echo $this->basePath('img/zf2-logo.png') ?>" alt="Zend Framework 2"/>&nbsp;<?php echo $this->translate('Skeleton Application') ?></a>
+                    <a class="navbar-brand" href="<?php echo $this->url('dashboard') ?>"><img src="<?php echo $this->basePath('img/logo_rebueno_admin.png') ?>" alt="Rebueno.ec"/></a>
                 </div>
                 <!--/menu -->
                 <div class="collapse navbar-collapse">
                      <ul class="nav navbar-nav">
-                         <li class="active"><a href="<?php echo $this->url('dashboard') ?>"><?php echo $this->translate('Home') ?></a></li>
+                         <li class="active"><span class="mirebueno"><?php echo $this->translate('Mi Rebueno.ec') ?></span></li>
                      </ul>
                  </div><!--/.nav-collapse -->
                 </div>
@@ -50,7 +50,7 @@
             <?php echo $this->content; ?>
             <footer>
                 <hr>
-                <p>&copy; 2005 - <?php echo date('Y') ?> by Zend Technologies Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
+                <p>&copy; 2015 - <?php echo date('Y') ?> Rebueno.ec <?php echo $this->translate('Todos los derechos reservados.') ?></p>
             </footer>
         </div> <!-- /container -->
         <?php echo $this->inlineScript() ?>

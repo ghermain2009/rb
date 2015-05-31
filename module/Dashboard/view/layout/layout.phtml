@@ -32,8 +32,9 @@
         <!-- Scripts -->
         <?php
         echo $this->headScript()
-                
-                
+                ->prependFile($this->basePath() . '/js/chart/modules/drilldown.js')
+                ->prependFile($this->basePath() . '/js/chart/modules/data.js')
+                ->prependFile($this->basePath() . '/js/chart/highcharts.js')
                 ->prependFile($this->basePath() . '/js/bootstrap-multiselect.js')
                 ->prependFile($this->basePath() . '/js/webfont.js')
                 ->prependFile($this->basePath() . 'http://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js')
@@ -59,15 +60,14 @@
     <body>
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container">
-                <!--                <div class="navbar-header">
-                                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                                        <span class="icon-bar"></span>
-                                        <span class="icon-bar"></span>
-                                        <span class="icon-bar"></span>
-                                    </button>
-                                    <a class="navbar-brand" href="<?php echo $this->url('dashboard') ?>"><img src="<?php echo $this->basePath('img/zf2-logo.png') ?>" alt="Zend Framework 2"/>&nbsp;<?php echo $this->translate('Skeleton Application') ?></a>
-                                </div>-->
-                <!--/menu -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="<?php echo $this->url('dashboard') ?>"><img src="<?php echo $this->basePath('img/logo_rebueno_admin.png') ?>" alt="Rebueno.ec"/></a>
+                </div>
                 <div class="collapse navbar-collapse">
                     <?php
                     echo $this->navigation('navigation')
@@ -83,7 +83,7 @@
         <?php echo $this->content; ?>
             <footer>
                 <hr>
-                <p>&copy; 2005 - <?php echo date('Y') ?> by Zend Technologies Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
+                <p>&copy; 2015 - <?php echo date('Y') ?> Rebueno.ec <?php echo $this->translate('Todos los derechos reservados.') ?></p>
             </footer>
         </div> <!-- /container -->
 <?php echo $this->inlineScript() ?>

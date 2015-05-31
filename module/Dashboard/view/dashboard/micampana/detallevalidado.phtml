@@ -114,31 +114,7 @@
                             </div>
                             <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
                                 <div class="panel-default detvalidados">
-                                    <table class="table-hover total">
-                                        <tr>
-                                            <td class="bttooltipdv  titulo">Código CupoRebueno</td>
-                                            <td class="bttooltipdv  titulo">Fecha Validación</td>
-                                            <td class="bttooltipdv  titulo">N° Publicación</td>
-                                            <td class="bttooltipdv  titulo">Fecha Publicación</td>
-                                            <td class="bttooltipdv  titulo">Precio Total</td>
-                                            <td class="bttooltipdv  titulo">Monto Pagado</td>
-                                        </tr>
-                                        <?php $cantidad = count($cupon_validado);
-                                              if( $cantidad > 0 ) { 
-                                                 for($i=0; $i<$cantidad; $i++ ) { ?>
-                                                    <tr>
-                                                        <td class="bttooltipdv"><?php echo $cupon_validado[$i]['codigo_cupon'];?></td>
-                                                        <td class="bttooltipdv"><?php echo $cupon_validado[$i]['fecha_validacion'];?></td>
-                                                        <td class="bttooltipdv">
-                                                            <a href="http://www.migroupon.com/admin/deals/view/1002350709" data-toggle="tooltip" data-placement="right" data-original-title="Ver esta Publicación"><?php echo $cupon_validado[$i]['id_campana'];?></a>
-                                                        </td>
-                                                        <td class="bttooltipdv"><?php echo $cupon_validado[$i]['fecha_inicio'];?></td>
-                                                        <td class="bttooltipdv"><?php echo $cupon_validado[$i]['precio_total'];?></td>
-                                                        <td class="bttooltipdv"><?php echo $cupon_validado[$i]['precio_total'];?></td>
-                                                    </tr>
-                                        <?php    }
-                                              } ?>
-                                    </table>
+                                    <?php echo $this->cupon_validado;?>
                                 </div>
                             </div>
                         </div>
@@ -176,6 +152,21 @@
                 $("#ocultar_partner").html('<span class="glyphicon glyphicon-collapse-up"></span> Ocultar')
             }
             //$("#element").hide();
+        });
+        
+        $("td").each(function(i){
+            var columna = $(this).attr("data-columnuniqueid");
+            if( columna == 'id_campana' ) {
+                var htm = "<a class='display: inline-table !important;' href='http://www.migroupon.com/admin/deals/view/1002350709' ";
+                    htm+= "data-toggle='tooltip' data-placement='right' data-original-title='Ver esta Publicación'>";
+                    htm+= $(this).html();
+                    htm+= "</a>"
+                $(this).html(htm);
+            }
+        });
+        
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
         });
     });
 

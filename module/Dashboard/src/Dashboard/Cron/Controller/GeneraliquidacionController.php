@@ -59,7 +59,7 @@ class GeneraliquidacionController extends AbstractActionController
                $cantidad_cupones_liquidar++;
                
                $insert_liquidacion_cupon = array('id_liquidacion' => $pre_liquidacion,
-                                            'id_cupon' => $datosCuponV[$i]['id_cupon']);
+                                            'codigo_cupon' => $datosCuponV[$i]['codigo_cupon']);
                
                $liquidacioncuponTable->addLiquidacionCupon($insert_liquidacion_cupon);
                
@@ -73,12 +73,12 @@ class GeneraliquidacionController extends AbstractActionController
                $total_comision_liquidar += $cantidad_ofertas * $comision_unitaria;
                $total_cliente_liquidar += $precio_total - ($cantidad_ofertas * $comision_unitaria);
                
-               $set = array('id_estado_compra' => '7',
+               $set = array('id_estado_cupon' => '7',
                             'fecha_liquidacion' => new Expression("NOW()"));
                
-               $where = array('id_cupon' => $datosCuponV[$i]['id_cupon'] );
+               $where = array('codigo_cupon' => $datosCuponV[$i]['codigo_cupon'] );
                
-               $cuponTable->updCupon($set, $where);
+               $cuponTable->updCuponDetalle($set, $where);
                
                $id_campana = $datosCuponV[$i]['id_campana'];
                $id_campana_opcion = $datosCuponV[$i]['id_campana_opcion'];

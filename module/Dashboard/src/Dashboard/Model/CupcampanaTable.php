@@ -357,15 +357,16 @@ class CupcampanaTable {
                     'id_campana',
                     'fecha_inicio' => new Expression("date_format(fecha_inicio,'%d-%m-%Y')"),
                     'fecha_final' => new Expression("date_format(fecha_final,'%d-%m-%Y')"),
-                    'descripcion',
+                    'descripcion' => 'titulo',
                     'vendidos' => new Expression("count(1)"),
-                    'validados' => new Expression("sum(case when cup_cupon.id_estado_compra in ('5','7') then 1 else 0 end)"), 
-                    'pagados' => new Expression("sum(case when cup_cupon.id_estado_compra in ('7') then 1 else 0 end)")
+                    'validados' => new Expression("sum(case when cup_cupon_detalle.id_estado_cupon in ('5','7') then 1 else 0 end)"), 
+                    'pagados' => new Expression("sum(case when cup_cupon_detalle.id_estado_cupon in ('7') then 1 else 0 end)")
                 ))
                   ->from('cup_campana')
-                  ->join('cup_cupon', new Expression("cup_campana.id_campana = cup_cupon.id_campana and cup_cupon.id_estado_compra in ('3','5','7')"), 
-                            array()
-                    )
+                  ->join('cup_cupon', new Expression("cup_campana.id_campana = cup_cupon.id_campana and cup_cupon.id_estado_compra in ('3')"), 
+                            array(),'left')
+                  ->join('cup_cupon_detalle', new Expression("cup_cupon.id_cupon = cup_cupon_detalle.id_cupon and cup_cupon_detalle.id_estado_cupon in ('3','5','7')"), 
+                            array(),'left')
                   ->where(array('cup_campana.id_empresa' => $id_empresa))
                   ->where(new Expression("NOW() <= cup_campana.fecha_final"));
        

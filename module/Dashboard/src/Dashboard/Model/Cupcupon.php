@@ -14,7 +14,6 @@ namespace Dashboard\Model;
 class Cupcupon {
     //put your code here
     public $id_cupon;
-    public $codigo_cupon;
     public $email_cliente;
     public $id_campana;
     public $id_opcion;
@@ -23,13 +22,10 @@ class Cupcupon {
     public $precio_total;
     public $id_tarjeta;
     public $id_estado_compra;
+    public $fecha_compra;
     
     function getId_cupon() {
         return $this->id_cupon;
-    }
-
-    function getCodigo_cupon() {
-        return $this->codigo_cupon;
     }
 
     function getEmail_cliente() {
@@ -63,13 +59,13 @@ class Cupcupon {
     function getId_estado_compra() {
         return $this->id_estado_compra;
     }
+    
+    function getFecha_compra() {
+        return $this->fecha_compra;
+    }
 
     function setId_cupon($id_cupon) {
         $this->id_cupon = $id_cupon;
-    }
-
-    function setCodigo_cupon($codigo_cupon) {
-        $this->codigo_cupon = $codigo_cupon;
     }
 
     function setEmail_cliente($email_cliente) {
@@ -103,11 +99,14 @@ class Cupcupon {
     function setId_estado_compra($id_estado_compra) {
         $this->id_estado_compra = $id_estado_compra;
     }
+    
+    function setFecha_compra($fecha_compra) {
+        $this->fecha_compra = $fecha_compra;
+    }
 
     public function exchangeArray($data)
     {
         $this->id_cupon = (isset($data['id_cupon'])) ? $data['id_cupon'] : null;
-        $this->codigo_cupon = (isset($data['codigo_cupon'])) ? $data['codigo_cupon'] : null;
         $this->email_cliente = (isset($data['email_cliente'])) ? $data['email_cliente'] : null;
         $this->id_campana = (isset($data['id_campana'])) ? $data['id_campana'] : null;
         $this->id_campana_opcion = (isset($data['id_campana_opcion'])) ? $data['id_campana_opcion'] : null;
@@ -116,6 +115,7 @@ class Cupcupon {
         $this->precio_total = (isset($data['precio_total'])) ? $data['precio_total'] : null;
         $this->id_tarjeta = (isset($data['id_tarjeta'])) ? $data['id_tarjeta'] : null;
         $this->id_estado_compra = (isset($data['id_estado_compra'])) ? $data['id_estado_compra'] : null;
+        $this->fecha_compra = (isset($data['fecha_compra'])) ? $data['fecha_compra'] : null;
   
     }
  

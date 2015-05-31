@@ -171,7 +171,7 @@
                                               } ?>
                                         </table>
                                         <div class="moduleFooter">
-                                            <a href="../micampana/detalleliquidacion/<?php echo base64_encode($id_empresa);?>">Ver listado completo de CupoRebuenos validados</a>
+                                            <a href="../micampana/detalleliquidacion/<?php echo base64_encode($id_empresa);?>">Ver listado completo de Liquidaciones</a>
                                         </div>
 
                                     </div>
@@ -211,7 +211,7 @@
                                             <div class="carousel-inner">
                                                 <div class="item active">
                                                     <span class="data-history data-validated boxGraphic">
-                                                        <span class="number"><?php echo $historial[0]['validados'];?></span>
+                                                        <span class="number"><?php echo $historialValidados[0]['validados'];?></span>
                                                         <span class="detailSlide">
                                                             <img src="../../img/icono_cupon.png">
                                                             <span>CupoRebuenos validados</span>
@@ -220,7 +220,7 @@
                                                 </div>
                                                 <div class="item">
                                                     <span class="data-history data-payed boxGraphic">
-                                                        <span class="number"><?php echo $historial[0]['cantidad_pagados'];?></span>
+                                                        <span class="number"><?php echo $historialPagados[0]['cantidad_pagados'];?></span>
                                                         <span class="detailSlide">
                                                             <img src="../../img/icono_cupon_paid.png">
                                                             <span>CupoRebuenos pagados</span>
@@ -229,7 +229,7 @@
                                                 </div>
                                                 <div class="item">
                                                     <span class="data-history data-total boxGraphic">
-                                                        <span class="number">DOL $ <?php echo $historial[0]['total_pagados'];?></span>
+                                                        <span class="number">DOL $ <?php echo $historialPagados[0]['total_pagados'];?></span>
                                                         <span class="detailSlide">
                                                             <img src="../../img/icono_all_payments.png">
                                                             <span>Monto total pagado</span>
@@ -304,10 +304,6 @@
                             <div class="panel-heading rebueno" role="tab" id="headingTwo">
                                 <div>
                                     Ventas y validaciones
-                                    <div class="btn-group rebueno" rol="group">
-                                        <button class="btn btn-chiqui tab" data-toggle="tab" href="#sales">Ventas</button>
-                                        <button class="btn active btn-chiqui tab" data-toggle="tab" href="#redemptions">Validaciones</button>
-                                    </div>
                                 </div>
                             </div>
                             <div class="tab-content">
@@ -317,92 +313,8 @@
                                         <span>Cargando...</span>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="sales">
-                                    <div class="moduleContent">
-                                        <div class="graph-filter">
-                                            <p>Estas viendo:</p>
-                                            <select class="couponsSelect" data_status="SOLD">
-                                                <option value="DAY">Los últimos 30 días</option>
-                                                <option value="WEEK">Los últimos 4 meses</option>
-                                                <option value="MONTH">Los últimos 12 meses</option>
-                                            </select>
-                                        </div>
-                                        <div class="graph-sales-redemptions">
-                                            <div id="couponsGraphSOLD"></div>
-                                            <p class="date-rank">Saturday 17 de January - Sunday 15 de February</p>
-                                            <p class="refundNote">Nota: El gráfico de ventas no incluye los cupones devueltos</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade active in" id="redemptions">
-                                    <div class="moduleContent">
-                                        <div class="graph-filter">
-                                            <p>Estas viendo:</p>
-                                            <select class="couponsSelect" data_status="USED">
-                                                <option value="DAY">Los últimos 30 días</option>
-                                                <option value="WEEK">Los últimos 4 meses</option>
-                                                <option value="MONTH">Los últimos 12 meses</option>
-                                            </select>
-                                        </div>
-                                        <div class="graph-sales-redemptions">
-                                            <div id="couponsGraphUSED">
-                                           <div class="highcharts-container" id="highcharts-6" 
-                                                style="position: relative; overflow:hidden; width: 1040px; height: 250px; text-align: left; 
-                                                line-height: normal; z-index: 0; font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, Arial, Helvetica, sans-serif; 
-                                                font-size: 12px;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1040" height="250"><defs>
-                                               <clippath id="highcharts-7"><rect fill="none" x="0" y="0" width="998" height="210"></rect></clippath></defs>
-                                               <rect rx="5" ry="5" fill="#FFFFFF" x="0" y="0" width="1040" height="250" stroke-width="0.000001"></rect>
-                                               <g class="highcharts-grid" zIndex="1"></g><g class="highcharts-grid" zIndex="1">
-                                               <path fill="none" d="M 32 150.5 L 1030 150.5" stroke="#C0C0C0" stroke-width="1" zIndex="1"></path>
-                                               <path fill="none" d="M 32 80.5 L 1030 80.5" stroke="#C0C0C0" stroke-width="1" zIndex="1"></path>
-                                               <path fill="none" d="M 32 10.5 L 1030 10.5" stroke="#C0C0C0" stroke-width="1" zIndex="1"></path>
-                                               <path fill="none" d="M 32 220.5 L 1030 220.5" stroke="#C0C0C0" stroke-width="1" zIndex="1"></path></g>
-                                               <g class="highcharts-axis" zIndex="2"><path fill="none" d="M 98.5 220 L 98.5 225" stroke="#C0D0E0" stroke-width="1"></path>
-                                               <path fill="none" d="M 131.5 220 L 131.5 225" stroke="#C0D0E0" stroke-width="1"></path>
-                                               <path fill="none" d="M 164.5 220 L 164.5 225" stroke="#C0D0E0" stroke-width="1"></path>
-                                               <path fill="none" d="M 197.5 220 L 197.5 225" stroke="#C0D0E0" stroke-width="1"></path>
-                                               <path fill="none" d="M 231.5 220 L 231.5 225" stroke="#C0D0E0" stroke-width="1"></path>
-                                               <path fill="none" d="M 264.5 220 L 264.5 225" stroke="#C0D0E0" stroke-width="1"></path>
-                                               <path fill="none" d="M 297.5 220 L 297.5 225" stroke="#C0D0E0" stroke-width="1"></path>
-                                               <path fill="none" d="M 330.5 220 L 330.5 225" stroke="#C0D0E0" stroke-width="1"></path>
-                                               <path fill="none" d="M 364.5 220 L 364.5 225" stroke="#C0D0E0" stroke-width="1"></path>
-                                               <path fill="none" d="M 397.5 220 L 397.5 225" stroke="#C0D0E0" stroke-width="1"></path>
-                                               <path fill="none" d="M 430.5 220 L 430.5 225" stroke="#C0D0E0" stroke-width="1"></path>
-                                               <path fill="none" d="M 463.5 220 L 463.5 225" stroke="#C0D0E0" stroke-width="1"></path>
-                                               <path fill="none" d="M 497.5 220 L 497.5 225" stroke="#C0D0E0" stroke-width="1"></path>
-                                               <path fill="none" d="M 530.5 220 L 530.5 225" stroke="#C0D0E0" stroke-width="1"></path>
-                                               <path fill="none" d="M 563.5 220 L 563.5 225" stroke="#C0D0E0" stroke-width="1"></path>
-                                               <path fill="none" d="M 597.5 220 L 597.5 225" stroke="#C0D0E0" stroke-width="1"></path>
-                                               <path fill="none" d="M 630.5 220 L 630.5 225" stroke="#C0D0E0" stroke-width="1"></path>
-                                               <path fill="none" d="M 663.5 220 L 663.5 225" stroke="#C0D0E0" stroke-width="1"></path>
-                                               <path fill="none" d="M 696.5 220 L 696.5 225" stroke="#C0D0E0" stroke-width="1"></path>
-                                               <path fill="none" d="M 730.5 220 L 730.5 225" stroke="#C0D0E0" stroke-width="1"></path>
-                                               <path fill="none" d="M 763.5 220 L 763.5 225" stroke="#C0D0E0" stroke-width="1"></path>
-                                               <path fill="none" d="M 796.5 220 L 796.5 225" stroke="#C0D0E0" stroke-width="1"></path>
-                                               <path fill="none" d="M 829.5 220 L 829.5 225" stroke="#C0D0E0" stroke-width="1"></path>
-                                               <path fill="none" d="M 863.5 220 L 863.5 225" stroke="#C0D0E0" stroke-width="1"></path>
-                                               <path fill="none" d="M 896.5 220 L 896.5 225" stroke="#C0D0E0" stroke-width="1"></path>
-                                               <path fill="none" d="M 929.5 220 L 929.5 225" stroke="#C0D0E0" stroke-width="1"></path>
-                                               <path fill="none" d="M 962.5 220 L 962.5 225" stroke="#C0D0E0" stroke-width="1"></path>
-                                               <path fill="none" d="M 996.5 220 L 996.5 225" stroke="#C0D0E0" stroke-width="1"></path>
-                                               <path fill="none" d="M 1029.5 220 L 1029.5 225" stroke="#C0D0E0" stroke-width="1"></path>
-                                               <path fill="none" d="M 64.5 220 L 64.5 225" stroke="#C0D0E0" stroke-width="1"></path>
-                                               <path fill="none" d="M 32 220.5 L 1030 220.5" stroke="#C0D0E0" stroke-width="1" zIndex="7" visibility="visible"></path></g>
-                                               <g class="highcharts-axis" zIndex="2"></g>
-                                               <g class="highcharts-series-group" zIndex="3">
-                                               <g class="highcharts-series" visibility="visible" zIndex="0.1" transform="translate(32,10)" clip-path="url(#highcharts-7)">
-                                               <rect fill="none" x="8.5" y="160.5" width="15" height="49" stroke-width="5" stroke="black" rx="2" ry="2" isShadow="true" 
-                                                     stroke-opacity="0.049999999999999996" transform="translate(1, 1)"></rect>
-                                               <rect fill="none" x="8.5" y="160.5" width="15" height="49" stroke-width="3" stroke="black" rx="2" ry="2" isShadow="true" 
-                                                     stroke-opacity="0.09999999999999999" transform="translate(1, 1)"></rect>
-                                               <rect fill="none" x="8.5" y="160.5" width="15" height="49" stroke-width="1" stroke="black" rx="2" ry="2" isShadow="true" 
-                                                     stroke-opacity="0.15" transform="translate(1, 1)"></rect>
-                                               <rect fill="#7aa34b" x="8.5" y="160.5" width="15" height="49" stroke-width="1" stroke="#FFFFFF" rx="2" ry="2"></rect><rect fill="none" x="41.5" y="209.5" width="15" height="0" stroke-width="5" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.049999999999999996" transform="translate(1, 1)"></rect><rect fill="none" x="41.5" y="209.5" width="15" height="0" stroke-width="3" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.09999999999999999" transform="translate(1, 1)"></rect><rect fill="none" x="41.5" y="209.5" width="15" height="0" stroke-width="1" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.15" transform="translate(1, 1)"></rect><rect fill="#7aa34b" x="41.5" y="209.5" width="15" height="0" stroke-width="1" stroke="#FFFFFF" rx="2" ry="2"></rect><rect fill="none" x="75.5" y="188.5" width="15" height="21" stroke-width="5" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.049999999999999996" transform="translate(1, 1)"></rect><rect fill="none" x="75.5" y="188.5" width="15" height="21" stroke-width="3" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.09999999999999999" transform="translate(1, 1)"></rect><rect fill="none" x="75.5" y="188.5" width="15" height="21" stroke-width="1" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.15" transform="translate(1, 1)"></rect><rect fill="#7aa34b" x="75.5" y="188.5" width="15" height="21" stroke-width="1" stroke="#FFFFFF" rx="2" ry="2"></rect><rect fill="none" x="108.5" y="209.5" width="15" height="0" stroke-width="5" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.049999999999999996" transform="translate(1, 1)"></rect><rect fill="none" x="108.5" y="209.5" width="15" height="0" stroke-width="3" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.09999999999999999" transform="translate(1, 1)"></rect><rect fill="none" x="108.5" y="209.5" width="15" height="0" stroke-width="1" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.15" transform="translate(1, 1)"></rect><rect fill="#7aa34b" x="108.5" y="209.5" width="15" height="0" stroke-width="1" stroke="#FFFFFF" rx="2" ry="2"></rect><rect fill="none" x="141.5" y="209.5" width="15" height="0" stroke-width="5" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.049999999999999996" transform="translate(1, 1)"></rect><rect fill="none" x="141.5" y="209.5" width="15" height="0" stroke-width="3" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.09999999999999999" transform="translate(1, 1)"></rect><rect fill="none" x="141.5" y="209.5" width="15" height="0" stroke-width="1" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.15" transform="translate(1, 1)"></rect><rect fill="#7aa34b" x="141.5" y="209.5" width="15" height="0" stroke-width="1" stroke="#FFFFFF" rx="2" ry="2"></rect><rect fill="none" x="174.5" y="209.5" width="15" height="0" stroke-width="5" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.049999999999999996" transform="translate(1, 1)"></rect><rect fill="none" x="174.5" y="209.5" width="15" height="0" stroke-width="3" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.09999999999999999" transform="translate(1, 1)"></rect><rect fill="none" x="174.5" y="209.5" width="15" height="0" stroke-width="1" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.15" transform="translate(1, 1)"></rect><rect fill="#7aa34b" x="174.5" y="209.5" width="15" height="0" stroke-width="1" stroke="#FFFFFF" rx="2" ry="2"></rect><rect fill="none" x="208.5" y="209.5" width="15" height="0" stroke-width="5" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.049999999999999996" transform="translate(1, 1)"></rect><rect fill="none" x="208.5" y="209.5" width="15" height="0" stroke-width="3" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.09999999999999999" transform="translate(1, 1)"></rect><rect fill="none" x="208.5" y="209.5" width="15" height="0" stroke-width="1" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.15" transform="translate(1, 1)"></rect><rect fill="#7aa34b" x="208.5" y="209.5" width="15" height="0" stroke-width="1" stroke="#FFFFFF" rx="2" ry="2"></rect><rect fill="none" x="241.5" y="209.5" width="15" height="0" stroke-width="5" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.049999999999999996" transform="translate(1, 1)"></rect><rect fill="none" x="241.5" y="209.5" width="15" height="0" stroke-width="3" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.09999999999999999" transform="translate(1, 1)"></rect><rect fill="none" x="241.5" y="209.5" width="15" height="0" stroke-width="1" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.15" transform="translate(1, 1)"></rect><rect fill="#7aa34b" x="241.5" y="209.5" width="15" height="0" stroke-width="1" stroke="#FFFFFF" rx="2" ry="2"></rect><rect fill="none" x="274.5" y="209.5" width="15" height="0" stroke-width="5" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.049999999999999996" transform="translate(1, 1)"></rect><rect fill="none" x="274.5" y="209.5" width="15" height="0" stroke-width="3" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.09999999999999999" transform="translate(1, 1)"></rect><rect fill="none" x="274.5" y="209.5" width="15" height="0" stroke-width="1" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.15" transform="translate(1, 1)"></rect><rect fill="#7aa34b" x="274.5" y="209.5" width="15" height="0" stroke-width="1" stroke="#FFFFFF" rx="2" ry="2"></rect><rect fill="none" x="308.5" y="209.5" width="15" height="0" stroke-width="5" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.049999999999999996" transform="translate(1, 1)"></rect><rect fill="none" x="308.5" y="209.5" width="15" height="0" stroke-width="3" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.09999999999999999" transform="translate(1, 1)"></rect><rect fill="none" x="308.5" y="209.5" width="15" height="0" stroke-width="1" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.15" transform="translate(1, 1)"></rect><rect fill="#7aa34b" x="308.5" y="209.5" width="15" height="0" stroke-width="1" stroke="#FFFFFF" rx="2" ry="2"></rect><rect fill="none" x="341.5" y="209.5" width="15" height="0" stroke-width="5" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.049999999999999996" transform="translate(1, 1)"></rect><rect fill="none" x="341.5" y="209.5" width="15" height="0" stroke-width="3" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.09999999999999999" transform="translate(1, 1)"></rect><rect fill="none" x="341.5" y="209.5" width="15" height="0" stroke-width="1" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.15" transform="translate(1, 1)"></rect><rect fill="#7aa34b" x="341.5" y="209.5" width="15" height="0" stroke-width="1" stroke="#FFFFFF" rx="2" ry="2"></rect><rect fill="none" x="374.5" y="209.5" width="15" height="0" stroke-width="5" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.049999999999999996" transform="translate(1, 1)"></rect><rect fill="none" x="374.5" y="209.5" width="15" height="0" stroke-width="3" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.09999999999999999" transform="translate(1, 1)"></rect><rect fill="none" x="374.5" y="209.5" width="15" height="0" stroke-width="1" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.15" transform="translate(1, 1)"></rect><rect fill="#7aa34b" x="374.5" y="209.5" width="15" height="0" stroke-width="1" stroke="#FFFFFF" rx="2" ry="2"></rect><rect fill="none" x="407.5" y="209.5" width="15" height="0" stroke-width="5" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.049999999999999996" transform="translate(1, 1)"></rect><rect fill="none" x="407.5" y="209.5" width="15" height="0" stroke-width="3" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.09999999999999999" transform="translate(1, 1)"></rect><rect fill="none" x="407.5" y="209.5" width="15" height="0" stroke-width="1" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.15" transform="translate(1, 1)"></rect><rect fill="#7aa34b" x="407.5" y="209.5" width="15" height="0" stroke-width="1" stroke="#FFFFFF" rx="2" ry="2"></rect><rect fill="none" x="441.5" y="202.5" width="15" height="7" stroke-width="5" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.049999999999999996" transform="translate(1, 1)"></rect><rect fill="none" x="441.5" y="202.5" width="15" height="7" stroke-width="3" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.09999999999999999" transform="translate(1, 1)"></rect><rect fill="none" x="441.5" y="202.5" width="15" height="7" stroke-width="1" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.15" transform="translate(1, 1)"></rect><rect fill="#7aa34b" x="441.5" y="202.5" width="15" height="7" stroke-width="1" stroke="#FFFFFF" rx="2" ry="2"></rect><rect fill="none" x="474.5" y="139.5" width="15" height="70" stroke-width="5" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.049999999999999996" transform="translate(1, 1)"></rect><rect fill="none" x="474.5" y="139.5" width="15" height="70" stroke-width="3" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.09999999999999999" transform="translate(1, 1)"></rect><rect fill="none" x="474.5" y="139.5" width="15" height="70" stroke-width="1" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.15" transform="translate(1, 1)"></rect><rect fill="#7aa34b" x="474.5" y="139.5" width="15" height="70" stroke-width="1" stroke="#FFFFFF" rx="2" ry="2"></rect><rect fill="none" x="507.5" y="209.5" width="15" height="0" stroke-width="5" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.049999999999999996" transform="translate(1, 1)"></rect><rect fill="none" x="507.5" y="209.5" width="15" height="0" stroke-width="3" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.09999999999999999" transform="translate(1, 1)"></rect><rect fill="none" x="507.5" y="209.5" width="15" height="0" stroke-width="1" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.15" transform="translate(1, 1)"></rect><rect fill="#7aa34b" x="507.5" y="209.5" width="15" height="0" stroke-width="1" stroke="#FFFFFF" rx="2" ry="2"></rect><rect fill="none" x="540.5" y="209.5" width="15" height="0" stroke-width="5" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.049999999999999996" transform="translate(1, 1)"></rect><rect fill="none" x="540.5" y="209.5" width="15" height="0" stroke-width="3" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.09999999999999999" transform="translate(1, 1)"></rect><rect fill="none" x="540.5" y="209.5" width="15" height="0" stroke-width="1" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.15" transform="translate(1, 1)"></rect><rect fill="#7aa34b" x="540.5" y="209.5" width="15" height="0" stroke-width="1" stroke="#FFFFFF" rx="2" ry="2"></rect><rect fill="none" x="574.5" y="209.5" width="15" height="0" stroke-width="5" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.049999999999999996" transform="translate(1, 1)"></rect><rect fill="none" x="574.5" y="209.5" width="15" height="0" stroke-width="3" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.09999999999999999" transform="translate(1, 1)"></rect><rect fill="none" x="574.5" y="209.5" width="15" height="0" stroke-width="1" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.15" transform="translate(1, 1)"></rect><rect fill="#7aa34b" x="574.5" y="209.5" width="15" height="0" stroke-width="1" stroke="#FFFFFF" rx="2" ry="2"></rect><rect fill="none" x="607.5" y="209.5" width="15" height="0" stroke-width="5" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.049999999999999996" transform="translate(1, 1)"></rect><rect fill="none" x="607.5" y="209.5" width="15" height="0" stroke-width="3" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.09999999999999999" transform="translate(1, 1)"></rect><rect fill="none" x="607.5" y="209.5" width="15" height="0" stroke-width="1" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.15" transform="translate(1, 1)"></rect><rect fill="#7aa34b" x="607.5" y="209.5" width="15" height="0" stroke-width="1" stroke="#FFFFFF" rx="2" ry="2"></rect><rect fill="none" x="640.5" y="209.5" width="15" height="0" stroke-width="5" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.049999999999999996" transform="translate(1, 1)"></rect><rect fill="none" x="640.5" y="209.5" width="15" height="0" stroke-width="3" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.09999999999999999" transform="translate(1, 1)"></rect><rect fill="none" x="640.5" y="209.5" width="15" height="0" stroke-width="1" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.15" transform="translate(1, 1)"></rect><rect fill="#7aa34b" x="640.5" y="209.5" width="15" height="0" stroke-width="1" stroke="#FFFFFF" rx="2" ry="2"></rect><rect fill="none" x="673.5" y="209.5" width="15" height="0" stroke-width="5" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.049999999999999996" transform="translate(1, 1)"></rect><rect fill="none" x="673.5" y="209.5" width="15" height="0" stroke-width="3" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.09999999999999999" transform="translate(1, 1)"></rect><rect fill="none" x="673.5" y="209.5" width="15" height="0" stroke-width="1" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.15" transform="translate(1, 1)"></rect><rect fill="#7aa34b" x="673.5" y="209.5" width="15" height="0" stroke-width="1" stroke="#FFFFFF" rx="2" ry="2"></rect><rect fill="none" x="707.5" y="41.5" width="15" height="168" stroke-width="5" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.049999999999999996" transform="translate(1, 1)"></rect><rect fill="none" x="707.5" y="41.5" width="15" height="168" stroke-width="3" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.09999999999999999" transform="translate(1, 1)"></rect><rect fill="none" x="707.5" y="41.5" width="15" height="168" stroke-width="1" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.15" transform="translate(1, 1)"></rect><rect fill="#7aa34b" x="707.5" y="41.5" width="15" height="168" stroke-width="1" stroke="#FFFFFF" rx="2" ry="2"></rect><rect fill="none" x="740.5" y="209.5" width="15" height="0" stroke-width="5" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.049999999999999996" transform="translate(1, 1)"></rect><rect fill="none" x="740.5" y="209.5" width="15" height="0" stroke-width="3" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.09999999999999999" transform="translate(1, 1)"></rect><rect fill="none" x="740.5" y="209.5" width="15" height="0" stroke-width="1" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.15" transform="translate(1, 1)"></rect><rect fill="#7aa34b" x="740.5" y="209.5" width="15" height="0" stroke-width="1" stroke="#FFFFFF" rx="2" ry="2"></rect><rect fill="none" x="773.5" y="209.5" width="15" height="0" stroke-width="5" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.049999999999999996" transform="translate(1, 1)"></rect><rect fill="none" x="773.5" y="209.5" width="15" height="0" stroke-width="3" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.09999999999999999" transform="translate(1, 1)"></rect><rect fill="none" x="773.5" y="209.5" width="15" height="0" stroke-width="1" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.15" transform="translate(1, 1)"></rect><rect fill="#7aa34b" x="773.5" y="209.5" width="15" height="0" stroke-width="1" stroke="#FFFFFF" rx="2" ry="2"></rect><rect fill="none" x="807.5" y="209.5" width="15" height="0" stroke-width="5" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.049999999999999996" transform="translate(1, 1)"></rect><rect fill="none" x="807.5" y="209.5" width="15" height="0" stroke-width="3" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.09999999999999999" transform="translate(1, 1)"></rect><rect fill="none" x="807.5" y="209.5" width="15" height="0" stroke-width="1" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.15" transform="translate(1, 1)"></rect><rect fill="#7aa34b" x="807.5" y="209.5" width="15" height="0" stroke-width="1" stroke="#FFFFFF" rx="2" ry="2"></rect><rect fill="none" x="840.5" y="209.5" width="15" height="0" stroke-width="5" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.049999999999999996" transform="translate(1, 1)"></rect><rect fill="none" x="840.5" y="209.5" width="15" height="0" stroke-width="3" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.09999999999999999" transform="translate(1, 1)"></rect><rect fill="none" x="840.5" y="209.5" width="15" height="0" stroke-width="1" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.15" transform="translate(1, 1)"></rect><rect fill="#7aa34b" x="840.5" y="209.5" width="15" height="0" stroke-width="1" stroke="#FFFFFF" rx="2" ry="2"></rect><rect fill="none" x="873.5" y="209.5" width="15" height="0" stroke-width="5" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.049999999999999996" transform="translate(1, 1)"></rect><rect fill="none" x="873.5" y="209.5" width="15" height="0" stroke-width="3" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.09999999999999999" transform="translate(1, 1)"></rect><rect fill="none" x="873.5" y="209.5" width="15" height="0" stroke-width="1" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.15" transform="translate(1, 1)"></rect><rect fill="#7aa34b" x="873.5" y="209.5" width="15" height="0" stroke-width="1" stroke="#FFFFFF" rx="2" ry="2"></rect><rect fill="none" x="906.5" y="209.5" width="15" height="0" stroke-width="5" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.049999999999999996" transform="translate(1, 1)"></rect><rect fill="none" x="906.5" y="209.5" width="15" height="0" stroke-width="3" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.09999999999999999" transform="translate(1, 1)"></rect><rect fill="none" x="906.5" y="209.5" width="15" height="0" stroke-width="1" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.15" transform="translate(1, 1)"></rect><rect fill="#7aa34b" x="906.5" y="209.5" width="15" height="0" stroke-width="1" stroke="#FFFFFF" rx="2" ry="2"></rect><rect fill="none" x="940.5" y="104.5" width="15" height="105" stroke-width="5" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.049999999999999996" transform="translate(1, 1)"></rect><rect fill="none" x="940.5" y="104.5" width="15" height="105" stroke-width="3" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.09999999999999999" transform="translate(1, 1)"></rect><rect fill="none" x="940.5" y="104.5" width="15" height="105" stroke-width="1" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.15" transform="translate(1, 1)"></rect><rect fill="#7aa34b" x="940.5" y="104.5" width="15" height="105" stroke-width="1" stroke="#FFFFFF" rx="2" ry="2"></rect><rect fill="none" x="973.5" y="209.5" width="15" height="0" stroke-width="5" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.049999999999999996" transform="translate(1, 1)"></rect><rect fill="none" x="973.5" y="209.5" width="15" height="0" stroke-width="3" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.09999999999999999" transform="translate(1, 1)"></rect><rect fill="none" x="973.5" y="209.5" width="15" height="0" stroke-width="1" stroke="black" rx="2" ry="2" isShadow="true" stroke-opacity="0.15" transform="translate(1, 1)"></rect><rect fill="#7aa34b" x="973.5" y="209.5" width="15" height="0" stroke-width="1" stroke="#FFFFFF" rx="2" ry="2"></rect></g><g class="highcharts-markers" visibility="visible" zIndex="0.1" transform="translate(32,10)"></g></g><g class="highcharts-axis-labels" zIndex="7"><text x="48.63333333333333" y="234" style="font-family:Verdana, sans-serif;font-size:12px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="middle" visibility="visible"><tspan x="48.63333333333333">17</tspan></text><text x="81.9" y="234" style="font-family:Verdana, sans-serif;font-size:12px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="middle" visibility="visible"><tspan x="81.9">18</tspan></text><text x="115.16666666666666" y="234" style="font-family:Verdana, sans-serif;font-size:12px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="middle" visibility="visible"><tspan x="115.16666666666666">19</tspan></text><text x="148.43333333333334" y="234" style="font-family:Verdana, sans-serif;font-size:12px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="middle" visibility="visible"><tspan x="148.43333333333334">20</tspan></text><text x="181.7" y="234" style="font-family:Verdana, sans-serif;font-size:12px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="middle" visibility="visible"><tspan x="181.7">21</tspan></text><text x="214.96666666666667" y="234" style="font-family:Verdana, sans-serif;font-size:12px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="middle" visibility="visible"><tspan x="214.96666666666667">22</tspan></text><text x="248.23333333333335" y="234" style="font-family:Verdana, sans-serif;font-size:12px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="middle" visibility="visible"><tspan x="248.23333333333335">23</tspan></text><text x="281.5" y="234" style="font-family:Verdana, sans-serif;font-size:12px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="middle" visibility="visible"><tspan x="281.5">24</tspan></text><text x="314.76666666666665" y="234" style="font-family:Verdana, sans-serif;font-size:12px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="middle" visibility="visible"><tspan x="314.76666666666665">25</tspan></text><text x="348.0333333333333" y="234" style="font-family:Verdana, sans-serif;font-size:12px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="middle" visibility="visible"><tspan x="348.0333333333333">26</tspan></text><text x="381.3" y="234" style="font-family:Verdana, sans-serif;font-size:12px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="middle" visibility="visible"><tspan x="381.3">27</tspan></text><text x="414.56666666666666" y="234" style="font-family:Verdana, sans-serif;font-size:12px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="middle" visibility="visible"><tspan x="414.56666666666666">28</tspan></text><text x="447.8333333333333" y="234" style="font-family:Verdana, sans-serif;font-size:12px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="middle" visibility="visible"><tspan x="447.8333333333333">29</tspan></text><text x="481.09999999999997" y="234" style="font-family:Verdana, sans-serif;font-size:12px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="middle" visibility="visible"><tspan x="481.09999999999997">30</tspan></text><text x="514.3666666666667" y="234" style="font-family:Verdana, sans-serif;font-size:12px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="middle" visibility="visible"><tspan x="514.3666666666667">31</tspan></text><text x="547.6333333333333" y="234" style="font-family:Verdana, sans-serif;font-size:12px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="middle" visibility="visible"><tspan x="547.6333333333333"> 1</tspan></text><text x="580.9" y="234" style="font-family:Verdana, sans-serif;font-size:12px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="middle" visibility="visible"><tspan x="580.9"> 2</tspan></text><text x="614.1666666666666" y="234" style="font-family:Verdana, sans-serif;font-size:12px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="middle" visibility="visible"><tspan x="614.1666666666666"> 3</tspan></text><text x="647.4333333333333" y="234" style="font-family:Verdana, sans-serif;font-size:12px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="middle" visibility="visible"><tspan x="647.4333333333333"> 4</tspan></text><text x="680.6999999999999" y="234" style="font-family:Verdana, sans-serif;font-size:12px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="middle" visibility="visible"><tspan x="680.6999999999999"> 5</tspan></text><text x="713.9666666666667" y="234" style="font-family:Verdana, sans-serif;font-size:12px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="middle" visibility="visible"><tspan x="713.9666666666667"> 6</tspan></text><text x="747.2333333333333" y="234" style="font-family:Verdana, sans-serif;font-size:12px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="middle" visibility="visible"><tspan x="747.2333333333333"> 7</tspan></text><text x="780.5" y="234" style="font-family:Verdana, sans-serif;font-size:12px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="middle" visibility="visible"><tspan x="780.5"> 8</tspan></text><text x="813.7666666666667" y="234" style="font-family:Verdana, sans-serif;font-size:12px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="middle" visibility="visible"><tspan x="813.7666666666667"> 9</tspan></text><text x="847.0333333333333" y="234" style="font-family:Verdana, sans-serif;font-size:12px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="middle" visibility="visible"><tspan x="847.0333333333333">10</tspan></text><text x="880.3" y="234" style="font-family:Verdana, sans-serif;font-size:12px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="middle" visibility="visible"><tspan x="880.3">11</tspan></text><text x="913.5666666666666" y="234" style="font-family:Verdana, sans-serif;font-size:12px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="middle" visibility="visible"><tspan x="913.5666666666666">12</tspan></text><text x="946.8333333333333" y="234" style="font-family:Verdana, sans-serif;font-size:12px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="middle" visibility="visible"><tspan x="946.8333333333333">13</tspan></text><text x="980.1" y="234" style="font-family:Verdana, sans-serif;font-size:12px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="middle" visibility="visible"><tspan x="980.1">14</tspan></text><text x="1013.3666666666667" y="234" style="font-family:Verdana, sans-serif;font-size:12px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="middle" visibility="visible"><tspan x="1013.3666666666667">15</tspan></text></g><g class="highcharts-axis-labels" zIndex="7"><text x="24" y="224.1" style="font-family:'Lucida Grande', 'Lucida Sans Unicode', Verdana, Arial, Helvetica, sans-serif;font-size:11px;width:479px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="end" visibility="visible"><tspan x="24">0</tspan></text><text x="24" y="154.1" style="font-family:'Lucida Grande', 'Lucida Sans Unicode', Verdana, Arial, Helvetica, sans-serif;font-size:11px;width:479px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="end" visibility="visible"><tspan x="24">10</tspan></text><text x="24" y="84.1" style="font-family:'Lucida Grande', 'Lucida Sans Unicode', Verdana, Arial, Helvetica, sans-serif;font-size:11px;width:479px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="end" visibility="visible"><tspan x="24">20</tspan></text><text x="24" y="14.1" style="font-family:'Lucida Grande', 'Lucida Sans Unicode', Verdana, Arial, Helvetica, sans-serif;font-size:11px;width:479px;color:#cccccc;line-height:14px;fill:#cccccc;" text-anchor="end" visibility="visible"><tspan x="24">30</tspan></text></g><g class="highcharts-tooltip" zIndex="8" style="padding:0;white-space:nowrap;" visibility="hidden"><rect rx="5" ry="5" fill="none" x="0" y="0" width="10" height="10" stroke-width="5" fill-opacity="0.85" isShadow="true" stroke="black" stroke-opacity="0.049999999999999996" transform="translate(1, 1)"></rect><rect rx="5" ry="5" fill="none" x="0" y="0" width="10" height="10" stroke-width="3" fill-opacity="0.85" isShadow="true" stroke="black" stroke-opacity="0.09999999999999999" transform="translate(1, 1)"></rect><rect rx="5" ry="5" fill="none" x="0" y="0" width="10" height="10" stroke-width="1" fill-opacity="0.85" isShadow="true" stroke="black" stroke-opacity="0.15" transform="translate(1, 1)"></rect><rect rx="5" ry="5" fill="rgb(255,255,255)" x="0" y="0" width="10" height="10" stroke-width="2" fill-opacity="0.85"></rect><text x="5" y="18" style="font-family:'Lucida Grande', 'Lucida Sans Unicode', Verdana, Arial, Helvetica, sans-serif;font-size:12px;color:#333333;fill:#333333;" zIndex="1"></text></g><g class="highcharts-tracker" zIndex="9"><g visibility="visible" zIndex="1" transform="translate(32,10)" clip-path="url(#highcharts-7)"><rect fill="rgb(192,192,192)" x="8.5" y="160.5" width="15" height="49" isTracker="1424006128445" fill-opacity="0.000001" visibility="visible" style=""></rect><rect fill="rgb(192,192,192)" x="41.5" y="207" width="15" height="6" isTracker="1424006128445" fill-opacity="0.000001" visibility="visible" style=""></rect><rect fill="rgb(192,192,192)" x="75.5" y="188.5" width="15" height="21" isTracker="1424006128445" fill-opacity="0.000001" visibility="visible" style=""></rect><rect fill="rgb(192,192,192)" x="108.5" y="207" width="15" height="6" isTracker="1424006128445" fill-opacity="0.000001" visibility="visible" style=""></rect><rect fill="rgb(192,192,192)" x="141.5" y="207" width="15" height="6" isTracker="1424006128445" fill-opacity="0.000001" visibility="visible" style=""></rect><rect fill="rgb(192,192,192)" x="174.5" y="207" width="15" height="6" isTracker="1424006128445" fill-opacity="0.000001" visibility="visible" style=""></rect><rect fill="rgb(192,192,192)" x="208.5" y="207" width="15" height="6" isTracker="1424006128445" fill-opacity="0.000001" visibility="visible" style=""></rect><rect fill="rgb(192,192,192)" x="241.5" y="207" width="15" height="6" isTracker="1424006128445" fill-opacity="0.000001" visibility="visible" style=""></rect><rect fill="rgb(192,192,192)" x="274.5" y="207" width="15" height="6" isTracker="1424006128445" fill-opacity="0.000001" visibility="visible" style=""></rect><rect fill="rgb(192,192,192)" x="308.5" y="207" width="15" height="6" isTracker="1424006128445" fill-opacity="0.000001" visibility="visible" style=""></rect><rect fill="rgb(192,192,192)" x="341.5" y="207" width="15" height="6" isTracker="1424006128445" fill-opacity="0.000001" visibility="visible" style=""></rect><rect fill="rgb(192,192,192)" x="374.5" y="207" width="15" height="6" isTracker="1424006128445" fill-opacity="0.000001" visibility="visible" style=""></rect><rect fill="rgb(192,192,192)" x="407.5" y="207" width="15" height="6" isTracker="1424006128445" fill-opacity="0.000001" visibility="visible" style=""></rect><rect fill="rgb(192,192,192)" x="441.5" y="202.5" width="15" height="7" isTracker="1424006128445" fill-opacity="0.000001" visibility="visible" style=""></rect><rect fill="rgb(192,192,192)" x="474.5" y="139.5" width="15" height="70" isTracker="1424006128445" fill-opacity="0.000001" visibility="visible" style=""></rect><rect fill="rgb(192,192,192)" x="507.5" y="207" width="15" height="6" isTracker="1424006128445" fill-opacity="0.000001" visibility="visible" style=""></rect><rect fill="rgb(192,192,192)" x="540.5" y="207" width="15" height="6" isTracker="1424006128445" fill-opacity="0.000001" visibility="visible" style=""></rect><rect fill="rgb(192,192,192)" x="574.5" y="207" width="15" height="6" isTracker="1424006128445" fill-opacity="0.000001" visibility="visible" style=""></rect><rect fill="rgb(192,192,192)" x="607.5" y="207" width="15" height="6" isTracker="1424006128445" fill-opacity="0.000001" visibility="visible" style=""></rect><rect fill="rgb(192,192,192)" x="640.5" y="207" width="15" height="6" isTracker="1424006128445" fill-opacity="0.000001" visibility="visible" style=""></rect><rect fill="rgb(192,192,192)" x="673.5" y="207" width="15" height="6" isTracker="1424006128445" fill-opacity="0.000001" visibility="visible" style=""></rect><rect fill="rgb(192,192,192)" x="707.5" y="41.5" width="15" height="168" isTracker="1424006128445" fill-opacity="0.000001" visibility="visible" style=""></rect><rect fill="rgb(192,192,192)" x="740.5" y="207" width="15" height="6" isTracker="1424006128445" fill-opacity="0.000001" visibility="visible" style=""></rect><rect fill="rgb(192,192,192)" x="773.5" y="207" width="15" height="6" isTracker="1424006128445" fill-opacity="0.000001" visibility="visible" style=""></rect><rect fill="rgb(192,192,192)" x="807.5" y="207" width="15" height="6" isTracker="1424006128445" fill-opacity="0.000001" visibility="visible" style=""></rect><rect fill="rgb(192,192,192)" x="840.5" y="207" width="15" height="6" isTracker="1424006128445" fill-opacity="0.000001" visibility="visible" style=""></rect><rect fill="rgb(192,192,192)" x="873.5" y="207" width="15" height="6" isTracker="1424006128445" fill-opacity="0.000001" visibility="visible" style=""></rect><rect fill="rgb(192,192,192)" x="906.5" y="207" width="15" height="6" isTracker="1424006128445" fill-opacity="0.000001" visibility="visible" style=""></rect><rect fill="rgb(192,192,192)" x="940.5" y="104.5" width="15" height="105" isTracker="1424006128445" fill-opacity="0.000001" visibility="visible" style=""></rect><rect fill="rgb(192,192,192)" x="973.5" y="207" width="15" height="6" isTracker="1424006128445" fill-opacity="0.000001" visibility="visible" style=""></rect></g></g></svg></div></div>
-                                            <p class="date-rank">Saturday 17 de January - Sunday 15 de February</p>
-                                            <p class="refundNote">Nota: El gráfico de ventas no incluye los cupones devueltos</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                                <pre id="tsv" style="display:none">P</pre>
                             </div>
                         </div>
                     </div>
@@ -440,6 +352,155 @@
             }
             //$("#element").hide();
         });
+        
+        Highcharts.data({
+            csv: document.getElementById('tsv').innerHTML,
+            itemDelimiter: '\t',
+            parsed: function (columns) {
+
+                var cuponesVendidos = [],
+                    cuponesValidados = [],
+                    drilldownSeries = [],
+                    datosSeriesVendidos = [],
+                    datosSeriesValidados = [];
+            
+                /*
+
+                cuponesVendidos = [{name:'Abr 2015',y:25,drilldown:'vAbr 2015',color:'#c45f45'},
+                              {name:'May 2015',y:30,drilldown:'vMay 2015',color:'#c45f45'}];
+                          
+                cuponesValidados = [{name:'Abr 2015',y:15,drilldown:'cAbr 2015',color:'#c4ee45'},
+                              {name:'May 2015',y:8,drilldown:'cMay 2015',color:'#c4ee45'}];
+                          
+                drilldownSeries = [{name:'Abr 2015',id:'vAbr 2015',data:[{name:23,y:10},{name:24,y:15}]},
+                                   {name:'May 2015',id:'vMay 2015',data:[{name:23,y:12},{name:24,y:18}]},
+                                   {name:'Abr 2015',id:'cAbr 2015',data:[{name:23,y:7},{name:24,y:8}]},
+                                   {name:'May 2015',id:'cMay 2015',data:[{name:23,y:2},{name:24,y:6}]}];*/
+                
+                <?php 
+                      $totvendidos = 0; 
+                      $totvalidados = 0;
+                      $periodo = '';
+                      for($i=0;$i<count($historialDia);$i++) { 
+                            if( $periodo != '' && $periodo != $historialDia[$i]['periodo'] ) { ?>
+                                drilldownSeries.push({
+                                    name: '<?php echo $periodo;?>',
+                                    id: '<?php echo 'v'.$periodo;?>',
+                                    data: datosSeriesVendidos
+                                });
+                                drilldownSeries.push({
+                                    name: '<?php echo $periodo;?>',
+                                    id: <?php echo 'c'.$periodo;?>,
+                                    data: datosSeriesValidados
+                                });
+                                cuponesVendidos.push({
+                                    name: '<?php echo $periodo;?>',
+                                    y: <?php echo $totvendidos;?>,
+                                    drilldown: '<?php echo 'v'.$periodo;?>',
+                                    color:'#c45f45'
+                                });
+                                cuponesValidados.push({
+                                    name: '<?php echo $periodo;?>',
+                                    y: <?php echo $totvalidados;?>,
+                                    drilldown: '<?php echo 'c'.$periodo;?>',
+                                    color:'#c4ee45'
+                                });
+                            <?php 
+                            }
+                          
+                            $totvendidos += $historialDia[$i]['vendidos'];
+                            $totvalidados += $historialDia[$i]['validados'];
+                            $periodo = $historialDia[$i]['periodo'];
+                            ?>
+                            datosSeriesVendidos.push({
+                                name: <?php echo $historialDia[$i]['dia'];?>,
+                                y: <?php echo $historialDia[$i]['vendidos'];?>
+                            });
+                            datosSeriesValidados.push({
+                                name: <?php echo $historialDia[$i]['dia'];?>,
+                                y: <?php echo $historialDia[$i]['validados'];?>
+                            });
+                <?php } 
+                      if( $periodo != '' ) { ?>
+                            drilldownSeries.push({
+                                name: '<?php echo $periodo;?>',
+                                id: '<?php echo 'v'.$periodo;?>',
+                                data: datosSeriesVendidos
+                            });
+                            drilldownSeries.push({
+                                name: '<?php echo $periodo;?>',
+                                id: '<?php echo 'c'.$periodo;?>',
+                                data: datosSeriesValidados
+                            });
+                            cuponesVendidos.push({
+                                name: '<?php echo $periodo;?>',
+                                y: <?php echo $totvendidos;?>,
+                                drilldown: '<?php echo 'v'.$periodo;?>',
+                                color:'#c45f45'
+                            });
+                            cuponesValidados.push({
+                                name: '<?php echo $periodo;?>',
+                                y: <?php echo $totvalidados;?>,
+                                drilldown: '<?php echo 'c'.$periodo;?>',
+                                color:'#c4ee45'
+                            });
+                        <?php 
+                        }
+                        ?>
+
+                // Create the chart
+                $('#container').highcharts({
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: 'Ventas y validaciones de los últimos 6 meses'
+                    },
+                    subtitle: {
+                        text: 'Click en la columna de mes para ver el detalle de la venta diaria.'
+                    },
+                    xAxis: {
+                        type: 'category'
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Total Cupones'
+                        }
+                    },
+                    legend: {
+                        enabled: false
+                    },
+                    plotOptions: {
+                        series: {
+                            borderWidth: 0,
+                            dataLabels: {
+                                enabled: true,
+                                format: '{point.y}'
+                            }
+                        }
+                    },
+
+                    tooltip: {
+                        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b> cupones<br/>'
+                    },
+
+                    series: [{
+                        name: 'Ventas por Mes',
+                        colorByPoint: true,
+                        data: cuponesVendidos
+                    }, {
+                        name: 'Validados por Mes',
+                        colorByPoint: true,
+                        data: cuponesValidados
+                    }],
+                    drilldown: {
+                        series: drilldownSeries
+                    }
+                });
+            }
+        });
+    
     });
 
     $("#valida_unico").click(function () {

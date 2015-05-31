@@ -114,4 +114,30 @@ class CupliquidacionTable {
 
         return ArrayUtils::iteratorToArray($result);
     }
+    
+    public function getLiquidacionById($id_liquidacion) {
+
+        $sql = new Sql($this->tableGateway->adapter);
+                
+        $select = $sql->select();
+
+        $select->columns(array(
+            'id_liquidacion',
+            'fecha_liquidacion' => new Expression("date_format(fecha_liquidacion,'%d-%m-%Y')"),
+            'cantidad_cupones',
+            'total_importe',
+            'comision',
+            'impuesto',
+            'total_liquidacion',
+            'estado_liquidacion',
+            'id_campana'
+        ))
+        ->from('cup_liquidacion')
+        ->where(array('cup_liquidacion.id_liquidacion' => $id_liquidacion));
+        
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $result = $statement->execute();
+
+        return ArrayUtils::iteratorToArray($result);
+    }
 }

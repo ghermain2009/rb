@@ -29,7 +29,9 @@ class MicampanaController extends AbstractActionController {
         $campanaTable = $serviceLocator->get('Dashboard\Model\CupcampanaTable');
         $datosEmpresa = $empresaTable->getEmpresa($id_empresa);
         $datosCuponV = $cuponTable->getCuponValidado($id_empresa,3);
-        $datosHistorial = $cuponTable->getHistorialEmpresa($id_empresa);
+        $datosHistorialValidados = $cuponTable->getHistorialValidadosEmpresa($id_empresa);
+        $datosHistorialPagados = $cuponTable->getHistorialPagadosEmpresa($id_empresa);
+        $datosHistorialDia = $cuponTable->getHistorialpordiaEmpresa($id_empresa);
         $datosLiquidacion = $liquidacionTable->getLiquidaciones($id_empresa,3);
         $datosCampana = $campanaTable->getCampanaActiva($id_empresa);
         
@@ -41,7 +43,9 @@ class MicampanaController extends AbstractActionController {
                                    'nombre_empresa' => $nombre_empresa,
                                    'cupon_validado' => $datosCuponV,
                                    'liquidaciones' => $datosLiquidacion,
-                                   'historial' => $datosHistorial,
+                                   'historialValidados' => $datosHistorialValidados,
+                                   'historialPagados' => $datosHistorialPagados,
+                                   'historialDia' => $datosHistorialDia,
                                    'datosCampana' => $datosCampana
                                   ));
     }
@@ -63,14 +67,61 @@ class MicampanaController extends AbstractActionController {
     
     public function detallevalidadoAction() {
         
+        $limite = 10;
         $id_empresa = base64_decode($this->params()->fromRoute("empresa", null));
         
         $serviceLocator = $this->getServiceLocator();
         $cuponTable = $serviceLocator->get('Dashboard\Model\CupcuponTable');
-        $datosCuponV = $cuponTable->getCuponValidado($id_empresa,0);
+        $datosCuponV = $cuponTable->getCuponValidado($id_empresa);
         
-        return new ViewModel(array('id_empresa' => $id_empresa,
-                                   'cupon_validado' => $datosCuponV));
+        $grid = $serviceLocator->get('ZfcDatagrid\Datagrid');
+        $grid->setUserFilterDisabled();
+        $grid->setToolbarTemplate(null);
+        $grid->setDefaultItemsPerPage(9);
+        $grid->setDataSource($datosCuponV);
+        
+        $col = new Column\Select('codigo_cupon');
+        $col->setLabel('Código CupoRebueno');
+        $col->setWidth(23);
+        $col->setUserSortDisabled();
+        $grid->addColumn($col);
+
+        $col = new Column\Select('fecha_validacion');
+        $col->setLabel('Fecha Validación');
+        $col->setWidth(13);
+        $col->setUserSortDisabled();
+        $grid->addColumn($col);
+        
+        $col = new Column\Select('id_campana');
+        $col->setLabel('N° Publicación');
+        $col->setWidth(23);
+        $col->setUserSortDisabled();
+        $grid->addColumn($col);
+        
+        $col = new Column\Select('fecha_inicio');
+        $col->setLabel('Fecha Publicación');
+        $col->setWidth(23);
+        $col->setUserSortDisabled();
+        $grid->addColumn($col);
+        
+        $col = new Column\Select('precio_total');
+        $col->setLabel('Precio Total');
+        $col->setWidth(23);
+        $col->setUserSortDisabled();
+        $grid->addColumn($col);
+        
+        $col = new Column\Select('precio_total');
+        $col->setLabel('Monto Pagado');
+        $col->setWidth(23);
+        $col->setUserSortDisabled();
+        $grid->addColumn($col);
+        
+        
+        $viewModel = new ViewModel();
+        $viewModel->addChild($grid->getResponse(), 'cupon_validado');
+        $viewModel->setVariable('id_empresa', $id_empresa);
+        
+        return $viewModel;
     }
     
     public function detalleliquidacionAction() {
@@ -81,8 +132,48 @@ class MicampanaController extends AbstractActionController {
         $liquidacionTable = $serviceLocator->get('Dashboard\Model\CupliquidacionTable');
         $datosLiquidacion = $liquidacionTable->getLiquidaciones($id_empresa,0);
         
-        return new ViewModel(array('id_empresa' => $id_empresa,
-                                   'liquidaciones' => $datosLiquidacion));
+        $grid = $serviceLocator->get('ZfcDatagrid\Datagrid');
+        $grid->setUserFilterDisabled();
+        $grid->setToolbarTemplate(null);
+        $grid->setDefaultItemsPerPage(9);
+        $grid->setDataSource($datosLiquidacion);
+        
+        $col = new Column\Select('id_liquidacion');
+        $col->setLabel('Número de Liquidación');
+        $col->setWidth(23);
+        $col->setUserSortDisabled();
+        $grid->addColumn($col);
+
+        $col = new Column\Select('id_campana');
+        $col->setLabel('N° Publicación');
+        $col->setWidth(13);
+        $col->setUserSortDisabled();
+        $grid->addColumn($col);
+        
+        $col = new Column\Select('fecha_liquidacion');
+        $col->setLabel('Fecha Emisión');
+        $col->setWidth(23);
+        $col->setUserSortDisabled();
+        $grid->addColumn($col);
+        
+        $col = new Column\Select('cantidad_cupones');
+        $col->setLabel('Cantidad de CupoRebuenos');
+        $col->setWidth(23);
+        $col->setUserSortDisabled();
+        $grid->addColumn($col);
+        
+        $col = new Column\Select('total_liquidacion');
+        $col->setLabel('Total');
+        $col->setWidth(23);
+        $col->setUserSortDisabled();
+        $grid->addColumn($col);
+        
+        $viewModel = new ViewModel();
+     
+        $viewModel->addChild($grid->getResponse(), 'liquidaciones');
+        $viewModel->setVariable('id_empresa', $id_empresa);
+        
+        return $viewModel;
     }
     
     public function historiacampanasAction() {
@@ -93,7 +184,53 @@ class MicampanaController extends AbstractActionController {
         $campanaTable = $serviceLocator->get('Dashboard\Model\CupcampanaTable');
         $datosCampana = $campanaTable->getCampanaActiva($id_empresa);
         
-        return new ViewModel(array('id_empresa' => $id_empresa,
-                                   'campanas' => $datosCampana));
+        $grid = $serviceLocator->get('ZfcDatagrid\Datagrid');
+        $grid->setUserFilterDisabled();
+        $grid->setToolbarTemplate(null);
+        $grid->setDefaultItemsPerPage(9);
+        $grid->setDataSource($datosCampana);
+        
+        $col = new Column\Select('descripcion');
+        $col->setLabel('Titulo de Campaña');
+        $col->setWidth(23);
+        $col->setUserSortDisabled();
+        $grid->addColumn($col);
+
+        $col = new Column\Select('fecha_inicio');
+        $col->setLabel('Fecha Inicio');
+        $col->setWidth(13);
+        $col->setUserSortDisabled();
+        $grid->addColumn($col);
+        
+        $col = new Column\Select('fecha_final');
+        $col->setLabel('Fecha Final');
+        $col->setWidth(13);
+        $col->setUserSortDisabled();
+        $grid->addColumn($col);
+        
+        $col = new Column\Select('vendidos');
+        $col->setLabel('Cantidad Vendidos');
+        $col->setWidth(13);
+        $col->setUserSortDisabled();
+        $grid->addColumn($col);
+        
+        $col = new Column\Select('validados');
+        $col->setLabel('Cantidad Validados');
+        $col->setWidth(13);
+        $col->setUserSortDisabled();
+        $grid->addColumn($col);
+        
+        $col = new Column\Select('pagados');
+        $col->setLabel('Cantidad Pagados');
+        $col->setWidth(13);
+        $col->setUserSortDisabled();
+        $grid->addColumn($col);
+        
+        $viewModel = new ViewModel();
+        
+        $viewModel->addChild($grid->getResponse(), 'historico_campanas');
+        $viewModel->setVariable('id_empresa', $id_empresa);
+        
+        return $viewModel;
     }
 }

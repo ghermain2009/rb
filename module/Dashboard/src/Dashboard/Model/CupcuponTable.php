@@ -46,7 +46,6 @@ class CupcuponTable {
 
         $select->columns(array(
             'id_cupon',
-            'codigo_cupon',
             'id_campana',
             'id_campana_opcion',
             'cantidad',
@@ -54,12 +53,14 @@ class CupcuponTable {
             'fecha_compra' => new Expression("date_format(fecha_compra,'%d-%m-%Y')")
         ))
         ->from('cup_cupon')
+        ->join('cup_cupon_detalle', new Expression("cup_cupon.id_cupon = cup_cupon_detalle.id_cupon"),
+                array('codigo_cupon'))
         ->join('cup_campana', new Expression("cup_cupon.id_campana = cup_campana.id_campana"),
                 array(
                    'sobre_campana',
                    'saber' => 'observaciones',
                    'fecha_validez' => new Expression("date_format(fecha_validez,'%d-%m-%Y')")
-                ))        
+                ))
         ->join('cup_campana_opcion', new Expression("cup_cupon.id_campana = cup_campana_opcion.id_campana and "
                                                   . "cup_cupon.id_campana_opcion = cup_campana_opcion.id_campana_opcion"),
                 array('campana_descripcion' => 'descripcion'
@@ -72,7 +73,7 @@ class CupcuponTable {
                       'descripcion_empresa' => 'descripcion',
                       'direccion' => new Expression("case when ifnull(direccion_comercial,'') = '' then direccion_facturacion else direccion_comercial end ")
                     ))
-        ->where(array('id_cupon' => $orden));
+        ->where(array('cup_cupon.id_cupon' => $orden));
         
         $statement = $sql->prepareStatementForSqlObject($select);
         $result = $statement->execute();
@@ -85,13 +86,9 @@ class CupcuponTable {
 
         if (isset($datos)) {
 
-            $codigo_cupon = $this->_getCodigoCupon($sl);
-
             $sql = new Sql($this->tableGateway->adapter);
 
             $insert = $sql->insert('cup_cupon')->values(array(
-                //'id_cupon' => (isset($datos[''])) ? $datos[''] : null,
-                'codigo_cupon' => $codigo_cupon,
                 'email_cliente' => (isset($datos['email'])) ? $datos['email'] : null,
                 'id_campana' => (isset($datos['IdCampana'])) ? base64_decode($datos['IdCampana']) : null,
                 'id_campana_opcion' => (isset($datos['IdOpcion'])) ? base64_decode($datos['IdOpcion']) : null,
@@ -101,14 +98,31 @@ class CupcuponTable {
                 'id_tarjeta' => (isset($datos['metodo'])) ? $datos['metodo'] : null,
                 'id_estado_compra' => '1'
             ));
-
-            //echo $insert->getSqlString();
-
+            
             $statement = $sql->prepareStatementForSqlObject($insert);
 
-            $result = $statement->execute()->getGeneratedValue();
+            $id_cuponera = $statement->execute()->getGeneratedValue();
+            
+            $cantidad_cupones = $datos['cantidad'];
+            
+            for($i=0;$i<$cantidad_cupones;$i++) {
+                $codigo_cupon = $this->_getCodigoCupon($sl);
+                
+                $insert = $sql->insert('cup_cupon_detalle')->values(array(
+                    'codigo_cupon' => $codigo_cupon,
+                    'id_cupon' => $id_cuponera,
+                    'precio_unitario' => $datos['PriceUnit'],
+                    'id_estado_cupon' => '1',
+                    'fecha_cancelacion' => new Expression("NOW()")
+                ));
+                
+                $statement = $sql->prepareStatementForSqlObject($insert);
 
-            return $result; /* Se inserto Informacion */
+                $statement->execute();
+                
+            }
+
+            return $id_cuponera; /* Se inserto Informacion */
         }
     }
 
@@ -122,6 +136,13 @@ class CupcuponTable {
         $rs = $this->tableGateway->update($set, $where);
 
         $sql = new Sql($this->tableGateway->getAdapter());
+        
+        $update = $sql->update('cup_cupon_detalle');
+        $update->set(array('id_estado_cupon' => $estado,
+                           'fecha_cancelacion' => new Expression("NOW()")));
+        $update->where(array('id_cupon' => $orden));
+        
+        $sql->prepareStatementForSqlObject($update)->execute();
 
         $select = $sql->select();
 
@@ -154,7 +175,7 @@ class CupcuponTable {
                   '-' .
                   $this->_desordenarNumero(date('YmdHis')) .
                   '-' .
-                  rand(0, 9);
+                  str_pad(rand(0, 9999), 4, "0", STR_PAD_LEFT);
                   
         return $codigo;
     }
@@ -184,13 +205,16 @@ class CupcuponTable {
 
             $select = $sql->select();
 
-            $select->columns(array('estado' => 'id_estado_compra'))
-                    ->from('cup_cupon')
+            $select->columns(array('estado' => 'id_estado_cupon'))
+                    ->from('cup_cupon_detalle')
+                    ->join('cup_cupon', new
+                            Expression("cup_cupon.id_cupon = cup_cupon_detalle.id_cupon"),
+                            array())        
                     ->join('cup_campana', new
                             Expression("cup_cupon.id_campana = cup_campana.id_campana and "
                             . "cup_campana.id_empresa = $id_empresa"),
                             array())        
-                    ->where(array('cup_cupon.codigo_cupon' => $cupon));
+                    ->where(array('cup_cupon_detalle.codigo_cupon' => $cupon));
 
             $stmt = $sql->prepareStatementForSqlObject($select);
 
@@ -209,8 +233,8 @@ class CupcuponTable {
                 $sql = new Sql($this->tableGateway->getAdapter());
                 $select = $sql
                         ->update()
-                        ->table('cup_cupon')
-                        ->set(array('id_estado_compra' => '5',
+                        ->table('cup_cupon_detalle')
+                        ->set(array('id_estado_cupon' => '5',
                                     'fecha_validacion' => $fecha_validacion))
                         ->where(array('codigo_cupon' => $cupon));
 
@@ -226,7 +250,7 @@ class CupcuponTable {
         return $aValidar;
     }
     
-    public function getCuponValidado($id_empresa, $cantidad = 0) {
+    public function getCuponValidado($id_empresa, $cantidad = 0, $inicio = 0) {
 
         $sql = new Sql($this->tableGateway->adapter);
                 
@@ -234,21 +258,28 @@ class CupcuponTable {
 
         $select->columns(array(
             'id_cupon',
+            'cantidad' => new Expression("1"),
+            'precio_total' => 'precio_unitario',
             'codigo_cupon',
-            'id_campana',
-            'id_campana_opcion',
-            'cantidad',
-            'precio_total',
             'fecha_compra' => new Expression("date_format(fecha_compra,'%d-%m-%Y')"),
             'fecha_validacion' => new Expression("date_format(fecha_validacion,'%d-%m-%Y')")
         ))
-        ->from('cup_cupon');
+        ->from('cup_cupon_detalle');
         
         if( $cantidad > 0 ) { 
             $select->limit($cantidad); 
         }
         
-        $select->join('cup_campana', new Expression("cup_cupon.id_campana = cup_campana.id_campana and "
+        if( $inicio > 0 ) { 
+            $select->offset($inicio); 
+        }
+        
+        $select->join('cup_cupon', new Expression("cup_cupon_detalle.id_cupon = cup_cupon.id_cupon "),
+                array(
+                    'id_campana',
+                    'id_campana_opcion'
+                ))        
+        ->join('cup_campana', new Expression("cup_cupon.id_campana = cup_campana.id_campana and "
                                            . "cup_campana.id_empresa = $id_empresa"),
                 array(
                    'sobre_campana',
@@ -268,9 +299,7 @@ class CupcuponTable {
                       'descripcion_empresa' => 'descripcion',
                       'direccion' => new Expression("case when ifnull(direccion_comercial,'') = '' then direccion_facturacion else direccion_comercial end ")
                     ))
-        ->where(new In('id_estado_compra', array('5','7')));
-        
-        
+        ->where(new In('id_estado_cupon', array('5','7')));
         
         $statement = $sql->prepareStatementForSqlObject($select);
         $result = $statement->execute();
@@ -280,28 +309,26 @@ class CupcuponTable {
     
     public function getCuponesxLiquidar() {
 
-        $fecha = '11/05/2015';
-        $fechaF = '12/05/2015';
+        $fecha = '24/05/2015';
         
         $sql = new Sql($this->tableGateway->adapter);
                 
         $select = $sql->select();
         
         $select->columns(array(
-            'id_cupon',
-            'id_campana', 
-            'id_campana_opcion',
             'fecha_validacion',
             'codigo_cupon', 
-            'cantidad', 
+            'cantidad' => new Expression("1"), 
             'precio_unitario', 
-            'precio_total'
-        ))->from('cup_cupon')
-        ->where(array('cup_cupon.id_estado_compra' => '5'))
-        //->where->addPredicate(new Between('fecha_validacion', new Expression("STR_TO_DATE('".$fecha." 00:00:00','%d/%m/%Y %H:%i:%s')"), new Expression("NOW()")));
-        ->where->addPredicate(new Between('fecha_validacion', new Expression("STR_TO_DATE('".$fecha." 00:00:00','%d/%m/%Y %H:%i:%s')"), new Expression("STR_TO_DATE('".$fechaF." 23:59:59','%d/%m/%Y %H:%i:%s')")));
+            'precio_total' => 'precio_unitario'
+        ))->from('cup_cupon_detalle')
+        ->join('cup_cupon', new Expression("cup_cupon_detalle.id_cupon = cup_cupon.id_cupon "),
+                array('id_campana', 
+                      'id_campana_opcion'))       
+        ->where(array('cup_cupon_detalle.id_estado_cupon' => '5'))
+        ->where->addPredicate(new Between('fecha_validacion', new Expression("STR_TO_DATE('".$fecha." 00:00:00','%d/%m/%Y %H:%i:%s')"), new Expression("STR_TO_DATE('".$fecha." 23:59:59','%d/%m/%Y %H:%i:%s')")));
 
-        $select->order(array('cup_cupon.id_campana', 'cup_cupon.id_campana_opcion', 'cup_cupon.fecha_validacion'));
+        $select->order(array('cup_cupon.id_campana', 'cup_cupon.id_campana_opcion', 'cup_cupon_detalle.fecha_validacion'));
         
         $statement = $sql->prepareStatementForSqlObject($select);
         $result = $statement->execute();
@@ -318,26 +345,85 @@ class CupcuponTable {
         
     }
     
-    public function getHistorialEmpresa($id_empresa) {
-
+    public function updCuponDetalle($set, $where) {
+        
+        $sql = new Sql($this->tableGateway->adapter);
+        
+        $update = $sql->update('cup_cupon_detalle');
+        $update->set($set);
+        $update->where($where);
+        
+        $rs = $sql->prepareStatementForSqlObject($update)->execute();
+        
+        return $rs;
+        
+    }
+    
+    public function getHistorialValidadosEmpresa($id_empresa) {
         $sql = new Sql($this->tableGateway->adapter);
                 
         $select = $sql->select();
-
         $select->columns(array(
             'validados' => new Expression("count(1)"),
-            'cantidad_pagados' => new Expression("sum(case when id_estado_compra = '7' then 1 else 0 end)"),
-            'total_pagados' => new Expression("sum(case when id_estado_compra = '7' then precio_total else 0 end)")
+            'cantidad_pagados' => new Expression("sum(case when id_estado_cupon = '7' then 1 else 0 end)"),
+            'total_pagados' => new Expression("sum(case when id_estado_cupon = '7' then cup_cupon_detalle.precio_unitario else 0 end)")
         ))
-        ->from('cup_cupon')
+        ->from('cup_cupon_detalle')
+        ->join('cup_cupon', new Expression("cup_cupon_detalle.id_cupon = cup_cupon.id_cupon "),
+                array()) 
         ->join('cup_campana', new Expression("cup_cupon.id_campana = cup_campana.id_campana and "
                                            . "cup_campana.id_empresa = $id_empresa"),
                 array())
-        ->where(new In('id_estado_compra', array('5','7')));
+        ->where(new In('id_estado_cupon', array('5','7')));
         
         $statement = $sql->prepareStatementForSqlObject($select);
         $result = $statement->execute();
-
         return ArrayUtils::iteratorToArray($result);
     }
+    
+    public function getHistorialPagadosEmpresa($id_empresa) {
+        $sql = new Sql($this->tableGateway->adapter);
+                
+        $select = $sql->select();
+        $select->columns(array(
+            'cantidad_pagados' => new Expression("sum(cantidad_cupones)"),
+            'total_pagados' => new Expression("sum(total_liquidacion)")
+        ))
+        ->from('cup_liquidacion')
+        ->join('cup_campana', new Expression("cup_liquidacion.id_campana = cup_campana.id_campana and "
+                                           . "cup_campana.id_empresa = $id_empresa"),
+                array())
+        ->where(new In('estado_liquidacion', array('1')));
+        
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $result = $statement->execute();
+        return ArrayUtils::iteratorToArray($result);
+    }
+    
+    public function getHistorialpordiaEmpresa($id_empresa) {
+        $sql = new Sql($this->tableGateway->adapter);
+                
+        $select = $sql->select();
+        $select->columns(array(
+            'periodo' => new Expression("DATE_FORMAT(fecha_cancelacion,'%M %Y')"), 
+            'dia' => new Expression("DATE_FORMAT(fecha_cancelacion,'%d')"),
+            'vendidos' => new Expression("count(1)"),
+            'validados' => new Expression("sum(case when id_estado_cupon in ('5','7') then 1 else 0 end)")
+        ))
+        ->from('cup_cupon_detalle')
+        ->join('cup_cupon', new Expression("cup_cupon_detalle.id_cupon = cup_cupon.id_cupon "),
+                array()) 
+        ->join('cup_campana', new Expression("cup_cupon.id_campana = cup_campana.id_campana and "
+                                           . "cup_campana.id_empresa = $id_empresa"),
+                array())
+        ->where(new In('id_estado_cupon', array('3','5','7')));
+        
+        $select->group(array(new Expression("DATE_FORMAT(fecha_cancelacion,'%M %Y')")));
+        $select->group(array(new Expression("DATE_FORMAT(fecha_cancelacion,'%d')")));
+        
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $result = $statement->execute();
+        return ArrayUtils::iteratorToArray($result);
+    }
+    
 }

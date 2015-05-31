@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
 
-            <div>
+            <div><h3><b></b></h3>
                 <div class="paneles"> 
                     
                     <div class="panel-group collap" id="accordion" role="tablist" aria-multiselectable="true" >
@@ -103,18 +103,18 @@
                         </div>
                     </div>
                 </div>
-                <h3><b>Campañas</b></h3>
+                <h3><b>Cupones Válidados</b></h3>
                 <div class="paneles">   
                     <div class="panel-group grafico" id="accordionTree" role="tablist" aria-multiselectable="true">
                         <div class="panel panel-default">
                             <div class="panel-heading rebueno" role="tab" id="headingTwo">
                                 <div>
-                                    Historico de campañas
+                                    Listado CupoRebuenos validados
                                 </div>
                             </div>
                             <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
                                 <div class="panel-default detvalidados">
-                                    <?php echo $this->historico_campanas;?>
+                                    <?php echo var_dump($cupon_validado);?>
                                 </div>
                             </div>
                         </div>

@@ -295,6 +295,8 @@ table.total {
 
 .panel-default.detvalidados {
     height: 460px;
+    padding-top: 0px !important;
+    margin-top: 0px !important;
 }
 
 .panel-default.validados {
@@ -431,3 +433,42 @@ table.total {
 	width: 32px;
 }
 /* END CARRUSEL */
+
+#codigo_cupon, 
+#fecha_validacion, 
+#id_campana, 
+#fecha_inicio, 
+#precio_total,
+#id_liquidacion,
+#fecha_liquidacion,
+#cantidad_cupones,
+#total_liquidacion,
+#descripcion,
+#fecha_final,
+#vendidos,
+#validados,
+#pagados{
+    text-align: center;
+}
+
+td[data-columnuniqueid="codigo_cupon"],
+td[data-columnuniqueid="fecha_validacion"],
+td[data-columnuniqueid="id_campana"],
+td[data-columnuniqueid="fecha_inicio"],
+td[data-columnuniqueid="id_liquidacion"],
+td[data-columnuniqueid="fecha_liquidacion"],
+td[data-columnuniqueid="cantidad_cupones"],
+td[data-columnuniqueid="fecha_inicio"],
+td[data-columnuniqueid="descripcion"],
+td[data-columnuniqueid="fecha_final"],
+td[data-columnuniqueid="vendidos"],
+td[data-columnuniqueid="validados"],
+td[data-columnuniqueid="pagados"]{
+    text-align: center;
+}
+
+td[data-columnuniqueid="precio_total"],
+td[data-columnuniqueid="total_liquidacion"]{
+    text-align: right;
+}
+
