@@ -283,6 +283,17 @@ return array(
             ),
             //mi campana
             'dash_micampana' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/dashboard/micampana[/:empresa]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Dashboard\Controller',
+                        'controller' => 'micampana',
+                        'action' => 'index',
+                    ),
+                ),
+            ),
+            'dash_micampanacupon' => array(
                 'type' => 'Literal',
                 'options' => array(
                     'route' => '/micampana/cupon',
@@ -323,6 +334,17 @@ return array(
                         '__NAMESPACE__' => 'Dashboard\Controller',
                         'controller' => 'micampana',
                         'action' => 'historiacampanas',
+                    ),
+                ),
+            ),
+            'dash_resumenliquidacion' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/micampana/resumenliquidacion[/:empresa[/:liquidacion]]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Dashboard\Controller',
+                        'controller' => 'micampana',
+                        'action' => 'resumenliquidacion',
                     ),
                 ),
             ),

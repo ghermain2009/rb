@@ -128,12 +128,35 @@ class CupliquidacionTable {
             'total_importe',
             'comision',
             'impuesto',
+            'comision_sin_impuesto' => new Expression("comision - impuesto"),
             'total_liquidacion',
             'estado_liquidacion',
             'id_campana'
         ))
         ->from('cup_liquidacion')
         ->where(array('cup_liquidacion.id_liquidacion' => $id_liquidacion));
+        
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $result = $statement->execute();
+
+        return ArrayUtils::iteratorToArray($result);
+    }
+    
+    public function getLiquidacionCupones($id_liquidacion) {
+
+        $sql = new Sql($this->tableGateway->adapter);
+                
+        $select = $sql->select();
+
+        $select->columns(array(
+            'id_liquidacion',
+            'codigo_cupon'
+        ))
+        ->from('cup_liquidacion_cupon')
+        ->join('cup_cupon_detalle', new Expression("cup_liquidacion_cupon.codigo_cupon = cup_cupon_detalle.codigo_cupon "),
+                array('fecha_validacion' => new Expression("date_format(fecha_validacion,'%d %M %Y %H:%i')"),
+                      'precio_unitario'))
+        ->where(array('cup_liquidacion_cupon.id_liquidacion' => $id_liquidacion));
         
         $statement = $sql->prepareStatementForSqlObject($select);
         $result = $statement->execute();

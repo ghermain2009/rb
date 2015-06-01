@@ -103,7 +103,7 @@
                         </div>
                     </div>
                 </div>
-                <h3><b>Cupones Válidados</b></h3>
+                <h3><b>Cupones Válidados</b></h3>&nbsp;&nbsp;<button id="btn_regresar" class="btn btn-primary" type="button"><span class="glyphicon glyphicon-triangle-left"></span> Regresar</button>
                 <div class="paneles">   
                     <div class="panel-group grafico" id="accordionTree" role="tablist" aria-multiselectable="true">
                         <div class="panel panel-default">
@@ -168,6 +168,13 @@
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         });
+        
+        
+    });
+
+    $("#btn_regresar").click(function () {
+        var url = "/dashboard/micampana/<?php echo $id_empresa;?>";    
+        $(location).attr('href',url);
     });
 
     $("#valida_unico").click(function () {

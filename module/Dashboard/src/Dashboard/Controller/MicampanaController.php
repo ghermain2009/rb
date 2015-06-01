@@ -20,13 +20,33 @@ use Zend\Json\Json;
 class MicampanaController extends AbstractActionController {
     //put your code here
     public function indexAction() {
-        $id_empresa = 5;
+        
+        $id_empresa = $this->params()->fromRoute("empresa", null);
         
         $serviceLocator = $this->getServiceLocator();
         $empresaTable = $serviceLocator->get('Dashboard\Model\GenempresaTable');
         $cuponTable = $serviceLocator->get('Dashboard\Model\CupcuponTable');
         $liquidacionTable = $serviceLocator->get('Dashboard\Model\CupliquidacionTable');
         $campanaTable = $serviceLocator->get('Dashboard\Model\CupcampanaTable');
+        
+        $datosEmpresas = $empresaTable->getEmpresaAutorizadas();
+        
+        $selectEmpresas = "<select id='id_empresa_sel' class='selectpicker'>";
+        foreach( $datosEmpresas as $empresa ) {
+           if( $empresa['razon_social'] != '' ) {
+                if ( empty($id_empresa) ) {
+                    $id_empresa = $empresa['id_empresa'];
+                }
+                if( $id_empresa == $empresa['id_empresa'] ) {
+                    $sel = 'selected';
+                } else {
+                    $sel = '';
+                }
+                $selectEmpresas.= "<option value='".$empresa['id_empresa']."' ".$sel.">".$empresa['razon_social']."</option>";
+           }
+        }
+        $selectEmpresas.= "</select>";
+               
         $datosEmpresa = $empresaTable->getEmpresa($id_empresa);
         $datosCuponV = $cuponTable->getCuponValidado($id_empresa,3);
         $datosHistorialValidados = $cuponTable->getHistorialValidadosEmpresa($id_empresa);
@@ -46,7 +66,8 @@ class MicampanaController extends AbstractActionController {
                                    'historialValidados' => $datosHistorialValidados,
                                    'historialPagados' => $datosHistorialPagados,
                                    'historialDia' => $datosHistorialDia,
-                                   'datosCampana' => $datosCampana
+                                   'datosCampana' => $datosCampana,
+                                   'selectEmpresas' => $selectEmpresas
                                   ));
     }
 
@@ -67,7 +88,6 @@ class MicampanaController extends AbstractActionController {
     
     public function detallevalidadoAction() {
         
-        $limite = 10;
         $id_empresa = base64_decode($this->params()->fromRoute("empresa", null));
         
         $serviceLocator = $this->getServiceLocator();
@@ -232,5 +252,29 @@ class MicampanaController extends AbstractActionController {
         $viewModel->setVariable('id_empresa', $id_empresa);
         
         return $viewModel;
+    }
+    
+    public function resumenliquidacionAction() {
+        
+        $id_empresa = base64_decode($this->params()->fromRoute("empresa", null));
+        
+        $liquidacion = $this->params()->fromRoute("liquidacion", null);
+        
+        if(is_numeric($liquidacion)) {
+            $id_liquidacion = $liquidacion;
+        } else {
+            $id_liquidacion = base64_decode($liquidacion);
+        }
+        
+        $serviceLocator = $this->getServiceLocator();
+        $liquidacionTable = $serviceLocator->get('Dashboard\Model\CupliquidacionTable');
+        $datosLiquidacion = $liquidacionTable->getLiquidacionById($id_liquidacion);
+        $datosLiqCupones = $liquidacionTable->getLiquidacionCupones($id_liquidacion);
+        
+        
+        return new ViewModel(array('datos_liquidacion' => $datosLiquidacion,
+                               'datos_cupones' => $datosLiqCupones,
+                               'id_empresa' => $id_empresa,
+                               'id_liquidacion' => $id_liquidacion ) );
     }
 }

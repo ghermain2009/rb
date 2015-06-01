@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
 
-            <div><h3><b></b></h3>
+            <div>
                 <div class="paneles"> 
                     
                     <div class="panel-group collap" id="accordion" role="tablist" aria-multiselectable="true" >
@@ -103,24 +103,99 @@
                         </div>
                     </div>
                 </div>
-                <h3><b>Cupones Válidados</b></h3>
+                <h3><b>Detalles de la liquidación</b></h3>&nbsp;&nbsp;<button id="btn_regresar" class="btn btn-primary" type="button"><span class="glyphicon glyphicon-triangle-left"></span> Regresar</button>
                 <div class="paneles">   
                     <div class="panel-group grafico" id="accordionTree" role="tablist" aria-multiselectable="true">
                         <div class="panel panel-default">
                             <div class="panel-heading rebueno" role="tab" id="headingTwo">
                                 <div>
-                                    Listado CupoRebuenos validados
+                                    Liquidación Nro. <?php echo $this->id_liquidacion;?>
                                 </div>
                             </div>
                             <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
-                                <div class="panel-default detvalidados">
-                                    <?php echo var_dump($cupon_validado);?>
+                                <div class="panel-default">
+                                    <table class="table table-bordered" >
+                                        <tr>
+                                            <td class="text-title">Nro. de Publicación</td>
+                                            <td class="text-title">Ubicación</td>
+                                            <td class="text-title">CupoRebuenos liquidados</td>
+                                            <td class="text-title">Fecha Liquidación</td>
+                                            <td colspan="3"  class="text-title">Precio de Compra</td>
+                                        </tr>
+                                        <?php $liquidacion = $this->datos_liquidacion;
+                                         if(count($liquidacion) > 0) {
+                                        ?>
+                                        <tr>
+                                            <td class="text-center"><?php echo $liquidacion[0]['id_campana'];?></td>
+                                            <td class="text-center">Guayaquil</td>
+                                            <td class="text-center"><?php echo $liquidacion[0]['cantidad_cupones'];?></td>
+                                            <td class="text-center"><?php echo $liquidacion[0]['fecha_liquidacion'];?></td>
+                                            <td class="text-right rightdelete">DOL</td>
+                                            <td class="text-right rightdelete"><?php echo $liquidacion[0]['total_importe'];?></td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                         <?php } ?>
+                                        <tr class="warning">
+                                            <td colspan='4' class="text-right">Subtotal:</td>
+                                            <td class="text-right rightdelete">DOL</td>
+                                            <td class="text-right rightdelete"><?php echo $liquidacion[0]['total_importe'];?></td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr class="warning">
+                                            <td colspan='4' class="text-right">Comisión - IVA:</td>
+                                            <td class="text-right rightdelete">DOL</td>
+                                            <td class="text-right rightdelete"><?php echo $liquidacion[0]['comision_sin_impuesto'];?></td>
+                                            <td>( 35% )</td>
+                                        </tr >
+                                        <tr class="warning">
+                                            <td colspan='4' class="text-right">IVA Comisión:</td>
+                                            <td class="text-right rightdelete">DOL</td>
+                                            <td class="text-right rightdelete"><?php echo $liquidacion[0]['impuesto'];?></td>
+                                            <td>( 12% )</td>
+                                        </tr>
+                                        <tr class="info">
+                                            <td colspan='4' class="text-right">Total:</td>
+                                            <td class="text-right rightdelete">DOL</td>
+                                            <td class="text-right rightdelete"><?php echo $liquidacion[0]['total_liquidacion'];?></td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
+                <div class="paneles">   
+                    <div class="panel-group grafico" id="accordionTree" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default">
+                            <div class="panel-heading rebueno" role="tab" id="headingTwo">
+                                <div>
+                                    CupoRebuenos Liquidados
+                                </div>
+                            </div>
+                            <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+                                <div class="panel-default">
+                                    <table class="table table-bordered" >
+                                        <tr>
+                                            <td class="text-title">Código del Cupón</td>
+                                            <td class="text-title">Fecha de Uso</td>
+                                            <td class="text-title">Importe Cupón</td>
+                                        </tr>
+                                        <?php $cupones = $this->datos_cupones;
+                                        $cantidad = count($cupones);
+                                        for($i=0; $i<$cantidad; $i++ ) { ?>
+                                        <tr>
+                                            <td class="text-center"><?php echo $cupones[$i]['codigo_cupon'];?></td>
+                                            <td class="text-center"><?php echo $cupones[$i]['fecha_validacion'];?></td>
+                                            <td class="text-center"><?php echo $cupones[$i]['precio_unitario'];?></td>
+                                        </tr>
+                                         <?php } ?>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div><!-- /row -->
@@ -153,6 +228,26 @@
             }
             //$("#element").hide();
         });
+        
+        $("td").each(function(i){
+            var columna = $(this).attr("data-columnuniqueid");
+            if( columna == 'id_liquidacion' ) {
+                var htm = "<a class='display: inline-table !important;' href='http://www.migroupon.com/admin/deals/view/1002350709' ";
+                    htm+= "data-toggle='tooltip' data-placement='right' data-original-title='Ver esta Liquidación'>";
+                    htm+= $(this).html();
+                    htm+= "</a>"
+                $(this).html(htm);
+            }
+        });
+        
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+    });
+    
+    $("#btn_regresar").click(function () {
+        var url = "/dashboard/micampana/<?php echo $id_empresa;?>";    
+        $(location).attr('href',url);
     });
 
     $("#valida_unico").click(function () {

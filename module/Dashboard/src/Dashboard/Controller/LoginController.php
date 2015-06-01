@@ -62,7 +62,8 @@ class LoginController extends AbstractActionController
                                             'password'
                                     )
                                 );
-                       return $this->redirect()->toRoute('dash_index');
+                        
+                       return $this->redirect()->toRoute('dash_micampana');
                        break;
                    default :
                        $message = "Usuario o password incorrecto.";

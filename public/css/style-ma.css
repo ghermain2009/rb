@@ -472,3 +472,20 @@ td[data-columnuniqueid="total_liquidacion"]{
     text-align: right;
 }
 
+.text-title {
+    text-align: center;
+    font-weight: bold;
+}
+
+.text-right.rightdelete {
+    border-right-width: 0px;
+}
+
+.selectpicker {
+    font:15px Arial, Helvetica, sans-serif;
+    width:300px;
+    height: 30px;
+    color:#ffffff;
+    background-color:#f8d078;
+    border:1px solid #DDD;
+}

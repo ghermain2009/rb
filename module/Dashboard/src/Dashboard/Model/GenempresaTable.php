@@ -63,6 +63,21 @@ class GenempresaTable
         return $select;
     }
     
+    public function getEmpresaAutorizadas()
+    {
+        $sql = new Sql($this->tableGateway->adapter);
+                
+        $select = $sql->select();
+        
+        $select->from('gen_empresa')
+        ->order('razon_social');
+
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $result = $statement->execute();
+
+        return ArrayUtils::iteratorToArray($result);
+    }
+    
     public function getEmpresa($id_empresa)
     {
         $sql = new Sql($this->tableGateway->getAdapter());

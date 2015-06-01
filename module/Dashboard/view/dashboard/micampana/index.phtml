@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
 
-            <div><h3><b><?php echo $nombre_empresa;?></b></h3>
+            <div><h3><b>Empresa : <?php echo $this->selectEmpresas;?></b></h3>
                 <div class="paneles"> 
                     
                     <div class="panel-group collap" id="accordion" role="tablist" aria-multiselectable="true" >
@@ -94,7 +94,7 @@
                                 <div class="panel-body">
                                     <div class="contPartnerProfile">
                                         <div class="info-pm" style="width: 100%;height: 190px">
-                                            <span>Para contactarte con tu Partner Manager, puedes escribir a <a href="mailto:socios.pe@groupon.com">socios.pe@groupon.com</a> o hacer click en </span><a id="contact-pm-opt" href="#contact-pm" data-toggle="modal" class="btn btn-large btn-success">Contactar a PM</a>
+                                            <span>Para contactarte con tu Partner Manager, puedes escribir a <a href="mailto:socios@rebueno.ec">socios@rebueno.ec</a> o hacer click en </span><a id="contact-pm-opt" href="#contact-pm" data-toggle="modal" class="btn btn-large btn-success">Contactar a PM</a>
                                         </div>
                                     </div>
                                 </div>
@@ -132,7 +132,7 @@
                                               } ?>
                                     </table>
                                     <div class="moduleFooter">
-                                        <a href="../micampana/detallevalidado/<?php echo base64_encode($id_empresa);?>">Ver listado completo de CupoRebuenos validados</a>
+                                        <a href="../../micampana/detallevalidado/<?php echo base64_encode($id_empresa);?>">Ver listado completo de CupoRebuenos validados</a>
                                     </div>
 
                                 </div>
@@ -159,7 +159,7 @@
                                                  for($i=0; $i<$cantidadL; $i++ ) { ?>
                                                     <tr>
                                                         <td class="bttooltip">
-                                                            <a href="http://www.migroupon.com/admin/deals/view/1002350709" data-toggle="tooltip" data-placement="right" data-original-title="Ver esta Liquidación"><?php echo $liquidaciones[$i]['id_liquidacion'];?></a>
+                                                            <a href="../../micampana/resumenliquidacion/<?php echo base64_encode($id_empresa);?>/<?php echo base64_encode($liquidaciones[$i]['id_liquidacion']);?>" data-toggle="tooltip" data-placement="right" data-original-title="Ver esta Liquidación"><?php echo $liquidaciones[$i]['id_liquidacion'];?></a>
                                                         </td>
                                                         <td class="bttooltip" data-toggle="tooltip" data-placement="top" data-original-title="Fecha de emisión"><?php echo $liquidaciones[$i]['fecha_liquidacion'];?></td>
                                                         <td class="bttooltip" data-toggle="tooltip" data-placement="top" data-original-title="Total">DOL $ <?php echo $liquidaciones[$i]['total_liquidacion'];?></td>
@@ -171,7 +171,7 @@
                                               } ?>
                                         </table>
                                         <div class="moduleFooter">
-                                            <a href="../micampana/detalleliquidacion/<?php echo base64_encode($id_empresa);?>">Ver listado completo de Liquidaciones</a>
+                                            <a href="../../micampana/detalleliquidacion/<?php echo base64_encode($id_empresa);?>">Ver listado completo de Liquidaciones</a>
                                         </div>
 
                                     </div>
@@ -290,7 +290,7 @@
                                         } ?>
                                     </table>
                                     <div class="moduleFooter">
-                                        <a href="../micampana/historiacampanas/<?php echo base64_encode($id_empresa);?>">Ver listado histórico de campañas</a>
+                                        <a href="../../micampana/historiacampanas/<?php echo base64_encode($id_empresa);?>">Ver listado histórico de campañas</a>
                                     </div>
                                 </div>
                             </div>
@@ -351,6 +351,11 @@
                 $("#ocultar_partner").html('<span class="glyphicon glyphicon-collapse-up"></span> Ocultar')
             }
             //$("#element").hide();
+        });
+        
+        $("#id_empresa_sel").change(function () {
+            var url = "/dashboard/micampana/" + $("#id_empresa_sel").val();    
+            $(location).attr('href',url);
         });
         
         Highcharts.data({
