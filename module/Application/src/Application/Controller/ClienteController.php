@@ -49,8 +49,8 @@ class ClienteController extends AbstractActionController {
 
             $message = new Message();
             $message->addTo($email)
-                    ->addFrom('recuperar@buenisimo.com')
-                    ->setSubject('Nueva contraseña para Buenisimo!‏');
+                    ->addFrom('recuperar@rebueno.ec')
+                    ->setSubject('Nueva contraseña para Rebueno!‏');
 
             $transport = new SmtpTransport();
             $options = new SmtpOptions(array(
