@@ -60,77 +60,76 @@ $user_session = new Container('user');
     <body>
         <div class="top_bar" id="headerContainer">
             <div  class="container">
-                <a href="javascript:;" title="mostrar categorias" class="btn_options"></a>
-                <a href="javascript:;" title="mostrar opciones de usuario" class="btn_user"></a>
-                <div class="btn-group oferta">
-                    <a id="btnSubscribe" href="javascript:;" title="Quiero recibir ofertas" class="btn btn-rebueno btn-sm">Quiero recibir ofertas <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
-                </div>
-
-
-                <div class="btn-group login">
-                    <!--btn-github btn-sm-->
-                    <button type="button" class="btn btn-github btn-sm"><?php
-                        if (isset($user_session->username))
-                            echo 'Hola ' . $user_session->nombre;
-                        else
-                            echo 'Iniciar Session';
-                        ?></button>
-                    <button id="boton_login" type="button" class="btn btn-github btn-sm dropdown-toggle" >
-                        <span class="caret"></span>
-                    </button>
-                    <div id="formlogin_menu" class="dropdown-menu formlogin" >
-                        <?php if (!isset($user_session->username)) { ?>
-                            <!--form id="frmlogin" role="form" action="/campana/pago" method="POST"-->
-                            <form id="frmlogin" name="frmlogin" role="form" validate>
-                                <div>
-                                    <a class="btn btn-block btn-social btn-facebook" href="javascript:loginFacebook();">
-                                        <i class="fa fa-facebook"></i> Conectar con Facebook
-                                    </a>
-                                    <hr class="special2">
-                                    <div class="form-group">
-                                        <div>
-                                            <input type="email" class="form-control" name="email_menu" id="email_menu" value="" maxlength="50" required placeholder="Email">
-                                            <span for="email" class="help-block with-errors"></span>
+                <div id='logo-mini' class="header-top-center logo" style="display:none"></div>
+                <div class="header-boton-oferta">
+                    <div class="btn-group oferta">
+                        <a id="btnSubscribe" href="javascript:;" title="Quiero recibir ofertas" class="btn btn-rebueno btn-sm">Quiero recibir ofertas <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+                    </div>
+                    <div class="btn-group login">
+                        <!--btn-github btn-sm-->
+                        <button type="button" class="btn btn-github btn-sm"><?php
+                            if (isset($user_session->username))
+                                echo 'Hola ' . $user_session->nombre;
+                            else
+                                echo 'Iniciar Session';
+                            ?></button>
+                        <button id="boton_login" type="button" class="btn btn-github btn-sm dropdown-toggle" >
+                            <span class="caret"></span>
+                        </button>
+                        <div id="formlogin_menu" class="dropdown-menu formlogin" >
+                            <?php if (!isset($user_session->username)) { ?>
+                                <!--form id="frmlogin" role="form" action="/campana/pago" method="POST"-->
+                                <form id="frmlogin" name="frmlogin" role="form" validate>
+                                    <div>
+                                        <a class="btn btn-block btn-social btn-facebook" href="javascript:loginFacebook();">
+                                            <i class="fa fa-facebook"></i> Conectar con Facebook
+                                        </a>
+                                        <hr class="special2">
+                                        <div class="form-group">
+                                            <div>
+                                                <input type="email" class="form-control" name="email_menu" id="email_menu" value="" maxlength="50" required placeholder="Email">
+                                                <span for="email" class="help-block with-errors"></span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div>
-                                            <input type="password" class="form-control" name="clave_menu" id="clave_menu" value="" maxlength="20" required placeholder="Contraseña">
-                                            <span for="password" class="help-block with-errors"></span>
+                                        <div class="form-group">
+                                            <div>
+                                                <input type="password" class="form-control" name="clave_menu" id="clave_menu" value="" maxlength="20" required placeholder="Contraseña">
+                                                <span for="password" class="help-block with-errors"></span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="text_olvido clave">
-                                            <a href="javascript:postfunction('/campana', 'recuperar');">¿Olvidaste tu contraseña?</a>
+                                        <div class="form-group">
+                                            <div class="text_olvido clave">
+                                                <a href="javascript:postfunction('/campana', 'recuperar');">¿Olvidaste tu contraseña?</a>
+                                            </div>
+                                            <div class="text_olvido">
+                                                <div class="col-xs-3">
+                                                    <!--button type="button" class="btn btn-danger"  id="valida_ingreso_menu">Ingresar</button-->
+                                                    <input type="submit" class="btn btn-danger"  value="Ingresar">
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="text_olvido">
-                                            <div class="col-xs-3">
-                                                <!--button type="button" class="btn btn-danger"  id="valida_ingreso_menu">Ingresar</button-->
-                                                <input type="submit" class="btn btn-danger"  value="Ingresar">
+                                        <div class="form-group">
+                                            <div class="text_olvido">
+                                                ¿No tienes una cuenta? <a href="javascript:postfunction('/campana', 'registrar');">Registrate</a>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <div class="text_olvido">
-                                            ¿No tienes una cuenta? <a href="javascript:postfunction('/campana', 'registrar');">Registrate</a>
+                                </form>
+                            <?php } else { ?>
+                                <form name="frmlogin" role="form" action="/campana/pago" method="POST" data-parsley-validate>
+                                    <div>
+                                        <div class="form-group">
+                                            <b><?php echo $user_session->nombre . ' ' . $user_session->apellido; ?></b>
                                         </div>
-                                    </div>
-                                </div>
-                            </form>
-                        <?php } else { ?>
-                            <form name="frmlogin" role="form" action="/campana/pago" method="POST" data-parsley-validate>
-                                <div>
-                                    <div class="form-group">
-                                        <b><?php echo $user_session->nombre . ' ' . $user_session->apellido; ?></b>
-                                    </div>
-                                    <hr>
-                                    <div class="form-group">
-                                        <a class="btn btn-danger btn-sm" id="cerrar_session">Cerrar Sessión</a>
-                                    </div>
+                                        <hr>
+                                        <div class="form-group">
+                                            <a class="btn btn-danger btn-sm" id="cerrar_session">Cerrar Sessión</a>
+                                        </div>
 
-                                </div>
-                            </form>
-                        <?php } ?>
+                                    </div>
+                                </form>
+                            <?php } ?>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -360,7 +359,7 @@ $user_session = new Container('user');
 
             if ($(window).scrollTop() >= altura) {
                 $("#headerContainer").css("top", "0px");
-                $("#cabecera_contenedor").css("top", "36px");
+                $("#cabecera_contenedor").css("top", "0px");
                 $("#cabecera_menu").css("top", "30px");
 
                 $("#headerContainer").css("position", "fixed");
@@ -377,7 +376,9 @@ $user_session = new Container('user');
                 $("#cabecera_contenedor").css("display", "none");
 
                 $("#cabecera_menu_container").attr('class', 'container segundo');
-                $("#logo").attr('class', 'logo2');
+                
+                $("#logo").css('display', 'none');
+                $("#logo-mini").css('display', '');
                 
                 $("#headerContainer").attr('class', 'top_bar_move');
             } else {
@@ -390,7 +391,10 @@ $user_session = new Container('user');
                 $("#cabecera_contenedor").css("display", "");
 
                 $("#cabecera_menu_container").attr('class', 'container');
-                $("#logo").attr('class', 'logo');
+                
+                //$("#logo").attr('class', 'logo');
+                $("#logo").css('display', '');
+                $("#logo-mini").css('display', 'none');
                 
                 $("#headerContainer").attr('class', 'top_bar');
             }

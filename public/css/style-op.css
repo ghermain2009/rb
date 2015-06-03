@@ -802,6 +802,32 @@ h4 {
     top: 20px;
 }
 
+.header-top-center {
+    display: inline-block;
+}
+
+.header-top-center.logo {
+    position: relative;
+    top: 0px;
+    width: 102px; 
+    height: 38px;
+    background-image: url('../img/logo_rebueno.png');
+    z-index: 9;
+    padding: 0px;
+    margin: 0px;
+    //top:10px;
+    //float:left;
+    //clear: both !important;
+    background-size: 102px 38px;
+    
+}
+ 
+.logo-fijo {
+    width: 204px; 
+    height: 75px;
+    background-image: url('../img/logo_rebueno.png');
+}
+
 .logo {
     width: 204px; 
     height: 75px;
@@ -816,23 +842,16 @@ h4 {
     //background-size: 50% 50%;
 }
 
-.logo-fijo {
-    width: 204px; 
-    height: 75px;
-    background-image: url('../img/logo_rebueno.png');
-}
-
-
-
 .logo2 {
     width: 102px; 
     height: 38px;
     background-image: url('../img/logo_rebueno.png');
-    z-index: 8;
-    position: absolute;
+    z-index: 9;
     padding: 0px;
     margin: 0px;
-    top:0px;
+    //top:10px;
+    //float:left;
+    //clear: both !important;
     background-size: 102px 38px;
 }
 
@@ -849,22 +868,21 @@ h4 {
     padding-top: 0px;
 }
 
-.btn-group.login {
+.header-boton-oferta {
     position: relative;
-    padding: 0px;
-    margin: 0px;
-    top:2px;
+    top:3px;
     float: right;
-    right: 120px;
 }
 
 .btn-group.oferta {
-    position: relative;
     padding: 0px;
     margin: 0px;
-    top:2px;
-    float: left;
-    left:710px;
+    
+}
+
+.btn-group.login {
+    padding: 0px;
+    margin: 0px;
 }
 
 .dropdown-menu.formlogin {
