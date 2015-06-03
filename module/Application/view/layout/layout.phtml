@@ -29,8 +29,8 @@ $user_session = new Container('user');
         echo $this->headMeta()
                 ->appendName('viewport', 'width=device-width, initial-scale=1.0')
                 ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
-        //->appendHttpEquiv('Pragma', 'no-cache')
-        //->appendHttpEquiv('Expires', '-1')
+                ->appendHttpEquiv('Pragma', 'no-cache')
+                ->appendHttpEquiv('Expires', '-1')
         ?>
 
         <!-- Le styles -->
@@ -61,7 +61,6 @@ $user_session = new Container('user');
             <div  class="container">
                 <a href="javascript:;" title="mostrar categorias" class="btn_options"></a>
                 <a href="javascript:;" title="mostrar opciones de usuario" class="btn_user"></a>
-                <span class="logo" id="logo"></span>
                 <div class="btn-group oferta">
                     <a id="btnSubscribe" href="javascript:;" title="Quiero recibir ofertas" class="btn btn-rebueno btn-sm">Quiero recibir ofertas <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
                 </div>
@@ -138,11 +137,12 @@ $user_session = new Container('user');
         <div id="cabecera_contenedor">
             <div class="container">
                 <div class="ofertas_donde">
-                    <div class="tit_ofertas">Ofertas en</div>
-                    <div style="display: inline-block">
+                    <div class="en-donde-top-center logo"><span class="logo" id="logo"></span></div>
+                    <div class="en-donde-top-center titulo">Ofertas en</div>
+                    <div class="en-donde-top-center localidades">
                         <select class="btn btn-lg btn-github" id="ofertas_localidad" data-toggle="popover"                             
                                 data-content="">
-                            <option>Guayaquil</option>
+                            <option>Gxxxxxxxx</option>
                         </select>
                     </div>
                 </div>
@@ -441,9 +441,11 @@ $user_session = new Container('user');
             });
         });
 
-        var data = "<b>¡Rebueno!</b> descubre las mejores ofertas.";
+        var data = "<div style ='width:90px;'><b>¡Rebueno!</b> mejores ofertas.</div>";
         $('#ofertas_localidad').popover({placement: 'right', content: data, html: true});
         $('#ofertas_localidad').popover('show');
+        
+        
 
         $("#boton_login").click(function () {
             $("#formlogin_menu").css("display", "block");
