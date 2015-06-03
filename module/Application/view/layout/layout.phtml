@@ -30,7 +30,8 @@ $user_session = new Container('user');
                 ->appendName('viewport', 'width=device-width, initial-scale=1.0')
                 ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
                 ->appendHttpEquiv('Pragma', 'no-cache')
-                ->appendHttpEquiv('Expires', '-1')
+                ->appendHttpEquiv('Cache-Control', 'no-cache')
+                ->appendHttpEquiv('Expires', '-1');
         ?>
 
         <!-- Le styles -->
