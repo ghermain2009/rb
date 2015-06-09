@@ -35,14 +35,20 @@ class Variados {
         $config = $sl->get('Config');
         $localhost = $config['constantes']['localhost'];
         
-        
+        $activo   = $config['correo']['activo'];
+        $name     = $config['correo']['name'];
+        $host     = $config['correo']['host'];
+        $port     = $config['correo']['port'];
+        $username = $config['correo']['username'];
+        $password = $config['correo']['password'];
+        $cuenta   = $config['correo']['cuenta-envio-cupones'];
 
         $body = new MimeMessage();
         //$body->
         
         //var_dump($datos);
-        //for($i=0;$i<count($datos);$i++) {
-        for($i=0;$i<1;$i++) {
+        for($i=0;$i<count($datos);$i++) {
+        //for($i=0;$i<1;$i++) {
             if($i==0) {
                 $documentoPdf = new PdfModel();
                 $documentoPdf->setOption('filename', 'cupon-'.$datos[$i]["codigo_cupon"].'.pdf');
@@ -93,36 +99,25 @@ class Variados {
         
         $email = 'ghermain@gmail.com';
 
-        if(!empty($email)) {
+        if($activo == '1') {
             
             $message = new Message();
             $message->addTo($email)
-                    ->addFrom('cupones@rebueno.com')
+                    ->addFrom($cuenta)
                     ->setSubject('Un cuponazo Rebueno ...‏');
 
             $transport = new SmtpTransport();
-            $options = new SmtpOptions(array(
-                'name' => 'smtp.gmail.com',
-                'host' => 'smtp.gmail.com',
-                'port' => '587',
+            $options   = new SmtpOptions(array(
+                'name' => $name,
+                'host' => $host,
+                'port' => $port,
                 'connection_class' => 'login',
                 'connection_config' => array(
                     'ssl' => 'tls',
-                    'username' => 'ghermain@gmail.com',
-                    'password' => 'GENENIOR'
+                    'username' => $username,
+                    'password' => $password
                 ),
             ));
-            /*$options = new SmtpOptions(array(
-                'name' => 'correo.gibarcena.com.pe',
-                'host' => 'correo.gibarcena.com.pe',
-                'port' => '25',
-                'connection_class' => 'login',
-                'connection_config' => array(
-                    'ssl' => 'tls',
-                    'username' => 'gtapia@gibarcena.com.pe',
-                    'password' => '9'
-                ),
-            ));*/
 
             /*$attachment = new MimePart($pdfCode);
             $attachment->type = 'application/pdf';

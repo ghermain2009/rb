@@ -34,6 +34,16 @@ class ClienteController extends AbstractActionController {
         $serviceLocator = $this->getServiceLocator();
         $clienteTable = $serviceLocator->get('Dashboard\Model\CupclienteTable');
         $datos = $clienteTable->getUsuarioByUser($email);
+        
+        $config = $serviceLocator->get('Config');
+        
+        $activo   = $config['correo']['activo'];
+        $name     = $config['correo']['name'];
+        $host     = $config['correo']['host'];
+        $port     = $config['correo']['port'];
+        $username = $config['correo']['username'];
+        $password = $config['correo']['password'];
+        $cuenta   = $config['correo']['cuenta-recuperar-clave'];
 
         $data = array();
         foreach ($datos as $dato) {
@@ -46,51 +56,54 @@ class ClienteController extends AbstractActionController {
 
             $nombre = $data[0]['nombres'];
             $token = base64_encode($email);
+            
+            if( $activo == '1' ) {
 
-            $message = new Message();
-            $message->addTo($email)
-                    ->addFrom('recuperar@rebueno.ec')
-                    ->setSubject('Nueva contraseña para Rebueno!‏');
+                $message = new Message();
+                $message->addTo($email)
+                        ->addFrom($cuenta)
+                        ->setSubject('Nueva contraseña para Rebueno!‏');
 
-            $transport = new SmtpTransport();
-            $options = new SmtpOptions(array(
-                'name' => 'smtp.gmail.com',
-                'host' => 'smtp.gmail.com',
-                'port' => '587',
-                'connection_class' => 'login',
-                'connection_config' => array(
-                    'ssl' => 'tls',
-                    'username' => 'ghermain@gmail.com',
-                    'password' => 'GENENIOR'
-                ),
-            ));
+                $transport = new SmtpTransport();
+                $options = new SmtpOptions(array(
+                    'name' => $name,
+                    'host' => $host,
+                    'port' => $port,
+                    'connection_class' => 'login',
+                    'connection_config' => array(
+                        'ssl' => 'tls',
+                        'username' => $username,
+                        'password' => $password
+                    ),
+                ));
 
-            $resolver = new TemplateMapResolver();
-            $resolver->setMap(array(
-                'mailLayout' => __DIR__ . '/../../../../Application/view/application/cliente/emailclave.phtml'
-            ));
+                $resolver = new TemplateMapResolver();
+                $resolver->setMap(array(
+                    'mailLayout' => __DIR__ . '/../../../../Application/view/application/cliente/emailclave.phtml'
+                ));
 
-            $rendered = new PhpRenderer();
-            $rendered->setResolver($resolver);
+                $rendered = new PhpRenderer();
+                $rendered->setResolver($resolver);
 
-            $viewModel = new ViewModel();
-            $viewModel->setTemplate('mailLayout')->setVariables(array(
-                'nombre' => $nombre,
-                'token' => $token
-            ));
+                $viewModel = new ViewModel();
+                $viewModel->setTemplate('mailLayout')->setVariables(array(
+                    'nombre' => $nombre,
+                    'token' => $token
+                ));
 
-            $content = $rendered->render($viewModel);
+                $content = $rendered->render($viewModel);
 
-            $html = new MimePart($content);
-            $html->type = "text/html";
+                $html = new MimePart($content);
+                $html->type = "text/html";
 
-            $body = new MimeMessage();
-            $body->addPart($html);
+                $body = new MimeMessage();
+                $body->addPart($html);
 
-            $message->setBody($body);
+                $message->setBody($body);
 
-            $transport->setOptions($options);
-            $transport->send($message);
+                $transport->setOptions($options);
+                $transport->send($message);
+            }
 
             $data[0]['validar'] = '1';
         }

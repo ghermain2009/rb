@@ -1,7 +1,7 @@
-/*@font-face {
+@font-face {
     font-family: "gotham-medium";
     src: url('fonts/gotham-medium-webfont.woff') format("truetype");
-}*/
+}
 
 .img_container {
     width: 320px;
@@ -828,6 +828,12 @@ h4 {
     background-image: url('../img/logo_rebueno.png');
 }
 
+.logo-fijo-cupon {
+    width: 100px; 
+    height: 35px;
+    background-image: url('../img/logo_rebueno_cupon.png');
+}
+
 .logo {
     width: 204px; 
     height: 75px;
@@ -1061,7 +1067,7 @@ h4 {
 
 .letra-cupon{
     font-family: arial;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
     text-align: right;
    
@@ -1069,7 +1075,7 @@ h4 {
 
 .letra-cupon-min {
     font-family: arial;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: bold;
     text-align: right;
     
@@ -1080,7 +1086,8 @@ h4 {
     border-width: 4px;
     width: 70%;
     background-color: #ffffff;
-    padding: 20px;;
+    padding: 20px;
+    margin-top: 20px;
 }
 
 .separacion-cupon{

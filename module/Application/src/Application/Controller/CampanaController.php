@@ -251,6 +251,8 @@ class CampanaController extends AbstractActionController {
         
         $datos = $this->params()->fromPost();
         
+        set_time_limit(0);
+        
         $orden = $datos["transaccion"];
         $estado = $datos["estado"];
 
@@ -269,7 +271,7 @@ class CampanaController extends AbstractActionController {
         /*Enviamos el correo*/
         $datosCupon = $cuponTable->getCupon($orden);
         $variados = new Variados($serviceLocator);
-        //$variados->obtenerCuponPdf($datosCupon);
+        $variados->obtenerCuponPdf($datosCupon);
         /********************/
 
         $url = $localhost."/campana/cuponbuenaso";
