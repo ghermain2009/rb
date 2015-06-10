@@ -113,7 +113,7 @@ class Variados {
                 'port' => $port,
                 'connection_class' => 'login',
                 'connection_config' => array(
-                    'ssl' => 'tls',
+                    //'ssl' => 'tls',
                     'username' => $username,
                     'password' => $password
                 ),
