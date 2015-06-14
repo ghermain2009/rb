@@ -116,17 +116,6 @@ class CampanaController extends AbstractActionController {
         $usuario = $postURL[$datos['metodo']]['user'];
         $password = $postURL[$datos['metodo']]['pass'];
         
-        //$this->layout('layout/layout_pago');
-        //return new ViewModel(array('datos' => $datos));
-        //$this->redirect()->toRoute('route',array('action' => 'name'), array('param => 1'));
-        //$request->setMethod('POST')
-        //
-        //;
-
-        //$url = "http://visapago.ec";
-
-        //$url = "http://www.google.com";
-
         $request = new Request;
         $request->getHeaders()->addHeaders([
             'Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -146,9 +135,6 @@ class CampanaController extends AbstractActionController {
         
         return $response;
 
-        //eturn $this->redirect()->toUrl('http://visapago.ec',$datos);
-        //$this->redirect()->to
-        //return $this->url()->fromRoute('http://visapago.ec', $datos);
     }
 
     public function categoriaAction() {

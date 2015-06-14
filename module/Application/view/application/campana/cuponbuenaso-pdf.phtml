@@ -14,6 +14,12 @@
                 text-align: right;
             }
 
+            .letra-cupon-cabecera{
+                font-size: 16px;
+                font-weight: bold;
+                text-align: right;
+             }
+            
             .letra-cupon-min {
                 font-size: 13px;
                 font-weight: bold;
@@ -36,6 +42,10 @@
                 width: 100%;
                 padding: 10px;
             }
+            
+            .separacion-cupon.cabecera{
+                height:100px;
+            }
 
             .separacion-empresa{
                 display: block;
@@ -47,8 +57,25 @@
                 display:inline-block;
             }
 
-            .en-linea.logo-ofeta {
+            .en-linea.logo-oferta-cabecera {
+                width: 15%
+            }
+            
+            .en-linea.texto-cabecera {
+                width: 25%;
+            }
+            
+            .en-linea.codigo-barra {
+                width: 40%;
+            }
+            
+            .en-linea.logo-oferta {
                 width: 40%
+            }
+            
+            .en-linea.logo-oferta img {
+                width: 316px;
+                height: 179px;
             }
 
             .en-linea.texto {
@@ -75,13 +102,17 @@
     <body>
     <div>
     <div class="borde-cupon-externo">
-        <div class="separacion-cupon">
-            <div class="en-linea logo-ofeta"><div class="logo-fijo"></div></div>
-            <div class="en-linea texto"><p class="letra-cupon">Número de Cupón: <?php echo $codigo_cupon;?><br>Válido por 1 cupón</p></div>
+        <div class="separacion-cupon cabecera">
+            <div class="en-linea logo-oferta-cabecera">
+                <div class="logo-fijo"></div>
+            </div>
+            <div class="en-linea texto-cabecera"><p class="letra-cupon">Número de Cupón:<br>Válido por 1 cupón</p></div>
+            <div class="en-linea codigo-barra"><img src="<?php echo $this->barras_img;?>" width="280" height="48"/></div>
+            <div class="en-linea codigo-qr"><img src="<?php echo $this->qr_img;?>" width="90" height="90"/></div>
         </div>
         <div class="separacion-cupon">
-            <div class="en-linea logo-ofeta"><img src="<?php echo $localhost; ?>/img/<?php echo $id_campana; ?>/small2/image1.jpg"></div>
-            <div class="en-linea texto"><p class="letra-cupon">Tu compra en Rebueno:<br><?php echo $campana_descripcion;?></p>
+            <div class="en-linea logo-oferta"><img src="<?php echo $localhost; ?>/img/<?php echo $id_campana; ?>/small2/image1.jpg"></div>
+            <div class="en-linea texto"><p class="letra-cupon-cabecera">Tu compra en Rebueno:<br><?php echo $campana_descripcion;?></p>
                     <p class="letra-cupon-min">Fecha Compra : <?php echo $fecha_compra;?></p>
                     <?php if( !empty($fecha_validez) ) { ?>
                     <p class="letra-cupon-min">Fecha Válidez : <?php echo $fecha_validez;?></p>
