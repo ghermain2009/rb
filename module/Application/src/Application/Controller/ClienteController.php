@@ -41,6 +41,7 @@ class ClienteController extends AbstractActionController {
         $name     = $config['correo']['name'];
         $host     = $config['correo']['host'];
         $port     = $config['correo']['port'];
+        $tls      = $config['correo']['tls'];
         $username = $config['correo']['username'];
         $password = $config['correo']['password'];
         $cuenta   = $config['correo']['cuenta-recuperar-clave'];
@@ -63,18 +64,27 @@ class ClienteController extends AbstractActionController {
                 $message->addTo($email)
                         ->addFrom($cuenta)
                         ->setSubject('Nueva contraseña para Rebueno!‏');
-
+                
+                if( $tls ) {
+                    $connection_config = array(
+                        'ssl' => 'tls',
+                        'username' => $username,
+                        'password' => $password
+                    );
+                } else {
+                    $connection_config = array(
+                        'username' => $username,
+                        'password' => $password
+                    );
+                }
+                
                 $transport = new SmtpTransport();
                 $options = new SmtpOptions(array(
                     'name' => $name,
                     'host' => $host,
                     'port' => $port,
                     'connection_class' => 'login',
-                    'connection_config' => array(
-                        'ssl' => 'tls',
-                        'username' => $username,
-                        'password' => $password
-                    ),
+                    'connection_config' => $connection_config
                 ));
 
                 $resolver = new TemplateMapResolver();

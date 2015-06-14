@@ -43,6 +43,7 @@ class Variados {
         $name     = $config['correo']['name'];
         $host     = $config['correo']['host'];
         $port     = $config['correo']['port'];
+        $tls      = $config['correo']['tls'];
         $username = $config['correo']['username'];
         $password = $config['correo']['password'];
         $cuenta   = $config['correo']['cuenta-envio-cupones'];
@@ -132,16 +133,26 @@ class Variados {
                     ->setSubject('Un cuponazo Rebueno ...‏');
 
             $transport = new SmtpTransport();
+            
+            if( $tls ) {
+                $connection_config = array(
+                    'ssl' => 'tls',
+                    'username' => $username,
+                    'password' => $password
+                );
+            } else {
+                $connection_config = array(
+                    'username' => $username,
+                    'password' => $password
+                );
+            }
+            
             $options   = new SmtpOptions(array(
                 'name' => $name,
                 'host' => $host,
                 'port' => $port,
                 'connection_class' => 'login',
-                'connection_config' => array(
-                    //'ssl' => 'tls',
-                    'username' => $username,
-                    'password' => $password
-                ),
+                'connection_config' => $connection_config
             ));
 
             $message->setBody($body);
