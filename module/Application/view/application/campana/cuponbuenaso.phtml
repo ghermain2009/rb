@@ -4,11 +4,11 @@
 <div>
     <div class="borde-cupon-externo">
         <div class="separacion-cupon">
-            <div class="en-linea logo-ofeta"><div class="logo-fijo-cupon"></div></div>
+            <div class="en-linea logo-oferta"><div class="logo-fijo-cupon"></div></div>
             <div class="en-linea texto"><p class="letra-cupon">Número de Cupón: <?php echo $datos["codigo_cupon"];?><?php if($datos["cantidad"] > 1) { echo ' - ...'; }?><br>Válido por <?php echo $datos["cantidad"];?> <?php if($datos["cantidad"] > 1) { echo 'cupones'; } else { echo 'cupón'; }?></p></div>
         </div>
         <div class="separacion-cupon">
-            <div class="en-linea logo-ofeta"><img src="../../../img/<?php echo $datos['id_campana']; ?>/small2/image1.jpg"></div>
+            <div class="en-linea logo-oferta"><img src="../../../img/<?php echo $datos['id_campana']; ?>/small2/image1.jpg"></div>
             <div class="en-linea texto"><p class="letra-cupon">Tu compra en Rebueno:<br><?php echo $datos["campana_descripcion"];?></p>
                     <p class="letra-cupon-min">Fecha Compra : <?php echo $datos["fecha_compra"];?></p>
                     <?php if( !empty($datos["fecha_validez"]) ) { ?>

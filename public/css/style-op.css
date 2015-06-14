@@ -1108,10 +1108,14 @@ h4 {
     display:inline-block;
 }
 
-.en-linea.logo-ofeta {
+.en-linea.logo-oferta {
     width: 40%
 }
 
+.en-linea.logo-oferta img {
+    width: 316px;
+    height: 179px;
+}
 .en-linea.texto {
     width: 59%
 }
