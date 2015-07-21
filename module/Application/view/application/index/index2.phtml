@@ -1,6 +1,6 @@
 <div class="carrusel-afiliacion">
     <div  class="container afiliacion">
-        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="width:100%;display:inline-block;">
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="width:100%;height:100%">
             <div class="carousel-inner" role="listbox">
                 <div class="item active">
                     <div class="slider-afiliacion" style="background-image: url('img/afiliacion/banner/afiliaciones1.jpg');"></div>
@@ -22,10 +22,6 @@
                     <div class="slider-afiliacion" style="background-image: url('img/afiliacion/banner/afiliaciones5.jpg');"></div>
                     <div class="carousel-caption"></div>
                 </div>
-                <div class="item">
-                    <div class="slider-afiliacion" style="background-image: url('img/afiliacion/banner/afiliaciones6.jpg');"></div>
-                    <div class="carousel-caption"></div>
-                </div>
             </div>
         </div>
     </div>
@@ -35,9 +31,9 @@
         <form name="frmpago" role="form" action="/campana/pago" method="POST" data-parsley-validate>
             <div class="form-group">
                 <div class="col-xs-5"> 
-                    <div class="logo-fijo-cupon"></div>
+                    <div class="logo-fijo-afiliacion"></div>
                 </div>
-                <label for="logo" class="col-lg-7 control-faltan">Faltan pocos días</label>
+                <label for="logo" class="col-xs-7 control-faltan">Faltan pocos días</label>
             </div>
             <div class="form-group">
                 <div class="col-xs-12">
@@ -71,12 +67,17 @@
             <div class="form-group">
                 <label for="genero" class="col-lg-5 control-label">Género:</label>
                 <div class="col-xs-7">
-                    <div class="radio" >
+                    <div class="radio afiliacion" >
                         <label><input type="radio" name="genero" id="genero" value="M" required checked>Masculino</label>
                     </div>
-                    <div class="radio" >
+                    <div class="radio afiliacion" >
                         <label><input type="radio" name="genero" id="genero" value="F" required>Femenino</label>
                     </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-12">
+                    <p class="promocion-parrafo"><br/></p>
                 </div>
             </div>
             <div class="form-group">
@@ -94,14 +95,16 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#promocion-container").delay(10000);
-        $("#promocion-container").animate({'opacity': '0.5', 'width': '60%', 'height': '60%', 'top': '20%', 'left': '20%', 'background-size': '60% 60%'}, 3000, function () {
+        
+        $("#promocion-container").animate({'opacity': '1', 'width': '60%', 'height': '60%', 'top': '20%', 'left': '20%', 'background-size': '60% 60%'}, 3000, function () {
             // Animation complete.
-            $("#promocion-container").css('background-image', 'none');
-            $("#formulario-container").css('display', 'inline-block');
-            $("#imagen-container").css('display', 'inline-block');
-            $("#promocion-container").animate({'opacity': '1'});
-
+            $("#promocion-container").delay(4000);
+            $("#promocion-container").animate({'opacity': '0.5'}, 3000, function () {
+                $("#promocion-container").css('background-image', 'none');
+                $("#formulario-container").css('display', 'inline-block');
+                $("#imagen-container").css('display', 'inline-block');
+                $("#promocion-container").animate({'opacity': '1'});
+            });
         });
     });
 

@@ -1232,11 +1232,12 @@ h4 {
 
 .promocion-parrafo {
     text-align: justify;
+    font-size: 16px;
 }
 
 .promocion-parrafo > porcentaje {
     color: #A8CF45;
-    font-size: 17px;
+    font-size: 17px !important;
 }
 
 .formulario-afiliacion {
@@ -1249,7 +1250,10 @@ h4 {
 }
 
 .formulario-afiliacion > form {
-    margin:25px !important;
+    margin-top:25px !important;
+    margin-bottom:25px !important;
+    margin-left:20px !important;
+    margin-right:20px !important;
 }
 
 .imagen-afiliacion {
@@ -1262,10 +1266,13 @@ h4 {
     margin:0px !important;
 }
 
-.col-lg-7.control-faltan {
+.col-xs-7.control-faltan {
     font-weight: normal !important;
     color: #A8CF45;
     margin-top: 10px;
+    margin-left: 3px;
+    font-size: 20px;
+    width: inherit !important;
 }
 
 .col-lg-5.control-label {
@@ -1274,4 +1281,15 @@ h4 {
 
 #suscribirme {
     font-weight: normal !important;
+}
+
+.logo-fijo-afiliacion {
+    width: 130px; 
+    height: 46px;
+    background-image: url('../img/logo_rebueno_cupon.png');
+    background-size: 100% 100%;
+}
+
+.radio.afiliacion {
+    display: inline-block !important;
 }
