@@ -1230,66 +1230,196 @@ h4 {
     margin:0px !important;
 }
 
-.promocion-parrafo {
-    text-align: justify;
-    font-size: 16px;
-}
 
-.promocion-parrafo > porcentaje {
-    color: #A8CF45;
-    font-size: 17px !important;
-}
 
-.formulario-afiliacion {
-    width: 40%;
-    height: 100%;
-    background-color: #FFF;
-    display: none;
-    padding:0px !important;
-    margin:0px !important;
-}
 
-.formulario-afiliacion > form {
-    margin-top:25px !important;
-    margin-bottom:25px !important;
-    margin-left:20px !important;
-    margin-right:20px !important;
-}
 
-.imagen-afiliacion {
-    width: 59.5%;
-    height: 100%; 
-    background-image: url('../img/afiliacion/afiliacion_teclado.jpg');
-    background-size: 100% 100%;
-    display: none;
-    padding-top: 0px !important;
-    margin:0px !important;
-}
 
-.col-xs-7.control-faltan {
-    font-weight: normal !important;
-    color: #A8CF45;
-    margin-top: 10px;
-    margin-left: 3px;
-    font-size: 20px;
-    width: inherit !important;
-}
-
-.col-lg-5.control-label {
-    font-weight: normal !important;
-}
 
 #suscribirme {
     font-weight: normal !important;
 }
 
-.logo-fijo-afiliacion {
-    width: 130px; 
-    height: 46px;
-    background-image: url('../img/logo_rebueno_cupon.png');
-    background-size: 100% 100%;
-}
-
 .radio.afiliacion {
     display: inline-block !important;
+}
+
+@media (min-width: 0px) and (max-width: 767px) {
+    .formulario-afiliacion {
+        width: 100%;
+        height: 100%;
+        background-color: #FFF;
+        display: none;
+        padding:0px !important;
+        margin:0px !important;
+    }
+
+    .formulario-afiliacion > form {
+        margin-top:8px !important;
+        margin-bottom:8px !important;
+        margin-left:0px !important;
+        margin-right:0px !important;
+    }
+
+    .imagen-afiliacion {
+        width: 0%;
+        height: 100%; 
+        background-image: url('../img/afiliacion/afiliacion_teclado.jpg');
+        background-size: 100% 100%;
+        display: none;
+        padding-top: 0px !important;
+        margin:0px !important;
+    }
+    
+    .logo-fijo-afiliacion {
+        width: 80px; 
+        height: 28px;
+        background-image: url('../img/logo_rebueno_cupon.png');
+        background-size: 100% 100%;
+    }
+    
+    .col-lg-5.control-label.afiliacion {
+        font-size: 12px !important;
+        font-weight: normal !important;
+        float: left;
+        width: 41%;
+        margin-top: 8px;
+    }
+    
+    .col-xs-7.control-faltan {
+        font-weight: normal !important;
+        color: #A8CF45;
+        margin-top: 6px;
+        margin-left: 3px;
+        font-size: 14px;
+        width: inherit !important;
+    }
+    
+    .col-xs-7 > input {
+        height: 26px;
+        float: right;
+        margin-bottom: 5px !important;
+    }
+    
+    .promocion-parrafo {
+        text-align: justify;
+        font-size: 12px;
+    }
+
+    .promocion-parrafo > porcentaje {
+        color: #A8CF45;
+        font-size: 13px !important;
+    }
+    
+    .radio.afiliacion > label {
+        font-size: 12px !important;
+    }
+}
+
+@media (min-width: 767px) and (max-width: 1200px) {
+    .formulario-afiliacion {
+        width: 40%;
+        height: 100%;
+        background-color: #FFF;
+        display: none;
+        padding:0px !important;
+        margin:0px !important;
+    }
+
+    .formulario-afiliacion > form {
+        margin-top:25px !important;
+        margin-bottom:25px !important;
+        margin-left:20px !important;
+        margin-right:20px !important;
+    }
+
+    .imagen-afiliacion {
+        width: 59.5%;
+        height: 100%; 
+        background-image: url('../img/afiliacion/afiliacion_teclado.jpg');
+        background-size: 100% 100%;
+        display: none;
+        padding-top: 0px !important;
+        margin:0px !important;
+    }
+    
+    .logo-fijo-afiliacion {
+        width: 130px; 
+        height: 46px;
+        background-image: url('../img/logo_rebueno_cupon.png');
+        background-size: 100% 100%;
+    }
+    
+    .col-xs-7.control-faltan {
+        font-weight: normal !important;
+        color: #A8CF45;
+        margin-top: 10px;
+        margin-left: 3px;
+        font-size: 20px;
+        width: inherit !important;
+    }
+    
+    .promocion-parrafo {
+        text-align: justify;
+        font-size: 16px;
+    }
+
+    .promocion-parrafo > porcentaje {
+        color: #A8CF45;
+        font-size: 17px !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .formulario-afiliacion {
+        width: 40%;
+        height: 100%;
+        background-color: #FFF;
+        display: none;
+        padding:0px !important;
+        margin:0px !important;
+    }
+
+    .formulario-afiliacion > form {
+        margin-top:25px !important;
+        margin-bottom:25px !important;
+        margin-left:20px !important;
+        margin-right:20px !important;
+    }
+
+    .imagen-afiliacion {
+        width: 59.5%;
+        height: 100%; 
+        background-image: url('../img/afiliacion/afiliacion_teclado.jpg');
+        background-size: 100% 100%;
+        display: none;
+        padding-top: 0px !important;
+        margin:0px !important;
+    }
+    
+    .logo-fijo-afiliacion {
+        width: 130px; 
+        height: 46px;
+        background-image: url('../img/logo_rebueno_cupon.png');
+        background-size: 100% 100%;
+    }
+    
+    .col-xs-7.control-faltan {
+        font-weight: normal !important;
+        color: #A8CF45;
+        margin-top: 10px;
+        margin-left: 3px;
+        font-size: 20px;
+        width: inherit !important;
+    }
+    
+    .promocion-parrafo {
+        text-align: justify;
+        font-size: 16px;
+    }
+
+    .promocion-parrafo > porcentaje {
+        color: #A8CF45;
+        font-size: 17px !important;
+    }
 }
