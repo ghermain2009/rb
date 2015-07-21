@@ -1,0 +1,126 @@
+<div class="carrusel-afiliacion">
+    <div  class="container afiliacion">
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="width:100%;display:inline-block;">
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <div class="slider-afiliacion" style="background-image: url('img/afiliacion/banner/afiliaciones1.jpg');"></div>
+                    <div class="carousel-caption"></div>
+                </div>
+                <div class="item">
+                    <div class="slider-afiliacion" style="background-image: url('img/afiliacion/banner/afiliaciones2.jpg');"></div>
+                    <div class="carousel-caption"></div>
+                </div>
+                <div class="item">
+                    <div class="slider-afiliacion" style="background-image: url('img/afiliacion/banner/afiliaciones3.jpg');"></div>
+                    <div class="carousel-caption"></div>
+                </div>
+                <div class="item">
+                    <div class="slider-afiliacion" style="background-image: url('img/afiliacion/banner/afiliaciones4.jpg');"></div>
+                    <div class="carousel-caption"></div>
+                </div>
+                <div class="item">
+                    <div class="slider-afiliacion" style="background-image: url('img/afiliacion/banner/afiliaciones5.jpg');"></div>
+                    <div class="carousel-caption"></div>
+                </div>
+                <div class="item">
+                    <div class="slider-afiliacion" style="background-image: url('img/afiliacion/banner/afiliaciones6.jpg');"></div>
+                    <div class="carousel-caption"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="promocion-afiliacion" id="promocion-container">
+    <div class="formulario-afiliacion" id="formulario-container">
+        <form name="frmpago" role="form" action="/campana/pago" method="POST" data-parsley-validate>
+            <div class="form-group">
+                <div class="col-xs-5"> 
+                    <div class="logo-fijo-cupon"></div>
+                </div>
+                <label for="logo" class="col-lg-7 control-faltan">Faltan pocos días</label>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-12">
+                    <p class="promocion-parrafo"><br/></p>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-12">
+                    <p class="promocion-parrafo">Disfrutar de momentos inolvidables con descuentos de <porcentaje>50% a más</porcentaje> en Ecuador es ya una realidad.</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-12">
+                    <p class="promocion-parrafo">Suscríbete y recibirás por las mañanas super ofertas en tu buzón casi como tips de super utilidad.</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="ciudad" class="col-lg-5 control-label">Elige tu ciudad:</label>
+                <div class="col-xs-7"> 
+                    <input type="text" class="form-control" name="ciudad" id="ciudad" value="" >
+                    <span class="help-block with-errors"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email" class="col-lg-5 control-label">Email:</label>
+                <div class="col-xs-7"> 
+                    <input type="text" class="form-control" name="email" id="email" value="" >
+                    <span class="help-block with-errors"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="genero" class="col-lg-5 control-label">Género:</label>
+                <div class="col-xs-7">
+                    <div class="radio" >
+                        <label><input type="radio" name="genero" id="genero" value="M" required checked>Masculino</label>
+                    </div>
+                    <div class="radio" >
+                        <label><input type="radio" name="genero" id="genero" value="F" required>Femenino</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="suscribirme" class="col-lg-5 control-label"></label>
+                <div class="col-xs-7">
+                    <button type="button" class="btn btn-rebueno"  id="suscribirme">Suscribirme</button>
+                </div>
+            </div>
+
+
+
+        </form>
+    </div>
+    <div class="imagen-afiliacion" id="imagen-container"></div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#promocion-container").delay(10000);
+        $("#promocion-container").animate({'opacity': '0.5', 'width': '60%', 'height': '60%', 'top': '20%', 'left': '20%', 'background-size': '60% 60%'}, 3000, function () {
+            // Animation complete.
+            $("#promocion-container").css('background-image', 'none');
+            $("#formulario-container").css('display', 'inline-block');
+            $("#imagen-container").css('display', 'inline-block');
+            $("#promocion-container").animate({'opacity': '1'});
+
+        });
+    });
+
+    $(function () {
+        /*$("img.lazy").lazyload();
+         
+         $('#promocion-container').hover(
+         function(){
+         var $this = $(this);
+         $this.stop().animate({'opacity':'0.5','width':'60%','height':'60%','top':'20%','left':'20%','background-size':'60% 60%'});
+         },
+         function(){
+         var $this = $(this);
+         $this.stop().animate({'opacity':'1','width':'100%','height':'100%','top':'0px','left':'0px','background-size':'100% 100%'});
+         }
+         );*/
+    });
+
+</script>
+<script type="text/javascript">
+
+</script>

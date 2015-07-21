@@ -19,8 +19,13 @@ class IndexController extends AbstractActionController
     {
         $serviceLocator = $this->getServiceLocator();
         $config = $serviceLocator->get('config');
+        $en_produccion = $config['en_produccion'];
         $constantes = $config['constantes'];
         $moneda = $config['moneda'];
+
+        if( !$en_produccion ) {
+            $this->redirect()->toRoute('index2');
+        }
         
         $user_session = new Container('user');
         
@@ -51,6 +56,12 @@ class IndexController extends AbstractActionController
     
     public function phpinfoAction()
     {
+        return new ViewModel();
+    }
+    
+    public function index2Action()
+    {
+        $this->layout('layout/layout_afiliacion');
         return new ViewModel();
     }
     

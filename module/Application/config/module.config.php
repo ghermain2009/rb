@@ -70,6 +70,17 @@ return array(
                     ),
                 ),
             ),
+            'index2' => array(
+                //'type' => 'Zend\Mvc\Router\Http\Literal',
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/:action',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action'     => 'index2',
+                    ),
+                ),
+            ),
             'home' => array(
                 'type'    => 'Literal',
                 'options' => array(
