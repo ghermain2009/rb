@@ -95,7 +95,7 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-            if($(window).width() <= 767){
+            if($(window).width() <= 567){
                 $("#promocion-container").animate({'opacity': '1', 'width': '90%', 'height': '90%', 'top': '5%', 'left': '5%', 'background-size': '90% 90%'}, 3000, function () {
                     // Animation complete.
                     $("#promocion-container").delay(4000);
@@ -103,7 +103,10 @@
                         $("#promocion-container").css('background-image', 'none');
                         $("#formulario-container").css('display', 'inline-block');
                         $("#imagen-container").css('display', 'inline-block');
-                        $("#promocion-container").animate({'opacity': '1'});
+                        $("#promocion-container").animate({'opacity': '1'}, function () {
+                            $("#promocion-container").removeClass('promocion-afiliacion');
+                            $("#promocion-container").addClass('promocion-afiliacion-fija');
+                        });
                     });
                 });
             } else {
@@ -114,7 +117,10 @@
                         $("#promocion-container").css('background-image', 'none');
                         $("#formulario-container").css('display', 'inline-block');
                         $("#imagen-container").css('display', 'inline-block');
-                        $("#promocion-container").animate({'opacity': '1'});
+                        $("#promocion-container").animate({'opacity': '1'}, function () {
+                            $("#promocion-container").removeClass('promocion-afiliacion');
+                            $("#promocion-container").addClass('promocion-afiliacion-fija');
+                        });
                     });
                 });
             }
