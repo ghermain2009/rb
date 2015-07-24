@@ -1230,12 +1230,6 @@ h4 {
     margin:0px !important;
 }
 
-
-
-
-
-
-
 #suscribirme {
     font-weight: normal !important;
 }
@@ -1267,6 +1261,7 @@ h4 {
         display: none;
         padding:0px !important;
         margin:0px !important;
+        float: left;
     }
 
     .formulario-afiliacion > form {
@@ -1355,8 +1350,7 @@ h4 {
         display: none;
         padding:0px !important;
         margin:0px !important;
-        position:relative !important;
-        top:0% !important;
+        float: left;
     }
 
     .formulario-afiliacion > form {
@@ -1367,172 +1361,172 @@ h4 {
     }
 
     .imagen-afiliacion {
-        width: 38.9%;
-        height: 100%; 
-        background-image: url('../img/afiliacion/afiliacion_teclado.jpg');
-        background-size: 100% 100%;
-        display: none;
-        padding-top: 0px !important;
-        margin:0px !important;
-    }
-    
-    .logo-fijo-afiliacion {
-        width: 80px; 
-        height: 28px;
-        background-image: url('../img/logo_rebueno_cupon.png');
-        background-size: 100% 100%;
-    }
-    
-    .col-lg-5.control-label.afiliacion {
-        font-size: 11px !important;
-        font-weight: normal !important;
-        float: left;
-        width: 41%;
-        margin-top: 8px;
-    }
-    
-    .col-xs-7.control-faltan {
-        font-weight: normal !important;
-        color: #A8CF45;
-        margin-top: 6px;
-        margin-left: 3px;
-        font-size: 14px;
-        width: inherit !important;
-    }
-    
-    .col-xs-7 > input {
-        height: 26px;
-        float: right;
-        margin-bottom: 5px !important;
-    }
-    
-    .promocion-parrafo {
-        text-align: justify;
-        font-size: 12px;
-    }
-
-    .promocion-parrafo > porcentaje {
-        color: #A8CF45;
-        font-size: 13px !important;
-    }
-    
-    .radio.afiliacion > label {
-        font-size: 12px !important;
-    }
-}
-
-@media (min-width: 727px) and (max-width: 1200px) {
-    
-    .promocion-afiliacion-fija {
-        width: 60% !important;
-        height: 60% !important; 
-        top:20% !important;
-        left:20% !important;
-        right:20% !important;
-        position:absolute;
-        top:0px;
-        left:0px;
-        z-index:1000;
-        padding:0px !important;
-        margin:0px !important;
-    }
-    
-    .formulario-afiliacion {
-        width: 60%;
-        height: 100%;
-        background-color: #FFF;
-        display: none;
-        padding:0px !important;
-        margin:0px !important;
-        position:relative !important;
-        top: -50px !important;
-    }
-
-    .formulario-afiliacion > form {
-        margin-top:8px !important;
-        margin-bottom:8px !important;
-        margin-left:0px !important;
-        margin-right:0px !important;
-    }
-
-    .imagen-afiliacion {
-        width: 38.9%;
-        height: 100%; 
-        background-image: url('../img/afiliacion/afiliacion_teclado.jpg');
-        background-size: 100% 100%;
-        display: none;
-        padding-top: 0px !important;
-        margin:0px !important;
-    }
-    
-    .logo-fijo-afiliacion {
-        width: 80px; 
-        height: 28px;
-        background-image: url('../img/logo_rebueno_cupon.png');
-        background-size: 100% 100%;
-    }
-    
-    .col-lg-5.control-label.afiliacion {
-        font-size: 11px !important;
-        font-weight: normal !important;
-        float: left;
-        width: 41%;
-        margin-top: 8px;
-    }
-    
-    .col-xs-7.control-faltan {
-        font-weight: normal !important;
-        color: #A8CF45;
-        margin-top: 6px;
-        margin-left: 3px;
-        font-size: 14px;
-        width: inherit !important;
-    }
-    
-    .col-xs-7 > input {
-        height: 26px;
-        float: right;
-        margin-bottom: 5px !important;
-    }
-    
-    .promocion-parrafo {
-        text-align: justify;
-        font-size: 12px;
-    }
-
-    .promocion-parrafo > porcentaje {
-        color: #A8CF45;
-        font-size: 13px !important;
-    }
-    
-    .radio.afiliacion > label {
-        font-size: 12px !important;
-    }
-}
-
-@media (min-width: 1200px) {
-    
-    .promocion-afiliacion-fija {
-        width: 60% !important;
-        height: 60% !important; 
-        top:20% !important;
-        left:20% !important;
-        right:20% !important;
-        position:absolute;
-        top:0px;
-        left:0px;
-        z-index:1000;
-        padding:0px !important;
-        margin:0px !important;
-    }
-    
-    .formulario-afiliacion {
         width: 40%;
+        height: 100%; 
+        background-image: url('../img/afiliacion/afiliacion_teclado.jpg');
+        background-size: 100% 100%;
+        display: none;
+        padding-top: 0px !important;
+        margin:0px auto !important;
+    }
+    
+    .logo-fijo-afiliacion {
+        width: 80px; 
+        height: 28px;
+        background-image: url('../img/logo_rebueno_cupon.png');
+        background-size: 100% 100%;
+    }
+    
+    .col-lg-5.control-label.afiliacion {
+        font-size: 11px !important;
+        font-weight: normal !important;
+        float: left;
+        width: 41%;
+        margin-top: 8px;
+    }
+    
+    .col-xs-7.control-faltan {
+        font-weight: normal !important;
+        color: #A8CF45;
+        margin-top: 6px;
+        margin-left: 3px;
+        font-size: 14px;
+        width: inherit !important;
+    }
+    
+    .col-xs-7 > input {
+        height: 26px;
+        float: right;
+        margin-bottom: 5px !important;
+    }
+    
+    .promocion-parrafo {
+        text-align: justify;
+        font-size: 12px;
+    }
+
+    .promocion-parrafo > porcentaje {
+        color: #A8CF45;
+        font-size: 13px !important;
+    }
+    
+    .radio.afiliacion > label {
+        font-size: 12px !important;
+    }
+}
+
+@media (min-width: 727px) and (max-width: 1250px) {
+    
+    .promocion-afiliacion-fija {
+        width: 60% !important;
+        height: 60% !important; 
+        top:20% !important;
+        left:20% !important;
+        right:20% !important;
+        position:absolute;
+        top:0px;
+        left:0px;
+        z-index:1000;
+        padding:0px !important;
+        margin:0px !important;
+    }
+    
+    .formulario-afiliacion {
+        width: 65%;
         height: 100%;
         background-color: #FFF;
         display: none;
         padding:0px !important;
         margin:0px !important;
+        float: left;
+    }
+
+    .formulario-afiliacion > form {
+        margin-top:8px !important;
+        margin-bottom:8px !important;
+        margin-left:0px !important;
+        margin-right:0px !important;
+    }
+
+    .imagen-afiliacion {
+        width: 35%;
+        height: 100%; 
+        background-image: url('../img/afiliacion/afiliacion_teclado.jpg');
+        background-size: 100% 100%;
+        display: none;
+        padding-top: 0px !important;
+        margin:0px !important;
+    }
+    
+    .logo-fijo-afiliacion {
+        width: 80px; 
+        height: 28px;
+        background-image: url('../img/logo_rebueno_cupon.png');
+        background-size: 100% 100%;
+    }
+    
+    .col-lg-5.control-label.afiliacion {
+        font-size: 11px !important;
+        font-weight: normal !important;
+        float: left;
+        width: 41%;
+        margin-top: 8px;
+    }
+    
+    .col-xs-7.control-faltan {
+        font-weight: normal !important;
+        color: #A8CF45;
+        margin-top: 6px;
+        margin-left: 3px;
+        font-size: 14px;
+        width: inherit !important;
+    }
+    
+    .col-xs-7 > input {
+        height: 26px;
+        float: right;
+        margin-bottom: 5px !important;
+    }
+    
+    .promocion-parrafo {
+        text-align: justify;
+        font-size: 12px;
+    }
+
+    .promocion-parrafo > porcentaje {
+        color: #A8CF45;
+        font-size: 13px !important;
+    }
+    
+    .radio.afiliacion > label {
+        font-size: 12px !important;
+    }
+}
+
+@media (min-width: 1250px) {
+    
+    .promocion-afiliacion-fija {
+        width: 60% !important;
+        height: 60% !important; 
+        top:20% !important;
+        left:20% !important;
+        right:20% !important;
+        position:absolute;
+        top:0px;
+        left:0px;
+        z-index:1000;
+        padding:0px !important;
+        margin:0px !important;
+    }
+    
+    .formulario-afiliacion {
+        width: 55%;
+        height: 100%;
+        background-color: #FFF;
+        display: none;
+        padding:0px !important;
+        margin:0px !important;
+        float: left;
     }
 
     .formulario-afiliacion > form {
@@ -1543,7 +1537,7 @@ h4 {
     }
 
     .imagen-afiliacion {
-        width: 59.5%;
+        width: 45%;
         height: 100%; 
         background-image: url('../img/afiliacion/afiliacion_teclado.jpg');
         background-size: 100% 100%;

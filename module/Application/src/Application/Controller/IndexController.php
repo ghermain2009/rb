@@ -62,8 +62,31 @@ class IndexController extends AbstractActionController
     public function index2Action()
     {
         $this->layout('layout/layout_afiliacion');
-        return new ViewModel();
+        
+        $serviceLocator = $this->getServiceLocator();
+        $config = $serviceLocator->get('config');
+        
+        $pais = $config['id_pais'];
+        $capital = $config['id_capital'];
+        
+        $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
+        $datos = $departamentoTable->getDepartamentosxPais($pais);
+        
+        return new ViewModel(array('departamentos' => $datos, 'capital' => $capital));
     }
     
-    
+    public function suscribirmeAction() {
+        $datos = $this->params()->fromPost();
+        
+        $serviceLocator = $this->getServiceLocator();
+        $clienteTable = $serviceLocator->get('Dashboard\Model\CupclienteTable');
+        
+        $clienteTable->addCliente($datos);
+        
+        $viewmodel = new ViewModel();
+        $viewmodel->setTerminal(true);
+
+        return $viewmodel;
+        
+    }
 }

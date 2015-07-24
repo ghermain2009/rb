@@ -22,6 +22,12 @@ use Dashboard\Model\RoleTable;
 use Dashboard\Model\User;
 use Dashboard\Model\UserTable;
 
+
+use Dashboard\Model\Ubipais;
+use Dashboard\Model\UbipaisTable;
+use Dashboard\Model\Ubidepartamento;
+use Dashboard\Model\UbidepartamentoTable;
+
 use Dashboard\Model\Cupcampana;
 use Dashboard\Model\CupcampanaTable;
 use Dashboard\Model\Cupcampanacategoria;
@@ -242,6 +248,30 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
                         $rsPrototype = new ResultSet();
                         $rsPrototype->setArrayObjectPrototype(new Genempresa());
                         $tableGateway = new TableGateway('gen_empresa', $adapter, null, $rsPrototype);
+                        return $tableGateway;
+                    },
+                    'Dashboard\Model\UbipaisTable' => function($sl){
+                        $gateway = $sl->get('UbipaisTableGateway');
+                        $table = new UbipaisTable($gateway);
+                        return $table;
+                    },
+                    'UbipaisTableGateway' => function($sl) {
+                        $adapter = $sl->get('Zend\Db\Adapter\Adapter');
+                        $rsPrototype = new ResultSet();
+                        $rsPrototype->setArrayObjectPrototype(new Ubipais());
+                        $tableGateway = new TableGateway('ubi_pais', $adapter, null, $rsPrototype);
+                        return $tableGateway;
+                    },
+                    'Dashboard\Model\UbidepartamentoTable' => function($sl){
+                        $gateway = $sl->get('UbidepartamentoTableGateway');
+                        $table = new UbidepartamentoTable($gateway);
+                        return $table;
+                    },
+                    'UbidepartamentoTableGateway' => function($sl) {
+                        $adapter = $sl->get('Zend\Db\Adapter\Adapter');
+                        $rsPrototype = new ResultSet();
+                        $rsPrototype->setArrayObjectPrototype(new Ubidepartamento());
+                        $tableGateway = new TableGateway('ubi_departamento', $adapter, null, $rsPrototype);
                         return $tableGateway;
                     },
                 )
