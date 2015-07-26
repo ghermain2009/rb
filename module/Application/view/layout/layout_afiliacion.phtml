@@ -123,6 +123,7 @@ $user_session = new Container('user');
 
     function testAPI() {
         FB.api('/me', function (response) {
+            console.log(response);
             var email = response.email;
             var fname = response.first_name;
             var lname = response.last_name;
