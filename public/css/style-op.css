@@ -1242,6 +1242,46 @@ h4 {
     padding-left: 0px !important; 
 }
 
+.slider-afiliacion.fondo_pantalla_1 {
+    background: url('../img/afiliacion/banner/afiliaciones1.jpg') no-repeat fixed center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.slider-afiliacion.fondo_pantalla_2 {
+    background: url('../img/afiliacion/banner/afiliaciones2.jpg') no-repeat fixed center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.slider-afiliacion.fondo_pantalla_3 {
+    background: url('../img/afiliacion/banner/afiliaciones3.jpg') no-repeat fixed center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.slider-afiliacion.fondo_pantalla_4 {
+    background: url('../img/afiliacion/banner/afiliaciones4.jpg') no-repeat fixed center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.slider-afiliacion.fondo_pantalla_5 {
+    background: url('../img/afiliacion/banner/afiliaciones5.jpg') no-repeat fixed center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
 @media (min-width: 0px) and (max-width: 567px) {
     
     .promocion-afiliacion-fija,
