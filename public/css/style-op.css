@@ -1238,9 +1238,64 @@ h4 {
     display: inline-block !important;
 }
 
+.col-xs-7.validacion {
+    padding-left: 0px !important; 
+}
+
+.registro-actualizacion {
+    width: 60% !important;
+    height: 80% !important; 
+    top:10% !important;
+    left:20% !important;
+    right:20% !important;
+    position:absolute;
+    top:0px;
+    left:0px;
+    z-index:1000;
+    padding:0px !important;
+    margin:0px !important;
+    display: none;
+}
+
+.formulario-actualizacion {
+    width: 55%;
+    height: 100%;
+    background-color: #FFF;
+    padding:0px !important;
+    margin:0px !important;
+    float: left;
+    display: none;
+}
+
+.formulario-actualizacion > form {
+    margin-top:8px !important;
+    margin-bottom:8px !important;
+    margin-left:0px !important;
+    margin-right:10px !important;
+}
+
+.facebook-actualizacion {
+    width: 45%;
+    height: 100%;
+    background-color: #FFF;
+    opacity: 0.85;
+    padding:0px !important;
+    margin:0px !important;
+    float: right;
+    display: none;
+}
+
+.facebook-datos {
+    width: 90%;
+    height: 40%;
+    margin: 0 auto;
+    display: none;
+}
+
 @media (min-width: 0px) and (max-width: 567px) {
     
-    .promocion-afiliacion-fija {
+    .promocion-afiliacion-fija,
+    .promocion-saludo {
         width: 90% !important;
         height: 60% !important; 
         top:20% !important;
@@ -1254,7 +1309,12 @@ h4 {
         margin:0px !important;
     }
     
-    .formulario-afiliacion {
+    #promocion-saludo {
+        display: none;
+    }
+    
+    .formulario-afiliacion,
+    .formulario-saludo {
         width: 100%;
         height: 100%;
         background-color: #FFF;
@@ -1264,9 +1324,10 @@ h4 {
         float: left;
     }
 
-    .formulario-afiliacion > form {
-        margin-top:8px !important;
-        margin-bottom:8px !important;
+    .formulario-afiliacion,
+    .formulario-saludo  > form {
+        margin-top:0px !important;
+        margin-bottom:0px !important;
         margin-left:0px !important;
         margin-right:0px !important;
     }
@@ -1329,7 +1390,8 @@ h4 {
 
 @media (min-width: 567px) and (max-width: 727px) {
     
-    .promocion-afiliacion-fija {
+    .promocion-afiliacion-fija,
+    .promocion-saludo {
         width: 90% !important;
         height: 60% !important; 
         top:20% !important;
@@ -1343,7 +1405,12 @@ h4 {
         margin:0px !important;
     }
     
-    .formulario-afiliacion {
+    #promocion-saludo {
+        display: none;
+    }
+    
+    .formulario-afiliacion,
+    .formulario-saludo  {
         width: 60%;
         height: 100%;
         background-color: #FFF;
@@ -1353,9 +1420,10 @@ h4 {
         float: left;
     }
 
-    .formulario-afiliacion > form {
-        margin-top:8px !important;
-        margin-bottom:8px !important;
+    .formulario-afiliacion,
+    .formulario-saludo  > form {
+        margin-top:0px !important;
+        margin-bottom:0px !important;
         margin-left:0px !important;
         margin-right:0px !important;
     }
@@ -1417,7 +1485,8 @@ h4 {
 
 @media (min-width: 727px) and (max-width: 1250px) {
     
-    .promocion-afiliacion-fija {
+    .promocion-afiliacion-fija,
+    .promocion-saludo {
         width: 60% !important;
         height: 60% !important; 
         top:20% !important;
@@ -1431,7 +1500,12 @@ h4 {
         margin:0px !important;
     }
     
-    .formulario-afiliacion {
+    #promocion-saludo {
+        display: none;
+    }
+    
+    .formulario-afiliacion,
+    .formulario-saludo  {
         width: 65%;
         height: 100%;
         background-color: #FFF;
@@ -1441,9 +1515,10 @@ h4 {
         float: left;
     }
 
-    .formulario-afiliacion > form {
-        margin-top:8px !important;
-        margin-bottom:8px !important;
+    .formulario-afiliacion,
+    .formulario-saludo  > form {
+        margin-top:0px !important;
+        margin-bottom:0px !important;
         margin-left:0px !important;
         margin-right:0px !important;
     }
@@ -1505,7 +1580,8 @@ h4 {
 
 @media (min-width: 1250px) {
     
-    .promocion-afiliacion-fija {
+    .promocion-afiliacion-fija,
+    .promocion-saludo {
         width: 60% !important;
         height: 60% !important; 
         top:20% !important;
@@ -1519,7 +1595,12 @@ h4 {
         margin:0px !important;
     }
     
-    .formulario-afiliacion {
+    #promocion-saludo {
+        display: none;
+    }
+    
+    .formulario-afiliacion,
+    .formulario-saludo  {
         width: 55%;
         height: 100%;
         background-color: #FFF;
@@ -1529,11 +1610,12 @@ h4 {
         float: left;
     }
 
-    .formulario-afiliacion > form {
-        margin-top:25px !important;
-        margin-bottom:25px !important;
-        margin-left:20px !important;
-        margin-right:20px !important;
+    .formulario-afiliacion,
+    .formulario-saludo > form {
+        margin-top:0px !important;
+        margin-bottom:0px !important;
+        margin-left:0px !important;
+        margin-right:0px !important;
     }
 
     .imagen-afiliacion {

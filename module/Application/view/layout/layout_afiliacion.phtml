@@ -37,6 +37,7 @@ $user_session = new Container('user');
         <!-- Le styles -->
         <?php
         echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+                ->prependStylesheet($this->basePath() . '/css/formValidation.css')
                 ->prependStylesheet($this->basePath() . '/css/style.css')
                 ->prependStylesheet($this->basePath() . '/css/style-op.css')
                 ->prependStylesheet($this->basePath() . '/css/docs.css')
@@ -49,6 +50,8 @@ $user_session = new Container('user');
         <!-- Scripts -->
         <?php
         echo $this->headScript()
+                ->prependFile($this->basePath() . '/js/framework/bootstrap.js')
+                ->prependFile($this->basePath() . '/js/formValidation.js')
                 ->prependFile($this->basePath() . '/js/bootstrap.min.js')
                 ->prependFile($this->basePath() . '/js/jquery.lazyload.js')
                 ->prependFile($this->basePath() . '/js/jquery.min.js')
@@ -132,23 +135,21 @@ $user_session = new Container('user');
             else
                 sex = 'F';
 
-            verifyUser(email, fname, lname, sex);
+            registrarFacebook(email, fname, lname, sex);
         });
     }
 
-    function verifyUser(email, fname, lname, sex) {
+    function registrarFacebook(email, fname, lname, sex) {
 
         $.ajax({
             type: "POST",
-            url: "/campana/cliente",
+            url: "/index/suscribirme",
             data: {email: email, fname: fname, lname: lname, sex: sex, facebook: '1'},
             success: function (data) {
-                var cliente = $.parseJSON(data);
-                if (cliente[0]) {
-                    if (cliente[0].validar == '1') {
-                        postfunction('', '');
-                    }
-                }
+                $("#registro-container").css('display', 'none');
+                $("#promocion-saludo").css('display', 'inline-block');
+                $("#formulario-saludo").css('display', 'inline-block');
+                $("#imagen-saludo").css('display', 'inline-block');
             }
         });
 

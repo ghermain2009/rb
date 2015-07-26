@@ -17,18 +17,19 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
+        
         $serviceLocator = $this->getServiceLocator();
         $config = $serviceLocator->get('config');
         $en_produccion = $config['en_produccion'];
-        $constantes = $config['constantes'];
-        $moneda = $config['moneda'];
-
+        
         if( !$en_produccion ) {
             $this->redirect()->toRoute('index2');
         }
         
+        $constantes = $config['constantes'];
+        $moneda = $config['moneda'];
+
         $user_session = new Container('user');
-        
         $user_session->facebook = array('id' => $constantes["id_facebook"],
                                         've' => $constantes["ve_facebook"]);
         
@@ -65,6 +66,11 @@ class IndexController extends AbstractActionController
         
         $serviceLocator = $this->getServiceLocator();
         $config = $serviceLocator->get('config');
+        $constantes = $config['constantes'];
+
+        $user_session = new Container('user');
+        $user_session->facebook = array('id' => $constantes["id_facebook"],
+                                        've' => $constantes["ve_facebook"]);
         
         $pais = $config['id_pais'];
         $capital = $config['id_capital'];
@@ -72,7 +78,7 @@ class IndexController extends AbstractActionController
         $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
         $datos = $departamentoTable->getDepartamentosxPais($pais);
         
-        return new ViewModel(array('departamentos' => $datos, 'capital' => $capital));
+        return new ViewModel(array('departamentos' => $datos, 'capital' => $capital, 'user_session' => $user_session));
     }
     
     public function suscribirmeAction() {
@@ -89,4 +95,5 @@ class IndexController extends AbstractActionController
         return $viewmodel;
         
     }
+   
 }
