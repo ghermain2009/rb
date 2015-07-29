@@ -1,6 +1,6 @@
 @font-face {
     font-family: "gotham-medium";
-    src: url('fonts/gotham-medium-webfont.woff') format("truetype");
+    src: url('../fonts/gotham-medium-webfont.woff') format("truetype");
 }
 
 .img_container {
@@ -15,18 +15,7 @@
      display: inline-block;
 }
 
-.campaign.one_third {
-    margin: 10px;
-    text-align: left;
-    width: 320px;
-    display:inline-block;
-    background-color: #ffffff;
-    
-}
 
-.campaign.one_third:hover {
-    box-shadow: 0px 0px 3px 3px #d6d3d3;
-}
 
 .compra {
     display: inline-block;
@@ -331,7 +320,7 @@ a:hover {
     /*border-right:#000 1px solid;*/
     list-style:none;
     float:left;
-    width: 550px;
+    //width: 550px;
     margin: 0px;
     padding-right: 20px;
     text-align: justify;
@@ -748,15 +737,7 @@ h4 {
     background: #ffffff;
 }
 
-.top_bar {
-    width: 100%;
-    height: 35px;
-    padding: 0px;
-    margin: 0px;
-    position: absolute;
-    top:0px;
-    background-color: #fdaf06;
-}
+
 
 .top_bar_move {
     width: 100%;
@@ -768,39 +749,9 @@ h4 {
     background-color: #ffffff;
 }
 
-#cabecera_contenedor {
-    width: 100%;
-    padding: 0px;
-    margin: 0px;
-    position: absolute;
-    top:36px !important;
-    //background-color: #f4f3ef;
-    background-color: #ffffff;
-    //height: 100px;
-}
 
-.en-donde-top-center {
-    display: inline-block;
-}
 
-.en-donde-top-center.logo {
-    margin-right: 50px;
-    position: relative;
-    top: 6px;
-    
-}
 
-.en-donde-top-center.titulo {
-    margin-right: 10px;
-    position: relative;
-    top: 20px;
-}
-
-.en-donde-top-center.localidades {
-    display: inline-block;
-    position: relative;
-    top: 20px;
-}
 
 .header-top-center {
     display: inline-block;
@@ -880,16 +831,6 @@ h4 {
     float: right;
 }
 
-.btn-group.oferta {
-    padding: 0px;
-    margin: 0px;
-}
-
-.btn-group.login {
-    padding: 0px;
-    margin: 0px;
-}
-
 .dropdown-menu.formlogin {
     width: 250px !important;
     padding: 10px;
@@ -908,19 +849,7 @@ h4 {
     text-align: center;
 }
 
-.ofertas_donde {
-    //margin-left: 250px;
-    //margin-top: 18px;
-    display: inline-block;
-    vertical-align: central;
-}
 
-.ofertas_siguenos {
-    display: inline-block;
-    float: right;
-    vertical-align: middle;
-    margin-right: 90px;
-}
 
 
 .tit_ofertas {
@@ -982,22 +911,18 @@ h4 {
   height: 300px;
 }*/
 #tabsaber, #taboferta, #tabempresa  {
-    width: 750px;
+    width: 100%;
     display:block;
 }
 
-.box_center-titulo {
-    width:91%;
-    padding-bottom: 10px;
-    
-}   
+
 
 .box_center_info {
     display: inline-block;
     padding-bottom: 10px;
 }
 
-.box_center_info span {
+.box_tabempresacenter_info span {
     float: right;
     position:relative !important;
     top: 0px !important;
@@ -1032,7 +957,7 @@ h4 {
     /*border-right:#000 1px solid;*/
     list-style:none;
     float:left;
-    width: 250px;
+    ///width: 250px;
     margin: 0px;
     text-align: justify;
     padding: 0px;
@@ -1162,15 +1087,7 @@ h4 {
     //text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 
-.carrusel-principal {
-    background-image:  url('../img/back_rebueno.png');
-    background-repeat: repeat-x;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    margin: 0px;
-    width: 100%;
-   // background-size: 20px 200px;
-}
+
 
 .carousel.slide.enlinea {
     display: inline-block !important;
@@ -1192,8 +1109,18 @@ h4 {
   z-index: 10050;
 }
 
-/* Solo para la afiliacion */
+/*Lo nuevo utilizado */
+.containe.total {
+    width: 100% !important;
+}
 
+.slider {
+    width: 100%;
+    height: 270px; 
+    background-size: 100% 270px;
+}
+
+/*Solo para la afiliacion */
 .carrusel-afiliacion {
     margin: 0px;
     width: 100%;
@@ -1232,6 +1159,7 @@ h4 {
 
 #suscribirme {
     font-weight: normal !important;
+    margin:0 auto 0 auto !important;
 }
 
 .radio.afiliacion {
@@ -1282,8 +1210,337 @@ h4 {
     background-size: cover;
 }
 
+
+
+.cabecera-top {
+    width: 100%;
+    height: 35px;
+    padding: 0px;
+    margin: 0px;
+    background-color: #fdaf06;
+}
+
+.cabecera-menu {
+    width: 100%;
+    display: inline-block;
+}
+
+.cabecera-menu > nav {
+    position:initial;
+}
+
 @media (min-width: 0px) and (max-width: 567px) {
+    /*Index*/
+    .contenedor-carrusel {
+        background-image:  none;
+        background-repeat: repeat-x;
+        padding-top: 5px;
+        padding-bottom: 0px;
+        margin: 0px;
+        width: 100%;
+    }
     
+    .carousel.carrusel-principal{
+         width:100%;
+         display:inline-block;
+    }
+
+    .carousel.carrusel-secundario {
+        width:0%;
+        display:none;
+    }
+    
+    .slider {
+        width: 100%;
+        height: 120px; 
+        background-size: 100% 120px;
+    }
+    
+    .campana-stilouno {
+        margin-bottom: 5px;
+        margin-top: 5px;
+        margin-left: 5px;
+        margin-right: 5px;
+        text-align: left;
+        width: 300px;
+        height: 290px;
+        display:inline-block;
+        background-color: #ffffff;
+
+    }
+    .campana-stilouno:hover {
+        box-shadow: 0px 0px 3px 3px #d6d3d3;
+    }
+    
+    .lazy.campana-imgreferencia{
+        margin-top: 0px !important;
+        height: 145px;
+        width: 300px;
+        background-size: 1456px 260px; 
+    }
+    
+    .campana-texto-descuento {
+        font-family:gotham-medium, 'arial', 'sans-serif';
+        font-size: 18px;
+        color:white;
+        background: linear-gradient(to bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
+        position: relative;
+        top: -40px;
+        padding: 8px;
+    }
+    
+    .campana-texto-detalle {
+        height: 30px;
+        display: inline-block;
+        position: relative;
+        top: -30px;
+        text-align: center;
+    }
+
+    .campana-texto-detalle > a {
+        font-weight: normal !important;
+        font-size: 10px !important;
+    }
+    
+    .campana-precio-oferta {
+        font-family:gotham-medium, 'arial', 'sans-serif';
+        font-size: 15px;
+        font-weight: bold;
+        color:#fdaf06;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    
+    .campana-tarifario {
+        text-align: right;
+        padding-top: 0px;
+        padding-bottom: 2px;
+        padding-left: 2px;
+        padding-right: 2px;
+        position: relative;
+        top: -20px;
+    }
+    
+    .campana-tarifario > simbolo {
+        color: black !important;
+        font-size: 12px !important;
+    }
+    
+    .btn.btn-ver-oferta {
+        font-family:gotham-medium, 'arial', 'sans-serif';
+        font-size: 12px;
+        color:white;
+        background: linear-gradient(to bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
+        padding-top: 4px;
+        padding-bottom: 4px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .btn.btn-ver-oferta:hover {
+        background: linear-gradient(#93ba2f,#93ba2f);
+    }
+    
+    .campana-vendidos{
+        font-family:gotham-medium, 'arial', 'sans-serif';
+        font-size: 10px;
+        text-align: center;
+        border-top-style:dashed;
+        border-top-width: 1px; 
+        border-color: #d0c3af;
+        padding-top: 5px;
+        padding-bottom: 0px;
+        color: black !important;
+    }
+    
+    .logo-principal {
+        width: 102px; 
+        height: 38px;
+        background-image: url('../img/logo_rebueno.png');
+        z-index: 8;
+        padding: 0px;
+        margin: 0px;
+        float:left;
+        clear: both !important;
+        background-size: 102px 38px;
+    }
+
+    .logo-principal-mini {
+        width: 102px; 
+        height: 38px;
+        background-image: url('../img/logo_rebueno.png');
+        z-index: 9;
+        padding: 0px;
+        margin: 0px;
+        background-size: 102px 38px;
+    }
+    
+    .cabecera {
+        width: 100%;
+        background-color: #ffffff;
+    }
+    
+    .btn-group.oferta {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .btn-group.login {
+        padding: 0px;
+        margin: 0px;
+        display: none;
+    }
+    
+    .cabecera-ofertas {
+        width: 100%;
+        height: 45px !important;
+        display: inline-block;
+        background-color: #ffffff;
+    }
+    
+    .ofertas_donde {
+        display: inline-block;
+        float: left;
+    }
+
+    .ofertas_siguenos {
+        display: none;
+        float: right;
+    }
+    
+    
+    .en-donde-top-center {
+        display: inline-block;
+    }
+
+    .en-donde-top-center.logo-principal {
+        margin-right: 50px;
+        position: relative;
+        top: 6px;
+
+    }
+
+    .en-donde-top-center.titulo {
+        display: none;
+        margin-right: 10px;
+        position: relative;
+        top: 20px;
+    }
+
+    .en-donde-top-center.localidades {
+        display: none;
+        position: relative;
+        top: 20px;
+    }
+    
+    /*Detalle*/
+    .detalle-titulo {
+        width:100%;
+        padding-bottom: 10px;
+        display: inline-block;
+    }
+    
+    .detalle-titulo > p {
+        font-family: 'gotham-medium', 'arial', 'sans-serif';
+        font-weight: normal;
+        font-size: 18px;
+        text-align: justify;
+    }
+    
+    .carousel.carrusel-detalle{
+         width:100%;
+         display:inline-block;
+    }
+    
+    .slider-detalle {
+        width: 100%;
+        height: 200px; 
+        background-size: 100% 200px;
+    }
+    
+    .contenedor-tabs {
+        width:100%;
+        display:table;
+    }
+    
+    .contenedor-tabs > div {
+        width:100%;
+        display:table;
+    }
+    
+    .contenedor-tabs > div > ul {
+        width:100%;
+        list-style:none;
+        float: left;
+        padding-left: 0px
+    }
+    
+    .contenedor-tabs > div > ul > li {
+        display:inline-block;
+        width: 100%;
+        padding-bottom: 5px;
+    }
+    
+    .contenedor-tabs > div > ul > li > a {
+        display:inline-block;
+        width: 100%;
+        font-size: 16px;
+        font-weight: bold;
+        font-family: 'gotham-medium', 'arial', 'sans-serif';
+        color:#72e564;
+    }
+    
+    .contenedor-tabs-panel {
+        width: 100%;
+        border-top: solid #53b546 2px;
+        padding-bottom: 10px;
+    }
+    
+    .contenedor-tabs-panel.cierre {
+        border-bottom: solid #53b546 2px;
+    }
+    
+    .contenedor-tabs-panel > h2 {
+        font-size: 16px;
+        font-weight: bold;
+        font-family: 'gotham-medium', 'arial', 'sans-serif';
+        color:#72e564;
+    }
+    
+    .contenedor-tabs-panel > ul {
+        width: 100%;
+        display: inline-block;
+    }
+    
+    .contenedor-tabs-panel-descripcion {
+        width:100%;
+        display: inline-block;
+    }
+    
+    .contenedor-tabs-panel-datos {
+        width:100%;
+        display: inline-block;
+    }
+    
+    .contenedor-tabs-panel-datos > div {
+        width:100%;
+    }
+    
+    .contenedor-tabs-panel-mapa {
+        width:100% !important;
+        display: inline-block;
+    }
+    
+    .contenedor-compra-detalle {
+        width: 100%;
+        display:block;
+        margin-top: 0px;
+        margin-left: 0px;
+        float: right;
+        position: static;
+    }
+    
+    /*Afiliacion*/
     .promocion-afiliacion-fija,
     .promocion-saludo {
         width: 90% !important;
@@ -1438,7 +1695,301 @@ h4 {
 
 
 @media (min-width: 567px) and (max-width: 727px) {
+    /*Index*/
+    .contenedor-carrusel {
+        background-image:  url('../img/back_rebueno.png');
+        background-repeat: repeat-x;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin: 0px;
+        width: 100%;
+    }
     
+    .carousel.carrusel-principal{
+         width:76%;
+         display:inline-block;
+    }
+
+    .carousel.carrusel-secundario {
+        width:20%;
+        display:inline-block;
+    }
+    
+    .slider {
+        width: 100%;
+        height: 240px; 
+        background-size: 100% 240px;
+    }
+        
+    .campana-stilouno {
+        margin-bottom: 10px;
+        margin-top: 10px;
+        margin-left: 20px;
+        margin-right: 20px;
+        text-align: left;
+        width: 330px;
+        height: 360px;
+        display:inline-block;
+        background-color: #ffffff;
+    }
+    
+    .campana-stilouno:hover {
+        box-shadow: 0px 0px 3px 3px #d6d3d3;
+    }
+    
+    .lazy.campana-imgreferencia{
+        margin-top: 0px !important;
+        height: 200px;
+        width: 330px;
+        background-size: 1456px 260px; 
+    }
+    
+    .campana-texto-descuento {
+        font-family:gotham-medium, 'arial', 'sans-serif';
+        font-size: 22px;
+        color:white;
+        background: linear-gradient(to bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
+        position: relative;
+        top: -40px;
+        padding: 8px;
+    }
+    
+    .campana-texto-detalle {
+        height: 100px;
+        display: inline-block;
+        position: relative;
+        top: 30px;
+        text-align: center;
+    }
+
+    .campana-texto-detalle > a {
+        font-weight: normal !important;
+        font-size: 12px !important;
+    }
+    
+    .campana-precio-oferta {
+        font-family:gotham-medium, 'arial', 'sans-serif';
+        font-size: 15px;
+        font-weight: bold;
+        color:#fdaf06;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    
+    .campana-tarifario {
+        text-align: right;
+        padding-top: 0px;
+        padding-bottom: 2px;
+        padding-left: 2px;
+        padding-right: 2px;
+        position: relative;
+        top: -10px;
+    }
+    
+    .campana-tarifario > simbolo {
+        color: black !important;
+        font-size: 12px !important;
+    }
+    
+    .btn.btn-ver-oferta {
+        font-family:gotham-medium, 'arial', 'sans-serif';
+        font-size: 14px;
+        color:white;
+        background: linear-gradient(to bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
+        padding-top: 4px;
+        padding-bottom: 4px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .btn.btn-ver-oferta:hover {
+        background: linear-gradient(#93ba2f,#93ba2f);
+    }
+    
+    .campana-vendidos{
+        font-family:gotham-medium, 'arial', 'sans-serif';
+        font-size: 12px;
+        text-align: center;
+        border-top-style:dashed;
+        border-top-width: 1px; 
+        border-color: #d0c3af;
+        padding-top: 10px;
+        padding-bottom: 0px;
+        color: black !important;
+    }
+    
+    .logo-principal {
+        width: 204px; 
+        height: 75px;
+        background-image: url('../img/logo_rebueno.png');
+        z-index: 8;
+        padding: 0px;
+        margin: 0px;
+        float:left;
+        clear: both !important;
+    }
+
+    .logo-principal-mini {
+        width: 102px; 
+        height: 38px;
+        background-image: url('../img/logo_rebueno.png');
+        z-index: 9;
+        padding: 0px;
+        margin: 0px;
+        background-size: 102px 38px;
+    }
+    
+    .btn-group.oferta {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .btn-group.login {
+        padding: 0px;
+        margin: 0px;
+        display: inline-block;
+    }
+    
+    .ofertas_donde {
+        display: inline-block;
+        float: left;
+    }
+
+    .ofertas_siguenos {
+        display: inline-block;
+        float: right;
+    }
+    
+    .en-donde-top-center {
+        display: inline-block;
+    }
+
+    .en-donde-top-center.logo-principal {
+        margin-right: 50px;
+        position: relative;
+        top: 6px;
+
+    }
+
+    .en-donde-top-center.titulo {
+        margin-right: 10px;
+        position: relative;
+        top: 20px;
+    }
+
+    .en-donde-top-center.localidades {
+        display: inline-block;
+        position: relative;
+        top: 20px;
+    }
+    
+    /*Detalle*/
+    .detalle-titulo {
+        width:100%;
+        padding-bottom: 10px;
+        display: inline-block;
+    }
+    
+    .detalle-titulo > p {
+        font-family: 'gotham-medium', 'arial', 'sans-serif';
+        font-weight: normal;
+        font-size: 25px;
+        text-align: justify;
+    }
+    
+    .carousel.carrusel-detalle{
+         width:67%;
+         display:inline-block;
+    }
+    
+    .slider-detalle {
+        width: 100%;
+        height: 400px; 
+        background-size: 100% 400px;
+    }
+    
+    .contenedor-tabs {
+        width:67%;
+        display:table;
+    }
+    
+    .contenedor-tabs > div {
+        width:100%;
+        display:table;
+    }
+    
+    .contenedor-tabs > div > ul {
+        width:100%;
+        list-style:none;
+        float: left;
+        padding-left: 0px
+    }
+    
+    .contenedor-tabs > div > ul > li {
+        display:inline-block;
+        width: 30%;
+    }
+    
+    .contenedor-tabs > div > ul > li > a {
+        display:inline-block;
+        width: 100%;
+        font-size: 16px;
+        font-weight: bold;
+        font-family: 'gotham-medium', 'arial', 'sans-serif';
+        color:#72e564;
+    }
+    
+    .contenedor-tabs-panel {
+        width: 100%;
+        border-top: solid #53b546 2px;
+        padding-bottom: 10px;
+    }
+    
+    .contenedor-tabs-panel.cierre {
+        border-bottom: solid #53b546 2px;
+    }
+    
+    .contenedor-tabs-panel > h2 {
+        font-size: 16px;
+        font-weight: bold;
+        font-family: 'gotham-medium', 'arial', 'sans-serif';
+        color:#72e564;
+    }
+    
+    .contenedor-tabs-panel > ul {
+        width: 100%;
+        display: inline-block;
+    }
+    
+    .contenedor-tabs-panel-descripcion {
+        width:100%;
+        display: inline-block;
+    }
+    
+    .contenedor-tabs-panel-datos {
+        width:67%;
+        display: inline-block;
+    }
+    
+    .contenedor-tabs-panel-datos > div {
+        width:100%;
+    }
+    
+    .contenedor-tabs-panel-mapa {
+        width:30% !important;
+        display: inline-block;
+    }
+    
+    .contenedor-compra-detalle {
+        width: 25%;
+        display:fixed;
+        margin-top: 0px;
+        margin-left: 30px;
+        float: right;
+        position: relative;
+    }
+    
+    /*Afiliacion*/
     .promocion-afiliacion-fija,
     .promocion-saludo {
         width: 90% !important;
@@ -1592,7 +2143,301 @@ h4 {
 }
 
 @media (min-width: 727px) and (max-width: 1250px) {
+    /*Index*/
+    .contenedor-carrusel {
+        background-image:  url('../img/back_rebueno.png');
+        background-repeat: repeat-x;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin: 0px;
+        width: 100%;
+    }
     
+    .carousel.carrusel-principal{
+         width:76%;
+         display:inline-block;
+    }
+
+    .carousel.carrusel-secundario {
+        width:20%;
+        display:inline-block;
+    }
+    
+    .slider {
+        width: 100%;
+        height: 240px; 
+        background-size: 100% 240px;
+    }
+        
+    .campana-stilouno {
+        margin-bottom: 10px;
+        margin-top: 10px;
+        margin-left: 20px;
+        margin-right: 20px;
+        text-align: left;
+        width: 330px;
+        height: 360px;
+        display:inline-block;
+        background-color: #ffffff;
+    }
+    
+    .campana-stilouno:hover {
+        box-shadow: 0px 0px 3px 3px #d6d3d3;
+    }
+    
+    .lazy.campana-imgreferencia{
+        margin-top: 0px !important;
+        height: 200px;
+        width: 330px;
+        background-size: 1456px 260px; 
+    }
+    
+    .campana-texto-descuento {
+        font-family:gotham-medium, 'arial', 'sans-serif';
+        font-size: 22px;
+        color:white;
+        background: linear-gradient(to bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
+        position: relative;
+        top: -40px;
+        padding: 8px;
+    }
+    
+    .campana-texto-detalle {
+        height: 100px;
+        display: inline-block;
+        position: relative;
+        top: 30px;
+        text-align: center;
+    }
+
+    .campana-texto-detalle > a {
+        font-weight: normal !important;
+        font-size: 12px !important;
+    }
+    
+    .campana-precio-oferta {
+        font-family:gotham-medium, 'arial', 'sans-serif';
+        font-size: 15px;
+        font-weight: bold;
+        color:#fdaf06;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    
+    .campana-tarifario {
+        text-align: right;
+        padding-top: 0px;
+        padding-bottom: 2px;
+        padding-left: 2px;
+        padding-right: 2px;
+        position: relative;
+        top: -10px;
+    }
+    
+    .campana-tarifario > simbolo {
+        color: black !important;
+        font-size: 12px !important;
+    }
+    
+    .btn.btn-ver-oferta {
+        font-family:gotham-medium, 'arial', 'sans-serif';
+        font-size: 14px;
+        color:white;
+        background: linear-gradient(to bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
+        padding-top: 4px;
+        padding-bottom: 4px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .btn.btn-ver-oferta:hover {
+        background: linear-gradient(#93ba2f,#93ba2f);
+    }
+    
+    .campana-vendidos{
+        font-family:gotham-medium, 'arial', 'sans-serif';
+        font-size: 12px;
+        text-align: center;
+        border-top-style:dashed;
+        border-top-width: 1px; 
+        border-color: #d0c3af;
+        padding-top: 10px;
+        padding-bottom: 0px;
+        color: black !important;
+    }
+    
+    .logo-principal {
+        width: 204px; 
+        height: 75px;
+        background-image: url('../img/logo_rebueno.png');
+        z-index: 8;
+        padding: 0px;
+        margin: 0px;
+        float:left;
+        clear: both !important;
+    }
+
+    .logo-principal-mini {
+        width: 102px; 
+        height: 38px;
+        background-image: url('../img/logo_rebueno.png');
+        z-index: 9;
+        padding: 0px;
+        margin: 0px;
+        background-size: 102px 38px;
+    }
+    
+    .btn-group.oferta {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .btn-group.login {
+        padding: 0px;
+        margin: 0px;
+        display: inline-block;
+    }
+    
+    .ofertas_donde {
+        display: inline-block;
+        float: left;
+    }
+
+    .ofertas_siguenos {
+        display: inline-block;
+        float: right;
+    }
+    
+    .en-donde-top-center {
+        display: inline-block;
+    }
+
+    .en-donde-top-center.logo-principal {
+        margin-right: 50px;
+        position: relative;
+        top: 6px;
+
+    }
+
+    .en-donde-top-center.titulo {
+        margin-right: 10px;
+        position: relative;
+        top: 20px;
+    }
+
+    .en-donde-top-center.localidades {
+        display: inline-block;
+        position: relative;
+        top: 20px;
+    }
+    
+    /*Detalle*/
+    .detalle-titulo {
+        width:100%;
+        padding-bottom: 10px;
+        display: inline-block;
+    }
+    
+    .detalle-titulo > p {
+        font-family: 'gotham-medium', 'arial', 'sans-serif';
+        font-weight: normal;
+        font-size: 25px;
+        text-align: justify;
+    }
+    
+    .carousel.carrusel-detalle{
+         width:67%;
+         display:inline-block;
+    }
+    
+    .slider-detalle {
+        width: 100%;
+        height: 400px; 
+        background-size: 100% 400px;
+    }
+    
+    .contenedor-tabs {
+        width:67%;
+        display:table;
+    }
+    
+    .contenedor-tabs > div {
+        width:100%;
+        display:table;
+    }
+    
+    .contenedor-tabs > div > ul {
+        width:100%;
+        list-style:none;
+        float: left;
+        padding-left: 0px
+    }
+    
+    .contenedor-tabs > div > ul > li {
+        display:inline-block;
+        width: 30%;
+    }
+    
+    .contenedor-tabs > div > ul > li > a {
+        display:inline-block;
+        width: 100%;
+        font-size: 16px;
+        font-weight: bold;
+        font-family: 'gotham-medium', 'arial', 'sans-serif';
+        color:#72e564;
+    }
+    
+    .contenedor-tabs-panel {
+        width: 100%;
+        border-top: solid #53b546 2px;
+        padding-bottom: 10px;
+    }
+    
+    .contenedor-tabs-panel.cierre {
+        border-bottom: solid #53b546 2px;
+    }
+    
+    .contenedor-tabs-panel > h2 {
+        font-size: 16px;
+        font-weight: bold;
+        font-family: 'gotham-medium', 'arial', 'sans-serif';
+        color:#72e564;
+    }
+    
+    .contenedor-tabs-panel > ul {
+        width: 100%;
+        display: inline-block;
+    }
+    
+    .contenedor-tabs-panel-descripcion {
+        width:100%;
+        display: inline-block;
+    }
+    
+    .contenedor-tabs-panel-datos {
+        width:67%;
+        display: inline-block;
+    }
+    
+    .contenedor-tabs-panel-datos > div {
+        width:100%;
+    }
+    
+    .contenedor-tabs-panel-mapa {
+        width:30% !important;
+        display: inline-block;
+    }
+    
+    .contenedor-compra-detalle {
+        width: 25%;
+        display:fixed;
+        margin-top: 0px;
+        margin-left: 30px;
+        float: right;
+        position: relative;
+    }
+    
+    /*Afiliacion*/
     .promocion-afiliacion-fija,
     .promocion-saludo {
         width: 60% !important;
@@ -1745,7 +2590,301 @@ h4 {
 }
 
 @media (min-width: 1250px) {
+    /*Index*/
+    .contenedor-carrusel {
+        background-image:  url('../img/back_rebueno.png');
+        background-repeat: repeat-x;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin: 0px;
+        width: 100%;
+    }
     
+    .carousel.carrusel-principal{
+         width:76%;
+         display:inline-block;
+    }
+
+    .carousel.carrusel-secundario {
+        width:20%;
+        display:inline-block;
+    }
+    
+    .slider {
+        width: 100%;
+        height: 240px; 
+        background-size: 100% 240px;
+    }
+       
+    .campana-stilouno {
+        margin-bottom: 10px;
+        margin-top: 10px;
+        margin-left: 20px;
+        margin-right: 20px;
+        text-align: left;
+        width: 330px;
+        height: 360px;
+        display:inline-block;
+        background-color: #ffffff;
+    }
+    
+    .campana-stilouno:hover {
+        box-shadow: 0px 0px 3px 3px #d6d3d3;
+    }
+    
+    .lazy.campana-imgreferencia{
+        margin-top: 0px !important;
+        height: 200px;
+        width: 330px;
+        background-size: 1456px 260px; 
+    }
+    
+    .campana-texto-descuento {
+        font-family:gotham-medium, 'arial', 'sans-serif';
+        font-size: 22px;
+        color:white;
+        background: linear-gradient(to bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
+        position: relative;
+        top: -40px;
+        padding: 8px;
+    }
+    
+    .campana-texto-detalle {
+        height: 100px;
+        display: inline-block;
+        position: relative;
+        top: 30px;
+        text-align: center;
+    }
+
+    .campana-texto-detalle > a {
+        font-weight: normal !important;
+        font-size: 12px !important;
+    }
+    
+    .campana-precio-oferta {
+        font-family:gotham-medium, 'arial', 'sans-serif';
+        font-size: 15px;
+        font-weight: bold;
+        color:#fdaf06;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    
+    .campana-tarifario {
+        text-align: right;
+        padding-top: 0px;
+        padding-bottom: 2px;
+        padding-left: 2px;
+        padding-right: 2px;
+        position: relative;
+        top: -10px;
+    }
+    
+    .campana-tarifario > simbolo {
+        color: black !important;
+        font-size: 12px !important;
+    }
+    
+    .btn.btn-ver-oferta {
+        font-family:gotham-medium, 'arial', 'sans-serif';
+        font-size: 14px;
+        color:white;
+        background: linear-gradient(to bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
+        padding-top: 4px;
+        padding-bottom: 4px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .btn.btn-ver-oferta:hover {
+        background: linear-gradient(#93ba2f,#93ba2f);
+    }
+    
+    .campana-vendidos{
+        font-family:gotham-medium, 'arial', 'sans-serif';
+        font-size: 12px;
+        text-align: center;
+        border-top-style:dashed;
+        border-top-width: 1px; 
+        border-color: #d0c3af;
+        padding-top: 10px;
+        padding-bottom: 0px;
+        color: black !important;
+    }
+    
+    .logo-principal {
+        width: 204px; 
+        height: 75px;
+        background-image: url('../img/logo_rebueno.png');
+        z-index: 8;
+        padding: 0px;
+        margin: 0px;
+        float:left;
+        clear: both !important;
+    }
+
+    .logo-principal-mini {
+        width: 102px; 
+        height: 38px;
+        background-image: url('../img/logo_rebueno.png');
+        z-index: 9;
+        padding: 0px;
+        margin: 0px;
+        background-size: 102px 38px;
+    }
+    
+    .btn-group.oferta {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .btn-group.login {
+        padding: 0px;
+        margin: 0px;
+        display: inline-block;
+    }
+    
+    .ofertas_donde {
+        display: inline-block;
+        float: left;
+    }
+
+    .ofertas_siguenos {
+        display: inline-block;
+        float: right;
+    }
+    
+    .en-donde-top-center {
+        display: inline-block;
+    }
+
+    .en-donde-top-center.logo-principal {
+        margin-right: 50px;
+        position: relative;
+        top: 6px;
+
+    }
+
+    .en-donde-top-center.titulo {
+        margin-right: 10px;
+        position: relative;
+        top: 20px;
+    }
+
+    .en-donde-top-center.localidades {
+        display: inline-block;
+        position: relative;
+        top: 20px;
+    }
+    
+    /*Detalle*/
+    .detalle-titulo {
+        width:100%;
+        padding-bottom: 10px;
+        display: inline-block;
+    }
+    
+    .detalle-titulo > p {
+        font-family: 'gotham-medium', 'arial', 'sans-serif';
+        font-weight: normal;
+        font-size: 25px;
+        text-align: justify;
+    }
+    
+    .carousel.carrusel-detalle{
+         width:67%;
+         display:inline-block;
+    }
+    
+    .slider-detalle {
+        width: 100%;
+        height: 400px; 
+        background-size: 100% 400px;
+    }
+    
+    .contenedor-tabs {
+        width:67%;
+        display:table;
+    }
+    
+    .contenedor-tabs > div {
+        width:100%;
+        display:table;
+    }
+    
+    .contenedor-tabs > div > ul {
+        width:100%;
+        list-style:none;
+        float: left;
+        padding-left: 0px
+    }
+    
+    .contenedor-tabs > div > ul > li {
+        display:inline-block;
+        width: 30%;
+    }
+    
+    .contenedor-tabs > div > ul > li > a {
+        display:inline-block;
+        width: 100%;
+        font-size: 16px;
+        font-weight: bold;
+        font-family: 'gotham-medium', 'arial', 'sans-serif';
+        color:#72e564;
+    }
+    
+    .contenedor-tabs-panel {
+        width: 100%;
+        border-top: solid #53b546 2px;
+        padding-bottom: 10px;
+    }
+    
+    .contenedor-tabs-panel.cierre {
+        border-bottom: solid #53b546 2px;
+    }
+    
+    .contenedor-tabs-panel > h2 {
+        font-size: 16px;
+        font-weight: bold;
+        font-family: 'gotham-medium', 'arial', 'sans-serif';
+        color:#72e564;
+    }
+    
+    .contenedor-tabs-panel > ul {
+        width: 100%;
+        display: inline-block;
+    }
+    
+    .contenedor-tabs-panel-descripcion {
+        width:100%;
+        display: inline-block;
+    }
+    
+    .contenedor-tabs-panel-datos {
+        width:67%;
+        display: inline-block;
+    }
+    
+    .contenedor-tabs-panel-datos > div {
+        width:100%;
+    }
+    
+    .contenedor-tabs-panel-mapa {
+        width:30% !important;
+        display: inline-block;
+    }
+    
+    .contenedor-compra-detalle {
+        width: 25%;
+        display:fixed;
+        margin-top: 0px;
+        margin-left: 30px;
+        float: right;
+        position: relative;
+    }
+    
+    /*Afiliacion*/
     .promocion-afiliacion-fija,
     .promocion-saludo {
         width: 60% !important;

@@ -1,3 +1,4 @@
+<div class="container">
 <form name="frmpago" role="form" action="/campana/pago" method="POST" data-parsley-validate>
     <div class="section_payment">
         <?php if (($fl != null && $fl == '2') || isset($user_session->username) ) { ?>
@@ -250,6 +251,7 @@
         </div>
     </div>
 </form>
+</div>
 <div id="status"></div>
 <div id="fb-root"></div>
 <script type="text/javascript">
