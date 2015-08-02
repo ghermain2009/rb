@@ -6,22 +6,14 @@ use Zend\Session\Container;
 
 $user_session = new Container('user');
 
-/*
-
-  $serviceLocator = $this->getApplication()->getServiceManager();
-  $campanaTable = $serviceLocator->get('Dashboard\Model\CupcampanaTable');
-  $datos = $campanaTable->getMenu();
-
-  var_dump($datos); */
 ?>
 
 <html lang="es">
     <head>
         <meta charset="utf-8">
-        <meta property="og:url" content="<?php echo $user_session->localhost;?>" />
-        <meta property="og:title" content="Developando Web & Móvil" />
-        <meta property="og:description" content="Empresa encarga de desarrollar aplicaciones movil y web con calidad" />
-        <meta property="og:image" content="<?php echo $user_session->localhost;?>/img/<?php echo $user_session->id_campana;?>/small2/image1.jpg" />
+        <title>Disfrutar de momentos inolvidables con descuentos de 50% a más en Ecuador es ya una realidad | Rebueno.ec</title>
+        <meta name="title" content="Disfrutar de momentos inolvidables con descuentos de 50% a más en Ecuador es ya una realidad | Rebueno.ec">
+        <meta name="keywords" content="comida, cupones, descuentos, diversion, full day, ofertas, oferton, rebueno, viajes, guayaquil, ecuador">
         
         <?php echo $this->headTitle('Rebueno')->setSeparator(' - ')->setAutoEscape(false) ?>
 

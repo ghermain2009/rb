@@ -50,14 +50,17 @@
                     <p class="promocion-parrafo">Suscríbete y recibirás por las mañanas super ofertas en tu buzón casi como tips de super utilidad.</p>
                 </div>
             </div>
+            <input type="hidden" name="pais" id="pais" value="<?php echo $pais; ?>">
             <div class="form-group">
                 <label for="ciudad" class="col-lg-5 control-label afiliacion">Elige tu ciudad:</label>
                 <div class="col-xs-7 validacion"> 
                     <select class="form-control" name="ciudad" id="ciudad">
                         <option value="">-- Selecciona tu ciudad --</option>
                         <?php foreach ($departamentos as $departamento) { ?>
-                        <option value="<?php echo $departamento['id_departamento']; ?>" <?php if($departamento['id_departamento'] == $capital){ echo 'selected';} ?>><?php echo $departamento['descripcion']; ?></option>
-                        <?php } ?>
+                            <option value="<?php echo $departamento['id_departamento']; ?>" <?php if ($departamento['id_departamento'] == $capital) {
+                            echo 'selected';
+                        } ?>><?php echo $departamento['descripcion']; ?></option>
+<?php } ?>
                     </select>
                     <span class="help-block with-errors"></span>
                 </div>
@@ -142,11 +145,9 @@
                 <label for="tpdoc" class="col-lg-5 control-label afiliacion"><span class="required">* </span>Tipo Documento:</label>
                 <div class="col-xs-7 validacion">
                     <select class="form-control" name="tipdoc" id="tipdoc">
-                        <option value="DNI" label="DNI">DNI</option>
-                        <option value="RUC" label="RUC">RUC</option>
-                        <option value="PAS" label="Pasaporte">Pasaporte</option>
-                        <option value="CEX" label="Carnét de Extranjería">Carnét de Extranjería</option>
-                        <option value="CED" label="Cédula">Carnét de Extranjería</option>
+                        <?php foreach ($tipodocumentos as $tipodocumento) { ?>
+                            <option value="<?php echo $tipodocumento["id_tipo_documento"]; ?>" label="<?php echo $tipodocumento["descripcion"]; ?>"><?php echo $tipodocumento["descripcion"]; ?></option>
+                        <?php } ?>
                     </select>
                     <span class="help-block with-errors"></span>
                 </div>
@@ -183,9 +184,21 @@
                     </div>
                 </div>
             </div>
-            <div class="registrar"><br><br>
-                <button type="submit" class="btn btn-rebueno">Registrarme</button>
+            <div class="form-group">
+                <div class="col-xs-12 validacion">
+                    <?php foreach ($categorias as $categoria) { ?>
+                        <div class="radio afiliacion" >
+                            <label><input type="checkbox" name="preferencia[]" value="<?php echo $categoria["id_categoria"]; ?>"><?php echo $categoria["descripcion"]; ?></label>
+                        </div>
+                    <?php } ?>
+                </div>
             </div>
+            <div class="form-group">
+                <div class="registrar">
+                    <button type="submit" class="btn btn-rebueno">Registrarme</button>
+                </div>
+            </div>
+
         </form>
     </div>
     <div class="facebook-actualizacion" id="facebook-contenedor">
@@ -240,11 +253,13 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-        
+
         jQuery.fn.reset = function () {
-            $(this).each (function() { this.reset(); });
+            $(this).each(function () {
+                this.reset();
+            });
         }
-        
+
         if ($(window).width() <= 727) {
             $("#promocion-container").animate({'opacity': '1', 'width': '90%', 'height': '60%', 'top': '20%', 'left': '5%', 'background-size': '90% 90%'}, 3000, function () {
                 // Animation complete.
@@ -272,255 +287,281 @@
                 });
             });
         }
-        
+
         $('#suscribirmeForm').formValidation({
-                message: 'El valor no es válido.',
-                err: {
-                    container: 'tooltip'
-                },
-                icon: {
-                    valid: 'glyphicon glyphicon-ok',
-                    invalid: 'glyphicon glyphicon-remove',
-                    validating: 'glyphicon glyphicon-refresh',
-                },
-                fields: {
-                    email: {
-                        err: 'popover',
-                        //icon: false,
-                        validators: {
-                            notEmpty: {
-                                message: 'Por favor registre su email.'
-                            },
-                            emailAddress: {
-                                message: 'El email ingresado no es una dirección correcta.'
-                            }
+            message: 'El valor no es válido.',
+            err: {
+                container: 'tooltip'
+            },
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh',
+            },
+            fields: {
+                email: {
+                    err: 'popover',
+                    //icon: false,
+                    validators: {
+                        notEmpty: {
+                            message: 'Por favor registre su email.'
+                        },
+                        emailAddress: {
+                            message: 'El email ingresado no es una dirección correcta.'
                         }
-                    },
-                    ciudad: {
-                        err: 'popover',
-                        //icon: false,
-                        validators: {
-                            notEmpty: {
-                                message: 'Ls ciudad es requerida, por favor seleecione una.'
-                            }
+                    }
+                },
+                ciudad: {
+                    err: 'popover',
+                    //icon: false,
+                    validators: {
+                        notEmpty: {
+                            message: 'Ls ciudad es requerida, por favor seleecione una.'
                         }
-                    },
-                    genero: {
-                        err: 'popover',
-                        //icon: false,
-                        validators: {
-                            notEmpty: {
-                                message: 'Debe seleccionar su genero.'
-                            }
+                    }
+                },
+                genero: {
+                    err: 'popover',
+                    //icon: false,
+                    validators: {
+                        notEmpty: {
+                            message: 'Debe seleccionar su genero.'
                         }
                     }
                 }
-            }).on('success.form.fv', function(e) {
-                e.preventDefault();
-                var $form = $(e.target);
-                $.post($form.attr('action'), $form.serialize(), 
-                function(data) {
+            }
+        }).on('success.form.fv', function (e) {
+            e.preventDefault();
+            var $form = $(e.target);
+            $.post($form.attr('action'), $form.serialize(),
+                function (data) {
+                    var cliente = $.parseJSON(data);
                     $("#promocion-container").css('display', 'none');
                     $("#registro-container").css('display', 'inline-block');
                     $("#formulario-registro").css('display', 'inline-block');
                     $("#facebook-contenedor").css('display', 'inline-block');
                     $("#facebook-registro").css('display', 'inline-block');
                     $("#actualizarForm :input[name=email]").val($("#suscribirmeForm :input[name=email]").val());
-                });
-            });
-            
-            $('#actualizarForm').formValidation({
-                message: 'El valor no es válido.',
-                err: {
-                    container: 'tooltip'
-                },
-                icon: {
-                    valid: 'glyphicon glyphicon-ok',
-                    invalid: 'glyphicon glyphicon-remove',
-                    validating: 'glyphicon glyphicon-refresh',
-                },
-                fields: {
-                    nombre: {
-                        err: 'popover',
-                        validators: {
-                            notEmpty: {
-                                message: 'Por favor registre su nombre.'
-                            },
-                            regexp: {
-                                regexp: /^[a-zA-Z ]+$/
-                            },
-                            stringLength: {
-                                min: 1,
-                                max: 50,
-                                message: 'El nombre debe contener 50 caracteres como máximo.'
-                            }
-                        }
-                    },
-                    apellido: {
-                        err: 'popover',
-                        validators: {
-                            notEmpty: {
-                                message: 'Por favor registre su apellido.'
-                            },
-                            regexp: {
-                                regexp: /^[a-zA-Z ]+$/
-                            },
-                            stringLength: {
-                                min: 1,
-                                max: 50,
-                                message: 'El apellido debe contener 50 caracteres como máximo.'
-                            }
-                        }
-                    },
-                    clave: {
-                        err: 'popover',
-                        validators: {
-                            notEmpty: {
-                                message: 'Por favor registre su password.'
-                            },
-                            stringLength: {
-                                min: 6,
-                                max: 50,
-                                message: 'El password debe contener 50 caracteres como máximo.'
-                            }
-                        }
-                    },
-                    claverepeat: {
-                        err: 'popover',
-                        validators: {
-                            notEmpty: {
-                                message: 'Por favor repita su password.'
-                            },
-                            identical: {
-                                field: 'clave',
-                                message: 'No coinciden las claves ingresadas.'
-                            },
-                            stringLength: {
-                                min: 6,
-                                max: 50,
-                                message: 'El password debe contener 50 caracteres como máximo.'
-                            }
-                        }
-                    },
-                    ciudad: {
-                        err: 'popover',
-                        //icon: false,
-                        validators: {
-                            notEmpty: {
-                                message: 'Ls ciudad es requerida, por favor seleecione una.'
-                            }
-                        }
-                    },
-                    email: {
-                        err: 'popover',
-                        //icon: false,
-                        validators: {
-                            notEmpty: {
-                                message: 'Por favor registre su email.'
-                            },
-                            emailAddress: {
-                                message: 'El email ingresado no es una dirección correcta.'
-                            }
-                        }
-                    },
-                    tipdoc: {
-                        err: 'popover',
-                        //icon: false,
-                        validators: {
-                            notEmpty: {
-                                message: 'El tipo de documento es requerido, por favor seleecione uno.'
-                            }
-                        }
-                    },
-                    numdoc: {
-                        err: 'popover',
-                        validators: {
-                            notEmpty: {
-                                message: 'Por favor registre su numero de documento de identidad.'
-                            },
-                            regexp: {
-                                regexp: /^[a-zA-Z0-9-]+$/
-                            },
-                            stringLength: {
-                                min: 1,
-                                max: 20,
-                                message: 'El documento debe contener 20 caracteres como máximo.'
-                            }
-                        }
-                    },
-                    telefono: {
-                        err: 'popover',
-                        validators: {
-                            notEmpty: {
-                                message: 'Por favor registre su numero de telefono.'
-                            },
-                            regexp: {
-                                regexp: /^[0-9-]+$/
-                            },
-                            stringLength: {
-                                min: 1,
-                                max: 45,
-                                message: 'El telefono debe contener 45 caracteres como máximo.'
-                            }
-                        }
-                    },
-                    celular: {
-                        err: 'popover',
-                        validators: {
-                            notEmpty: {
-                                message: 'Por favor registre su numero de celular.'
-                            },
-                            regexp: {
-                                regexp: /^[0-9-]+$/
-                            },
-                            stringLength: {
-                                min: 1,
-                                max: 45,
-                                message: 'El celular debe contener 45 caracteres como máximo.'
-                            }
-                        }
-                    },
-                    genero: {
-                        err: 'popover',
-                        //icon: false,
-                        validators: {
-                            notEmpty: {
-                                message: 'Debe seleccionar su genero.'
-                            }
+                    if (cliente[0][0]) {
+                        if (cliente[0][0].id_tipo_documento) {
+                            $("#actualizarForm :input[name=nombre]").val(cliente[0][0].nombres);
+                            $("#actualizarForm :input[name=apellido]").val(cliente[0][0].apellidos);
+                            $("#actualizarForm select[name=tipdoc] option[value=" + cliente[0][0].id_tipo_documento + "]").attr("selected", "selected");
+                            $("#actualizarForm :input[name=numdoc]").val(cliente[0][0].numero_documento);
+                            $("#actualizarForm :input[name=telefono]").val(cliente[0][0].telefono);
+                            $("#actualizarForm :input[name=celular]").val(cliente[0][0].celular);
+                            $("#actualizarForm :radio[name=genero][value=" + cliente[0][0].id_sexo + "]").attr("checked", "checked");
+                            $.each(cliente[1], function(i, obj) {
+                                $("#actualizarForm :checkbox[name='preferencia[]'][value=" + obj.id_categoria + "]").attr("checked", "checked");
+                            });
                         }
                     }
                 }
-            }).on('success.form.fv', function(e) {
-                e.preventDefault();
-                var $form = $(e.target);
-                $.post($form.attr('action'), $form.serialize(), 
-                function(data) {
-                    $("#registro-container").css('display', 'none');
-                    $("#promocion-saludo").css('display', 'inline-block');
-                    $("#formulario-saludo").css('display', 'inline-block');
-                    $("#imagen-saludo").css('display', 'inline-block');
-                    //$("#suscribirmeForm").formValidation('resetForm', true);
-                    //$("#suscribirmeForm").formValidation('updateStatus', 'email', 'NOT_VALIDATED').formValidation('validateField', 'email');
-                    //$("#suscribirmeForm").data('formValidation').updateStatus('email', 'NOT_VALIDATED').validateField('email');
-                    //
-                    //$("#suscribirmeForm").reset();
-                    //$('#suscribirmeForm').data('validator').resetForm();
-                    //$("#actualizarForm").reset();
-                    
-                    
-                    //$(form).data('formValidation').resetForm();
-                    
-                });
-            });
-            
-            $('#saludoForm').formValidation().on('success.form.fv', function(e) {
-                //e.preventDefault();
-                //$("#promocion-saludo").css('display', 'none');
-                //$("#promocion-container").css('display', 'inline-block');
-            });
-       
+            );
         });
-        
+
+        $('#actualizarForm').formValidation({
+            message: 'El valor no es válido.',
+            err: {
+                container: 'tooltip'
+            },
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh',
+            },
+            fields: {
+                nombre: {
+                    err: 'popover',
+                    validators: {
+                        notEmpty: {
+                            message: 'Por favor registre su nombre.'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z ]+$/
+                        },
+                        stringLength: {
+                            min: 1,
+                            max: 50,
+                            message: 'El nombre debe contener 50 caracteres como máximo.'
+                        }
+                    }
+                },
+                apellido: {
+                    err: 'popover',
+                    validators: {
+                        notEmpty: {
+                            message: 'Por favor registre su apellido.'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z ]+$/
+                        },
+                        stringLength: {
+                            min: 1,
+                            max: 50,
+                            message: 'El apellido debe contener 50 caracteres como máximo.'
+                        }
+                    }
+                },
+                clave: {
+                    err: 'popover',
+                    validators: {
+                        notEmpty: {
+                            message: 'Por favor registre su password.'
+                        },
+                        stringLength: {
+                            min: 6,
+                            max: 50,
+                            message: 'El password debe contener 50 caracteres como máximo.'
+                        }
+                    }
+                },
+                claverepeat: {
+                    err: 'popover',
+                    validators: {
+                        notEmpty: {
+                            message: 'Por favor repita su password.'
+                        },
+                        identical: {
+                            field: 'clave',
+                            message: 'No coinciden las claves ingresadas.'
+                        },
+                        stringLength: {
+                            min: 6,
+                            max: 50,
+                            message: 'El password debe contener 50 caracteres como máximo.'
+                        }
+                    }
+                },
+                ciudad: {
+                    err: 'popover',
+                    //icon: false,
+                    validators: {
+                        notEmpty: {
+                            message: 'Ls ciudad es requerida, por favor seleecione una.'
+                        }
+                    }
+                },
+                email: {
+                    err: 'popover',
+                    //icon: false,
+                    validators: {
+                        notEmpty: {
+                            message: 'Por favor registre su email.'
+                        },
+                        emailAddress: {
+                            message: 'El email ingresado no es una dirección correcta.'
+                        }
+                    }
+                },
+                tipdoc: {
+                    err: 'popover',
+                    //icon: false,
+                    validators: {
+                        notEmpty: {
+                            message: 'El tipo de documento es requerido, por favor seleecione uno.'
+                        }
+                    }
+                },
+                numdoc: {
+                    err: 'popover',
+                    validators: {
+                        notEmpty: {
+                            message: 'Por favor registre su numero de documento de identidad.'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9-]+$/
+                        },
+                        stringLength: {
+                            min: 1,
+                            max: 20,
+                            message: 'El documento debe contener 20 caracteres como máximo.'
+                        }
+                    }
+                },
+                telefono: {
+                    err: 'popover',
+                    validators: {
+                        notEmpty: {
+                            message: 'Por favor registre su numero de telefono.'
+                        },
+                        regexp: {
+                            regexp: /^[0-9-]+$/
+                        },
+                        stringLength: {
+                            min: 1,
+                            max: 45,
+                            message: 'El telefono debe contener 45 caracteres como máximo.'
+                        }
+                    }
+                },
+                celular: {
+                    err: 'popover',
+                    validators: {
+                        notEmpty: {
+                            message: 'Por favor registre su numero de celular.'
+                        },
+                        regexp: {
+                            regexp: /^[0-9-]+$/
+                        },
+                        stringLength: {
+                            min: 1,
+                            max: 45,
+                            message: 'El celular debe contener 45 caracteres como máximo.'
+                        }
+                    }
+                },
+                genero: {
+                    err: 'popover',
+                    //icon: false,
+                    validators: {
+                        notEmpty: {
+                            message: 'Debe seleccionar su genero.'
+                        }
+                    }
+                },
+                'preferencia[]': {
+                    err: 'popover',
+                    icon: false,
+                    validators: {
+                        choice: {
+                            min: 1,
+                            message: 'Por favor elija al menos %s de sus preferencias.'
+                        }
+                    }
+                }
+            }
+        }).on('success.form.fv', function (e) {
+            e.preventDefault();
+            var $form = $(e.target);
+            $.post($form.attr('action'), $form.serialize(),
+                    function (data) {
+                        $("#registro-container").css('display', 'none');
+                        $("#promocion-saludo").css('display', 'inline-block');
+                        $("#formulario-saludo").css('display', 'inline-block');
+                        $("#imagen-saludo").css('display', 'inline-block');
+                        //$("#suscribirmeForm").formValidation('resetForm', true);
+                        //$("#suscribirmeForm").formValidation('updateStatus', 'email', 'NOT_VALIDATED').formValidation('validateField', 'email');
+                        //$("#suscribirmeForm").data('formValidation').updateStatus('email', 'NOT_VALIDATED').validateField('email');
+                        //
+                        //$("#suscribirmeForm").reset();
+                        //$('#suscribirmeForm').data('validator').resetForm();
+                        //$("#actualizarForm").reset();
+
+
+                        //$(form).data('formValidation').resetForm();
+
+                    });
+        });
+
+        $('#saludoForm').formValidation().on('success.form.fv', function (e) {
+            //e.preventDefault();
+            //$("#promocion-saludo").css('display', 'none');
+            //$("#promocion-container").css('display', 'inline-block');
+        });
+
+    });
+
     $(function () {
         /*$("img.lazy").lazyload();
          

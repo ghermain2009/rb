@@ -12,6 +12,8 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Session\Container;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Json\Json;
 
 class IndexController extends AbstractActionController
 {
@@ -74,11 +76,24 @@ class IndexController extends AbstractActionController
         
         $pais = $config['id_pais'];
         $capital = $config['id_capital'];
+        $existepromocion = true; 
         
         $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
-        $datos = $departamentoTable->getDepartamentosxPais($pais);
+        $departamentos = $departamentoTable->getDepartamentosxPais($pais);
         
-        return new ViewModel(array('departamentos' => $datos, 'capital' => $capital, 'user_session' => $user_session));
+        $tipodocumentoTable = $serviceLocator->get('Dashboard\Model\GentipodocumentoTable');
+        $tipodocumentos = $tipodocumentoTable->fetchAll();
+        
+        $categoriaTable = $serviceLocator->get('Dashboard\Model\GencategoriaTable');
+        $categorias = $categoriaTable->fetchAll();
+        
+        return new ViewModel(array('departamentos' => $departamentos, 
+                                   'tipodocumentos' => $tipodocumentos, 
+                                   'categorias' => $categorias,
+                                   'pais' => $pais, 
+                                   'capital' => $capital, 
+                                   'user_session' => $user_session,
+                                   'existepromocion' => $existepromocion));
     }
     
     public function suscribirmeAction() {
@@ -86,13 +101,22 @@ class IndexController extends AbstractActionController
         
         $serviceLocator = $this->getServiceLocator();
         $clienteTable = $serviceLocator->get('Dashboard\Model\CupclienteTable');
+        $preferenciasTable = $serviceLocator->get('Dashboard\Model\CupclientepreferenciasTable');
         
         $clienteTable->addCliente($datos);
+        if(isset($datos["preferencia"])) {
+            $preferenciasTable->addPreferencias($datos);
+        }
+        
+        $datosCliente = ArrayUtils::iteratorToArray($clienteTable->getUsuarioByUser($datos["email"]));
+        $datosPreferencia = ArrayUtils::iteratorToArray($preferenciasTable->getPreferenciasByUser($datos["email"]));
+        
+        $datos = array('0' => $datosCliente,'1' => $datosPreferencia);
         
         $viewmodel = new ViewModel();
         $viewmodel->setTerminal(true);
 
-        return $viewmodel;
+        return $this->getResponse()->setContent(Json::encode($datos));
         
     }
    
