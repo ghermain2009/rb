@@ -76,7 +76,7 @@ class IndexController extends AbstractActionController
         
         $pais = $config['id_pais'];
         $capital = $config['id_capital'];
-        $existepromocion = true; 
+        $existepromocion = false; 
         
         $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
         $departamentos = $departamentoTable->getDepartamentosxPais($pais);
