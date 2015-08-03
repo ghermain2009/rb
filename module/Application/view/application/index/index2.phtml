@@ -103,7 +103,7 @@
             </div>
             <div class="form-group">
                 <div class="col-xs-12">
-                    <p class="promocion-parrafo"><br/></p>
+                    <p class="promocion-parrafo"></br></p>
                 </div>
             </div>
             <div class="form-group">
@@ -183,6 +183,9 @@
                         <label><input type="radio" name="genero" id="genero" value="F">Femenino</label>
                     </div>
                 </div>
+            </div>
+            <div class="form-group">
+                <label for="preferencia[]" class="col-lg-12 control-label afiliacion"><span class="required">* </span>Seleccione al menos 2 rubros del cual le gustaria recibir promociones rebuenas.</label>
             </div>
             <div class="form-group">
                 <div class="col-xs-12 validacion">
@@ -289,6 +292,7 @@
             });
         }
         <?php } else { ?>
+                $("#promocion-container").css('background-image', 'none');
                 $("#imagen-container").css('display', 'inline-block');
                 $("#formulario-container").css('display', 'inline-block');
                 $("#promocion-container").attr("class", "promocion-afiliacion-fija");
@@ -345,8 +349,13 @@
                     $("#promocion-container").css('display', 'none');
                     $("#registro-container").css('display', 'inline-block');
                     $("#formulario-registro").css('display', 'inline-block');
-                    $("#facebook-contenedor").css('display', 'inline-block');
-                    $("#facebook-registro").css('display', 'inline-block');
+                    if ($(window).width() <= 727) {
+                        //$("#facebook-contenedor").css('display', 'none');
+                        //$("#facebook-registro").css('display', 'none');
+                    } else {
+                        //$("#facebook-contenedor").css('display', 'inline-block');
+                        //$("#facebook-registro").css('display', 'inline-block');
+                    }
                     $("#actualizarForm :input[name=email]").val($("#suscribirmeForm :input[name=email]").val());
                     if (cliente[0][0]) {
                         if (cliente[0][0].id_tipo_documento) {
@@ -488,14 +497,14 @@
                 telefono: {
                     err: 'popover',
                     validators: {
-                        notEmpty: {
+                        /*notEmpty: {
                             message: 'Por favor registre su numero de telefono.'
-                        },
+                        },*/
                         regexp: {
                             regexp: /^[0-9-]+$/
                         },
                         stringLength: {
-                            min: 1,
+                            //min: 1,
                             max: 45,
                             message: 'El telefono debe contener 45 caracteres como máximo.'
                         }
@@ -504,14 +513,14 @@
                 celular: {
                     err: 'popover',
                     validators: {
-                        notEmpty: {
+                        /*notEmpty: {
                             message: 'Por favor registre su numero de celular.'
-                        },
+                        },*/
                         regexp: {
                             regexp: /^[0-9-]+$/
                         },
                         stringLength: {
-                            min: 1,
+                            //min: 1,
                             max: 45,
                             message: 'El celular debe contener 45 caracteres como máximo.'
                         }
@@ -531,7 +540,7 @@
                     icon: false,
                     validators: {
                         choice: {
-                            min: 1,
+                            min: 2,
                             message: 'Por favor elija al menos %s de sus preferencias.'
                         }
                     }
