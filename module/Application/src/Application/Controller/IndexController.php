@@ -12,23 +12,26 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Session\Container;
+use Zend\Stdlib\ArrayUtils;
+use Zend\Json\Json;
 
 class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
+        
         $serviceLocator = $this->getServiceLocator();
         $config = $serviceLocator->get('config');
         $en_produccion = $config['en_produccion'];
-        $constantes = $config['constantes'];
-        $moneda = $config['moneda'];
-
+        
         if( !$en_produccion ) {
             $this->redirect()->toRoute('index2');
         }
         
+        $constantes = $config['constantes'];
+        $moneda = $config['moneda'];
+
         $user_session = new Container('user');
-        
         $user_session->facebook = array('id' => $constantes["id_facebook"],
                                         've' => $constantes["ve_facebook"]);
         
@@ -62,8 +65,59 @@ class IndexController extends AbstractActionController
     public function index2Action()
     {
         $this->layout('layout/layout_afiliacion');
-        return new ViewModel();
+        
+        $serviceLocator = $this->getServiceLocator();
+        $config = $serviceLocator->get('config');
+        $constantes = $config['constantes'];
+
+        $user_session = new Container('user');
+        $user_session->facebook = array('id' => $constantes["id_facebook"],
+                                        've' => $constantes["ve_facebook"]);
+        
+        $pais = $config['id_pais'];
+        $capital = $config['id_capital'];
+        $existepromocion = false; 
+        
+        $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
+        $departamentos = $departamentoTable->getDepartamentosxPais($pais);
+        
+        $tipodocumentoTable = $serviceLocator->get('Dashboard\Model\GentipodocumentoTable');
+        $tipodocumentos = $tipodocumentoTable->fetchAll();
+        
+        $categoriaTable = $serviceLocator->get('Dashboard\Model\GencategoriaTable');
+        $categorias = $categoriaTable->fetchAll();
+        
+        return new ViewModel(array('departamentos' => $departamentos, 
+                                   'tipodocumentos' => $tipodocumentos, 
+                                   'categorias' => $categorias,
+                                   'pais' => $pais, 
+                                   'capital' => $capital, 
+                                   'user_session' => $user_session,
+                                   'existepromocion' => $existepromocion));
     }
     
-    
+    public function suscribirmeAction() {
+        $datos = $this->params()->fromPost();
+        
+        $serviceLocator = $this->getServiceLocator();
+        $clienteTable = $serviceLocator->get('Dashboard\Model\CupclienteTable');
+        $preferenciasTable = $serviceLocator->get('Dashboard\Model\CupclientepreferenciasTable');
+        
+        $clienteTable->addCliente($datos);
+        if(isset($datos["preferencia"])) {
+            $preferenciasTable->addPreferencias($datos);
+        }
+        
+        $datosCliente = ArrayUtils::iteratorToArray($clienteTable->getUsuarioByUser($datos["email"]));
+        $datosPreferencia = ArrayUtils::iteratorToArray($preferenciasTable->getPreferenciasByUser($datos["email"]));
+        
+        $datos = array('0' => $datosCliente,'1' => $datosPreferencia);
+        
+        $viewmodel = new ViewModel();
+        $viewmodel->setTerminal(true);
+
+        return $this->getResponse()->setContent(Json::encode($datos));
+        
+    }
+   
 }

@@ -56,6 +56,9 @@ class CupclienteTable {
         if (isset($datos)) {
 
             $email_cliente = $datos["email"];
+            
+            $dt = new \DateTime(date('Y-m-d H:i:s'));
+            $fecha_registro = $dt->format('Y-m-d H:i:s');
 
             $sql = new Sql($this->tableGateway->adapter);
 
@@ -89,7 +92,12 @@ class CupclienteTable {
                     'password' => (isset($datos['clave'])) ? sha1($datos['clave']) : null,
                     'id_sexo' => (isset($datos['genero'])) ? $datos['genero'] : null,
                     'nombres_facebook' => (isset($datos['nombres'])) ? $datos['nombres'] : null,
+                    'id_pais' => (isset($datos['pais'])) ? $datos['pais'] : null,
+                    'id_departamento' => (isset($datos['ciudad'])) ? $datos['ciudad'] : null,
+                    'fecha_registro' => (isset($fecha_registro)) ? $fecha_registro : null,
                 ));
+                
+                //error_log($insert->getSqlString());
 
                 //echo $insert->getSqlString();
 
@@ -98,13 +106,56 @@ class CupclienteTable {
                 $result = $statement->execute();
 
                 return 1; /* Se inserto Informacion */
+                
             } else {
+                
+                $set = array();
+                
+                if( isset($datos['tipdoc']) ) {
+                    $set['id_tipo_documento'] = $datos['tipdoc'];
+                }
+                if( isset($datos['numdoc']) ) {
+                    $set['numero_documento'] = $datos['numdoc'];
+                }
+                if( isset($datos['nombre']) ) {
+                    $set['nombres'] = $datos['nombre'];
+                }
+                if( isset($datos['apellido']) ) {
+                    $set['apellidos'] = $datos['apellido'];
+                }
+                if( isset($datos['telefono']) ) {
+                    $set['telefono'] = $datos['telefono'];
+                }
+                if( isset($datos['celular']) ) {
+                    $set['celular'] = $datos['celular'];
+                }
+                if( isset($datos['clave']) ) {
+                    $set['password'] = sha1($datos['clave']);
+                }
+                if( isset($datos['genero']) ) {
+                    $set['id_sexo'] = $datos['genero'];
+                }
+                if( isset($datos['nombres']) ) {
+                    $set['nombres_facebook'] = $datos['nombres'];
+                }
+                if( isset($datos['pais']) ) {
+                    $set['id_pais'] = $datos['pais'];
+                }
+                if( isset($datos['ciudad']) ) {
+                    $set['id_departamento'] = $datos['ciudad'];
+                }
+                if( isset($fecha_registro) ) {
+                    $set['fecha_actualizacion'] = $fecha_registro;
+                }
+                //error_log(print_r($set,1));
+                
+                $where = array('email_cliente' => $datos['email']);
+
+                $rs = $this->tableGateway->update($set, $where);
+                
+                
                 return 3; /* Se actualiza */
             }
-
-           
-
-            /**/
         } else {
             return 2; /* No hay datos a actualizar */
         }

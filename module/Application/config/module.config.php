@@ -49,7 +49,6 @@ return array(
                 ),
             ),
             'detalle' => array(
-                //'type' => 'Zend\Mvc\Router\Http\Literal',
                 'type' => 'Segment',
                 'options' => array(
                     'route'    => '/campana[/:action[/:id][/:op][/:fl][/:em]]',
@@ -58,6 +57,18 @@ return array(
                         'action'     => 'detalle',
                     ),
                 ),
+            ),
+            'campana-detalle' => array(
+                'type' => 'Regex',
+                'options' => array(
+                    'regex' => '/campana/detalle/(?<titulo>.*)--(?<id>[a-zA-Z0-9_=\-]+)(?<formato>\.html)?',
+                    'spec'  => '/campana/detalle/%titulo%--%id%.%formato%',
+                    'defaults' => array(
+                      'controller' => 'Application\Controller\Campana',
+                      'action'     => 'detalle',
+                      'formato'    => 'html',
+                    )
+                )
             ),
             'phpinfo' => array(
                 //'type' => 'Zend\Mvc\Router\Http\Literal',

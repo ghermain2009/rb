@@ -22,6 +22,12 @@ use Dashboard\Model\RoleTable;
 use Dashboard\Model\User;
 use Dashboard\Model\UserTable;
 
+
+use Dashboard\Model\Ubipais;
+use Dashboard\Model\UbipaisTable;
+use Dashboard\Model\Ubidepartamento;
+use Dashboard\Model\UbidepartamentoTable;
+
 use Dashboard\Model\Cupcampana;
 use Dashboard\Model\CupcampanaTable;
 use Dashboard\Model\Cupcampanacategoria;
@@ -38,6 +44,13 @@ use Dashboard\Model\Cupliquidacioncupon;
 use Dashboard\Model\CupliquidacioncuponTable;
 use Dashboard\Model\Genempresa;
 use Dashboard\Model\GenempresaTable;
+
+use Dashboard\Model\Gentipodocumento;
+use Dashboard\Model\GentipodocumentoTable;
+use Dashboard\Model\Gencategoria;
+use Dashboard\Model\GencategoriaTable;
+use Dashboard\Model\Cupclientepreferencias;
+use Dashboard\Model\CupclientepreferenciasTable;
 
 class Module implements AutoloaderProviderInterface, ConfigProviderInterface
 {
@@ -242,6 +255,66 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
                         $rsPrototype = new ResultSet();
                         $rsPrototype->setArrayObjectPrototype(new Genempresa());
                         $tableGateway = new TableGateway('gen_empresa', $adapter, null, $rsPrototype);
+                        return $tableGateway;
+                    },
+                    'Dashboard\Model\GentipodocumentoTable' => function($sl){
+                        $gateway = $sl->get('GentipodocumentoTableGateway');
+                        $table = new GentipodocumentoTable($gateway);
+                        return $table;
+                    },
+                    'GentipodocumentoTableGateway' => function($sl) {
+                        $adapter = $sl->get('Zend\Db\Adapter\Adapter');
+                        $rsPrototype = new ResultSet();
+                        $rsPrototype->setArrayObjectPrototype(new Gentipodocumento());
+                        $tableGateway = new TableGateway('gen_tipo_documento', $adapter, null, $rsPrototype);
+                        return $tableGateway;
+                    },
+                    'Dashboard\Model\GencategoriaTable' => function($sl){
+                        $gateway = $sl->get('GencategoriaTableGateway');
+                        $table = new GencategoriaTable($gateway);
+                        return $table;
+                    },
+                    'GencategoriaTableGateway' => function($sl) {
+                        $adapter = $sl->get('Zend\Db\Adapter\Adapter');
+                        $rsPrototype = new ResultSet();
+                        $rsPrototype->setArrayObjectPrototype(new Gencategoria());
+                        $tableGateway = new TableGateway('gen_categoria', $adapter, null, $rsPrototype);
+                        return $tableGateway;
+                    },
+                    'Dashboard\Model\CupclientepreferenciasTable' => function($sl){
+                        $gateway = $sl->get('CupclientepreferenciasTableGateway');
+                        $table = new CupclientepreferenciasTable($gateway);
+                        return $table;
+                    },
+                    'CupclientepreferenciasTableGateway' => function($sl) {
+                        $adapter = $sl->get('Zend\Db\Adapter\Adapter');
+                        $rsPrototype = new ResultSet();
+                        $rsPrototype->setArrayObjectPrototype(new Cupclientepreferencias());
+                        $tableGateway = new TableGateway('cup_cliente_preferencias', $adapter, null, $rsPrototype);
+                        return $tableGateway;
+                    },
+                    'Dashboard\Model\UbipaisTable' => function($sl){
+                        $gateway = $sl->get('UbipaisTableGateway');
+                        $table = new UbipaisTable($gateway);
+                        return $table;
+                    },
+                    'UbipaisTableGateway' => function($sl) {
+                        $adapter = $sl->get('Zend\Db\Adapter\Adapter');
+                        $rsPrototype = new ResultSet();
+                        $rsPrototype->setArrayObjectPrototype(new Ubipais());
+                        $tableGateway = new TableGateway('ubi_pais', $adapter, null, $rsPrototype);
+                        return $tableGateway;
+                    },
+                    'Dashboard\Model\UbidepartamentoTable' => function($sl){
+                        $gateway = $sl->get('UbidepartamentoTableGateway');
+                        $table = new UbidepartamentoTable($gateway);
+                        return $table;
+                    },
+                    'UbidepartamentoTableGateway' => function($sl) {
+                        $adapter = $sl->get('Zend\Db\Adapter\Adapter');
+                        $rsPrototype = new ResultSet();
+                        $rsPrototype->setArrayObjectPrototype(new Ubidepartamento());
+                        $tableGateway = new TableGateway('ubi_departamento', $adapter, null, $rsPrototype);
                         return $tableGateway;
                     },
                 )

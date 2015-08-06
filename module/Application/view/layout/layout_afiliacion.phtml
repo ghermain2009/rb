@@ -6,22 +6,14 @@ use Zend\Session\Container;
 
 $user_session = new Container('user');
 
-/*
-
-  $serviceLocator = $this->getApplication()->getServiceManager();
-  $campanaTable = $serviceLocator->get('Dashboard\Model\CupcampanaTable');
-  $datos = $campanaTable->getMenu();
-
-  var_dump($datos); */
 ?>
 
 <html lang="es">
     <head>
         <meta charset="utf-8">
-        <meta property="og:url" content="<?php echo $user_session->localhost;?>" />
-        <meta property="og:title" content="Developando Web & Móvil" />
-        <meta property="og:description" content="Empresa encarga de desarrollar aplicaciones movil y web con calidad" />
-        <meta property="og:image" content="<?php echo $user_session->localhost;?>/img/<?php echo $user_session->id_campana;?>/small2/image1.jpg" />
+        <title>Disfrutar de momentos inolvidables con descuentos de 50% a más en Ecuador es ya una realidad | Rebueno.ec</title>
+        <meta name="title" content="Disfrutar de momentos inolvidables con descuentos de 50% a más en Ecuador es ya una realidad | Rebueno.ec">
+        <meta name="keywords" content="comida, cupones, descuentos, diversion, full day, ofertas, oferton, rebueno, viajes, guayaquil, ecuador">
         
         <?php echo $this->headTitle('Rebueno')->setSeparator(' - ')->setAutoEscape(false) ?>
 
@@ -37,6 +29,7 @@ $user_session = new Container('user');
         <!-- Le styles -->
         <?php
         echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+                ->prependStylesheet($this->basePath() . '/css/formValidation.css')
                 ->prependStylesheet($this->basePath() . '/css/style.css')
                 ->prependStylesheet($this->basePath() . '/css/style-op.css')
                 ->prependStylesheet($this->basePath() . '/css/docs.css')
@@ -49,6 +42,8 @@ $user_session = new Container('user');
         <!-- Scripts -->
         <?php
         echo $this->headScript()
+                ->prependFile($this->basePath() . '/js/framework/bootstrap.js')
+                ->prependFile($this->basePath() . '/js/formValidation.js')
                 ->prependFile($this->basePath() . '/js/bootstrap.min.js')
                 ->prependFile($this->basePath() . '/js/jquery.lazyload.js')
                 ->prependFile($this->basePath() . '/js/jquery.min.js')
@@ -120,35 +115,31 @@ $user_session = new Container('user');
 
     function testAPI() {
         FB.api('/me', function (response) {
+            //console.log(response);
             var email = response.email;
             var fname = response.first_name;
             var lname = response.last_name;
-            console.log(email);
-            console.log(fname);
-            console.log(lname);
             var sex;
             if (response.gender === 'male')
                 sex = 'M';
             else
                 sex = 'F';
 
-            verifyUser(email, fname, lname, sex);
+            registrarFacebook(email, fname, lname, sex);
         });
     }
 
-    function verifyUser(email, fname, lname, sex) {
+    function registrarFacebook(email, fname, lname, sex) {
 
         $.ajax({
             type: "POST",
-            url: "/campana/cliente",
+            url: "/index/suscribirme",
             data: {email: email, fname: fname, lname: lname, sex: sex, facebook: '1'},
             success: function (data) {
-                var cliente = $.parseJSON(data);
-                if (cliente[0]) {
-                    if (cliente[0].validar == '1') {
-                        postfunction('', '');
-                    }
-                }
+                $("#registro-container").css('display', 'none');
+                $("#promocion-saludo").css('display', 'inline-block');
+                $("#formulario-saludo").css('display', 'inline-block');
+                $("#imagen-saludo").css('display', 'inline-block');
             }
         });
 
