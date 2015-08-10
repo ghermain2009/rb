@@ -570,9 +570,9 @@
         });
 
         $('#saludoForm').formValidation().on('success.form.fv', function (e) {
-            //e.preventDefault();
-            //$("#promocion-saludo").css('display', 'none');
-            //$("#promocion-container").css('display', 'inline-block');
+            e.preventDefault();
+            $("#promocion-saludo").css('display', 'none');
+            $("#promocion-container").css('display', 'inline-block');
         });
 
     });
