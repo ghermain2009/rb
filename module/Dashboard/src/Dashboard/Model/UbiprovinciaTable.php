@@ -14,11 +14,11 @@ use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Predicate\NotIn;
 use Zend\Stdlib\ArrayUtils;
 /**
- * Description of UbidepartamentoTable
+ * Description of UbiprovinciaTable
  *
- * @author Administrador
+ * @author gtapia
  */
-class UbidepartamentoTable {
+class UbiprovinciaTable {
     //put your code here
     protected $tableGateway;
 
@@ -35,38 +35,18 @@ class UbidepartamentoTable {
         return $resultSet;
     }
     
-    public function getDepartamentosxPais($id_pais) {
+    public function getProvinciasxDepartamento($id_pais, $id_departamento) {
         $sql = new Sql($this->tableGateway->adapter);
                 
         $select = $sql->select();
 
         $select->columns(array(
-            'id_departamento',
+            'id_provincia',
             'descripcion'
         ))
-        ->from('ubi_departamento')
-        ->where(array('id_pais' => $id_pais))
-        ->order('descripcion');
-
-        $statement = $sql->prepareStatementForSqlObject($select);
-        
-        $result = $statement->execute();
-
-        return ArrayUtils::iteratorToArray($result);
-    }
-    
-    public function getDepartamentosxPaisFavoritos($id_pais) {
-        $sql = new Sql($this->tableGateway->adapter);
-                
-        $select = $sql->select();
-
-        $select->columns(array(
-            'id_departamento',
-            'descripcion'
-        ))
-        ->from('ubi_departamento')
+        ->from('ubi_provincia')
         ->where(array('id_pais' => $id_pais,
-                      'preferencia' => '1' ))
+                      'id_departamento' => $id_departamento))
         ->order('descripcion');
 
         $statement = $sql->prepareStatementForSqlObject($select);

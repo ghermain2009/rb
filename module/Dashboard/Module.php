@@ -27,6 +27,8 @@ use Dashboard\Model\Ubipais;
 use Dashboard\Model\UbipaisTable;
 use Dashboard\Model\Ubidepartamento;
 use Dashboard\Model\UbidepartamentoTable;
+use Dashboard\Model\Ubiprovincia;
+use Dashboard\Model\UbiprovinciaTable;
 
 use Dashboard\Model\Cupcampana;
 use Dashboard\Model\CupcampanaTable;
@@ -315,6 +317,19 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
                         $rsPrototype = new ResultSet();
                         $rsPrototype->setArrayObjectPrototype(new Ubidepartamento());
                         $tableGateway = new TableGateway('ubi_departamento', $adapter, null, $rsPrototype);
+                        return $tableGateway;
+                    },
+                            
+                    'Dashboard\Model\UbiprovinciaTable' => function($sl){
+                        $gateway = $sl->get('UbiprovinciaTableGateway');
+                        $table = new UbiprovinciaTable($gateway);
+                        return $table;
+                    },
+                    'UbiprovinciaTableGateway' => function($sl) {
+                        $adapter = $sl->get('Zend\Db\Adapter\Adapter');
+                        $rsPrototype = new ResultSet();
+                        $rsPrototype->setArrayObjectPrototype(new Ubiprovincia());
+                        $tableGateway = new TableGateway('ubi_provincia', $adapter, null, $rsPrototype);
                         return $tableGateway;
                     },
                 )

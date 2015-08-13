@@ -79,7 +79,10 @@ class IndexController extends AbstractActionController
         $existepromocion = false; 
         
         $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
-        $departamentos = $departamentoTable->getDepartamentosxPais($pais);
+        $departamentos = $departamentoTable->getDepartamentosxPaisFavoritos($pais);
+        
+        $provinciaTable = $serviceLocator->get('Dashboard\Model\UbiprovinciaTable');
+        $provincias = $provinciaTable->getProvinciasxDepartamento($pais, $capital);
         
         $tipodocumentoTable = $serviceLocator->get('Dashboard\Model\GentipodocumentoTable');
         $tipodocumentos = $tipodocumentoTable->fetchAll();
@@ -88,6 +91,7 @@ class IndexController extends AbstractActionController
         $categorias = $categoriaTable->fetchAll();
         
         return new ViewModel(array('departamentos' => $departamentos, 
+                                   'provincias' => $provincias,
                                    'tipodocumentos' => $tipodocumentos, 
                                    'categorias' => $categorias,
                                    'pais' => $pais, 
