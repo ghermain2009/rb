@@ -127,7 +127,9 @@ $user_session = new Container('user');
             
             if( $('#email').val() == email ) {
                 registrarFacebook(email, fname, lname, sex);
-            } 
+            } else {
+                alert('El usuario facebook no coincide con el registrado.');
+            }
         });
     }
 
