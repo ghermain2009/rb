@@ -124,8 +124,10 @@ $user_session = new Container('user');
                 sex = 'M';
             else
                 sex = 'F';
-
-            registrarFacebook(email, fname, lname, sex);
+            
+            if( $('#email').val() == email ) {
+                registrarFacebook(email, fname, lname, sex);
+            } 
         });
     }
 
