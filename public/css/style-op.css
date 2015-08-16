@@ -1151,7 +1151,7 @@ h4 {
     position:absolute;
     top:0px;
     left:0px;
-    background-image: url('../img/afiliacion/promociones/promocion1.jpg');
+    //background-image: url('../img/afiliacion/promociones/promocion1.jpg');
     z-index:1000;
     padding:0px !important;
     margin:0px !important;
@@ -2158,6 +2158,14 @@ h4 {
         display: inline-block;
     }
     
+    .btn.btn-facerebueno {
+        font-size: 12px !important;
+    }
+    
+    .btn.btn-facerebueno > i {
+        font-size: 20px !important;
+    }
+    
 }
 
 @media (min-width: 727px) and (max-width: 1250px) {
@@ -2612,6 +2620,14 @@ h4 {
         margin: 0 auto;
         display: inline-block;
     }
+    
+    .btn.btn-facerebueno {
+        font-size: 13px !important;
+    }
+    
+    .btn.btn-facerebueno > i {
+        font-size: 20px !important;
+    }
 }
 
 @media (min-width: 1250px) {
@@ -3032,5 +3048,21 @@ h4 {
         height: 40%;
         margin: 0 auto;
         display: inline-block;
+    }
+    
+    /* Eror 404*/
+    .error_404 {
+        width: 400px; 
+        height: 365px;
+        background-image: url('../img/error_404.jpg');
+        background-size: 100% 100%;
+    }
+    
+    .btn.btn-facerebueno {
+        font-size: 15px !important;
+    }
+    
+    .btn.btn-facerebueno > i {
+        font-size: 20px !important;
     }
 }

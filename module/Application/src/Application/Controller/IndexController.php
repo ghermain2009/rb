@@ -17,7 +17,7 @@ use Zend\Json\Json;
 
 class IndexController extends AbstractActionController
 {
-    public function indexAction()
+    /*public function indexAction()
     {
         
         $serviceLocator = $this->getServiceLocator();
@@ -26,7 +26,7 @@ class IndexController extends AbstractActionController
         
         if( !$en_produccion ) {
             $this->redirect()->toRoute('index2');
-        }
+        } 
         
         $constantes = $config['constantes'];
         $moneda = $config['moneda'];
@@ -55,14 +55,14 @@ class IndexController extends AbstractActionController
                                    'user_session' => $user_session,
                                    'moneda' => $moneda,
                                    ));
-    }
+    }*/
     
     public function phpinfoAction()
     {
         return new ViewModel();
     }
     
-    public function index2Action()
+    public function indexAction()
     {
         $this->layout('layout/layout_afiliacion');
         
@@ -90,6 +90,7 @@ class IndexController extends AbstractActionController
         $categoriaTable = $serviceLocator->get('Dashboard\Model\GencategoriaTable');
         $categorias = $categoriaTable->fetchAll();
         
+        
         return new ViewModel(array('departamentos' => $departamentos, 
                                    'provincias' => $provincias,
                                    'tipodocumentos' => $tipodocumentos, 
@@ -115,13 +116,29 @@ class IndexController extends AbstractActionController
         $datosCliente = ArrayUtils::iteratorToArray($clienteTable->getUsuarioByUser($datos["email"]));
         $datosPreferencia = ArrayUtils::iteratorToArray($preferenciasTable->getPreferenciasByUser($datos["email"]));
         
-        $datos = array('0' => $datosCliente,'1' => $datosPreferencia);
+        $datosRespuesta = array('0' => $datosCliente,'1' => $datosPreferencia);
         
         $viewmodel = new ViewModel();
         $viewmodel->setTerminal(true);
 
-        return $this->getResponse()->setContent(Json::encode($datos));
+        return $this->getResponse()->setContent(Json::encode($datosRespuesta));
         
+    }
+    
+    public function zonificacionAction()  {
+        
+        $pais   = $this->params()->fromPost("pais", null);
+        $ciudad = $this->params()->fromPost("ciudad", null);
+        
+        $serviceLocator = $this->getServiceLocator();
+   
+        $provinciaTable = $serviceLocator->get('Dashboard\Model\UbiprovinciaTable');
+        $provincias = $provinciaTable->getProvinciasxDepartamento($pais, $ciudad);
+        
+        $viewmodel = new ViewModel(array('provincias' => $provincias));
+        $viewmodel->setTerminal(true);
+        
+        return $viewmodel;
     }
    
 }

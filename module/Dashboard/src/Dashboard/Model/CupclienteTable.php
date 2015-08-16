@@ -94,6 +94,7 @@ class CupclienteTable {
                     'nombres_facebook' => (isset($datos['nombres'])) ? $datos['nombres'] : null,
                     'id_pais' => (isset($datos['pais'])) ? $datos['pais'] : null,
                     'id_departamento' => (isset($datos['ciudad'])) ? $datos['ciudad'] : null,
+                    'id_provincia' => (isset($datos['zona'])) ? $datos['zona'] : null,
                     'fecha_registro' => (isset($fecha_registro)) ? $fecha_registro : null,
                 ));
                 
@@ -143,6 +144,11 @@ class CupclienteTable {
                 }
                 if( isset($datos['ciudad']) ) {
                     $set['id_departamento'] = $datos['ciudad'];
+                }
+                if( isset($datos['zona']) ) {
+                    $set['id_provincia'] = $datos['zona'];
+                } else {
+                    $set['id_provincia'] = NULL;
                 }
                 if( isset($fecha_registro) ) {
                     $set['fecha_actualizacion'] = $fecha_registro;

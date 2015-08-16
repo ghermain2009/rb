@@ -15,7 +15,6 @@ return array(
             // module. Simply drop new controllers in, and you can access them
             // using the path /application/:controller/:action
             'cliente' => array(
-                //'type' => 'Zend\Mvc\Router\Http\Literal',
                 'type' => 'Segment',
                 'options' => array(
                     'route'    => '/cliente[/:action]',
@@ -27,7 +26,6 @@ return array(
                 ),
             ),
             'interes' => array(
-                //'type' => 'Zend\Mvc\Router\Http\Literal',
                 'type' => 'Segment',
                 'options' => array(
                     'route'    => '/interes[/:action]',
@@ -38,7 +36,6 @@ return array(
                 ),
             ),
             'voucher' => array(
-                //'type' => 'Zend\Mvc\Router\Http\Literal',
                 'type' => 'Literal',
                 'options' => array(
                     'route'    => '/campana/cuponbuenaso',

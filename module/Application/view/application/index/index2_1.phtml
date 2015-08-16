@@ -60,10 +60,12 @@
                             <option value="<?php echo $departamento['id_departamento']; ?>" <?php if ($departamento['id_departamento'] == $capital) {
                             echo 'selected';
                         } ?>><?php echo $departamento['descripcion']; ?></option>
-<?php } ?>
+                        <?php } ?>
                     </select>
                     <span class="help-block with-errors"></span>
                 </div>
+            </div>
+            <div class="form-group" id="contenido-zona">
             </div>
             <div class="form-group">
                 <label for="email" class="col-lg-5 control-label afiliacion">Email:</label>
@@ -326,7 +328,7 @@
                     //icon: false,
                     validators: {
                         notEmpty: {
-                            message: 'Ls ciudad es requerida, por favor seleecione una.'
+                            message: 'La ciudad es requerida, por favor seleecione una.'
                         }
                     }
                 },
@@ -373,6 +375,30 @@
                     }
                 }
             );
+        });
+        
+        $('#ciudad').change(function(){
+            var pais   = $('#pais').val();
+            var ciudad = $('#ciudad').val();
+            $.ajax({
+                type: "POST",
+                url: "/zonificacion",
+                data: {pais: pais, ciudad: ciudad},
+                success: function (data) {
+                    $('#contenido-zona').html(data);
+                    if(data == '') {
+                        $('#suscribirmeForm').formValidation('removeField', 'zona');
+                    } else {
+                        $('#suscribirmeForm').formValidation('addField', 'zona', {
+                            validators: {
+                                notEmpty: {
+                                    message: 'La zona es requerida, por favor seleecione una.'
+                                }
+                            }
+                        });
+                    }
+                }
+            });
         });
 
         $('#actualizarForm').formValidation({
