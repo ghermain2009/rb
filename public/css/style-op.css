@@ -2485,7 +2485,7 @@ h4 {
     
     .formulario-afiliacion,
     .formulario-saludo  {
-        width: 65%;
+        width: 350px;
         height: 100%;
         background-color: #FFF;
         display: none;
@@ -2503,7 +2503,7 @@ h4 {
     }
 
     .imagen-afiliacion {
-        width: 35%;
+        width: calc(100% - 350px) ;
         height: 100%; 
         background-image: url('../img/afiliacion/afiliacion_teclado.jpg');
         background-size: 100% 100%;
@@ -2947,7 +2947,7 @@ h4 {
     
     .formulario-afiliacion,
     .formulario-saludo  {
-        width: 45%;
+        width: 350px;
         height: 100%;
         background-color: #FFF;
         display: none;
@@ -2965,7 +2965,7 @@ h4 {
     }
 
     .imagen-afiliacion {
-        width: 55%;
+        width: calc(100% - 350px);
         height: 100%; 
         background-image: url('../img/afiliacion/afiliacion_teclado.jpg');
         background-size: 100% 100%;
