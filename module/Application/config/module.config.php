@@ -26,9 +26,12 @@ return array(
                 ),
             ),
             'interes' => array(
-                'type' => 'Segment',
+                'type' => 'segment',
                 'options' => array(
                     'route'    => '/interes[/:action]',
+                    'constraints' => array(
+                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                     ),
                     'defaults' => array(
                         'controller' => 'Application\Controller\Interes',
                         'action'     => 'index',
@@ -75,17 +78,6 @@ return array(
                     'defaults' => array(
                         'controller' => 'Application\Controller\Index',
                         'action'     => 'phpinfo',
-                    ),
-                ),
-            ),
-            'index2' => array(
-                //'type' => 'Zend\Mvc\Router\Http\Literal',
-                'type' => 'Segment',
-                'options' => array(
-                    'route'    => '/:action',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
-                        'action'     => 'index2',
                     ),
                 ),
             ),

@@ -48,8 +48,9 @@ $user_session = new Container('user');
         <!-- Scripts -->
         <?php
         echo $this->headScript()
-                ->prependFile($this->basePath() . '/js/formValidation.js')
                 ->prependFile($this->basePath() . '/js/bootstrap.min.js')
+                ->prependFile($this->basePath() . '/js/framework/bootstrap.js')
+                ->prependFile($this->basePath() . '/js/formValidation.js')
                 ->prependFile($this->basePath() . '/js/jquery.lazyload.js')
                 ->prependFile($this->basePath() . '/js/jquery.min.js')
                 ->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
@@ -64,7 +65,7 @@ $user_session = new Container('user');
                     <div id='logo-mini' class="header-top-center logo" style="display:none;position:relative;top:5px "></div>
                     <div class="header-boton-oferta">
                         <div class="btn-group oferta">
-                            <a id="btnSubscribe" href="javascript:;" title="Quiero recibir ofertas" class="btn btn-rebueno btn-sm">Quiero recibir ofertas <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+                            <a id="btnSuscribe" href="javascript:;" title="Quiero recibir ofertas" class="btn btn-rebueno btn-sm">Quiero recibir ofertas <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
                         </div>
                         <div class="btn-group login">
                             <!--btn-github btn-sm-->
@@ -150,10 +151,10 @@ $user_session = new Container('user');
                     <div class="ofertas_siguenos">
                         <ul class="share_buttons" >
                             <li><span>Siguenos en: </span></li>
-                            <li><a href="javascript:;" title="Comparte en Facebook" class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></a></li>
-                            <li><a target="_blank" title="Comparte en Twitter" class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="javascript:;" title="Comparte en Google+" class="btn btn-social-icon btn-google-plus"><i class="fa fa-google-plus"></i>></a></li>
-                            <li><a href="javascript:;" title="Comparte por email" class="mail addthis_button_email"></a></li>
+                            <li><a href="https://www.facebook.com/people/Rebueno-Ecuador/100010002690223" target="_blank" title="Facebook" class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://twitter.com/RebuenoEC" target="_blank" title="Twitter" class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a></li>
+                            <!--li><a href="javascript:;" title="Comparte en Google+" class="btn btn-social-icon btn-google-plus"><i class="fa fa-google-plus"></i>></a></li>
+                            <li><a href="javascript:;" title="Comparte por email" class="mail addthis_button_email"></a></li-->
                         </ul>
                     </div>
                 </div>
@@ -189,24 +190,87 @@ $user_session = new Container('user');
         <!-- /container -->
         <div id="fb-root"></div>
         <div class="footer_rebueno" >
-
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">¿Cómo Funciona?</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div>Cada día en Rebueno Perú seleccionamos con esmero los mejores servicios, productos, espectáculos y viajes para ti.</div>
-                            <div>Los restaurantes con las cartas más deliciosas, los tratamientos que ayudarán y beneficiarán a tu cuerpo, los espectáculos más interesantes y los viajes que siempre has soñado. Contamos con los que más saben y el resultado son miles de usuarios satisfechos cada día.</div>
-                            <div>Compra el producto o servicio que más desees, el más exclusivo, atractivo, emocionante puedes comprar con Tarjeta de Crédito o sin ella, solo escoge el medio de pago que mas te convenga!</div>
-                            <div>En Cuponazo Perú conocemos los locales más exclusivos y gozamos de la confianza de nuestros Socios que saben que trabajamos bien.</div>
-                            <div>Todo esto hace que podamos ofrecer los mejores productos y servicios a precios increíbles para ti!!!</div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
+                <div class="promocion-afiliacion-dialog" id="promocion-container">
+                    <div class="formulario-afiliacion" id="formulario-container" style="display:inline-block">
+                        <form id="suscribirmeForm" method="post" action="/index/suscribirme">
+                            <div class="form-group">
+                                <div class="col-xs-5"> 
+                                    <div class="logo-fijo-afiliacion"></div>
+                                </div>
+                                <label for="logo" class="col-xs-7 control-faltan">Faltan pocos días</label>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <p class="promocion-parrafo"><br/></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <p class="promocion-parrafo">Disfrutar de momentos inolvidables con descuentos de <porcentaje>50% a más</porcentaje> en Ecuador es ya una realidad.</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <p class="promocion-parrafo">Suscríbete y recibirás por las mañanas super ofertas en tu buzón casi como tips de super utilidad.</p>
+                                </div>
+                            </div>
+                            <input type="hidden" name="pais" id="pais" value="<?php echo $pais; ?>">
+                            <div class="form-group">
+                                <label for="ciudad" class="col-lg-5 control-label afiliacion">Elige tu ciudad:</label>
+                                <div class="col-xs-7 validacion"> 
+                                    <select class="form-control" name="ciudad" id="ciudad">
+                                        <option value="">-- Selecciona tu ciudad --</option>
+                                        <?php foreach ($departamentos as $departamento) { ?>
+                                            <option value="<?php echo $departamento['id_departamento']; ?>" <?php if ($departamento['id_departamento'] == $capital) {
+                                            echo 'selected';
+                                        } ?>><?php echo $departamento['descripcion']; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                    <span class="help-block with-errors"></span>
+                                </div>
+                            </div>
+                            <div class="form-group" id="contenido-zona">
+                                <?php if( count($provincias) > 0 ) { ?>
+                                <label for="zona" class="col-lg-5 control-label afiliacion">Elige tu zona:</label>
+                                <div class="col-xs-7 validacion"> 
+                                    <select class="form-control" name="zona" id="zona">
+                                        <option value="">-- Selecciona tu zona --</option>
+                                        <?php foreach ($provincias as $provincia) { ?>
+                                            <option value="<?php echo $provincia['id_provincia']; ?>"><?php echo $provincia['descripcion']; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                    <span class="help-block with-errors"></span>
+                                </div>
+                                <?php } ?>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="col-lg-5 control-label afiliacion">Email:</label>
+                                <div class="col-xs-7 validacion"> 
+                                    <input type="text" class="form-control" name="email" id="email" value="" >
+                                    <span class="help-block with-errors"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="genero" class="col-lg-5 control-label afiliacion">Género:</label>
+                                <div class="col-xs-7 validacion">
+                                    <div class="radio afiliacion" >
+                                        <label><input type="radio" name="genero" id="genero" value="M" required>Masculino</label>
+                                    </div>
+                                    <div class="radio afiliacion" >
+                                        <label><input type="radio" name="genero" id="genero" value="F" required>Femenino</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12 total">
+                                    <button type="submit" class="btn btn-rebueno"  id="suscribirme" disabled="">Suscribirme</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="imagen-afiliacion" id="imagen-container" style="display:inline-block">
+                        <button type="button" class="close rebueno" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     </div>
                 </div>
             </div>
@@ -218,7 +282,7 @@ $user_session = new Container('user');
                             <div class="col_footer contact">
                                 <h3>De Interés</h3>
                                 <ul>
-                                    <li><a href="/interes/index" title="Sobre Rebueno">Sobre Rebueno</a></li>
+                                    <li><a href="/interes" title="Sobre Rebueno">Sobre Rebueno</a></li>
                                     <li><a href="/interes/comofunciona">¿Cómo funciona?</a></li>
                                     <li><a href="/interes/preguntasfrecuentes" title="Preguntas frecuentes">Preguntas frecuentes</a></li>
                                     <li><a href="/interes/terminosycondiciones" title="Términos y Condiciones">Términos y Condiciones</a></li>
@@ -255,16 +319,16 @@ $user_session = new Container('user');
                                 <ul>
                                     <li>
                                         <span class="btn-social-icon btn-lg btn-github"><i class="fa fa-facebook"></i></span>
-                                        <a href="https://www.facebook.com/RebuenoEcuador" get="_blank" title="RebuenoEcuador">RebuenoEcuador</a>
+                                        <a href="https://www.facebook.com/people/Rebueno-Ecuador/100010002690223" target="_blank" title="Rebueno-Ecuador">Rebueno-Ecuador</a>
                                     </li>
                                     <li>
                                         <span class="btn-social-icon btn-lg btn-github"><i class="fa fa-twitter"></i></span>
-                                        <a href="https://www.facebook.com/RebuenoEcuador" target="_blank" title="RebuenoEcuador">@RebuenoEcuador</a>
+                                        <a href="https://twitter.com/RebuenoEC" target="_blank" title="@RebuenoEC">@RebuenoEC</a>
                                     </li>
-                                    <li>
+                                    <!--li>
                                         <span class="btn-social-icon btn-lg btn-github"><i class="fa fa-google-plus"></i></span>
                                         <a href="https://www.facebook.com/RebuenoEcuador" target="_blank" title="RebuenoEcuador">RebuenoEcuador</a>
-                                    </li>
+                                    </li-->
                                 </ul>
                             </div>
                         </div>
@@ -312,50 +376,6 @@ $user_session = new Container('user');
                 $("#cabecera-container-top").css("background-color", "#fdaf06");
                 $("#logo-mini").css('display', 'none');
             }
-
-
-            /*if ($(window).scrollTop() >= altura) {
-                $("#headerContainer").css("top", "0px");
-                $("#cabecera_contenedor").css("top", "0px");
-                $("#cabecera_menu").css("top", "30px");
-
-                $("#headerContainer").css("position", "fixed");
-                $("#cabecera_contenedor").css("position", "fixed");
-                $("#cabecera_menu").css("position", "fixed");
-
-                $("#headerContainer").css("z-index", "57");
-                $("#cabecera_contenedor").css("z-index", "56");
-                $("#cabecera_menu").css("z-index", "50");
-
-                $("#cabecera_contenedor").css("width", "100%");
-                $("#cabecera_menu").css("width", "100%");
-
-                $("#cabecera_contenedor").css("display", "none");
-
-                $("#cabecera_menu_container").attr('class', 'container segundo');
-                
-                $("#logo").css('display', 'none');
-                $("#logo-mini").css('display', '');
-                
-                $("#headerContainer").attr('class', 'top_bar_move');
-            } else {
-                $("#cabecera_contenedor").css("top", "36px");
-                $("#cabecera_menu").css("top", "120px");
-
-                $("#cabecera_contenedor").css("position", "absolute");
-                $("#cabecera_menu").css("position", "static");
-
-                $("#cabecera_contenedor").css("display", "");
-
-                $("#cabecera_menu_container").attr('class', 'container');
-                
-                //$("#logo").attr('class', 'logo');
-                $("#logo").css('display', '');
-                $("#logo-mini").css('display', 'none');
-                
-                $("#headerContainer").attr('class', 'top_bar');
-            }*/
-
         });
 
         $("#frmlogin").submit(function (e) {
@@ -402,6 +422,10 @@ $user_session = new Container('user');
                 }
             });
         });
+        
+        $("#btnSuscribe").click(function () {
+            $('#myModal').modal();
+        });
 
         var data = "<div style ='width:90px;'><b>¡Rebueno!</b> mejores ofertas.</div>";
         $('#ofertas_localidad').popover({placement: 'right', content: data, html: true});
@@ -424,6 +448,94 @@ $user_session = new Container('user');
         $(".nav.navbar-nav li").mouseleave(function () {
             $(this).removeClass('open');
         });
+        
+        $('#suscribirmeForm').formValidation({
+            message: 'El valor no es válido.',
+            err: {
+                container: 'tooltip'
+            },
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh',
+            },
+            fields: {
+                email: {
+                    err: 'popover',
+                    //icon: false,
+                    validators: {
+                        notEmpty: {
+                            message: 'Por favor registre su email.'
+                        },
+                        emailAddress: {
+                            message: 'El email ingresado no es una dirección correcta.'
+                        }
+                    }
+                },
+                ciudad: {
+                    err: 'popover',
+                    //icon: false,
+                    validators: {
+                        notEmpty: {
+                            message: 'La ciudad es requerida, por favor seleecione una.'
+                        }
+                    }
+                },
+                genero: {
+                    err: 'popover',
+                    //icon: false,
+                    validators: {
+                        notEmpty: {
+                            message: 'Debe seleccionar su genero.'
+                        }
+                    }
+                }
+            }
+        }).on('success.form.fv', function (e) {
+            e.preventDefault();
+            var $form = $(e.target);
+            $.post($form.attr('action'), $form.serialize(),
+                function (data) {
+                    $('#myModal').modal('hide');
+                }
+            );
+        });
+        
+        $('#ciudad').change(function(){
+            var pais   = $('#pais').val();
+            var ciudad = $('#ciudad').val();
+            $.ajax({
+                type: "POST",
+                url: "/index/zonificacion",
+                data: {pais: pais, ciudad: ciudad},
+                success: function (data) {
+                    $('#contenido-zona').html(data);
+                    if(data == '') {
+                        $('#suscribirmeForm').formValidation('removeField', 'zona');
+                    } else {
+                        $('#suscribirmeForm').formValidation('addField', 'zona', {
+                            err: 'popover',
+                            validators: {
+                                notEmpty: {
+                                    message: 'La zona es requerida, por favor seleecione una.'
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        });
+        
+        if( $('#zona').length > 0 ) {
+            $('#suscribirmeForm').formValidation('addField', 'zona', {
+                err: 'popover',
+                validators: {
+                    notEmpty: {
+                        message: 'La zona es requerida, por favor seleecione una.'
+                    }
+                }
+            });
+        }
 
     });
 
