@@ -1218,6 +1218,7 @@ h4 {
 
 .cabecera-menu > nav {
     position:initial;
+    border-radius: 0px !important;
 }
 
 .mapasitio{
