@@ -1,69 +1,58 @@
 <div class="container">
-<div class="box_center box_sitemap">
-    <h2>Mapa del sitio</h2>
-    <hr class="medium">
-            <ul class="circle">
-            <li><span class="title">Acerca de Rebueno</span>
+    <div class="mapasitio">
+        <h2>Mapa del sitio</h2>
+        <hr class="medium">
+        <ul>
+            <li><span>Acerca de Rebueno</span>
                 <ul>
-                                            <li><a href="http://rebueno.ec/interes">Sobre Rebueno</a></li>
-                                            <li><a href="http://rebueno.ec/interes/como-funciona">¿Cómo funciona?</a></li>
-                                            <li><a href="http://rebueno.ec/interes/preguntas-frecuentes">Preguntas frecuentes</a></li>
-                                            <li><a href="http://rebueno.ec/interes/acerca-pago-efectivo">Acerca de Pago Efectivo</a></li>
-                                            <li><a href="http://rebueno.ec/interes/terminos-y-condiciones">Términos y Condiciones</a></li>
-                                            <li><a href="http://rebueno.ec/interes/contactanos">Contáctanos</a></li>
-                                            <li><a href="http://gec.pe/LibroReclamaciones/reclamo/p/rebueno.ec">Libro de reclamaciones</a></li>
-                                            <li><a href="http://rebueno.ec/interes/politicas-de-privacidad">Políticas de Privacidad</a></li>
-                                    </ul>
+                    <li><a href="/interes">Sobre Rebueno</a></li>
+                    <li><a href="/interes/comofunciona">¿Cómo funciona?</a></li>
+                    <li><a href="/interes/preguntasfrecuentes">Preguntas frecuentes</a></li>
+                    <li><a href="/interes/terminosycondiciones">Términos y Condiciones</a></li>
+                    <li><a href="/interes/contactanos">Contáctanos</a></li>
+                    <li><a href="/interes/politicasdeprivacidad">Políticas de Privacidad</a></li>
+                </ul>
             </li>
         </ul>
-            <ul class="circle">
-            <li><span class="title">Categorías en Rebueno</span>
+        <ul>
+            <li><span>Categorías en Rebueno</span>
                 <ul>
-                                            <li><a href="http://rebueno.ec/ofertas/lima/belleza-salud">Belleza & Salud</a></li>
-                                            <li><a href="http://rebueno.ec/ofertas/lima/viajes">Viajes</a></li>
-                                            <li><a href="http://rebueno.ec/ofertas/lima/restaurantes">Restaurantes</a></li>
-                                            <li><a href="http://rebueno.ec/ofertas/lima/entretenimiento">Entretenimiento</a></li>
-                                            <li><a href="http://rebueno.ec/ofertas/lima/productos">Productos</a></li>
-                                            <li><a href="http://rebueno.ec/ofertas/lima/servicios">Servicios</a></li>
-                                            <li><a href="http://rebueno.ec/ofertas/lima/megaplaza">MegaPlaza</a></li>
-                                    </ul>
+                    <?php foreach($categorias as $categoria) { ?>
+                    <li><a href="/campana/categoria/<?php echo base64_encode($categoria['id_categoria']);?>"><?php echo $categoria['descripcion'];?></a></li>
+                    <?php } ?>
+                </ul>
             </li>
         </ul>
-            <ul class="circle">
-            <li><span class="title">Usuarios Rebueno</span>
+        <ul>
+            <li><span>Usuarios Rebueno</span>
                 <ul>
-                                            <li><a href="http://rebueno.ec/registro">Registro de usuario</a></li>
-                                            <li><a href="http://rebueno.ec/recuperar">Recuperar contraseña</a></li>
-                                    </ul>
+                    <li><a href="/campana/registrar">Registro de usuario</a></li>
+                    <li><a href="/campana/recuperar">Recuperar contraseña</a></li>
+                </ul>
             </li>
         </ul>
-            <ul class="circle">
-            <li><span class="title">Socios Rebueno</span>
+        <ul>
+            <li><span>Socios Rebueno</span>
                 <ul>
-                                            <li><a href="http://retailer.rebueno.ec/">Ingresa a tu cuenta de socio</a></li>
-                                            <li><a href="http://rebueno.ec/paginas/contacto-retailer">Contáctenos</a></li>
-                                    </ul>
+                    <li><a href="/dashboard">Ingresa a tu cuenta de socio</a></li>
+
+                </ul>
             </li>
         </ul>
-            <ul class="circle">
-            <li><span class="title">Métodos de pago</span>
+        <ul>
+            <li><span>Métodos de pago</span>
                 <ul>
-                                            <li><a href="https://pagoefectivo.pe/">Pago Efectivo</a></li>
-                                            <li><a href="http://www.visanet.com.pe">Visa</a></li>
-                                            <li><a href="http://www.companiaperuanademediosdepago.pe/visa.htm">Verified by visa</a></li>
-                                            <li><a href="http://www.visanet.com.pe/promovbv/bancos.html">Afiliate Verified by visa</a></li>
-                                            <li><a href="http://www.mastercard.com/pe/consumidores/index.html">Master Card</a></li>
-                                            <li><a href="http://www.mastercard.com/us/personal/es/servicios/codigodeseguridad/">Master Card Sercure Code</a></li>
-                                    </ul>
+                    <li><a href="http://www.visanet.com.pe">Visa</a></li>
+                    <li><a href="http://www.mastercard.com/pe/consumidores/index.html">Master Card</a></li>
+                </ul>
             </li>
         </ul>
-            <ul class="circle">
-            <li><span class="title">Redes Sociales</span>
+        <ul>
+            <li><span>Redes Sociales</span>
                 <ul>
-                                            <li><a href="https://www.facebook.com/RebuenoEcuador">Facebook Rebueno</a></li>
-                                            <li><a href="https://twitter.com/RebuenoEcuador">Twitter Rebueno</a></li>
-                                            <li><a href="https://plus.google.com/101107211628238000946">Google Plus Rebueno</a></li>
-                                    </ul>
+                    <li><a href="https://www.facebook.com/people/Rebueno-Ecuador/100010002690223" target="_blank">Facebook Rebueno</a></li>
+                    <li><a href="https://twitter.com/RebuenoEC"  target="_blank">Twitter Rebueno</a></li>
+                </ul>
             </li>
         </ul>
     </div>

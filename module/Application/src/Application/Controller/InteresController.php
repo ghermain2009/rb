@@ -41,7 +41,10 @@ class InteresController extends AbstractActionController {
     }
     
     public function mapadesitioAction(){
-        return new ViewModel();
+        $serviceLocator = $this->getServiceLocator();
+        $categoriaTable = $serviceLocator->get('Dashboard\Model\GencategoriaTable');
+        $categorias = $categoriaTable->fetchAll();
+        return new ViewModel(array('categorias' => $categorias));
     }
     
 }
