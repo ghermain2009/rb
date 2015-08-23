@@ -516,6 +516,13 @@ h1 {
     margin-bottom: 20px;
 }
 
+.titulo_ofertas_categoria {
+    font-family: 'gotham-book', 'arial', 'sans-serif';
+    font-size: 15px;
+    padding-top: 10px; 
+    padding-bottom: 10px; 
+}
+
 .form-horizontal .control-label{
    text-align:left !important; 
    font-weight: normal;
