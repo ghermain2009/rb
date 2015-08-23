@@ -3,6 +3,11 @@
     src: url('../fonts/gotham-medium-webfont.woff') format("truetype");
 }
 
+@font-face {
+    font-family: "gotham-book";
+    src: url('../fonts/gotham-book-webfont.woff') format("truetype");
+}
+
 .img_container {
     width: 320px;
     height: 180px;
@@ -46,16 +51,6 @@
 
 .reftab ta i {
     font-size: 25px;
-}
-
-#tabempresa ta i, #tabsaber ta i {
-    font-size: 25px;
-}
-
-#tabempresa fo, #tabsaber fo {
-    font-family: gotham-medium, 'arial', 'sans-serif';
-    font-weight: normal;
-    font-size: 18px;
 }
 
 .special_text {
@@ -902,21 +897,6 @@ h4 {
   overflow: hidden;
 }
 
-/*#content {
-  overflow-y: auto;
-  width: 750px;
-}*/
-
-/*#tabsaber, #taboferta, #tabempresa  {
-  height: 300px;
-}*/
-#tabsaber, #taboferta, #tabempresa  {
-    width: 100%;
-    display:block;
-}
-
-
-
 .box_center_info {
     display: inline-block;
     padding-bottom: 10px;
@@ -1320,7 +1300,9 @@ h4 {
     .campana-texto-detalle-uno > a,
     .campana-texto-detalle-dos > a {
         font-weight: normal !important;
-        font-size: 10px !important;
+        font-size: 0.8em !important;
+        color: #333 !important;
+        font-family:gotham-book, 'arial', 'sans-serif';
     }
     
     .campana-precio-oferta-uno,
@@ -1468,7 +1450,7 @@ h4 {
     }
     
     .detalle-titulo > p {
-        font-family: 'gotham-medium', 'arial', 'sans-serif';
+        font-family: 'gotham-book', 'arial', 'sans-serif';
         font-weight: normal;
         font-size: 18px;
         text-align: justify;
@@ -1499,7 +1481,8 @@ h4 {
         width:100%;
         list-style:none;
         float: left;
-        padding-left: 0px
+        padding-left: 0px;
+        padding-top: 10px;
     }
     
     .contenedor-tabs > div > ul > li {
@@ -1512,8 +1495,8 @@ h4 {
         display:inline-block;
         width: 100%;
         font-size: 16px;
-        font-weight: bold;
-        font-family: 'gotham-medium', 'arial', 'sans-serif';
+        font-weight:600;
+        font-family: 'gotham-book', 'arial', 'sans-serif';
         color:#72e564;
     }
     
@@ -1530,7 +1513,7 @@ h4 {
     .contenedor-tabs-panel > h2 {
         font-size: 16px;
         font-weight: bold;
-        font-family: 'gotham-medium', 'arial', 'sans-serif';
+        font-family: 'gotham-book', 'arial', 'sans-serif';
         color:#72e564;
     }
     
@@ -1810,7 +1793,9 @@ h4 {
 
     .campana-texto-detalle-uno > a {
         font-weight: normal !important;
-        font-size: 12px !important;
+        font-size: 1em !important;
+        color: #333 !important;
+        font-family:gotham-book, 'arial', 'sans-serif';
     }
     
     .campana-precio-oferta-uno {
@@ -1908,7 +1893,9 @@ h4 {
 
     .campana-texto-detalle-dos > a {
         font-weight: normal !important;
-        font-size: 12px !important;
+        font-size: 1em !important;
+        color: #333 !important;
+        font-family:gotham-book, 'arial', 'sans-serif';
     }
     
     .campana-precio-oferta-dos {
@@ -2037,7 +2024,7 @@ h4 {
     }
     
     .detalle-titulo > p {
-        font-family: 'gotham-medium', 'arial', 'sans-serif';
+        font-family: 'gotham-book', 'arial', 'sans-serif';
         font-weight: normal;
         font-size: 25px;
         text-align: justify;
@@ -2068,7 +2055,8 @@ h4 {
         width:100%;
         list-style:none;
         float: left;
-        padding-left: 0px
+        padding-left: 0px;
+        padding-top: 10px;
     }
     
     .contenedor-tabs > div > ul > li {
@@ -2080,8 +2068,8 @@ h4 {
         display:inline-block;
         width: 100%;
         font-size: 16px;
-        font-weight: bold;
-        font-family: 'gotham-medium', 'arial', 'sans-serif';
+        font-weight:600;
+        font-family: 'gotham-book', 'arial', 'sans-serif';
         color:#72e564;
     }
     
@@ -2098,7 +2086,7 @@ h4 {
     .contenedor-tabs-panel > h2 {
         font-size: 16px;
         font-weight: bold;
-        font-family: 'gotham-medium', 'arial', 'sans-serif';
+        font-family: 'gotham-book', 'arial', 'sans-serif';
         color:#72e564;
     }
     
@@ -2385,7 +2373,9 @@ h4 {
 
     .campana-texto-detalle-uno > a {
         font-weight: normal !important;
-        font-size: 12px !important;
+        font-size: 1em !important;
+        color: #333 !important;
+        font-family:gotham-book, 'arial', 'sans-serif';
     }
     
     .campana-precio-oferta-uno {
@@ -2483,7 +2473,9 @@ h4 {
 
     .campana-texto-detalle-dos > a {
         font-weight: normal !important;
-        font-size: 12px !important;
+        font-size: 1em !important;
+        color: #333 !important;
+        font-family:gotham-book, 'arial', 'sans-serif';
     }
     
     .campana-precio-oferta-dos {
@@ -2612,7 +2604,7 @@ h4 {
     }
     
     .detalle-titulo > p {
-        font-family: 'gotham-medium', 'arial', 'sans-serif';
+        font-family: 'gotham-book', 'arial', 'sans-serif';
         font-weight: normal;
         font-size: 25px;
         text-align: justify;
@@ -2643,7 +2635,8 @@ h4 {
         width:100%;
         list-style:none;
         float: left;
-        padding-left: 0px
+        padding-left: 0px;
+        padding-top: 10px;
     }
     
     .contenedor-tabs > div > ul > li {
@@ -2655,8 +2648,8 @@ h4 {
         display:inline-block;
         width: 100%;
         font-size: 16px;
-        font-weight: bold;
-        font-family: 'gotham-medium', 'arial', 'sans-serif';
+        font-weight:600;
+        font-family: 'gotham-book', 'arial', 'sans-serif';
         color:#72e564;
     }
     
@@ -2673,7 +2666,7 @@ h4 {
     .contenedor-tabs-panel > h2 {
         font-size: 16px;
         font-weight: bold;
-        font-family: 'gotham-medium', 'arial', 'sans-serif';
+        font-family: 'gotham-book', 'arial', 'sans-serif';
         color:#72e564;
     }
     
@@ -2969,7 +2962,9 @@ h4 {
 
     .campana-texto-detalle-uno > a {
         font-weight: normal !important;
-        font-size: 12px !important;
+        font-size: 1em !important;
+        color: #333 !important;
+        font-family:gotham-book, 'arial', 'sans-serif';
     }
     
     .campana-precio-oferta-uno {
@@ -3067,7 +3062,9 @@ h4 {
 
     .campana-texto-detalle-dos > a {
         font-weight: normal !important;
-        font-size: 12px !important;
+        font-size: 1em !important;
+        color: #333 !important;
+        font-family:gotham-book, 'arial', 'sans-serif';
     }
     
     .campana-precio-oferta-dos {
@@ -3196,7 +3193,7 @@ h4 {
     }
     
     .detalle-titulo > p {
-        font-family: 'gotham-medium', 'arial', 'sans-serif';
+        font-family: 'gotham-book', 'arial', 'sans-serif';
         font-weight: normal;
         font-size: 25px;
         text-align: justify;
@@ -3216,6 +3213,7 @@ h4 {
     .contenedor-tabs {
         width:67%;
         display:table;
+        padding-top: 20px !important;
     }
     
     .contenedor-tabs > div {
@@ -3227,7 +3225,8 @@ h4 {
         width:100%;
         list-style:none;
         float: left;
-        padding-left: 0px
+        padding-left: 0px;
+        padding-top:10px;
     }
     
     .contenedor-tabs > div > ul > li {
@@ -3239,8 +3238,8 @@ h4 {
         display:inline-block;
         width: 100%;
         font-size: 16px;
-        font-weight: bold;
-        font-family: 'gotham-medium', 'arial', 'sans-serif';
+        font-weight:600;
+        font-family: 'gotham-book', 'arial', 'sans-serif';
         color:#72e564;
     }
     
@@ -3257,7 +3256,7 @@ h4 {
     .contenedor-tabs-panel > h2 {
         font-size: 16px;
         font-weight: bold;
-        font-family: 'gotham-medium', 'arial', 'sans-serif';
+        font-family: 'gotham-book', 'arial', 'sans-serif';
         color:#72e564;
     }
     

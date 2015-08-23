@@ -15,7 +15,7 @@ foreach ($data as $detalle) {
     $fecha_final = $detalle['fecha_final'];
     ?>
 
-    <div style="display:inline-block;">
+    <div style="display:inline-block;width:100%">
         <div class="detalle-titulo"><p><?php echo $detalle['titulo']; ?></p></div>
         <div id="carousel-detalle-promocion" class="carousel slide carrusel-detalle" data-ride="carousel">
             <!-- Indicators -->
@@ -160,13 +160,17 @@ foreach ($data as $detalle) {
             </nosale>
         </div>
         <div class="contenedor-tabs-panel" id="tabsaber">
+            <ul>
+                <li><a href="javascript:;" class="reftab" data-tab="tabsaber"><ta class="btn btn-rebueno"><i class="glyphicon glyphicon-eye-open"></i></ta>  Lo que debes saber</a></li>
+            </ul>
             <nosale>
-            <h2><ta class="btn btn-rebueno"><i class="glyphicon glyphicon-eye-open"></i></ta>  <fo>Lo que debes saber</fo></h2>
             <?php echo $detalle['observaciones']; ?>
             </nosale>
         </div>
         <div class="contenedor-tabs-panel cierre" id="tabempresa">
-            <h2><ta class="btn btn-rebueno"><i class="glyphicon glyphicon-home"></i></ta>  <fo>La Empresa</fo></h2>
+            <ul>
+                <li><a href="javascript:;" class="reftab" data-tab="tabempresa"><ta class="btn btn-rebueno"><i class="glyphicon glyphicon-home"></i></ta>  La Empresa</a></li>
+            </ul>
         <?php foreach ($data_e as $empresa) { ?>
             <h2><?php echo $empresa["razon_social"]; ?></h2>
             <div class="contenedor-tabs-panel-descripcion"><p><?php echo $empresa["descripcion"]; ?></p></div>
@@ -178,8 +182,10 @@ foreach ($data as $detalle) {
                 <div><b>Horario:</b></div>           
                 <div><?php echo $empresa["horario"]; ?></div>
             </div>
-            <div class="contenedor-tabs-panel-mapa">    
+            <div class="contenedor-tabs-panel-mapa">   
+                <?php if($empresa["ubicacion_gps"] != '') { ?>
                 <img src="<?php echo $empresa["ubicacion_gps"]; ?>">
+                <?php } ?>
             </div>    
             <?php } ?>
         </div>
