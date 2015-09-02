@@ -191,9 +191,9 @@ return array(
             ),
             //campana
             'dash_campana' => array(
-                'type' => 'Literal',
+                'type' => 'Segment',
                 'options' => array(
-                    'route' => '/dashboard/campana',
+                    'route' => '/dashboard/campana[/:action]',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Dashboard\Controller',
                         'controller' => 'campana',
@@ -270,7 +270,7 @@ return array(
                 ),
             ),
             //campana
-            'dash_campana' => array(
+            /*'dash_campana' => array(
                 'type' => 'Literal',
                 'options' => array(
                     'route' => '/dashboard/campana',
@@ -280,7 +280,7 @@ return array(
                         'action' => 'index',
                     ),
                 ),
-            ),
+            ),*/
             //mi campana
             'dash_micampana' => array(
                 'type' => 'Segment',

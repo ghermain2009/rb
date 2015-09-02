@@ -54,6 +54,13 @@ use Dashboard\Model\GencategoriaTable;
 use Dashboard\Model\Cupclientepreferencias;
 use Dashboard\Model\CupclientepreferenciasTable;
 
+use Dashboard\Model\Concontrato;
+use Dashboard\Model\ConcontratoTable;
+use Dashboard\Model\Concontratodetalle;
+use Dashboard\Model\ConcontratodetalleTable;
+use Dashboard\Model\Conestadocontrato;
+use Dashboard\Model\ConestadocontratoTable;
+
 class Module implements AutoloaderProviderInterface, ConfigProviderInterface
 {
     public function onBootstrap(MvcEvent $e)
@@ -330,6 +337,43 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
                         $rsPrototype = new ResultSet();
                         $rsPrototype->setArrayObjectPrototype(new Ubiprovincia());
                         $tableGateway = new TableGateway('ubi_provincia', $adapter, null, $rsPrototype);
+                        return $tableGateway;
+                    },
+                            
+                    'Dashboard\Model\ConcontratoTable' => function($sl){
+                        $gateway = $sl->get('ConcontratoTableGateway');
+                        $table = new ConcontratoTable($gateway);
+                        return $table;
+                    },
+                    'ConcontratoTableGateway' => function($sl) {
+                        $adapter = $sl->get('Zend\Db\Adapter\Adapter');
+                        $rsPrototype = new ResultSet();
+                        $rsPrototype->setArrayObjectPrototype(new Concontrato());
+                        $tableGateway = new TableGateway('con_contrato', $adapter, null, $rsPrototype);
+                        return $tableGateway;
+                    },
+                    'Dashboard\Model\ConcontratodetalleTable' => function($sl){
+                        $gateway = $sl->get('ConcontratodetalleTableGateway');
+                        $table = new ConcontratodetalleTable($gateway);
+                        return $table;
+                    },
+                    'ConcontratodetalleTableGateway' => function($sl) {
+                        $adapter = $sl->get('Zend\Db\Adapter\Adapter');
+                        $rsPrototype = new ResultSet();
+                        $rsPrototype->setArrayObjectPrototype(new Concontratodetalle());
+                        $tableGateway = new TableGateway('con_contrato_detalle', $adapter, null, $rsPrototype);
+                        return $tableGateway;
+                    },
+                    'Dashboard\Model\ConestadocontratoTable' => function($sl){
+                        $gateway = $sl->get('ConestadocontratoTableGateway');
+                        $table = new ConestadocontratoTable($gateway);
+                        return $table;
+                    },
+                    'ConestadocontratoTableGateway' => function($sl) {
+                        $adapter = $sl->get('Zend\Db\Adapter\Adapter');
+                        $rsPrototype = new ResultSet();
+                        $rsPrototype->setArrayObjectPrototype(new Conestadocontrato());
+                        $tableGateway = new TableGateway('con_estado_contrato', $adapter, null, $rsPrototype);
                         return $tableGateway;
                     },
                 )

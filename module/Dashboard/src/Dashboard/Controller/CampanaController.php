@@ -89,7 +89,7 @@ class CampanaController extends AbstractActionController {
 
         $editBtn = new Column\Action\Button();
         $editBtn->setLabel(' ');
-        $editBtn->setAttribute('class', 'btn btn-primary glyphicon glyphicon-edit');
+        $editBtn->setAttribute('class', 'btn btn-success glyphicon glyphicon-edit');
         $editBtn->setAttribute('href', '/dashboard/campana/edit/id/' . $editBtn->getRowIdPlaceholder());
         $editBtn->setAttribute('data-toggle', 'tooltip');
         $editBtn->setAttribute('data-placement', 'left');
@@ -103,9 +103,18 @@ class CampanaController extends AbstractActionController {
         $preBtn->setAttribute('data-placement', 'left');
         $preBtn->setAttribute('title', 'Preview Campaña');
         
+        $conBtn = new Column\Action\Button();
+        $conBtn->setLabel(' ');
+        $conBtn->setAttribute('class', 'btn btn-info glyphicon glyphicon-list-alt');
+        $conBtn->setAttribute('href', 'javascript:registrarcontrato(' . $conBtn->getRowIdPlaceholder().');');
+        $conBtn->setAttribute('data-toggle', 'tooltip');
+        $conBtn->setAttribute('data-placement', 'left');
+        $conBtn->setAttribute('title', 'Contrato Campaña');
+        
         $col = new Column\Action();
         $col->addAction($editBtn);
         $col->addAction($preBtn);
+        $col->addAction($conBtn);
         $grid->addColumn($col);
 
         return $grid->getResponse();
@@ -243,6 +252,36 @@ class CampanaController extends AbstractActionController {
 
 
         return $this->getResponse()->setContent(Json::encode($datos));
+    }
+    
+    public function contratoAction() {
+        
+        $id = $this->params()->fromPost("id", null);
+
+        $viewmodel = new ViewModel(array('id_campana' => $id));
+        
+        $viewmodel->setTerminal(true);
+
+        return $viewmodel;
+    }
+    
+    public function registrarcontratoAction() {
+        $id_campana = $this->params()->fromPost("id_campana", null);
+        $nombre     = $this->params()->fromPost("nombre", null);
+        $email      = $this->params()->fromPost("email", null);
+        
+        $serviceLocator = $this->getServiceLocator();
+        $contratoTable = $serviceLocator->get('Dashboard\Model\ConcontratoTable');
+        
+        $contrato = array('id_campana' => $id_campana,
+                          'id_estado' => '1',
+                          'nombre' => $nombre,
+                          'email' => $email,
+                          );
+        
+        $id_contrato = $contratoTable->addContrato($contrato);
+        
+        return;
     }
 
 }
