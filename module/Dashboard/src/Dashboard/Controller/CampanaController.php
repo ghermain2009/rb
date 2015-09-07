@@ -67,24 +67,30 @@ class CampanaController extends AbstractActionController {
 
         $col = new Column\Select('id_campana', 'c');
         $col->setLabel('id');
-        $col->setWidth(25);
+        $col->setWidth(20);
         $col->setIdentity(true);
         $col->setSortDefault(1, 'ASC');
         $grid->addColumn($col);
         
-         $col = new Column\Select('subtitulo', 'c');
+        /*$col = new Column\Select('id_contrato');
+        $col->setLabel('id_contrato');
+        $col->setWidth(20);
+        $col->setHidden(true);
+        $grid->addColumn($col);*/
+        
+        $col = new Column\Select('subtitulo', 'c');
         $col->setLabel('Titulo Portada');
-        $col->setWidth(25);
+        $col->setWidth(20);
         $grid->addColumn($col);
 
         $col = new Column\Select('titulo', 'c');
         $col->setLabel('Titulo Detalle');
-        $col->setWidth(25);
+        $col->setWidth(20);
         $grid->addColumn($col);
 
         $col = new Column\Select('razon_social', 'e');
         $col->setLabel('Empresa');
-        $col->setWidth(25);
+        $col->setWidth(15);
         $grid->addColumn($col);
 
         $editBtn = new Column\Action\Button();
@@ -106,12 +112,13 @@ class CampanaController extends AbstractActionController {
         $conBtn = new Column\Action\Button();
         $conBtn->setLabel(' ');
         $conBtn->setAttribute('class', 'btn btn-info glyphicon glyphicon-list-alt');
-        $conBtn->setAttribute('href', 'javascript:registrarcontrato(' . $conBtn->getRowIdPlaceholder().');');
+        $conBtn->setAttribute('href', 'javascript:registrarcontrato('. $conBtn->getRowIdPlaceholder().');');
         $conBtn->setAttribute('data-toggle', 'tooltip');
         $conBtn->setAttribute('data-placement', 'left');
         $conBtn->setAttribute('title', 'Contrato Campaña');
         
         $col = new Column\Action();
+        $col->setWidth(7);
         $col->addAction($editBtn);
         $col->addAction($preBtn);
         $col->addAction($conBtn);
@@ -257,12 +264,19 @@ class CampanaController extends AbstractActionController {
     public function contratoAction() {
         
         $id = $this->params()->fromPost("id", null);
-
-        $viewmodel = new ViewModel(array('id_campana' => $id));
         
-        $viewmodel->setTerminal(true);
-
-        return $viewmodel;
+        $serviceLocator = $this->getServiceLocator();
+        $campanaTable = $serviceLocator->get('Dashboard\Model\CupCampanaTable');
+        $contratos = $campanaTable->getContratoxCampana($id);
+        
+        if( count($contratos) > 0) {
+            $id_contrato = $contratos[0]['id_contrato'];
+        } else {
+            $id_contrato = -1;
+        }
+        
+        return $this->getResponse()->setContent(Json::encode(array('id_contrato' => $id_contrato)));
+        
     }
     
     public function registrarcontratoAction() {
@@ -275,13 +289,25 @@ class CampanaController extends AbstractActionController {
         
         $contrato = array('id_campana' => $id_campana,
                           'id_estado' => '1',
-                          'nombre' => $nombre,
-                          'email' => $email,
+                          'nombre_contacto' => $nombre,
+                          'email_contacto' => $email,
                           );
         
         $id_contrato = $contratoTable->addContrato($contrato);
         
-        return;
+        return $this->getResponse()->setContent(Json::encode(array('id_contrato' => $id_contrato)));
+    }
+    
+    public function editarcontratoAction() {
+        
+        $id_contrato = $this->params()->fromPost("id_contrato", null);
+        
+        $serviceLocator = $this->getServiceLocator();
+        $contratoTable = $serviceLocator->get('Dashboard\Model\ConcontratoTable');
+        $contrato = $contratoTable->getContratoId($id_contrato);
+        
+        return new ViewModel(array('contrato' => $contrato ));
+        
     }
 
 }

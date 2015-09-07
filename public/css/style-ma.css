@@ -1,3 +1,13 @@
+@font-face {
+    font-family: "gotham-medium";
+    src: url('../fonts/gotham-medium-webfont.woff') format("truetype");
+}
+
+@font-face {
+    font-family: "gotham-book";
+    src: url('../fonts/gotham-book-webfont.woff') format("truetype");
+}
+
 body {
    padding-top: 80px;
    padding-bottom: 0px;
@@ -488,4 +498,23 @@ td[data-columnuniqueid="total_liquidacion"]{
     color:#ffffff;
     background-color:#f8d078;
     border:1px solid #DDD;
+}
+
+
+
+/*********/
+
+.titulo-tabla-grilla {
+    font-family: 'gotham-book';
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.boton-nuevo-grilla {
+    float:right !important;
+    display: table;
+}
+
+.btn-group.tabla-grilla {
+    width:100%;
 }

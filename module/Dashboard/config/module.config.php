@@ -161,6 +161,17 @@ return array(
                     ),
                 ),
             ),
+            'dash_contrato_edit' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/dashboard/campana/editarcontrato',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Dashboard\Controller',
+                        'controller' => 'campana',
+                        'action' => 'editarcontrato',
+                    ),
+                ),
+            ),
             'dash_role_edit' => array(
                 'type' => 'Segment',
                 'options' => array(

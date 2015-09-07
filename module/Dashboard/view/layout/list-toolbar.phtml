@@ -22,16 +22,15 @@ switch ($this->controllerName()) {
         break;
 }
 ?>
-<div class="panel panel-primary">
+<div class="panel panel-warning">
     <div class="panel-heading">
         <div>
-            <div class="btn-group">
-                <span class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Registrar nueva campaña">
-                    <h4><?php echo $titulo; ?> <span class="caret"></span></h4>
+            <div class="btn-group tabla-grilla">
+                <span class="titulo-tabla-grilla">
+                    <?php echo $titulo; ?>
                 </span>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="javascript:nuevo();"><?php echo $enlace; ?></a></li>
-                </ul>
+                <button class="btn btn-danger boton-nuevo-grilla" id="btnAdd" name="btnAdd" value="add"><span class="glyphicon glyphicon-open-file" aria-hidden="true"></span> <?php echo $enlace; ?>
+                </button>
             </div>
         </div>
     </div>
@@ -60,14 +59,39 @@ switch ($this->controllerName()) {
                 <h4 class="modal-title" id="modalContratoLabel">Generación de Contrato</h4>
             </div>
             <div class="modal-body" id="bodyContrato">
+                <div class="container-fluid">
+                    <form name="frmregistro_contrato" id="frmregistro_contrato" role="form">
+                        <div class="form-group">
+                            <label for="nombre" class="col-lg-5 control-label afiliacion">Nombre Contacto:</label>
+                            <div class="col-xs-7 validacion"> 
+                                <input type="hidden" class="form-control" name="id_campana" id="id_campana" value="" >
+                                <input type="text" class="form-control" name="nombre" id="nombre" value="" >
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="col-lg-5 control-label afiliacion">Email Contacto:</label>
+                            <div class="col-xs-7 validacion"> 
+                                <input type="text" class="form-control" name="email" id="email" value="" >
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12 total">
+                                <button type="button" class="btn btn-rebueno" name="generar_contrato" id="generar_contrato" onclick="javascript:generarcontrato();">Generar Contrato</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
 <script type="text/javascript">
-    function nuevo() {
-        $("#btnAdd").click();
-    }
+
     function visualizar(campana){
         $.ajax({
             type: "POST",
@@ -78,23 +102,53 @@ switch ($this->controllerName()) {
                 $('#modalPreview').modal('show');
             }
         });
-        
-        
-    } 
+    }
+    
     function registrarcontrato(campana){
         $.ajax({
             type: "POST",
             url: "/dashboard/campana/contrato",
             data: {id: campana},
             success: function (data) {
-                $('#bodyContrato').html(data);
-                $('#modalContrato').modal('show');
+                var contrato = $.parseJSON(data);
+                if (contrato) {
+                    if (contrato.id_contrato == -1) {
+                        $('#id_campana').val(campana);
+                        $('#modalContrato').modal('show');
+                    } else {
+                        var form = $('<form method="post" action="/dashboard/campana/editarcontrato">' +
+                                     '<input type="hidden" name="id_contrato" value="' + contrato.id_contrato + '">' +
+                                     '</form>');
+                        $(form).submit();
+                    }
+                }
             }
         });
-        
-        
+    }
+    
+    function generarcontrato(){
+        var id_campana = $("#id_campana").val();
+        var nombre = $("#nombre").val();
+        var email = $("#email").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/dashboard/campana/registrarcontrato",
+            data: {id_campana:id_campana, nombre:nombre, email:email},
+            success: function (data) {
+                var contrato = $.parseJSON(data);
+                if (contrato) {
+                    if (contrato.id_contrato == -1) {
+                        $('#modalContrato').modal('hide');
+                    } else {
+                        var form = $('<form method="post" action="/dashboard/campana/editarcontrato">' +
+                                     '<input type="hidden" name="id_contrato" value="' + contrato.id_contrato + '">' +
+                                     '</form>');
+                        $(form).submit();
+                    }
+                }
+            }
+        });
     } 
+    
 </script>
-<div style="display: none">
-    <button name="btnAdd" id="btnAdd" class="btn-primary" value="add" data-toggle='tooltip' data-placement='left' title='Regitrar Nueva Campaña'><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Nuevo</button>
-</div>

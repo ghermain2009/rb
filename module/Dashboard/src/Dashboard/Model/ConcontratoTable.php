@@ -50,4 +50,18 @@ class ConcontratoTable {
         return $stmt->execute()->getGeneratedValue();
     }
     
+    public function getContratoId($id_contrato)
+    {
+        $sql = new Sql($this->tableGateway->adapter);
+                
+        $select = $sql->select();
+        
+        $select->from('con_contrato')
+        ->where(array('id_contrato' => $id_contrato));
+
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $result = $statement->execute();
+
+        return ArrayUtils::iteratorToArray($result);
+    }
 }
