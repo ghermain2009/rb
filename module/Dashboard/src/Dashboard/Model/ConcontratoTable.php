@@ -55,7 +55,13 @@ class ConcontratoTable {
         $sql = new Sql($this->tableGateway->adapter);
                 
         $select = $sql->select();
-        
+        $select->columns(array('id_contrato' => 'id_contrato',
+                               'id_campana'  => 'id_campana',
+                               'id_estado'   => 'id_estado',
+                               'nombre_contacto' => 'nombre_contacto',
+                               'email_contacto' => 'email_contacto',
+                               'fecha_registro' => new Expression("DATE_FORMAT(fecha_registro,'%Y-%m-%d %h:%i%s')") ,
+                               'numero' => new Expression("DATE_FORMAT(fecha_registro,'%Y-%m-%d %h:%i%s')")));
         $select->from('con_contrato')
         ->where(array('id_contrato' => $id_contrato));
 

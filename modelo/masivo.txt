@@ -1,0 +1,3 @@
+http://www.forosdelweb.com/f10/como-hacer-servidor-para-envio-del-correo-masivo-793813/
+https://documentation.cpanel.net/display/CKB/Configurar+DNS+inverso+para+BIND+en+WHM
+http://www.escueladeinternet.com/revender-hosting-con-un-servidor-dedicado
