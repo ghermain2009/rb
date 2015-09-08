@@ -56,10 +56,12 @@ use Dashboard\Model\CupclientepreferenciasTable;
 
 use Dashboard\Model\Concontrato;
 use Dashboard\Model\ConcontratoTable;
-use Dashboard\Model\Concontratodetalle;
-use Dashboard\Model\ConcontratodetalleTable;
+use Dashboard\Model\Concontratoanexo;
+use Dashboard\Model\ConcontratoanexoTable;
 use Dashboard\Model\Conestadocontrato;
 use Dashboard\Model\ConestadocontratoTable;
+use Dashboard\Model\Contipoobservacion;
+use Dashboard\Model\ContipoobservacionTable;
 
 class Module implements AutoloaderProviderInterface, ConfigProviderInterface
 {
@@ -352,16 +354,16 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
                         $tableGateway = new TableGateway('con_contrato', $adapter, null, $rsPrototype);
                         return $tableGateway;
                     },
-                    'Dashboard\Model\ConcontratodetalleTable' => function($sl){
-                        $gateway = $sl->get('ConcontratodetalleTableGateway');
-                        $table = new ConcontratodetalleTable($gateway);
+                    'Dashboard\Model\ConcontratoanexoTable' => function($sl){
+                        $gateway = $sl->get('ConcontratoanexoTableGateway');
+                        $table = new ConcontratoanexoTable($gateway);
                         return $table;
                     },
-                    'ConcontratodetalleTableGateway' => function($sl) {
+                    'ConcontratoanexoTableGateway' => function($sl) {
                         $adapter = $sl->get('Zend\Db\Adapter\Adapter');
                         $rsPrototype = new ResultSet();
-                        $rsPrototype->setArrayObjectPrototype(new Concontratodetalle());
-                        $tableGateway = new TableGateway('con_contrato_detalle', $adapter, null, $rsPrototype);
+                        $rsPrototype->setArrayObjectPrototype(new Concontratoanexo());
+                        $tableGateway = new TableGateway('con_contrato_anexo', $adapter, null, $rsPrototype);
                         return $tableGateway;
                     },
                     'Dashboard\Model\ConestadocontratoTable' => function($sl){
@@ -374,6 +376,18 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
                         $rsPrototype = new ResultSet();
                         $rsPrototype->setArrayObjectPrototype(new Conestadocontrato());
                         $tableGateway = new TableGateway('con_estado_contrato', $adapter, null, $rsPrototype);
+                        return $tableGateway;
+                    },
+                    'Dashboard\Model\ContipoobservacionTable' => function($sl){
+                        $gateway = $sl->get('ContipoobservacionTableGateway');
+                        $table = new ContipoobservacionTable($gateway);
+                        return $table;
+                    },
+                    'ContipoobservacionTableGateway' => function($sl) {
+                        $adapter = $sl->get('Zend\Db\Adapter\Adapter');
+                        $rsPrototype = new ResultSet();
+                        $rsPrototype->setArrayObjectPrototype(new Contipoobservacion());
+                        $tableGateway = new TableGateway('con_tipo_observacion', $adapter, null, $rsPrototype);
                         return $tableGateway;
                     },
                 )

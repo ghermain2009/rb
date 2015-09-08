@@ -100,9 +100,18 @@ class EmpresaController extends AbstractActionController {
         $editBtn->setAttribute('data-toggle', 'tooltip');
         $editBtn->setAttribute('data-placement', 'left');
         $editBtn->setAttribute('title', 'Editar Empresa');
+        
+        $conBtn = new Column\Action\Button();
+        $conBtn->setLabel(' ');
+        $conBtn->setAttribute('class', 'btn btn-info glyphicon glyphicon-list-alt');
+        $conBtn->setAttribute('href', 'javascript:registrarcontrato('. $conBtn->getRowIdPlaceholder().');');
+        $conBtn->setAttribute('data-toggle', 'tooltip');
+        $conBtn->setAttribute('data-placement', 'left');
+        $conBtn->setAttribute('title', 'Contrato Empresa');
 
         $col = new Column\Action();
         $col->addAction($editBtn);
+        $col->addAction($conBtn);
         $grid->addColumn($col);
 
         return $grid->getResponse();

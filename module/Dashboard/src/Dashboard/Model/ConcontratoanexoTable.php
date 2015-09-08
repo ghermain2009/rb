@@ -14,11 +14,11 @@ use Zend\Db\Sql\Expression;
 use Zend\Authentication\AuthenticationService;
 use Zend\Stdlib\ArrayUtils;
 /**
- * Description of ConcontratodetalleTable
+ * Description of ConcontratoanexoTable
  *
  * @author gtapia
  */
-class ConcontratodetalleTable {
+class ConcontratoanexoTable {
     //put your code here
     protected $tableGateway;
 
