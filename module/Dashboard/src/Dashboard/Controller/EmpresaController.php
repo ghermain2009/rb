@@ -183,8 +183,8 @@ class EmpresaController extends AbstractActionController {
 
         return $viewmodel;
     }
-
-    /* public function deleteAction()
+    
+        /* public function deleteAction()
       {
       $sl = $this->getServiceLocator();
       $userId = $this->params('id');

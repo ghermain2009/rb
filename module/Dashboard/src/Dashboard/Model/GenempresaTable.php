@@ -114,4 +114,25 @@ class GenempresaTable
 
         return $stmt->execute()->getGeneratedValue();
     }
+    
+    public function getContratoxEmpresa($id)
+    {
+        $sql = new Sql($this->tableGateway->getAdapter());
+        $select = $sql
+                  ->select()
+                  ->from(array('c' => 'con_contrato'))
+                  ->where(array('c.id_empresa' => $id));
+
+        $stmt = $sql->prepareStatementForSqlObject($select);
+        
+        $results = $stmt->execute(); 
+        
+        return ArrayUtils::iteratorToArray($results);
+    }
+    
+    public function gelPlantillaContrato($id) {
+        
+    }
+
+
 }

@@ -64,7 +64,7 @@ switch ($this->controllerName()) {
                         <div class="form-group">
                             <label for="nombre" class="col-lg-5 control-label afiliacion">Nombre Contacto:</label>
                             <div class="col-xs-7 validacion"> 
-                                <input type="hidden" class="form-control" name="id_campana" id="id_campana" value="" >
+                                <input type="hidden" class="form-control" name="id_empresa" id="id_empresa" value="" >
                                 <input type="text" class="form-control" name="nombre" id="nombre" value="" >
                                 <span class="help-block with-errors"></span>
                             </div>
@@ -104,16 +104,16 @@ switch ($this->controllerName()) {
         });
     }
     
-    function registrarcontrato(campana){
+    function registrarcontrato(empresa){
         $.ajax({
             type: "POST",
             url: "/dashboard/campana/contrato",
-            data: {id: campana},
+            data: {id: empresa},
             success: function (data) {
                 var contrato = $.parseJSON(data);
                 if (contrato) {
                     if (contrato.id_contrato == -1) {
-                        $('#id_campana').val(campana);
+                        $('#id_empresa').val(empresa);
                         $('#modalContrato').modal('show');
                     } else {
                         var form = $('<form method="post" action="/dashboard/campana/editarcontrato">' +

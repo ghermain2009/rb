@@ -266,8 +266,8 @@ class CampanaController extends AbstractActionController {
         $id = $this->params()->fromPost("id", null);
         
         $serviceLocator = $this->getServiceLocator();
-        $campanaTable = $serviceLocator->get('Dashboard\Model\CupCampanaTable');
-        $contratos = $campanaTable->getContratoxCampana($id);
+        $empresaTable = $serviceLocator->get('Dashboard\Model\GenempresaTable');
+        $contratos = $empresaTable->getContratoxEmpresa($id);
         
         if( count($contratos) > 0) {
             $id_contrato = $contratos[0]['id_contrato'];
@@ -280,17 +280,17 @@ class CampanaController extends AbstractActionController {
     }
     
     public function registrarcontratoAction() {
-        $id_campana = $this->params()->fromPost("id_campana", null);
+        $id_empresa = $this->params()->fromPost("id_empresa", null);
         $nombre     = $this->params()->fromPost("nombre", null);
         $email      = $this->params()->fromPost("email", null);
         
         $serviceLocator = $this->getServiceLocator();
         $contratoTable = $serviceLocator->get('Dashboard\Model\ConcontratoTable');
         
-        $contrato = array('id_campana' => $id_campana,
-                          'id_estado' => '1',
+        $contrato = array('id_empresa'      => $id_empresa,
                           'nombre_contacto' => $nombre,
-                          'email_contacto' => $email,
+                          'email_contacto'  => $email,
+                          'id_estado'       => '1'
                           );
         
         $id_contrato = $contratoTable->addContrato($contrato);

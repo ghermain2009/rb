@@ -41,6 +41,7 @@ class ConcontratoTable {
     public function addContrato($params)
     {
         $params['fecha_registro'] = date('Y-m-d H:i:s');
+        $params['nombre_documento'] = new Expression("CONCAT('CON-RE-',LPAD(LAST_INSERT_ID(),6,'0'),date_format(Now(),'-%Y'))");
         
         $sql = new Sql($this->tableGateway->getAdapter());
         $insert = $sql->insert('con_contrato')->values($params);
