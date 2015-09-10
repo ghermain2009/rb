@@ -7,6 +7,7 @@
  */
 namespace Dashboard\Controller;
 
+use DOMPDFModule\View\Model\PdfModel;
 use Dashboard\Form\EmpresaForm;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -192,4 +193,88 @@ class EmpresaController extends AbstractActionController {
       $userTable->deleteCampana($userId);
       $this->redirect()->toRoute('dash_user_list');
       } */
+    
+    public function contratoAction() {
+        
+        $id = $this->params()->fromPost("id", null);
+        
+        $serviceLocator = $this->getServiceLocator();
+        $empresaTable = $serviceLocator->get('Dashboard\Model\GenempresaTable');
+        $contratos = $empresaTable->getContratoxEmpresa($id);
+        
+        if( count($contratos) > 0) {
+            $id_contrato = $contratos[0]['id_contrato'];
+        } else {
+            $id_contrato = -1;
+        }
+        
+        return $this->getResponse()->setContent(Json::encode(array('id_contrato' => $id_contrato)));
+        
+    }
+    
+    public function registrarcontratoAction() {
+        $id_empresa = $this->params()->fromPost("id_empresa", null);
+        $nombre     = $this->params()->fromPost("nombre", null);
+        $email      = $this->params()->fromPost("email", null);
+        
+        $serviceLocator = $this->getServiceLocator();
+        $contratoTable = $serviceLocator->get('Dashboard\Model\ConcontratoTable');
+        
+        $contrato = array('id_empresa'      => $id_empresa,
+                          'nombre_contacto' => $nombre,
+                          'email_contacto'  => $email,
+                          'id_estado'       => '1'
+                          );
+        
+        $id_contrato = $contratoTable->addContrato($contrato);
+        
+        return $this->getResponse()->setContent(Json::encode(array('id_contrato' => $id_contrato)));
+    }
+    
+    public function editarcontratoAction() {
+        
+        set_time_limit(0);
+        
+        $id_contrato = $this->params()->fromPost("id_contrato", null);
+        
+        $serviceLocator = $this->getServiceLocator();
+        $contratoTable = $serviceLocator->get('Dashboard\Model\ConcontratoTable');
+        $contrato = $contratoTable->getContratoId($id_contrato);
+        
+        $config = $serviceLocator->get('Config');
+        $dir_image = $config['constantes']['dir_image'];
+        
+        $directorio = $dir_image."\\..\\..\\data\\contratos\\";
+        
+        foreach( $contrato as $cont ) {
+            
+            $empresaTable = $serviceLocator->get('Dashboard\Model\GenempresaTable');
+            $datosEmpresa = $empresaTable->getEmpresa($cont['id_empresa']);
+        
+            /*$documentoPdf = new PdfModel();
+            $documentoPdf->setOption('filename', $cont["nombre_documento"].'.pdf');
+            $documentoPdf->setOption('paperOrientation', 'portrait');
+            $documentoPdf->setVariables(array(
+                'ruc' => $datosEmpresa[0]['registro_contribuyente'],
+                'razon' => $datosEmpresa[0]['razon_social'],
+                'direccion' => $datosEmpresa[0]['direccion_facturacion']
+            ));
+
+            $documentoPdf->setTerminal(true);
+            $documentoPdf->setTemplate('dashboard/empresa/contrato-pdf.phtml');
+            $htmlPdf = $serviceLocator->get('viewPdfrenderer')->getHtmlRenderer()->render($documentoPdf);
+            $engine = $serviceLocator->get('viewPdfrenderer')->getEngine();
+            // Cargamos el HTML en DOMPDF
+            $engine->load_html($htmlPdf);
+            $engine->render();
+            // Obtenemos el PDF en memoria
+            $pdfCode = $engine->output();
+            
+            file_put_contents($directorio.$cont["nombre_documento"].'.pdf', $pdfCode);*/
+            
+        }
+        
+        return new ViewModel(array('contrato' => $contrato ));
+        
+    }
 }

@@ -107,7 +107,7 @@ switch ($this->controllerName()) {
     function registrarcontrato(empresa){
         $.ajax({
             type: "POST",
-            url: "/dashboard/campana/contrato",
+            url: "/dashboard/empresa/contrato",
             data: {id: empresa},
             success: function (data) {
                 var contrato = $.parseJSON(data);
@@ -116,7 +116,7 @@ switch ($this->controllerName()) {
                         $('#id_empresa').val(empresa);
                         $('#modalContrato').modal('show');
                     } else {
-                        var form = $('<form method="post" action="/dashboard/campana/editarcontrato">' +
+                        var form = $('<form method="post" action="/dashboard/empresa/editarcontrato">' +
                                      '<input type="hidden" name="id_contrato" value="' + contrato.id_contrato + '">' +
                                      '</form>');
                         $(form).submit();
@@ -127,21 +127,21 @@ switch ($this->controllerName()) {
     }
     
     function generarcontrato(){
-        var id_campana = $("#id_campana").val();
+        var id_empresa = $("#id_empresa").val();
         var nombre = $("#nombre").val();
         var email = $("#email").val();
 
         $.ajax({
             type: "POST",
-            url: "/dashboard/campana/registrarcontrato",
-            data: {id_campana:id_campana, nombre:nombre, email:email},
+            url: "/dashboard/empresa/registrarcontrato",
+            data: {id_empresa:id_empresa, nombre:nombre, email:email},
             success: function (data) {
                 var contrato = $.parseJSON(data);
                 if (contrato) {
                     if (contrato.id_contrato == -1) {
                         $('#modalContrato').modal('hide');
                     } else {
-                        var form = $('<form method="post" action="/dashboard/campana/editarcontrato">' +
+                        var form = $('<form method="post" action="/dashboard/empresa/editarcontrato">' +
                                      '<input type="hidden" name="id_contrato" value="' + contrato.id_contrato + '">' +
                                      '</form>');
                         $(form).submit();

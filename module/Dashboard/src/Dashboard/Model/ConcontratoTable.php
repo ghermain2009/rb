@@ -41,14 +41,21 @@ class ConcontratoTable {
     public function addContrato($params)
     {
         $params['fecha_registro'] = date('Y-m-d H:i:s');
-        $params['nombre_documento'] = new Expression("CONCAT('CON-RE-',LPAD(LAST_INSERT_ID(),6,'0'),date_format(Now(),'-%Y'))");
         
         $sql = new Sql($this->tableGateway->getAdapter());
         $insert = $sql->insert('con_contrato')->values($params);
                 
         $stmt = $sql->prepareStatementForSqlObject($insert);
+        
+        $id_contrato = $stmt->execute()->getGeneratedValue();
+        
+        $update = $sql->update('con_contrato')->set(array('nombre_documento' => new Expression("CONCAT('CON-RE-',LPAD(".$id_contrato.",6,'0'),date_format(Now(),'-%Y'))")))->where(array('id_contrato' => $id_contrato ));
+                
+        $stmt = $sql->prepareStatementForSqlObject($update);
+        
+        $stmt->execute();
 
-        return $stmt->execute()->getGeneratedValue();
+        return $id_contrato;
     }
     
     public function getContratoId($id_contrato)
@@ -57,12 +64,12 @@ class ConcontratoTable {
                 
         $select = $sql->select();
         $select->columns(array('id_contrato' => 'id_contrato',
-                               'id_campana'  => 'id_campana',
-                               'id_estado'   => 'id_estado',
+                               'id_empresa'  => 'id_empresa',
                                'nombre_contacto' => 'nombre_contacto',
                                'email_contacto' => 'email_contacto',
-                               'fecha_registro' => new Expression("DATE_FORMAT(fecha_registro,'%Y-%m-%d %h:%i%s')") ,
-                               'numero' => new Expression("DATE_FORMAT(fecha_registro,'%Y-%m-%d %h:%i%s')")));
+                               'fecha_registro' => new Expression("DATE_FORMAT(fecha_registro,'%d-%m-%Y %h:%i:%s')") ,
+                               'nombre_documento' => 'nombre_documento',
+                               'id_estado'   => 'id_estado'));
         $select->from('con_contrato')
         ->where(array('id_contrato' => $id_contrato));
 

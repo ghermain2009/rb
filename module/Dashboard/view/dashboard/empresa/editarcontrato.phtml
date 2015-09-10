@@ -1,0 +1,101 @@
+<form class="form-horizontal" role="form" >
+    <?php foreach($contrato as $contra) {?>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 class="panel-title">Contrato Nro. <?php echo $contra['nombre_documento'];?></h4>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="nombre_contacto" class="col-lg-2 control-label">Nombre Contacto :</label>
+                <div class="col-lg-8">
+                    <input class="form-control input-sm" type="text" name="nombre_contacto" id="nombre_contacto" value="<?php echo $contra['nombre_contacto'];?>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email_contacto" class="col-lg-2 control-label">Email Contacto :</label>
+                <div class="col-lg-8">
+                    <input class="form-control input-sm" type="text" name="email_contacto" id="nombre_contacto" value="<?php echo $contra['email_contacto'];?>">
+                </div>
+            </div>
+             <div class="form-group">
+                <label for="fecha_registro" class="col-lg-2 control-label">Fecha Registro :</label>
+                <div class="col-lg-8">
+                    <input class="form-control input-sm" type="text" name="fecha_registro" id="fecha_registro" value="<?php echo $contra['fecha_registro'];?>">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-offset-2 col-lg-7">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php } ?>
+</form>
+<form class="form-horizontal" role="form" >
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 class="panel-title">Seguimiento de Contrato</h4>
+        </div>
+        <?php foreach($contrato as $contra) {?>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="nombre_contacto" class="col-lg-2 control-label">Nombre Contacto :</label>
+                <div class="col-lg-8">
+                    <input class="form-control input-sm" type="text" name="nombre_contacto" id="nombre_contacto" value="<?php echo $contra['nombre_contacto'];?>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email_contacto" class="col-lg-2 control-label">Email Contacto :</label>
+                <div class="col-lg-8">
+                    <input class="form-control input-sm" type="text" name="email_contacto" id="nombre_contacto" value="<?php echo $contra['email_contacto'];?>">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-offset-2 col-lg-7">
+                    
+                </div>
+            </div>
+        </div>
+        <?php } ?>
+    </div>
+</form>
+<style>
+    .centrado {
+        text-align:center;
+    }
+
+    .justificado {
+        text-align:justify;
+    }
+
+    .vineta-numerado {
+        //list-style-position: inside;
+        list-style-type:none;
+        position:relative;
+        top:0px;
+        
+    }
+</style>
+<div><p class='centrado'><b>ACUERDO DE ALIANZA ESTRATEGICA</b></p>
+             <p class='justificado'>Conste por el presente documento, el <b>ACUERDO DE ALIANZA ESTRATEGICA</b>, que celebran de una parte <b>ECUADORPUNTOCOM C.L.</b>, con RUC N° 0992917202001, con domicilio en Los Sauces II Numero SOLAR 108 Manzana 111F, debidamente representada para estos efectos por la señora <b>CAROLINA GRANDA BARZOLA</b>, con Cédula Nº 0920626959, a quien en adelante se le denominará <b>LA EMPRESA</b>; y de la otra parte <b></b>, con RUC N° , con domicilio en , debidamente representado para estos efectos por el señor (a) __________________________________, identificado con C. Nº _________________; a quien en adelante se le denominará el <b>ALIADO ESTRATÉGICO</b>; en los términos y condiciones siguientes:</p>
+             <p><br></p>
+             <p><b>PRIMERA: ANTECEDENTES</b></p>
+             <div style="display: inline-block">
+                 
+                 <div style="display: inline-block">
+                    <ul class='vineta-numerado'>
+                     <div style="display: inline-block">1.1.</div>
+                     <lo>LA EMPRESA, es una sociedad ecuatoriana, dedicada a la prestación de servicios que ofrece ciertas ventajas y descuentos para usuarios de su marca REBUENO, respecto de los productos y servicios (los "Beneficios") ofrecidos por una amplia gama de comercios participantes y proveedores.</lo>
+                    </ul>
+                 </div>
+             </div>
+             <p class='justificado'>
+                    <ul class='vineta-numerado'>
+                        <li><div style="display:inline-block;width: 5%">1.2.</div><div style="display:inline-block;width: 95%"><p class='justificado'>El ALIADO ESTRATÉGICO: es una sociedad ecuatoriana, dedicada a la __________________________ ___________________________________ , está interesado en participar en las oportunidades de promoción que ofrece REBUENO para aumentar su notoriedad e incrementar su volumen de ventas, motivo por el cual emitirá cupones para el consumo de sus productos y/o servicios, con descuentos en el precio, a favor de clientes finales.</p><div></li>
+                    </ul></p>
+             <p class='justificado'>1.3.
+                    <ul class='vineta-numerado'>
+                     <li><p class='justificado'>El ALIADO ESTRATÉGICO emite documentos denominados “cupones”, concediendo un “derecho de opción” para que los adquirentes de tales cupones (“Optantes”), celebren contratos definitivos con el ALIADO ESTRATÉGICO para la venta de bienes y/o la prestación de servicios por parte del ALIADO ESTRATÉGICO a su favor, respecto de las prestaciones descritas en cada cupón. Cada cupón indica su correspondiente período de vigencia y eficacia.</p></li>
+                    </ul></p>
+</div>
