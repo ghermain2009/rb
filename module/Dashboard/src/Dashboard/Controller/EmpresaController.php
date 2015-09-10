@@ -251,7 +251,7 @@ class EmpresaController extends AbstractActionController {
             $empresaTable = $serviceLocator->get('Dashboard\Model\GenempresaTable');
             $datosEmpresa = $empresaTable->getEmpresa($cont['id_empresa']);
         
-            /*$documentoPdf = new PdfModel();
+            $documentoPdf = new PdfModel();
             $documentoPdf->setOption('filename', $cont["nombre_documento"].'.pdf');
             $documentoPdf->setOption('paperOrientation', 'portrait');
             $documentoPdf->setVariables(array(
@@ -270,11 +270,44 @@ class EmpresaController extends AbstractActionController {
             // Obtenemos el PDF en memoria
             $pdfCode = $engine->output();
             
-            file_put_contents($directorio.$cont["nombre_documento"].'.pdf', $pdfCode);*/
+            file_put_contents($directorio.$cont["nombre_documento"].'.pdf', $pdfCode);
             
         }
         
         return new ViewModel(array('contrato' => $contrato ));
         
+    }
+    
+    public function obtenerPdfContratoAction() 
+    {
+        $serviceLocator = $this->getServiceLocator();
+        $response = $this->getResponse();
+        $config = $serviceLocator->get('Config');
+        $dir_image = $config['constantes']['dir_image'];
+        
+        $directorio = $dir_image."\\..\\..\\data\\contratos\\";
+        
+        $params = $this->params()->fromQuery();
+        
+        $nombreDocumento = !empty($params['nombre_documento']) ? $params['nombre_documento'] : '';
+        
+        $rutaDocumento = $directorio.'\\'. 
+                         $nombreDocumento.'.pdf';
+        
+        //if(!is_file($rutaDocumento)) {
+        //    $this->redirect()->toRoute('documento-electronico');
+        //}
+
+        $contenidoDocumento = file_get_contents($rutaDocumento);
+        $response->setContent($contenidoDocumento);
+
+        $headers = $response->getHeaders();
+        $headers->clearHeaders()
+                ->addHeaderLine('Content-Type', 'application/pdf')
+                ->addHeaderLine('Content-Disposition', 'attachment; filename="'.$nombreDocumento.'.pdf"')
+                ->addHeaderLine('Content-Length', strlen($contenidoDocumento));
+
+
+        return $this->response;
     }
 }
