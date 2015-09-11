@@ -284,14 +284,15 @@ class EmpresaController extends AbstractActionController {
         $response = $this->getResponse();
         $config = $serviceLocator->get('Config');
         $dir_image = $config['constantes']['dir_image'];
+        $sep_path = $config['constantes']['sep_path'];
         
-        $directorio = $dir_image."\\..\\..\\data\\contratos\\";
+        $directorio = $dir_image.$sep_path."..".$sep_path."..".$sep_path."data".$sep_path."contratos".$sep_path;
         
         $params = $this->params()->fromQuery();
         
         $nombreDocumento = !empty($params['nombre_documento']) ? $params['nombre_documento'] : '';
         
-        $rutaDocumento = $directorio.'\\'. 
+        $rutaDocumento = $directorio. 
                          $nombreDocumento.'.pdf';
         
         //if(!is_file($rutaDocumento)) {
