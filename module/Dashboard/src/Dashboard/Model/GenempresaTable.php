@@ -53,11 +53,11 @@ class GenempresaTable
         $select->from(array(
                     'c' => 'gen_empresa'
                 ))
-                /*->join(array(
-                    'e' => 'gen_empresa'
-                    ), 
-                    'c.id_empresa = e.id_empresa'
-                 )*/
+                ->join(array('e' => 'con_contrato'), 
+                       'c.id_empresa = e.id_empresa',
+                        array('can_contrato' => new Expression("case when ifnull(id_contrato,-1) = -1 then 0 else 1 end")),
+                        'left'
+                 )
                 ->order('c.id_empresa');
         
         return $select;

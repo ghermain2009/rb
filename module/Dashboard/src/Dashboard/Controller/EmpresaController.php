@@ -102,10 +102,12 @@ class EmpresaController extends AbstractActionController {
         $editBtn->setAttribute('data-placement', 'left');
         $editBtn->setAttribute('title', 'Editar Empresa');
         
+        $col = new Column\Select('can_contrato', 'e');
+        
         $conBtn = new Column\Action\Button();
-        $conBtn->setLabel(' ');
+        $conBtn->setLabel('<span class="badge btn-danger"><font style="color:white">1<font></span>');
         $conBtn->setAttribute('class', 'btn btn-info glyphicon glyphicon-list-alt');
-        $conBtn->setAttribute('href', 'javascript:registrarcontrato('. $conBtn->getRowIdPlaceholder().');');
+        $conBtn->setAttribute('href', 'javascript:registrarcontrato('. $col->get .');');
         $conBtn->setAttribute('data-toggle', 'tooltip');
         $conBtn->setAttribute('data-placement', 'left');
         $conBtn->setAttribute('title', 'Contrato Empresa');
