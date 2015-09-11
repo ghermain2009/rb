@@ -243,8 +243,9 @@ class EmpresaController extends AbstractActionController {
         
         $config = $serviceLocator->get('Config');
         $dir_image = $config['constantes']['dir_image'];
+        $sep_path = $config['constantes']['sep_path'];
         
-        $directorio = $dir_image."\\..\\..\\data\\contratos\\";
+        $directorio = $dir_image.$sep_path."..".$sep_path."..".$sep_path."data".$sep_path."contratos".$sep_path;
         
         foreach( $contrato as $cont ) {
             
