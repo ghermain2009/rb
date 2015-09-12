@@ -14,6 +14,7 @@ use Zend\View\Model\ViewModel;
 use ZfcDatagrid\Column;
 use Zend\Session\Container;
 use Zend\Json\Json;
+use Zend\Stdlib\ArrayUtils;
 /**
  * Description of EmpresaController
  *
@@ -34,13 +35,13 @@ class EmpresaController extends AbstractActionController {
             //$form->setInputFilter($filters);
             $form->setData($request->getPost());
             if ($form->isValid()) {
-                //echo $data['id_campana'];
                 $data = $form->getData();
+                $tipoDocumentoTable = $serviceLocator->get('Dashboard\Model\GentipodocumentoTable');
                 $empresaTable = $serviceLocator->get('Dashboard\Model\GenempresaTable');
                 unset($data['submit']);
                 $rs = $empresaTable->addEmpresa($data);
                 if ($rs) {
-                    $form = new EmpresaForm($empresaTable);
+                    $form = new EmpresaForm($tipoDocumentoTable);
                 }
             }
         }
@@ -64,34 +65,46 @@ class EmpresaController extends AbstractActionController {
         $grid = $sl->get('ZfcDatagrid\Datagrid');
         $grid->setDefaultItemsPerPage(5);
         $grid->setToolbarTemplate('layout/list-toolbar');
-        $grid->setDataSource($sl->get('Dashboard\Model\GenempresaTable')
-                        ->getEmpresaList(), $dbAdapter);
-
-        $col = new Column\Select('id_empresa', 'c');
+        $grid->setDataSource($sl->get('Dashboard\Model\GenempresaTable')->getEmpresaList());
+        
+        $col = new Column\Select('id_empresa');
         $col->setLabel('id');
         $col->setWidth(25);
         $col->setIdentity(true);
         $col->setSortDefault(1, 'ASC');
         $grid->addColumn($col);
         
-         $col = new Column\Select('razon_social', 'c');
+        $col = new Column\Select('can_contrato');
+        $col->setHidden();
+        $col->setWidth(1);
+        $style = new Column\Style\BackgroundColor(array(
+            183,
+            249,
+            188
+        ));
+        $style->addByValue($col, '1');
+        $grid->addRowStyle($style);
+        $grid->addColumn($col);
+        
+        
+        $col = new Column\Select('razon_social');
         $col->setLabel('Razón Social');
         $col->setWidth(15);
         $grid->addColumn($col);
         
-        $col = new Column\Select('registro_contribuyente', 'c');
+        $col = new Column\Select('registro_contribuyente');
         $col->setLabel('RUC / CUIT');
         $col->setWidth(10);
         $grid->addColumn($col);
 
-        $col = new Column\Select('direccion_facturacion', 'c');
+        $col = new Column\Select('direccion_facturacion');
         $col->setLabel('Dirección');
-        $col->setWidth(25);
+        $col->setWidth(15);
         $grid->addColumn($col);
 
-        $col = new Column\Select('descripcion', 'c');
+        $col = new Column\Select('descripcion');
         $col->setLabel('Descripción');
-        $col->setWidth(25);
+        $col->setWidth(35);
         $grid->addColumn($col);
 
         $editBtn = new Column\Action\Button();
@@ -102,12 +115,10 @@ class EmpresaController extends AbstractActionController {
         $editBtn->setAttribute('data-placement', 'left');
         $editBtn->setAttribute('title', 'Editar Empresa');
         
-        $col = new Column\Select('can_contrato', 'e');
-        
         $conBtn = new Column\Action\Button();
-        $conBtn->setLabel('<span class="badge btn-danger"><font style="color:white">1<font></span>');
+        $conBtn->setLabel(' ');
         $conBtn->setAttribute('class', 'btn btn-info glyphicon glyphicon-list-alt');
-        $conBtn->setAttribute('href', 'javascript:registrarcontrato('. $col->get .');');
+        $conBtn->setAttribute('href', 'javascript:registrarcontrato('.$conBtn->getRowIdPlaceholder().');');
         $conBtn->setAttribute('data-toggle', 'tooltip');
         $conBtn->setAttribute('data-placement', 'left');
         $conBtn->setAttribute('title', 'Contrato Empresa');
@@ -137,8 +148,10 @@ class EmpresaController extends AbstractActionController {
         $request = $this->getRequest();
         $viewmodel = new ViewModel(array('dir_image' => $dir_image));
         $sl = $this->getServiceLocator();
+        $tipoDocumentoTable = $sl->get('Dashboard\Model\GentipodocumentoTable');
         $empresaTable = $sl->get('Dashboard\Model\GenempresaTable');
-        $form = new EmpresaForm();
+        
+        $form = new EmpresaForm($tipoDocumentoTable);
 
         if ($request->isPost()) {
             // @TODO addfilters
@@ -151,9 +164,9 @@ class EmpresaController extends AbstractActionController {
                 $dataId = array('id_empresa' => $empresaId);
                 $empresaTable->editEmpresa($data, $dataId);
 
-                if (trim($dataPost["id_categoria"]) != '') {
+                /*if (trim($dataPost["id_categoria"]) != '') {
                     $empresaCategoriaTable->savecategorias($dataPost["id_categoria"], $empresaId);
-                }
+                }*/
             }
         } else {
             $empresaData = $empresaTable->getEmpresa($empresaId);
@@ -254,27 +267,32 @@ class EmpresaController extends AbstractActionController {
             $empresaTable = $serviceLocator->get('Dashboard\Model\GenempresaTable');
             $datosEmpresa = $empresaTable->getEmpresa($cont['id_empresa']);
         
-            $documentoPdf = new PdfModel();
-            $documentoPdf->setOption('filename', $cont["nombre_documento"].'.pdf');
-            $documentoPdf->setOption('paperOrientation', 'portrait');
-            $documentoPdf->setVariables(array(
-                'ruc' => $datosEmpresa[0]['registro_contribuyente'],
-                'razon' => $datosEmpresa[0]['razon_social'],
-                'direccion' => $datosEmpresa[0]['direccion_facturacion']
-            ));
+            if(!is_file($directorio.$cont["nombre_documento"].'.pdf')) {
+                $documentoPdf = new PdfModel();
+                $documentoPdf->setOption('filename', $cont["nombre_documento"].'.pdf');
+                $documentoPdf->setOption('paperOrientation', 'portrait');
+                $documentoPdf->setVariables(array(
+                    'ruc' => $datosEmpresa[0]['registro_contribuyente'],
+                    'razon' => $datosEmpresa[0]['razon_social'],
+                    'direccion' => $datosEmpresa[0]['direccion_facturacion'],
+                    'tipdoc_representante' => $datosEmpresa[0]['tipo_documento'],
+                    'numero_representante' => $datosEmpresa[0]['documento_representante'],
+                    'nombre_representante' => $datosEmpresa[0]['nombre_representante'],
+                    'nombre_mes' => $this->_obtenerNombreMes(date('m'))
+                ));
 
-            $documentoPdf->setTerminal(true);
-            $documentoPdf->setTemplate('dashboard/empresa/contrato-pdf.phtml');
-            $htmlPdf = $serviceLocator->get('viewPdfrenderer')->getHtmlRenderer()->render($documentoPdf);
-            $engine = $serviceLocator->get('viewPdfrenderer')->getEngine();
-            // Cargamos el HTML en DOMPDF
-            $engine->load_html($htmlPdf);
-            $engine->render();
-            // Obtenemos el PDF en memoria
-            $pdfCode = $engine->output();
-            
-            file_put_contents($directorio.$cont["nombre_documento"].'.pdf', $pdfCode);
-            
+                $documentoPdf->setTerminal(true);
+                $documentoPdf->setTemplate('dashboard/empresa/contrato-pdf.phtml');
+                $htmlPdf = $serviceLocator->get('viewPdfrenderer')->getHtmlRenderer()->render($documentoPdf);
+                $engine = $serviceLocator->get('viewPdfrenderer')->getEngine();
+                // Cargamos el HTML en DOMPDF
+                $engine->load_html($htmlPdf);
+                $engine->render();
+                // Obtenemos el PDF en memoria
+                $pdfCode = $engine->output();
+
+                file_put_contents($directorio.$cont["nombre_documento"].'.pdf', $pdfCode);
+            }
         }
         
         return new ViewModel(array('contrato' => $contrato ));
@@ -313,5 +331,36 @@ class EmpresaController extends AbstractActionController {
 
 
         return $this->response;
+    }
+    
+    private function _obtenerNombreMes($mes) {
+        switch($mes) {
+            case '01' : $nombre = 'Enero';
+                break;
+            case '02' : $nombre = 'Febrero';
+                break;
+            case '03' : $nombre = 'Marzo';
+                break;
+            case '04' : $nombre = 'Abril';
+                break;
+            case '05' : $nombre = 'Mayo';
+                break;
+            case '06' : $nombre = 'Junio';
+                break;
+            case '07' : $nombre = 'Julio';
+                break;
+            case '08' : $nombre = 'Agosto';
+                break;
+            case '09' : $nombre = 'Setiembre';
+                break;
+            case '10' : $nombre = 'Octubre';
+                break;
+            case '11' : $nombre = 'Noviembre';
+                break;
+            case '12' : $nombre = 'Diciembre';
+                break;
+        }
+        
+        return $nombre;
     }
 }

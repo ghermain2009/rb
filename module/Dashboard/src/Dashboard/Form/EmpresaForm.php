@@ -8,8 +8,15 @@ use Zend\Form\Form;
 
 class EmpresaForm extends Form
 {
-    public function __construct() {
+    public function __construct($tipoDocumentoTable) {
         parent::__construct('campana');
+        
+        $tipoDocumentos = $tipoDocumentoTable->fetchAll();
+        $selTipoDocumento = array();
+        foreach($tipoDocumentos as $tipoDocumento) {
+            $id = $tipoDocumento['id_tipo_documento'];
+            $selTipoDocumento[$id] = $tipoDocumento['descripcion'];
+        }
         
         $this->setAttributes(array('method' => 'post',
                                   'class'  => 'form-horizontal',
@@ -96,6 +103,32 @@ class EmpresaForm extends Form
                 'rows'=>'3'
             ),
         ));
+        
+        $this->add(array(
+            'type' => 'Zend\Form\Element\Select',
+            'name' => 'tipo_documento_representante',
+            'options' => array(
+                 'value_options' => $selTipoDocumento,
+             ),
+            'attributes' => array(
+                'class' => 'form-control input-sm'
+            ),
+        ));
+        $this->add(array(
+            'name' => 'documento_representante',
+            'attributes' => array(
+                'type'  => 'text',
+                'class' => 'form-control input-sm'
+            ),
+        ));
+        $this->add(array(
+            'name' => 'nombre_representante',
+            'attributes' => array(
+                'type'  => 'text',
+                'class' => 'form-control input-sm'
+            ),
+        ));
+        
         $this->add(array(
             'name' => 'id_operador',
             'attributes' => array(

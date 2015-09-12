@@ -24,6 +24,9 @@ class Genempresa {
     public $ubicacion_gps;
     public $numero_cuenta;
     public $descripcion;
+    public $tipo_documento_representante;
+    public $documento_representante;
+    public $nombre_representante;
     public $id_operador;
     
     public function getId_empresa() {
@@ -68,6 +71,18 @@ class Genempresa {
 
     public function getDescripcion() {
         return $this->descripcion;
+    }
+
+    public function getTipo_documento_representante() {
+        return $this->tipo_documento_representante;
+    }
+
+    public function getDocumento_representante() {
+        return $this->documento_representante;
+    }
+
+    public function getNombre_representante() {
+        return $this->nombre_representante;
     }
 
     public function getId_operador() {
@@ -118,10 +133,22 @@ class Genempresa {
         $this->descripcion = $descripcion;
     }
 
+    public function setTipo_documento_representante($tipo_documento_representante) {
+        $this->tipo_documento_representante = $tipo_documento_representante;
+    }
+
+    public function setDocumento_representante($documento_representante) {
+        $this->documento_representante = $documento_representante;
+    }
+
+    public function setNombre_representante($nombre_representante) {
+        $this->nombre_representante = $nombre_representante;
+    }
+
     public function setId_operador($id_operador) {
         $this->id_operador = $id_operador;
     }
-
+    
     public function exchangeArray($data)
     {
         $this->id_empresa = (isset($data['id_empresa'])) ? $data['id_empresa'] : null;
@@ -135,12 +162,16 @@ class Genempresa {
         $this->ubicacion_gps = (isset($data['ubicacion_gps'])) ? $data['ubicacion_gps'] : null;
         $this->numero_cuenta = (isset($data['numero_cuenta'])) ? $data['numero_cuenta'] : null;
         $this->descripcion = (isset($data['descripcion'])) ? $data['descripcion'] : null;
+        $this->tipo_documento_representante = (isset($data['tipo_documento_representante'])) ? $data['tipo_documento_representante'] : null;
+        $this->documento_representante = (isset($data['documento_representante'])) ? $data['documento_representante'] : null;
+        $this->nombre_representante = (isset($data['nombre_representante'])) ? $data['nombre_representante'] : null;
         $this->id_operador = (isset($data['id_operador'])) ? $data['id_operador'] : null;
-         
     }
  
     public function getArrayCopy()
     {
         return get_object_vars($this);
     }
+
+
 }

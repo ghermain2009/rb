@@ -74,7 +74,7 @@
     <body>
         <div>
             <div><p class='centrado'><b>ACUERDO DE ALIANZA ESTRATEGICA</b></p>
-                <p class='justificado borde-bottom'>Conste por el presente documento, el <b>ACUERDO DE ALIANZA ESTRATEGICA</b>, que celebran de una parte <b>ECUADORPUNTOCOM C.L.</b>, con RUC N° 0992917202001, con domicilio en Los Sauces II Numero SOLAR 108 Manzana 111F, debidamente representada para estos efectos por la señora <b>CAROLINA GRANDA BARZOLA</b>, con Cédula Nº 0920626959, a quien en adelante se le denominará <b><b>LA EMPRESA</b></b>; y de la otra parte <b><?php echo $razon; ?></b>, con RUC N° <?php echo $ruc; ?>, con domicilio en <?php echo $direccion; ?>, debidamente representado para estos efectos por el señor (a) __________________________________, identificado con C. Nº _________________; a quien en adelante se le denominará el <b>ALIADO ESTRATÉGICO</b>; en los términos y condiciones siguientes:</p>
+                <p class='justificado borde-bottom'>Conste por el presente documento, el <b>ACUERDO DE ALIANZA ESTRATEGICA</b>, que celebran de una parte <b>ECUADORPUNTOCOM C.L.</b>, con RUC N° 0992917202001, con domicilio en Los Sauces II Numero SOLAR 108 Manzana 111F, debidamente representada para estos efectos por la señora <b>CAROLINA GRANDA BARZOLA</b>, con Cédula Nº 0920626959, a quien en adelante se le denominará <b><b>LA EMPRESA</b></b>; y de la otra parte <b><?php echo $razon; ?></b>, con RUC N° <?php echo $ruc; ?>, con domicilio en <?php echo $direccion; ?>, debidamente representado para estos efectos por el señor (a) <?php if(!empty($nombre_representante)) { echo '<b>'.$nombre_representante.'</b>'; } else { echo '__________________________________'; } ?>, identificado con <?php if(!empty($tipdoc_representante)) { echo $tipdoc_representante; } else { echo 'Cédula'; } ?> Nº <?php if(!empty($numero_representante)) { echo $numero_representante; } else { echo '_________________'; } ?>; a quien en adelante se le denominará el <b>ALIADO ESTRATÉGICO</b>; en los términos y condiciones siguientes:</p>
                 <p><b>PRIMERA: ANTECEDENTES</b></p>
                 <div class="con-vineta">
                     <div class="vineta-numerado">1.1.</div>
@@ -276,7 +276,7 @@
                 </div>
                 <p><b>DÉCIMA TERCERA: DERECHO APLICABLE Y JURISDICCIÓN</b></p>
                 <p class='justificado'>Este Acuerdo está sujeto a las Leyes de la República del Ecuador. Todo litigio, controversia, desavenencia o reclamo resultante, relacionada o derivada del presente acuerdo o que guarde relación con él, incluidas las relativas a su validez, eficacia o terminación, serán resueltas ante los jueces de la ciudad de Guayaquil, renunciando a cualquier otra jurisdicción.</p>
-                <p class='justificado borde-top'>Las partes suscriben el presente documento en señal de conformidad con lo expresado en el presente acuerdo de alianza estratégica, en la ciudad de Guayaquil a los ______ días del mes de __________.del año 2015.</p>
+                <p class='justificado borde-top'>Las partes suscriben el presente documento en señal de conformidad con lo expresado en el presente acuerdo de alianza estratégica, en la ciudad de Guayaquil a los <?php echo date('d');?> días del mes de <?php echo $nombre_mes;?> del año <?php echo date('Y');?>.</p>
                 <div class="firma-contenedor">
                     <div class="firma">ECUADORPUNTOCOM C.L.</div>
                     <div class="firma">ALIADO ESTRATÉGICO</div>

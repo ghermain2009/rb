@@ -47,7 +47,7 @@ class GenempresaTable
         return ArrayUtils::iteratorToArray($result);
     }
     
-    public function getEmpresaList()
+    /*public function getEmpresaList()
     {
         $select = new Select();
         $select->from(array(
@@ -59,8 +59,29 @@ class GenempresaTable
                         'left'
                  )
                 ->order('c.id_empresa');
-        
+              
         return $select;
+    }*/
+    
+    public function getEmpresaList()
+    {
+        $sql = new Sql($this->tableGateway->adapter);
+        
+        $select = new Select();
+        $select->from(array(
+                    'c' => 'gen_empresa'
+                ))
+                ->join(array('e' => 'con_contrato'), 
+                       'c.id_empresa = e.id_empresa',
+                        array('can_contrato' => new Expression("case when ifnull(id_contrato,-1) = -1 then 0 else 1 end")),
+                        'left'
+                 )
+                ->order('c.id_empresa');
+              
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $result = $statement->execute();
+
+        return ArrayUtils::iteratorToArray($result);
     }
     
     public function getEmpresaAutorizadas()
@@ -84,6 +105,11 @@ class GenempresaTable
         $select = $sql
                   ->select()
                   ->from(array('c' => 'gen_empresa'))
+                  ->join(array('d' => 'gen_tipo_documento'), 
+                       'c.tipo_documento_representante = d.id_tipo_documento',
+                        array('tipo_documento' => 'descripcion'),
+                        'left'
+                 )
                   ->where(array('c.id_empresa' => $id_empresa));
 
         $stmt = $sql->prepareStatementForSqlObject($select);
