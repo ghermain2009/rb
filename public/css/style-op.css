@@ -8,12 +8,7 @@
     src: url('../fonts/gotham-book-webfont.woff') format("truetype");
 }
 
-.img_container {
-    width: 320px;
-    height: 180px;
-    -webkit-background-size: 320px 180px;
-    vertical-align: top;
-}
+
 
 .img_container_pago {
      height: 50px;
@@ -68,13 +63,7 @@
     //filter:alpha(opacity=95); opacity:0.95;
 }
 
-.description {
-    font-family:gotham-medium, 'arial', 'sans-serif';
-    font-size: 14px;
-    padding-left: 8px;
-    padding-right: 8px;
-    height: 80px;
-}
+
 
 a {
     text-decoration: none;
@@ -1250,7 +1239,613 @@ h4 {
     color: #96d032;
 }
 
-@media (min-width: 0px) and (max-width: 567px) {
+
+
+/*@media (min-width: 1250px) {*/
+    /*General*/
+    
+.description {
+    font-family:gotham-medium, 'arial', 'sans-serif';
+    font-size: 14px;
+    padding-left: 8px;
+    padding-right: 8px;
+    height: 80px;
+}
+
+.img_container {
+    width: 100%;
+    height: auto;
+    //-webkit-background-size: 320px 180px;
+    vertical-align: top;
+    padding: 0px;
+    margin: 0px;
+}
+
+.close.rebueno {
+    padding: 5px !important;
+    //background-color: #ffffff !important;
+    color: #ffffff !important;
+    opacity: 0.5 !important;
+}
+.close.rebueno > span {
+    font-size: 30px !important;
+    font-weight: bold;
+}
+.promocion-afiliacion-dialog {
+    width: 60%;
+    height: 480px; 
+    position:absolute;
+    top:calc(100%/2 - 480px/2 );
+    left:20%;
+    z-index:1000;
+    padding:0px !important;
+    margin:0px !important;
+}
+/*Index*/
+.contenedor-carrusel {
+    background-image:  url('../img/back_rebueno.png');
+    background-repeat: repeat-x;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 0px;
+    width: 100%;
+}
+
+.carousel.carrusel-principal{
+     width:76%;
+     display:inline-block;
+}
+
+.carousel.carrusel-secundario {
+    width:20%;
+    display:inline-block;
+}
+
+.slider {
+    width: 100%;
+    height: 240px; 
+    background-size: 100% 240px;
+}
+
+.campana-stilo-uno {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    text-align: left;
+    width: 30.666666666666664%;
+    margin-left: 0%;
+    margin-right: 2%;
+    padding-left: 0;
+    padding-right: 0;
+    //height: 360px;
+    display:inline-block;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 3px 3px #d6d3d3;
+}
+
+.campana-stilo-uno:hover {
+    box-shadow: 0px 0px 3px 3px #fdaf06;
+}
+
+.lazy.campana-imgreferencia-uno{
+    margin-top: 0px !important;
+    //height: 200px;
+    width: 100%;
+    //background-size: 1456px 260px; 
+}
+
+.campana-texto-descuento-uno {
+    font-family:gotham-medium, 'arial', 'sans-serif';
+    font-size: 22px;
+    color:white;
+    background: linear-gradient(to bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
+    position: relative;
+    top: -40px;
+    padding: 8px;
+}
+
+.campana-texto-detalle-uno {
+    line-height: 1.6em;
+    overflow: hidden;
+    display: block;
+    height: 3.6em;
+    padding-top: 0;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 2em;
+    margin: 0;
+}
+
+.campana-texto-detalle-uno > a {
+    font-weight: normal !important;
+    font-size: 1em !important;
+    color: #333 !important;
+    font-family:gotham-book, 'arial', 'sans-serif';
+}
+
+.campana-precio-oferta-uno {
+    font-family:gotham-medium, 'arial', 'sans-serif';
+    font-size: 15px;
+    font-weight: bold;
+    color:#fdaf06;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.campana-tarifario-uno {
+    text-align: right;
+    padding-top: 0px;
+    padding-bottom: 6px;
+    padding-left: 2px;
+    padding-right: 2px;
+    //position: relative;
+    //top: -10px;
+}
+
+.campana-tarifario-uno > simbolo {
+    color: black !important;
+    font-size: 12px !important;
+}
+
+.btn.btn-ver-oferta-uno {
+    font-family:gotham-medium, 'arial', 'sans-serif';
+    font-size: 14px;
+    color:white;
+    background: linear-gradient(to bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.btn.btn-ver-oferta-uno:hover {
+    background: linear-gradient(#93ba2f,#93ba2f);
+}
+
+.campana-vendidos-uno{
+    font-family:gotham-medium, 'arial', 'sans-serif';
+    font-size: 12px;
+    text-align: center;
+    border-top-style:dashed;
+    border-top-width: 1px; 
+    border-color: #d0c3af;
+    padding-top: 10px;
+    padding-bottom: 0px;
+    color: black !important;
+}
+
+.campana-stilo-dos {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    width: 47.222222222222229%;
+    margin-left: 0%;
+    margin-right: 2%;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: left;
+    //height: 440px;
+    display:inline-block;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 3px 3px #d6d3d3;
+}
+
+.campana-stilo-dos:hover {
+    box-shadow: 0px 0px 3px 3px #fdaf06;
+}
+
+.lazy.campana-imgreferencia-dos{
+    margin-top: 0px !important;
+    //height: 300px;
+    width: 100%;
+    //background-size: 1456px 260px; 
+}
+
+.campana-texto-descuento-dos {
+    font-family:gotham-medium, 'arial', 'sans-serif';
+    font-size: 25px;
+    color:white;
+    background: linear-gradient(to bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
+    position: relative;
+    top: -60px;
+    padding: 8px;
+}
+
+.campana-texto-detalle-dos {
+    line-height: 1.6em;
+    overflow: hidden;
+    display: block;
+    height: 1.8em;
+    padding-top: 0;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 2em;
+    margin: 0;
+}
+
+.campana-texto-detalle-dos > a {
+    font-weight: normal !important;
+    font-size: 1em !important;
+    color: #333 !important;
+    font-family:gotham-book, 'arial', 'sans-serif';
+}
+
+.campana-precio-oferta-dos {
+    font-family:gotham-medium, 'arial', 'sans-serif';
+    font-size: 15px;
+    font-weight: bold;
+    color:#fdaf06;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.campana-tarifario-dos {
+    text-align: right;
+    padding-top: 0px;
+    padding-bottom: 2px;
+    padding-left: 2px;
+    padding-right: 2px;
+    //position: relative;
+    //top: 80px;
+}
+
+.campana-tarifario-dos > simbolo {
+    color: black !important;
+    font-size: 12px !important;
+}
+
+.btn.btn-ver-oferta-dos {
+    font-family:gotham-medium, 'arial', 'sans-serif';
+    font-size: 14px;
+    color:white;
+    background: linear-gradient(to bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.btn.btn-ver-oferta-dos:hover {
+    background: linear-gradient(#93ba2f,#93ba2f);
+}
+
+.campana-vendidos-dos{
+    font-family:gotham-medium, 'arial', 'sans-serif';
+    font-size: 12px;
+    text-align: center;
+    border-top-style:dashed;
+    border-top-width: 1px; 
+    border-color: #d0c3af;
+    padding-top: 10px;
+    padding-bottom: 0px;
+    color: black !important;
+    //top:90px;
+    //position:relative;
+}
+
+.logo-principal {
+    width: 204px; 
+    height: 75px;
+    background-image: url('../img/logo_rebueno.png');
+    z-index: 8;
+    padding: 0px;
+    margin: 0px;
+    float:left;
+    clear: both !important;
+}
+
+.logo-principal-mini {
+    width: 102px; 
+    height: 38px;
+    background-image: url('../img/logo_rebueno.png');
+    z-index: 9;
+    padding: 0px;
+    margin: 0px;
+    background-size: 102px 38px;
+}
+
+.btn-group.oferta {
+    padding: 0px;
+    margin: 0px;
+}
+
+.btn-group.login {
+    padding: 0px;
+    margin: 0px;
+    display: inline-block;
+}
+
+.ofertas_donde {
+    display: inline-block;
+    float: left;
+}
+
+.ofertas_siguenos {
+    display: inline-block;
+    float: right;
+}
+
+.en-donde-top-center {
+    display: inline-block;
+}
+
+.en-donde-top-center.logo-principal {
+    margin-right: 50px;
+    position: relative;
+    top: 6px;
+
+}
+
+.en-donde-top-center.titulo {
+    margin-right: 10px;
+    position: relative;
+    top: 20px;
+}
+
+.en-donde-top-center.localidades {
+    display: inline-block;
+    position: relative;
+    top: 20px;
+}
+
+/*Detalle*/
+.detalle-titulo {
+    width:100%;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.detalle-titulo > p {
+    font-family: 'gotham-book', 'arial', 'sans-serif';
+    font-weight: normal;
+    font-size: 25px;
+    text-align: justify;
+}
+
+.carousel.carrusel-detalle{
+     width:67%;
+     display:inline-block;
+}
+
+.slider-detalle {
+    width: 100%;
+    height: 400px; 
+    background-size: 100% 400px;
+}
+
+.contenedor-tabs {
+    width:67%;
+    display:table;
+    padding-top: 20px !important;
+}
+
+.contenedor-tabs > div {
+    width:100%;
+    display:table;
+}
+
+.contenedor-tabs > div > ul {
+    width:100%;
+    list-style:none;
+    float: left;
+    padding-left: 0px;
+    padding-top:10px;
+}
+
+.contenedor-tabs > div > ul > li {
+    display:inline-block;
+    width: 30%;
+}
+
+.contenedor-tabs > div > ul > li > a {
+    display:inline-block;
+    width: 100%;
+    font-size: 16px;
+    font-weight:600;
+    font-family: 'gotham-book', 'arial', 'sans-serif';
+    color:#72e564;
+}
+
+.contenedor-tabs-panel {
+    width: 100%;
+    border-top: solid #53b546 2px;
+    padding-bottom: 10px;
+}
+
+.contenedor-tabs-panel.cierre {
+    border-bottom: solid #53b546 2px;
+}
+
+.contenedor-tabs-panel > h2 {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'gotham-book', 'arial', 'sans-serif';
+    color:#72e564;
+}
+
+.contenedor-tabs-panel > ul {
+    width: 100%;
+    display: inline-block;
+}
+
+.contenedor-tabs-panel-descripcion {
+    width:100%;
+    display: inline-block;
+}
+
+.contenedor-tabs-panel-datos {
+    width:67%;
+    display: inline-block;
+}
+
+.contenedor-tabs-panel-datos > div {
+    width:100%;
+}
+
+.contenedor-tabs-panel-mapa {
+    width:30% !important;
+    display: inline-block;
+}
+
+.contenedor-compra-detalle {
+    width: 25%;
+    display:fixed;
+    margin-top: 0px;
+    margin-left: 30px;
+    float: right;
+    position: relative;
+}
+
+/*Afiliacion*/
+.promocion-afiliacion-fija,
+.promocion-saludo {
+    width: 60% !important;
+    height: 60% !important; 
+    top:20% !important;
+    left:20% !important;
+    right:20% !important;
+    position:absolute;
+    top:0px;
+    left:0px;
+    z-index:1000;
+    padding:0px !important;
+    margin:0px !important;
+}
+
+#promocion-saludo {
+    display: none;
+}
+
+.formulario-afiliacion,
+.formulario-saludo  {
+    width: 350px;
+    height: 100%;
+    background-color: #FFF;
+    display: none;
+    padding:0px !important;
+    margin:0px !important;
+    float: left;
+}
+
+.formulario-afiliacion,
+.formulario-saludo > form {
+    margin-top:0px !important;
+    margin-bottom:0px !important;
+    margin-left:0px !important;
+    margin-right:0px !important;
+}
+
+.imagen-afiliacion {
+    width: calc(100% - 350px);
+    height: 100%; 
+    background-image: url('../img/afiliacion/afiliacion_teclado.jpg');
+    background-size: 100% 100%;
+    display: none;
+    padding-top: 0px !important;
+    margin:0px !important;
+}
+
+.logo-fijo-afiliacion {
+    width: 130px; 
+    height: 46px;
+    background-image: url('../img/logo_rebueno_cupon.png');
+    background-size: 100% 100%;
+}
+
+.col-xs-7.control-faltan {
+    font-weight: normal !important;
+    color: #A8CF45;
+    margin-top: 10px;
+    margin-left: 3px;
+    font-size: 20px;
+    width: inherit !important;
+}
+
+.promocion-parrafo {
+    text-align: justify;
+    font-size: 16px;
+}
+
+.promocion-parrafo > porcentaje {
+    color: #A8CF45;
+    font-size: 17px !important;
+}
+
+.registro-actualizacion {
+    width: 60% !important;
+    height: 90% !important; 
+    top:5% !important;
+    left:20% !important;
+    right:20% !important;
+    position:absolute;
+    top:0px;
+    left:0px;
+    z-index:1000;
+    padding:0px !important;
+    margin:0px !important;
+    display: none;
+}
+
+.formulario-actualizacion {
+    width: 55%;
+    height: 100%;
+    background-color: #FFF;
+    padding:0px !important;
+    margin:0px !important;
+    float: left;
+    display: none;
+}
+
+.formulario-actualizacion > form {
+    margin-top:8px !important;
+    margin-bottom:8px !important;
+    margin-left:0px !important;
+    margin-right:10px !important;
+}
+
+.facebook-actualizacion {
+    width: 45%;
+    height: 100%;
+    background-color: #FFF;
+    opacity: 0.85;
+    padding:0px !important;
+    margin:0px !important;
+    float: right;
+    display: inline-block;
+}
+
+.facebook-datos {
+    width: 90%;
+    height: 40%;
+    margin: 0 auto;
+    display: inline-block;
+}
+
+/* Eror 404*/
+.error_404 {
+    width: 400px; 
+    height: 365px;
+    background-image: url('../img/error_404.jpg');
+    background-size: 100% 100%;
+}
+
+.btn.btn-facerebueno {
+    font-size: 15px !important;
+}
+
+.btn.btn-facerebueno > i {
+    font-size: 20px !important;
+}
+/*}*/
+
+@media only screen and (max-width: 668px) {
+    .img_container {
+        width: 190px;
+        height: 107px;
+        //-webkit-background-size: 320px 180px;
+        vertical-align: top;
+        padding: 0px;
+        margin: 0px;
+        display: inline-block;
+    }
     /*General*/
     .promocion-afiliacion-dialog {
         width: 90%;
@@ -1295,9 +1890,9 @@ h4 {
         margin-left: 5px;
         margin-right: 5px;
         text-align: left;
-        width: 300px;
-        height: 290px;
-        display:inline-block;
+        width: 100%;
+        //height: 290px;
+        display:block;
         background-color: #ffffff;
         box-shadow: 0px 0px 3px 3px #d6d3d3;
     }
@@ -1309,29 +1904,31 @@ h4 {
     .lazy.campana-imgreferencia-uno,
     .lazy.campana-imgreferencia-dos {
         margin-top: 0px !important;
-        height: 145px;
-        width: 300px;
-        background-size: 1456px 260px; 
+        //height: 145px;
+        width: 190px;
+        //background-size: 1456px 260px; 
     }
     
     .campana-texto-descuento-uno,
     .campana-texto-descuento-dos {
         font-family:gotham-medium, 'arial', 'sans-serif';
-        font-size: 18px;
+        font-size: 16px;
         color:white;
         background: linear-gradient(to bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
         position: relative;
-        top: -40px;
+        top: -30px;
         padding: 8px;
     }
     
     .campana-texto-detalle-uno,
     .campana-texto-detalle-dos {
-        height: 30px;
+        height: 90px;
         display: inline-block;
-        position: relative;
-        top: -30px;
+        //position: relative;
+        //top: -30px;
+        line-height: 1em;
         text-align: center;
+        width: calc(100% - 200px);
     }
 
     .campana-texto-detalle-uno > a,
@@ -1355,12 +1952,12 @@ h4 {
     .campana-tarifario-uno,
     .campana-tarifario-dos {
         text-align: right;
-        padding-top: 0px;
+        padding-top: 2px;
         padding-bottom: 2px;
         padding-left: 2px;
         padding-right: 2px;
         position: relative;
-        top: -20px;
+        top: 0px;
     }
     
     .campana-tarifario-uno > simbolo,
@@ -1743,1731 +2340,5 @@ h4 {
         height: 40%;
         margin: 0 auto;
         display: none;
-    }
-}
-
-
-
-@media (min-width: 567px) and (max-width: 727px) {
-    /*General*/
-    .promocion-afiliacion-dialog {
-        width: 90%;
-        height: 380px; 
-        position:absolute;
-        top:calc(100%/2 - 380px/2 );
-        left:5%;
-        z-index:1000;
-        padding:0px !important;
-        margin:0px !important;
-    }
-    /*Index*/
-    .contenedor-carrusel {
-        background-image:  url('../img/back_rebueno.png');
-        background-repeat: repeat-x;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        margin: 0px;
-        width: 100%;
-    }
-    
-    .carousel.carrusel-principal{
-         width:76%;
-         display:inline-block;
-    }
-
-    .carousel.carrusel-secundario {
-        width:20%;
-        display:inline-block;
-    }
-    
-    .slider {
-        width: 100%;
-        height: 240px; 
-        background-size: 100% 240px;
-    }
-        
-    .campana-stilo-uno {
-        margin-bottom: 10px;
-        margin-top: 10px;
-        margin-left: 20px;
-        margin-right: 20px;
-        text-align: left;
-        width: 330px;
-        height: 360px;
-        display:inline-block;
-        background-color: #ffffff;
-        box-shadow: 0px 0px 3px 3px #d6d3d3;
-    }
-    
-    .campana-stilo-uno:hover {
-        box-shadow: 0px 0px 3px 3px #fdaf06;
-    }
-    
-    .lazy.campana-imgreferencia-uno{
-        margin-top: 0px !important;
-        height: 200px;
-        width: 330px;
-        background-size: 1456px 260px; 
-    }
-    
-    .campana-texto-descuento-uno {
-        font-family:gotham-medium, 'arial', 'sans-serif';
-        font-size: 22px;
-        color:white;
-        background: linear-gradient(to bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
-        position: relative;
-        top: -40px;
-        padding: 8px;
-    }
-    
-    .campana-texto-detalle-uno {
-        height: 100px;
-        display: inline-block;
-        position: relative;
-        top: 30px;
-        text-align: center;
-    }
-
-    .campana-texto-detalle-uno > a {
-        font-weight: normal !important;
-        font-size: 1em !important;
-        color: #333 !important;
-        font-family:gotham-book, 'arial', 'sans-serif';
-    }
-    
-    .campana-precio-oferta-uno {
-        font-family:gotham-medium, 'arial', 'sans-serif';
-        font-size: 15px;
-        font-weight: bold;
-        color:#fdaf06;
-        padding-left: 8px;
-        padding-right: 8px;
-    }
-    
-    .campana-tarifario-uno {
-        text-align: right;
-        padding-top: 0px;
-        padding-bottom: 2px;
-        padding-left: 2px;
-        padding-right: 2px;
-        position: relative;
-        top: -10px;
-    }
-    
-    .campana-tarifario-uno > simbolo {
-        color: black !important;
-        font-size: 12px !important;
-    }
-    
-    .btn.btn-ver-oferta-uno {
-        font-family:gotham-medium, 'arial', 'sans-serif';
-        font-size: 14px;
-        color:white;
-        background: linear-gradient(to bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
-        padding-top: 4px;
-        padding-bottom: 4px;
-        padding-left: 8px;
-        padding-right: 8px;
-    }
-
-    .btn.btn-ver-oferta-uno:hover {
-        background: linear-gradient(#93ba2f,#93ba2f);
-    }
-    
-    .campana-vendidos-uno{
-        font-family:gotham-medium, 'arial', 'sans-serif';
-        font-size: 12px;
-        text-align: center;
-        border-top-style:dashed;
-        border-top-width: 1px; 
-        border-color: #d0c3af;
-        padding-top: 10px;
-        padding-bottom: 0px;
-        color: black !important;
-    }
-    
-    .campana-stilo-dos {
-        margin-bottom: 10px;
-        margin-top: 10px;
-        margin-left: 20px;
-        margin-right: 20px;
-        text-align: left;
-        width: 517px;
-        height: 440px;
-        display:inline-block;
-        background-color: #ffffff;
-        box-shadow: 0px 0px 3px 3px #d6d3d3;
-    }
-    
-    .campana-stilo-dos:hover {
-        box-shadow: 0px 0px 3px 3px #fdaf06;
-    }
-    
-    .lazy.campana-imgreferencia-dos{
-        margin-top: 0px !important;
-        height: 300px;
-        width: 517px;
-        background-size: 1456px 260px; 
-    }
-    
-    .campana-texto-descuento-dos {
-        font-family:gotham-medium, 'arial', 'sans-serif';
-        font-size: 30px;
-        color:white;
-        background: linear-gradient(to bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
-        position: relative;
-        top: -60px;
-        padding: 8px;
-    }
-    
-    .campana-texto-detalle-dos {
-        height: 100px;
-        display: inline-block;
-        position: relative;
-        top: 130px;
-        text-align: center;
-    }
-
-    .campana-texto-detalle-dos > a {
-        font-weight: normal !important;
-        font-size: 1em !important;
-        color: #333 !important;
-        font-family:gotham-book, 'arial', 'sans-serif';
-    }
-    
-    .campana-precio-oferta-dos {
-        font-family:gotham-medium, 'arial', 'sans-serif';
-        font-size: 15px;
-        font-weight: bold;
-        color:#fdaf06;
-        padding-left: 8px;
-        padding-right: 8px;
-    }
-    
-    .campana-tarifario-dos {
-        text-align: right;
-        padding-top: 0px;
-        padding-bottom: 2px;
-        padding-left: 2px;
-        padding-right: 2px;
-        position: relative;
-        top: 80px;
-    }
-    
-    .campana-tarifario-dos > simbolo {
-        color: black !important;
-        font-size: 12px !important;
-    }
-    
-    .btn.btn-ver-oferta-dos {
-        font-family:gotham-medium, 'arial', 'sans-serif';
-        font-size: 14px;
-        color:white;
-        background: linear-gradient(to bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
-        padding-top: 4px;
-        padding-bottom: 4px;
-        padding-left: 8px;
-        padding-right: 8px;
-    }
-
-    .btn.btn-ver-oferta-dos:hover {
-        background: linear-gradient(#93ba2f,#93ba2f);
-    }
-    
-    .campana-vendidos-dos{
-        font-family:gotham-medium, 'arial', 'sans-serif';
-        font-size: 12px;
-        text-align: center;
-        border-top-style:dashed;
-        border-top-width: 1px; 
-        border-color: #d0c3af;
-        padding-top: 10px;
-        padding-bottom: 0px;
-        color: black !important;
-        top:90px;
-        position:relative;
-    }
-    
-    .logo-principal {
-        width: 204px; 
-        height: 75px;
-        background-image: url('../img/logo_rebueno.png');
-        z-index: 8;
-        padding: 0px;
-        margin: 0px;
-        float:left;
-        clear: both !important;
-    }
-
-    .logo-principal-mini {
-        width: 102px; 
-        height: 38px;
-        background-image: url('../img/logo_rebueno.png');
-        z-index: 9;
-        padding: 0px;
-        margin: 0px;
-        background-size: 102px 38px;
-    }
-    
-    .btn-group.oferta {
-        padding: 0px;
-        margin: 0px;
-    }
-
-    .btn-group.login {
-        padding: 0px;
-        margin: 0px;
-        display: inline-block;
-    }
-    
-    .ofertas_donde {
-        display: inline-block;
-        float: left;
-    }
-
-    .ofertas_siguenos {
-        display: inline-block;
-        float: right;
-    }
-    
-    .en-donde-top-center {
-        display: inline-block;
-    }
-
-    .en-donde-top-center.logo-principal {
-        margin-right: 50px;
-        position: relative;
-        top: 6px;
-
-    }
-
-    .en-donde-top-center.titulo {
-        margin-right: 10px;
-        position: relative;
-        top: 20px;
-    }
-
-    .en-donde-top-center.localidades {
-        display: inline-block;
-        position: relative;
-        top: 20px;
-    }
-    
-    /*Detalle*/
-    .detalle-titulo {
-        width:100%;
-        padding-bottom: 10px;
-        display: inline-block;
-    }
-    
-    .detalle-titulo > p {
-        font-family: 'gotham-book', 'arial', 'sans-serif';
-        font-weight: normal;
-        font-size: 25px;
-        text-align: justify;
-    }
-    
-    .carousel.carrusel-detalle{
-         width:67%;
-         display:inline-block;
-    }
-    
-    .slider-detalle {
-        width: 100%;
-        height: 400px; 
-        background-size: 100% 400px;
-    }
-    
-    .contenedor-tabs {
-        width:67%;
-        display:table;
-    }
-    
-    .contenedor-tabs > div {
-        width:100%;
-        display:table;
-    }
-    
-    .contenedor-tabs > div > ul {
-        width:100%;
-        list-style:none;
-        float: left;
-        padding-left: 0px;
-        padding-top: 10px;
-    }
-    
-    .contenedor-tabs > div > ul > li {
-        display:inline-block;
-        width: 30%;
-    }
-    
-    .contenedor-tabs > div > ul > li > a {
-        display:inline-block;
-        width: 100%;
-        font-size: 16px;
-        font-weight:600;
-        font-family: 'gotham-book', 'arial', 'sans-serif';
-        color:#72e564;
-    }
-    
-    .contenedor-tabs-panel {
-        width: 100%;
-        border-top: solid #53b546 2px;
-        padding-bottom: 10px;
-    }
-    
-    .contenedor-tabs-panel.cierre {
-        border-bottom: solid #53b546 2px;
-    }
-    
-    .contenedor-tabs-panel > h2 {
-        font-size: 16px;
-        font-weight: bold;
-        font-family: 'gotham-book', 'arial', 'sans-serif';
-        color:#72e564;
-    }
-    
-    .contenedor-tabs-panel > ul {
-        width: 100%;
-        display: inline-block;
-    }
-    
-    .contenedor-tabs-panel-descripcion {
-        width:100%;
-        display: inline-block;
-    }
-    
-    .contenedor-tabs-panel-datos {
-        width:67%;
-        display: inline-block;
-    }
-    
-    .contenedor-tabs-panel-datos > div {
-        width:100%;
-    }
-    
-    .contenedor-tabs-panel-mapa {
-        width:30% !important;
-        display: inline-block;
-    }
-    
-    .contenedor-compra-detalle {
-        width: 25%;
-        display:fixed;
-        margin-top: 0px;
-        margin-left: 30px;
-        float: right;
-        position: relative;
-    }
-    
-    /*Afiliacion*/
-    .promocion-afiliacion-fija,
-    .promocion-saludo {
-        width: 90% !important;
-        height: 60% !important; 
-        top:20% !important;
-        left:5% !important;
-        right:5% !important;
-        position:absolute;
-        top:0px;
-        left:0px;
-        z-index:1000;
-        padding:0px !important;
-        margin:0px !important;
-    }
-    
-    #promocion-saludo {
-        display: none;
-    }
-    
-    .formulario-afiliacion,
-    .formulario-saludo  {
-        width: 60%;
-        height: 100%;
-        background-color: #FFF;
-        display: none;
-        padding:0px !important;
-        margin:0px !important;
-        float: left;
-    }
-
-    .formulario-afiliacion,
-    .formulario-saludo  > form {
-        margin-top:0px !important;
-        margin-bottom:0px !important;
-        margin-left:0px !important;
-        margin-right:0px !important;
-    }
-
-    .imagen-afiliacion {
-        width: 40%;
-        height: 100%; 
-        background-image: url('../img/afiliacion/afiliacion_teclado.jpg');
-        background-size: 100% 100%;
-        display: none;
-        padding-top: 0px !important;
-        margin:0px auto !important;
-    }
-    
-    .logo-fijo-afiliacion {
-        width: 80px; 
-        height: 28px;
-        background-image: url('../img/logo_rebueno_cupon.png');
-        background-size: 100% 100%;
-    }
-    
-    .col-lg-5.control-label.afiliacion {
-        font-size: 11px !important;
-        font-weight: normal !important;
-        float: left;
-        width: 41%;
-        margin-top: 8px;
-    }
-    
-    .col-lg-12.control-label.afiliacion {
-        font-size: 11px !important;
-        font-weight: normal !important;
-        float: left;
-        margin-top: 8px;
-    }
-    
-    .col-xs-7.control-faltan {
-        font-weight: normal !important;
-        color: #A8CF45;
-        margin-top: 6px;
-        margin-left: 3px;
-        font-size: 14px;
-        width: inherit !important;
-    }
-    
-    .col-xs-7 > input {
-        height: 26px;
-        float: right;
-        margin-bottom: 5px !important;
-        font-size: 12px;
-    }
-    
-    .col-xs-7 > select {
-        height: 26px;
-        float: right;
-        margin-bottom: 5px !important;
-        font-size: 12px;
-    }
-    
-    .promocion-parrafo {
-        text-align: justify;
-        font-size: 12px;
-    }
-
-    .promocion-parrafo > porcentaje {
-        color: #A8CF45;
-        font-size: 13px !important;
-    }
-    
-    .radio.afiliacion > label {
-        font-size: 12px !important;
-    }
-    
-    .registro-actualizacion {
-        width: 90% !important;
-        height: 90% !important; 
-        top:5% !important;
-        left:5% !important;
-        right:5% !important;
-        position:absolute;
-        top:0px;
-        left:0px;
-        z-index:1000;
-        padding:0px !important;
-        margin:0px !important;
-        display: none;
-    }
-    
-    .formulario-actualizacion {
-        width: 60%;
-        height: 100%;
-        background-color: #FFF;
-        padding:0px !important;
-        margin:0px !important;
-        float: left;
-        display: none;
-    }
-
-    .formulario-actualizacion > form {
-        margin-top:8px !important;
-        margin-bottom:8px !important;
-        margin-left:0px !important;
-        margin-right:0px !important;
-    }
-    
-    .facebook-actualizacion {
-        width: 40%;
-        height: 100%;
-        background-color: #FFF;
-        opacity: 0.85;
-        padding:0px !important;
-        margin:0px !important;
-        float: right;
-        display: inline-block;
-    }
-
-    .facebook-datos {
-        width: 90%;
-        height: 40%;
-        margin: 0 auto;
-        display: inline-block;
-    }
-    
-    .btn.btn-facerebueno {
-        font-size: 12px !important;
-    }
-    
-    .btn.btn-facerebueno > i {
-        font-size: 20px !important;
-    }
-    
-}
-
-@media (min-width: 727px) and (max-width: 1250px) {
-    /*General*/
-    .promocion-afiliacion-dialog {
-        width: 60%;
-        height: 380px; 
-        position:absolute;
-        top:calc(100%/2 - 380px/2 );
-        left:20%;
-        z-index:1000;
-        padding:0px !important;
-        margin:0px !important;
-    }
-    /*Index*/
-    .contenedor-carrusel {
-        background-image:  url('../img/back_rebueno.png');
-        background-repeat: repeat-x;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        margin: 0px;
-        width: 100%;
-    }
-    
-    .carousel.carrusel-principal{
-         width:76%;
-         display:inline-block;
-    }
-
-    .carousel.carrusel-secundario {
-        width:20%;
-        display:inline-block;
-    }
-    
-    .slider {
-        width: 100%;
-        height: 240px; 
-        background-size: 100% 240px;
-    }
-        
-    .campana-stilo-uno {
-        margin-bottom: 10px;
-        margin-top: 10px;
-        margin-left: 20px;
-        margin-right: 20px;
-        text-align: left;
-        width: 330px;
-        height: 360px;
-        display:inline-block;
-        background-color: #ffffff;
-        box-shadow: 0px 0px 3px 3px #d6d3d3;
-    }
-    
-    .campana-stilo-uno:hover {
-        box-shadow: 0px 0px 3px 3px #fdaf06;
-    }
-    
-    .lazy.campana-imgreferencia-uno{
-        margin-top: 0px !important;
-        height: 200px;
-        width: 330px;
-        background-size: 1456px 260px; 
-    }
-    
-    .campana-texto-descuento-uno {
-        font-family:gotham-medium, 'arial', 'sans-serif';
-        font-size: 22px;
-        color:white;
-        background: linear-gradient(to bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
-        position: relative;
-        top: -40px;
-        padding: 8px;
-    }
-    
-    .campana-texto-detalle-uno {
-        height: 100px;
-        display: inline-block;
-        position: relative;
-        top: 30px;
-        text-align: center;
-    }
-
-    .campana-texto-detalle-uno > a {
-        font-weight: normal !important;
-        font-size: 1em !important;
-        color: #333 !important;
-        font-family:gotham-book, 'arial', 'sans-serif';
-    }
-    
-    .campana-precio-oferta-uno {
-        font-family:gotham-medium, 'arial', 'sans-serif';
-        font-size: 15px;
-        font-weight: bold;
-        color:#fdaf06;
-        padding-left: 8px;
-        padding-right: 8px;
-    }
-    
-    .campana-tarifario-uno {
-        text-align: right;
-        padding-top: 0px;
-        padding-bottom: 2px;
-        padding-left: 2px;
-        padding-right: 2px;
-        position: relative;
-        top: -10px;
-    }
-    
-    .campana-tarifario-uno > simbolo {
-        color: black !important;
-        font-size: 12px !important;
-    }
-    
-    .btn.btn-ver-oferta-uno {
-        font-family:gotham-medium, 'arial', 'sans-serif';
-        font-size: 14px;
-        color:white;
-        background: linear-gradient(to bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
-        padding-top: 4px;
-        padding-bottom: 4px;
-        padding-left: 8px;
-        padding-right: 8px;
-    }
-
-    .btn.btn-ver-oferta-uno:hover {
-        background: linear-gradient(#93ba2f,#93ba2f);
-    }
-    
-    .campana-vendidos-uno{
-        font-family:gotham-medium, 'arial', 'sans-serif';
-        font-size: 12px;
-        text-align: center;
-        border-top-style:dashed;
-        border-top-width: 1px; 
-        border-color: #d0c3af;
-        padding-top: 10px;
-        padding-bottom: 0px;
-        color: black !important;
-    }
-    
-    .campana-stilo-dos {
-        margin-bottom: 10px;
-        margin-top: 10px;
-        margin-left: 20px;
-        margin-right: 20px;
-        text-align: left;
-        width: 517px;
-        height: 440px;
-        display:inline-block;
-        background-color: #ffffff;
-        box-shadow: 0px 0px 3px 3px #d6d3d3;
-    }
-    
-    .campana-stilo-dos:hover {
-        box-shadow: 0px 0px 3px 3px #fdaf06;
-    }
-    
-    .lazy.campana-imgreferencia-dos{
-        margin-top: 0px !important;
-        height: 300px;
-        width: 517px;
-        background-size: 1456px 260px; 
-    }
-    
-    .campana-texto-descuento-dos {
-        font-family:gotham-medium, 'arial', 'sans-serif';
-        font-size: 30px;
-        color:white;
-        background: linear-gradient(to bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
-        position: relative;
-        top: -60px;
-        padding: 8px;
-    }
-    
-    .campana-texto-detalle-dos {
-        height: 100px;
-        display: inline-block;
-        position: relative;
-        top: 130px;
-        text-align: center;
-    }
-
-    .campana-texto-detalle-dos > a {
-        font-weight: normal !important;
-        font-size: 1em !important;
-        color: #333 !important;
-        font-family:gotham-book, 'arial', 'sans-serif';
-    }
-    
-    .campana-precio-oferta-dos {
-        font-family:gotham-medium, 'arial', 'sans-serif';
-        font-size: 15px;
-        font-weight: bold;
-        color:#fdaf06;
-        padding-left: 8px;
-        padding-right: 8px;
-    }
-    
-    .campana-tarifario-dos {
-        text-align: right;
-        padding-top: 0px;
-        padding-bottom: 2px;
-        padding-left: 2px;
-        padding-right: 2px;
-        position: relative;
-        top: 80px;
-    }
-    
-    .campana-tarifario-dos > simbolo {
-        color: black !important;
-        font-size: 12px !important;
-    }
-    
-    .btn.btn-ver-oferta-dos {
-        font-family:gotham-medium, 'arial', 'sans-serif';
-        font-size: 14px;
-        color:white;
-        background: linear-gradient(to bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
-        padding-top: 4px;
-        padding-bottom: 4px;
-        padding-left: 8px;
-        padding-right: 8px;
-    }
-
-    .btn.btn-ver-oferta-dos:hover {
-        background: linear-gradient(#93ba2f,#93ba2f);
-    }
-    
-    .campana-vendidos-dos{
-        font-family:gotham-medium, 'arial', 'sans-serif';
-        font-size: 12px;
-        text-align: center;
-        border-top-style:dashed;
-        border-top-width: 1px; 
-        border-color: #d0c3af;
-        padding-top: 10px;
-        padding-bottom: 0px;
-        color: black !important;
-        top:90px;
-        position:relative;
-    }
-    
-    .logo-principal {
-        width: 204px; 
-        height: 75px;
-        background-image: url('../img/logo_rebueno.png');
-        z-index: 8;
-        padding: 0px;
-        margin: 0px;
-        float:left;
-        clear: both !important;
-    }
-
-    .logo-principal-mini {
-        width: 102px; 
-        height: 38px;
-        background-image: url('../img/logo_rebueno.png');
-        z-index: 9;
-        padding: 0px;
-        margin: 0px;
-        background-size: 102px 38px;
-    }
-    
-    .btn-group.oferta {
-        padding: 0px;
-        margin: 0px;
-    }
-
-    .btn-group.login {
-        padding: 0px;
-        margin: 0px;
-        display: inline-block;
-    }
-    
-    .ofertas_donde {
-        display: inline-block;
-        float: left;
-    }
-
-    .ofertas_siguenos {
-        display: inline-block;
-        float: right;
-    }
-    
-    .en-donde-top-center {
-        display: inline-block;
-    }
-
-    .en-donde-top-center.logo-principal {
-        margin-right: 50px;
-        position: relative;
-        top: 6px;
-
-    }
-
-    .en-donde-top-center.titulo {
-        margin-right: 10px;
-        position: relative;
-        top: 20px;
-    }
-
-    .en-donde-top-center.localidades {
-        display: inline-block;
-        position: relative;
-        top: 20px;
-    }
-    
-    /*Detalle*/
-    .detalle-titulo {
-        width:100%;
-        padding-bottom: 10px;
-        display: inline-block;
-    }
-    
-    .detalle-titulo > p {
-        font-family: 'gotham-book', 'arial', 'sans-serif';
-        font-weight: normal;
-        font-size: 25px;
-        text-align: justify;
-    }
-    
-    .carousel.carrusel-detalle{
-         width:67%;
-         display:inline-block;
-    }
-    
-    .slider-detalle {
-        width: 100%;
-        height: 400px; 
-        background-size: 100% 400px;
-    }
-    
-    .contenedor-tabs {
-        width:67%;
-        display:table;
-    }
-    
-    .contenedor-tabs > div {
-        width:100%;
-        display:table;
-    }
-    
-    .contenedor-tabs > div > ul {
-        width:100%;
-        list-style:none;
-        float: left;
-        padding-left: 0px;
-        padding-top: 10px;
-    }
-    
-    .contenedor-tabs > div > ul > li {
-        display:inline-block;
-        width: 30%;
-    }
-    
-    .contenedor-tabs > div > ul > li > a {
-        display:inline-block;
-        width: 100%;
-        font-size: 16px;
-        font-weight:600;
-        font-family: 'gotham-book', 'arial', 'sans-serif';
-        color:#72e564;
-    }
-    
-    .contenedor-tabs-panel {
-        width: 100%;
-        border-top: solid #53b546 2px;
-        padding-bottom: 10px;
-    }
-    
-    .contenedor-tabs-panel.cierre {
-        border-bottom: solid #53b546 2px;
-    }
-    
-    .contenedor-tabs-panel > h2 {
-        font-size: 16px;
-        font-weight: bold;
-        font-family: 'gotham-book', 'arial', 'sans-serif';
-        color:#72e564;
-    }
-    
-    .contenedor-tabs-panel > ul {
-        width: 100%;
-        display: inline-block;
-    }
-    
-    .contenedor-tabs-panel-descripcion {
-        width:100%;
-        display: inline-block;
-    }
-    
-    .contenedor-tabs-panel-datos {
-        width:67%;
-        display: inline-block;
-    }
-    
-    .contenedor-tabs-panel-datos > div {
-        width:100%;
-    }
-    
-    .contenedor-tabs-panel-mapa {
-        width:30% !important;
-        display: inline-block;
-    }
-    
-    .contenedor-compra-detalle {
-        width: 25%;
-        display:fixed;
-        margin-top: 0px;
-        margin-left: 30px;
-        float: right;
-        position: relative;
-    }
-    
-    /*Afiliacion*/
-    .promocion-afiliacion-fija,
-    .promocion-saludo {
-        width: 60% !important;
-        height: 60% !important; 
-        top:20% !important;
-        left:20% !important;
-        right:20% !important;
-        position:absolute;
-        top:0px;
-        left:0px;
-        z-index:1000;
-        padding:0px !important;
-        margin:0px !important;
-    }
-    
-    #promocion-saludo {
-        display: none;
-    }
-    
-    .formulario-afiliacion,
-    .formulario-saludo  {
-        width: 350px;
-        height: 100%;
-        background-color: #FFF;
-        display: none;
-        padding:0px !important;
-        margin:0px !important;
-        float: left;
-    }
-
-    .formulario-afiliacion,
-    .formulario-saludo  > form {
-        margin-top:0px !important;
-        margin-bottom:0px !important;
-        margin-left:0px !important;
-        margin-right:0px !important;
-    }
-
-    .imagen-afiliacion {
-        width: calc(100% - 350px) ;
-        height: 100%; 
-        background-image: url('../img/afiliacion/afiliacion_teclado.jpg');
-        background-size: 100% 100%;
-        display: none;
-        padding-top: 0px !important;
-        margin:0px !important;
-    }
-    
-    .logo-fijo-afiliacion {
-        width: 80px; 
-        height: 28px;
-        background-image: url('../img/logo_rebueno_cupon.png');
-        background-size: 100% 100%;
-    }
-    
-    .col-lg-5.control-label.afiliacion {
-        font-size: 11px !important;
-        font-weight: normal !important;
-        float: left;
-        width: 41%;
-        margin-top: 8px;
-    }
-    
-    .col-lg-12.control-label.afiliacion {
-        font-size: 11px !important;
-        font-weight: normal !important;
-        float: left;
-        margin-top: 8px;
-    }
-    
-    .col-xs-7.control-faltan {
-        font-weight: normal !important;
-        color: #A8CF45;
-        margin-top: 6px;
-        margin-left: 3px;
-        font-size: 14px;
-        width: inherit !important;
-    }
-    
-    .col-xs-7 > input {
-        height: 26px;
-        float: right;
-        margin-bottom: 5px !important;
-        font-size: 12px;
-    }
-    
-    .col-xs-7 > select {
-        height: 26px;
-        float: right;
-        margin-bottom: 5px !important;
-        font-size: 12px;
-    }
-    
-    .promocion-parrafo {
-        text-align: justify;
-        font-size: 12px;
-    }
-
-    .promocion-parrafo > porcentaje {
-        color: #A8CF45;
-        font-size: 13px !important;
-    }
-    
-    .radio.afiliacion > label {
-        font-size: 12px !important;
-    }
-    
-    .registro-actualizacion {
-        width: 90% !important;
-        height: 90% !important; 
-        top:5% !important;
-        left:5% !important;
-        right:5% !important;
-        position:absolute;
-        top:0px;
-        left:0px;
-        z-index:1000;
-        padding:0px !important;
-        margin:0px !important;
-        display: none;
-    }
-    
-    .formulario-actualizacion {
-        width: 65%;
-        height: 100%;
-        background-color: #FFF;
-        padding:0px !important;
-        margin:0px !important;
-        float: left;
-        display: none;
-    }
-
-    .formulario-actualizacion > form {
-        margin-top:8px !important;
-        margin-bottom:8px !important;
-        margin-left:0px !important;
-        margin-right:0px !important;
-    }
-    
-    .facebook-actualizacion {
-        width: 35%;
-        height: 100%;
-        background-color: #FFF;
-        opacity: 0.85;
-        padding:0px !important;
-        margin:0px !important;
-        float: right;
-        display: inline-block;
-    }
-
-    .facebook-datos {
-        width: 90%;
-        height: 40%;
-        margin: 0 auto;
-        display: inline-block;
-    }
-    
-    .btn.btn-facerebueno {
-        font-size: 13px !important;
-    }
-    
-    .btn.btn-facerebueno > i {
-        font-size: 20px !important;
-    }
-}
-
-@media (min-width: 1250px) {
-    /*General*/
-    .close.rebueno {
-        padding: 5px !important;
-        //background-color: #ffffff !important;
-        color: #ffffff !important;
-        opacity: 0.5 !important;
-    }
-    .close.rebueno > span {
-        font-size: 30px !important;
-        font-weight: bold;
-    }
-    .promocion-afiliacion-dialog {
-        width: 60%;
-        height: 480px; 
-        position:absolute;
-        top:calc(100%/2 - 480px/2 );
-        left:20%;
-        z-index:1000;
-        padding:0px !important;
-        margin:0px !important;
-    }
-    /*Index*/
-    .contenedor-carrusel {
-        background-image:  url('../img/back_rebueno.png');
-        background-repeat: repeat-x;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        margin: 0px;
-        width: 100%;
-    }
-    
-    .carousel.carrusel-principal{
-         width:76%;
-         display:inline-block;
-    }
-
-    .carousel.carrusel-secundario {
-        width:20%;
-        display:inline-block;
-    }
-    
-    .slider {
-        width: 100%;
-        height: 240px; 
-        background-size: 100% 240px;
-    }
-       
-    .campana-stilo-uno {
-        margin-bottom: 10px;
-        margin-top: 10px;
-        margin-left: 20px;
-        margin-right: 20px;
-        text-align: left;
-        width: 330px;
-        height: 360px;
-        display:inline-block;
-        background-color: #ffffff;
-        box-shadow: 0px 0px 3px 3px #d6d3d3;
-    }
-    
-    .campana-stilo-uno:hover {
-        box-shadow: 0px 0px 3px 3px #fdaf06;
-    }
-    
-    .lazy.campana-imgreferencia-uno{
-        margin-top: 0px !important;
-        height: 200px;
-        width: 330px;
-        background-size: 1456px 260px; 
-    }
-    
-    .campana-texto-descuento-uno {
-        font-family:gotham-medium, 'arial', 'sans-serif';
-        font-size: 22px;
-        color:white;
-        background: linear-gradient(to bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
-        position: relative;
-        top: -40px;
-        padding: 8px;
-    }
-    
-    .campana-texto-detalle-uno {
-        height: 100px;
-        display: inline-block;
-        position: relative;
-        top: 30px;
-        text-align: center;
-    }
-
-    .campana-texto-detalle-uno > a {
-        font-weight: normal !important;
-        font-size: 1em !important;
-        color: #333 !important;
-        font-family:gotham-book, 'arial', 'sans-serif';
-    }
-    
-    .campana-precio-oferta-uno {
-        font-family:gotham-medium, 'arial', 'sans-serif';
-        font-size: 15px;
-        font-weight: bold;
-        color:#fdaf06;
-        padding-left: 8px;
-        padding-right: 8px;
-    }
-    
-    .campana-tarifario-uno {
-        text-align: right;
-        padding-top: 0px;
-        padding-bottom: 2px;
-        padding-left: 2px;
-        padding-right: 2px;
-        position: relative;
-        top: -10px;
-    }
-    
-    .campana-tarifario-uno > simbolo {
-        color: black !important;
-        font-size: 12px !important;
-    }
-    
-    .btn.btn-ver-oferta-uno {
-        font-family:gotham-medium, 'arial', 'sans-serif';
-        font-size: 14px;
-        color:white;
-        background: linear-gradient(to bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
-        padding-top: 4px;
-        padding-bottom: 4px;
-        padding-left: 8px;
-        padding-right: 8px;
-    }
-
-    .btn.btn-ver-oferta-uno:hover {
-        background: linear-gradient(#93ba2f,#93ba2f);
-    }
-    
-    .campana-vendidos-uno{
-        font-family:gotham-medium, 'arial', 'sans-serif';
-        font-size: 12px;
-        text-align: center;
-        border-top-style:dashed;
-        border-top-width: 1px; 
-        border-color: #d0c3af;
-        padding-top: 10px;
-        padding-bottom: 0px;
-        color: black !important;
-    }
-    
-    .campana-stilo-dos {
-        margin-bottom: 10px;
-        margin-top: 10px;
-        margin-left: 20px;
-        margin-right: 20px;
-        text-align: left;
-        width: 517px;
-        height: 440px;
-        display:inline-block;
-        background-color: #ffffff;
-        box-shadow: 0px 0px 3px 3px #d6d3d3;
-    }
-    
-    .campana-stilo-dos:hover {
-        box-shadow: 0px 0px 3px 3px #fdaf06;
-    }
-    
-    .lazy.campana-imgreferencia-dos{
-        margin-top: 0px !important;
-        height: 300px;
-        width: 517px;
-        background-size: 1456px 260px; 
-    }
-    
-    .campana-texto-descuento-dos {
-        font-family:gotham-medium, 'arial', 'sans-serif';
-        font-size: 30px;
-        color:white;
-        background: linear-gradient(to bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
-        position: relative;
-        top: -60px;
-        padding: 8px;
-    }
-    
-    .campana-texto-detalle-dos {
-        height: 100px;
-        display: inline-block;
-        position: relative;
-        top: 130px;
-        text-align: center;
-    }
-
-    .campana-texto-detalle-dos > a {
-        font-weight: normal !important;
-        font-size: 1em !important;
-        color: #333 !important;
-        font-family:gotham-book, 'arial', 'sans-serif';
-    }
-    
-    .campana-precio-oferta-dos {
-        font-family:gotham-medium, 'arial', 'sans-serif';
-        font-size: 15px;
-        font-weight: bold;
-        color:#fdaf06;
-        padding-left: 8px;
-        padding-right: 8px;
-    }
-    
-    .campana-tarifario-dos {
-        text-align: right;
-        padding-top: 0px;
-        padding-bottom: 2px;
-        padding-left: 2px;
-        padding-right: 2px;
-        position: relative;
-        top: 80px;
-    }
-    
-    .campana-tarifario-dos > simbolo {
-        color: black !important;
-        font-size: 12px !important;
-    }
-    
-    .btn.btn-ver-oferta-dos {
-        font-family:gotham-medium, 'arial', 'sans-serif';
-        font-size: 14px;
-        color:white;
-        background: linear-gradient(to bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
-        padding-top: 4px;
-        padding-bottom: 4px;
-        padding-left: 8px;
-        padding-right: 8px;
-    }
-
-    .btn.btn-ver-oferta-dos:hover {
-        background: linear-gradient(#93ba2f,#93ba2f);
-    }
-    
-    .campana-vendidos-dos{
-        font-family:gotham-medium, 'arial', 'sans-serif';
-        font-size: 12px;
-        text-align: center;
-        border-top-style:dashed;
-        border-top-width: 1px; 
-        border-color: #d0c3af;
-        padding-top: 10px;
-        padding-bottom: 0px;
-        color: black !important;
-        top:90px;
-        position:relative;
-    }
-    
-    .logo-principal {
-        width: 204px; 
-        height: 75px;
-        background-image: url('../img/logo_rebueno.png');
-        z-index: 8;
-        padding: 0px;
-        margin: 0px;
-        float:left;
-        clear: both !important;
-    }
-
-    .logo-principal-mini {
-        width: 102px; 
-        height: 38px;
-        background-image: url('../img/logo_rebueno.png');
-        z-index: 9;
-        padding: 0px;
-        margin: 0px;
-        background-size: 102px 38px;
-    }
-    
-    .btn-group.oferta {
-        padding: 0px;
-        margin: 0px;
-    }
-
-    .btn-group.login {
-        padding: 0px;
-        margin: 0px;
-        display: inline-block;
-    }
-    
-    .ofertas_donde {
-        display: inline-block;
-        float: left;
-    }
-
-    .ofertas_siguenos {
-        display: inline-block;
-        float: right;
-    }
-    
-    .en-donde-top-center {
-        display: inline-block;
-    }
-
-    .en-donde-top-center.logo-principal {
-        margin-right: 50px;
-        position: relative;
-        top: 6px;
-
-    }
-
-    .en-donde-top-center.titulo {
-        margin-right: 10px;
-        position: relative;
-        top: 20px;
-    }
-
-    .en-donde-top-center.localidades {
-        display: inline-block;
-        position: relative;
-        top: 20px;
-    }
-    
-    /*Detalle*/
-    .detalle-titulo {
-        width:100%;
-        padding-bottom: 10px;
-        display: inline-block;
-    }
-    
-    .detalle-titulo > p {
-        font-family: 'gotham-book', 'arial', 'sans-serif';
-        font-weight: normal;
-        font-size: 25px;
-        text-align: justify;
-    }
-    
-    .carousel.carrusel-detalle{
-         width:67%;
-         display:inline-block;
-    }
-    
-    .slider-detalle {
-        width: 100%;
-        height: 400px; 
-        background-size: 100% 400px;
-    }
-    
-    .contenedor-tabs {
-        width:67%;
-        display:table;
-        padding-top: 20px !important;
-    }
-    
-    .contenedor-tabs > div {
-        width:100%;
-        display:table;
-    }
-    
-    .contenedor-tabs > div > ul {
-        width:100%;
-        list-style:none;
-        float: left;
-        padding-left: 0px;
-        padding-top:10px;
-    }
-    
-    .contenedor-tabs > div > ul > li {
-        display:inline-block;
-        width: 30%;
-    }
-    
-    .contenedor-tabs > div > ul > li > a {
-        display:inline-block;
-        width: 100%;
-        font-size: 16px;
-        font-weight:600;
-        font-family: 'gotham-book', 'arial', 'sans-serif';
-        color:#72e564;
-    }
-    
-    .contenedor-tabs-panel {
-        width: 100%;
-        border-top: solid #53b546 2px;
-        padding-bottom: 10px;
-    }
-    
-    .contenedor-tabs-panel.cierre {
-        border-bottom: solid #53b546 2px;
-    }
-    
-    .contenedor-tabs-panel > h2 {
-        font-size: 16px;
-        font-weight: bold;
-        font-family: 'gotham-book', 'arial', 'sans-serif';
-        color:#72e564;
-    }
-    
-    .contenedor-tabs-panel > ul {
-        width: 100%;
-        display: inline-block;
-    }
-    
-    .contenedor-tabs-panel-descripcion {
-        width:100%;
-        display: inline-block;
-    }
-    
-    .contenedor-tabs-panel-datos {
-        width:67%;
-        display: inline-block;
-    }
-    
-    .contenedor-tabs-panel-datos > div {
-        width:100%;
-    }
-    
-    .contenedor-tabs-panel-mapa {
-        width:30% !important;
-        display: inline-block;
-    }
-    
-    .contenedor-compra-detalle {
-        width: 25%;
-        display:fixed;
-        margin-top: 0px;
-        margin-left: 30px;
-        float: right;
-        position: relative;
-    }
-    
-    /*Afiliacion*/
-    .promocion-afiliacion-fija,
-    .promocion-saludo {
-        width: 60% !important;
-        height: 60% !important; 
-        top:20% !important;
-        left:20% !important;
-        right:20% !important;
-        position:absolute;
-        top:0px;
-        left:0px;
-        z-index:1000;
-        padding:0px !important;
-        margin:0px !important;
-    }
-    
-    #promocion-saludo {
-        display: none;
-    }
-    
-    .formulario-afiliacion,
-    .formulario-saludo  {
-        width: 350px;
-        height: 100%;
-        background-color: #FFF;
-        display: none;
-        padding:0px !important;
-        margin:0px !important;
-        float: left;
-    }
-
-    .formulario-afiliacion,
-    .formulario-saludo > form {
-        margin-top:0px !important;
-        margin-bottom:0px !important;
-        margin-left:0px !important;
-        margin-right:0px !important;
-    }
-
-    .imagen-afiliacion {
-        width: calc(100% - 350px);
-        height: 100%; 
-        background-image: url('../img/afiliacion/afiliacion_teclado.jpg');
-        background-size: 100% 100%;
-        display: none;
-        padding-top: 0px !important;
-        margin:0px !important;
-    }
-    
-    .logo-fijo-afiliacion {
-        width: 130px; 
-        height: 46px;
-        background-image: url('../img/logo_rebueno_cupon.png');
-        background-size: 100% 100%;
-    }
-    
-    .col-xs-7.control-faltan {
-        font-weight: normal !important;
-        color: #A8CF45;
-        margin-top: 10px;
-        margin-left: 3px;
-        font-size: 20px;
-        width: inherit !important;
-    }
-    
-    .promocion-parrafo {
-        text-align: justify;
-        font-size: 16px;
-    }
-
-    .promocion-parrafo > porcentaje {
-        color: #A8CF45;
-        font-size: 17px !important;
-    }
-    
-    .registro-actualizacion {
-        width: 60% !important;
-        height: 90% !important; 
-        top:5% !important;
-        left:20% !important;
-        right:20% !important;
-        position:absolute;
-        top:0px;
-        left:0px;
-        z-index:1000;
-        padding:0px !important;
-        margin:0px !important;
-        display: none;
-    }
-    
-    .formulario-actualizacion {
-        width: 55%;
-        height: 100%;
-        background-color: #FFF;
-        padding:0px !important;
-        margin:0px !important;
-        float: left;
-        display: none;
-    }
-
-    .formulario-actualizacion > form {
-        margin-top:8px !important;
-        margin-bottom:8px !important;
-        margin-left:0px !important;
-        margin-right:10px !important;
-    }
-    
-    .facebook-actualizacion {
-        width: 45%;
-        height: 100%;
-        background-color: #FFF;
-        opacity: 0.85;
-        padding:0px !important;
-        margin:0px !important;
-        float: right;
-        display: inline-block;
-    }
-
-    .facebook-datos {
-        width: 90%;
-        height: 40%;
-        margin: 0 auto;
-        display: inline-block;
-    }
-    
-    /* Eror 404*/
-    .error_404 {
-        width: 400px; 
-        height: 365px;
-        background-image: url('../img/error_404.jpg');
-        background-size: 100% 100%;
-    }
-    
-    .btn.btn-facerebueno {
-        font-size: 15px !important;
-    }
-    
-    .btn.btn-facerebueno > i {
-        font-size: 20px !important;
     }
 }

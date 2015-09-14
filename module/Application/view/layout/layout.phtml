@@ -222,27 +222,29 @@ $user_session = new Container('user');
                                     <select class="form-control" name="ciudad" id="ciudad">
                                         <option value="">-- Selecciona tu ciudad --</option>
                                         <?php foreach ($departamentos as $departamento) { ?>
-                                            <option value="<?php echo $departamento['id_departamento']; ?>" <?php if ($departamento['id_departamento'] == $capital) {
-                                            echo 'selected';
-                                        } ?>><?php echo $departamento['descripcion']; ?></option>
-                                        <?php } ?>
+                                            <option value="<?php echo $departamento['id_departamento']; ?>" <?php
+                                            if ($departamento['id_departamento'] == $capital) {
+                                                echo 'selected';
+                                            }
+                                            ?>><?php echo $departamento['descripcion']; ?></option>
+<?php } ?>
                                     </select>
                                     <span class="help-block with-errors"></span>
                                 </div>
                             </div>
                             <div class="form-group" id="contenido-zona">
-                                <?php if( count($provincias) > 0 ) { ?>
-                                <label for="zona" class="col-lg-5 control-label afiliacion">Elige tu zona:</label>
-                                <div class="col-xs-7 validacion"> 
-                                    <select class="form-control" name="zona" id="zona">
-                                        <option value="">-- Selecciona tu zona --</option>
-                                        <?php foreach ($provincias as $provincia) { ?>
-                                            <option value="<?php echo $provincia['id_provincia']; ?>"><?php echo $provincia['descripcion']; ?></option>
-                                        <?php } ?>
-                                    </select>
-                                    <span class="help-block with-errors"></span>
-                                </div>
-                                <?php } ?>
+<?php if (count($provincias) > 0) { ?>
+                                    <label for="zona" class="col-lg-5 control-label afiliacion">Elige tu zona:</label>
+                                    <div class="col-xs-7 validacion"> 
+                                        <select class="form-control" name="zona" id="zona">
+                                            <option value="">-- Selecciona tu zona --</option>
+                                            <?php foreach ($provincias as $provincia) { ?>
+                                                <option value="<?php echo $provincia['id_provincia']; ?>"><?php echo $provincia['descripcion']; ?></option>
+    <?php } ?>
+                                        </select>
+                                        <span class="help-block with-errors"></span>
+                                    </div>
+<?php } ?>
                             </div>
                             <div class="form-group">
                                 <label for="email" class="col-lg-5 control-label afiliacion">Email:</label>
@@ -347,7 +349,7 @@ $user_session = new Container('user');
             </div>
         </div>
 
-        <?php echo $this->inlineScript() ?>
+<?php echo $this->inlineScript() ?>
         <form name='envio' id='envio' method="post">
             <input type="hidden" name="id" id="id" />
             <input type="hidden" name="op" id="op" />
@@ -358,6 +360,10 @@ $user_session = new Container('user');
 <script type="text/javascript">
 
     $(document).ready(function () {
+
+        $(document).ready(function () {
+            ellipsis('.description');
+        });
 
         var altura = $("#cabecera_menu").offset().top - 50;
 
@@ -422,7 +428,7 @@ $user_session = new Container('user');
                 }
             });
         });
-        
+
         $("#btnSuscribe").click(function () {
             $('#myModal').modal();
         });
@@ -430,8 +436,8 @@ $user_session = new Container('user');
         var data = "<div style ='width:90px;'><b>¡Rebueno!</b> mejores ofertas.</div>";
         $('#ofertas_localidad').popover({placement: 'right', content: data, html: true});
         $('#ofertas_localidad').popover('show');
-        
-        
+
+
 
         $("#boton_login").click(function () {
             $("#formlogin_menu").css("display", "block");
@@ -444,11 +450,11 @@ $user_session = new Container('user');
         $(".nav.navbar-nav li").mouseover(function () {
             $(this).addClass('open');
         });
-        
+
         $(".nav.navbar-nav li").mouseleave(function () {
             $(this).removeClass('open');
         });
-        
+
         $('#suscribirmeForm').formValidation({
             message: 'El valor no es válido.',
             err: {
@@ -495,14 +501,14 @@ $user_session = new Container('user');
             e.preventDefault();
             var $form = $(e.target);
             $.post($form.attr('action'), $form.serialize(),
-                function (data) {
-                    $('#myModal').modal('hide');
-                }
+                    function (data) {
+                        $('#myModal').modal('hide');
+                    }
             );
         });
-        
-        $('#ciudad').change(function(){
-            var pais   = $('#pais').val();
+
+        $('#ciudad').change(function () {
+            var pais = $('#pais').val();
             var ciudad = $('#ciudad').val();
             $.ajax({
                 type: "POST",
@@ -510,7 +516,7 @@ $user_session = new Container('user');
                 data: {pais: pais, ciudad: ciudad},
                 success: function (data) {
                     $('#contenido-zona').html(data);
-                    if(data == '') {
+                    if (data == '') {
                         $('#suscribirmeForm').formValidation('removeField', 'zona');
                     } else {
                         $('#suscribirmeForm').formValidation('addField', 'zona', {
@@ -525,8 +531,8 @@ $user_session = new Container('user');
                 }
             });
         });
-        
-        if( $('#zona').length > 0 ) {
+
+        if ($('#zona').length > 0) {
             $('#suscribirmeForm').formValidation('addField', 'zona', {
                 err: 'popover',
                 validators: {
@@ -557,12 +563,39 @@ $user_session = new Container('user');
 
     }
 
+    function ellipsis(selector) {
+        var nodeList = document.querySelectorAll(selector);
+        arrNodes = [].slice.call(nodeList);
+        for (var i in arrNodes)
+        {
+            alert('1');
+            var n = arrNodes[i];
+            while (n.scrollHeight - n.offsetHeight > 0)
+            {
+                alert(3)M
+                var text = (n.innerText != undefined) ? n.innerText : n.textContent;
+                if (n.innerText != undefined)
+                {
+                    alert('1');
+                    n.innerText = text.replace(/\W*\s(\S)*$/, '...');
+                    
+                }
+                else
+                {
+                    alert('2');
+                    // Para Firefox
+                    n.textContent = text.replace(/\W*\s(\S)*$/, '...');
+                }
+            }
+        }
+    }
+
     window.fbAsyncInit = function () {
         FB.init({
-            appId: '<?php echo $user_session->facebook["id"];?>',
+            appId: '<?php echo $user_session->facebook["id"]; ?>',
             cookie: true,
             xfbml: true,
-            version: '<?php echo $user_session->facebook["ve"];?>',
+            version: '<?php echo $user_session->facebook["ve"]; ?>',
             scopes: ["publish_actions"]
         });
     };
@@ -590,52 +623,52 @@ $user_session = new Container('user');
         FB.ui(
                 {
                     method: 'share',
-                    href: '<?php echo $user_session->localhost;?>/campana/detalle/<?php echo base64_encode($user_session->id_campana);?>',
-                },
-                function (response) {
-                    if (response && !response.error_code) {
-                        alert('Posting completed.');
-                    } else {
-                        alert('Error while posting.');
-                    }
-                }
-        );
-    }
+                    href: '<?php echo $user_session->localhost; ?>/campana/detalle/<?php echo base64_encode($user_session->id_campana); ?>',
+                                    },
+                                    function (response) {
+                                        if (response && !response.error_code) {
+                                            alert('Posting completed.');
+                                        } else {
+                                            alert('Error while posting.');
+                                        }
+                                    }
+                            );
+                        }
 
-    function testAPI() {
-        FB.api('/me', function (response) {
-            var email = response.email;
-            var fname = response.first_name;
-            var lname = response.last_name;
-            console.log(email);
-            console.log(fname);
-            console.log(lname);
-            var sex;
-            if (response.gender === 'male')
-                sex = 'M';
-            else
-                sex = 'F';
+                        function testAPI() {
+                            FB.api('/me', function (response) {
+                                var email = response.email;
+                                var fname = response.first_name;
+                                var lname = response.last_name;
+                                console.log(email);
+                                console.log(fname);
+                                console.log(lname);
+                                var sex;
+                                if (response.gender === 'male')
+                                    sex = 'M';
+                                else
+                                    sex = 'F';
 
-            verifyUser(email, fname, lname, sex);
-        });
-    }
+                                verifyUser(email, fname, lname, sex);
+                            });
+                        }
 
-    function verifyUser(email, fname, lname, sex) {
+                        function verifyUser(email, fname, lname, sex) {
 
-        $.ajax({
-            type: "POST",
-            url: "/campana/cliente",
-            data: {email: email, fname: fname, lname: lname, sex: sex, facebook: '1'},
-            success: function (data) {
-                var cliente = $.parseJSON(data);
-                if (cliente[0]) {
-                    if (cliente[0].validar == '1') {
-                        postfunction('', '');
-                    }
-                }
-            }
-        });
+                            $.ajax({
+                                type: "POST",
+                                url: "/campana/cliente",
+                                data: {email: email, fname: fname, lname: lname, sex: sex, facebook: '1'},
+                                success: function (data) {
+                                    var cliente = $.parseJSON(data);
+                                    if (cliente[0]) {
+                                        if (cliente[0].validar == '1') {
+                                            postfunction('', '');
+                                        }
+                                    }
+                                }
+                            });
 
-    }
-    
+                        }
+
 </script>
