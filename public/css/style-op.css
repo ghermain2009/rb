@@ -1247,8 +1247,8 @@ h4 {
 .description {
     font-family:gotham-medium, 'arial', 'sans-serif';
     font-size: 14px;
-    padding-left: 8px;
-    padding-right: 8px;
+    //padding-left: 8px;
+    //padding-right: 8px;
     height: 80px;
 }
 
