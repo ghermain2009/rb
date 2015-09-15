@@ -1820,6 +1820,15 @@ h4 {
     display: inline-block;
 }
 
+.col-lg-5.control-label.afiliacion {
+    font-size: 0.85em !important;
+    font-weight: normal !important;
+    font-family: 'gotham-book', 'arial', 'sans-serif' !important;
+    float: left;
+    width: 140px;
+    margin-top: 8px;
+}
+
 /* Eror 404*/
 .error_404 {
     width: 400px; 

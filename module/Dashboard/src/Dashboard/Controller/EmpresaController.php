@@ -24,9 +24,11 @@ class EmpresaController extends AbstractActionController {
     //put your code here
     public function indexAction() {
         $viewmodel = new ViewModel();
-        $form = new EmpresaForm();
-        $request = $this->getRequest();
         $serviceLocator = $this->getServiceLocator();
+        $tipoDocumentoTable = $serviceLocator->get('Dashboard\Model\GentipodocumentoTable');
+        $form = new EmpresaForm($tipoDocumentoTable);
+        $request = $this->getRequest();
+        
         $form->get('submit');
         $message = ""; //Message
 
@@ -36,7 +38,7 @@ class EmpresaController extends AbstractActionController {
             $form->setData($request->getPost());
             if ($form->isValid()) {
                 $data = $form->getData();
-                $tipoDocumentoTable = $serviceLocator->get('Dashboard\Model\GentipodocumentoTable');
+                
                 $empresaTable = $serviceLocator->get('Dashboard\Model\GenempresaTable');
                 unset($data['submit']);
                 $rs = $empresaTable->addEmpresa($data);
