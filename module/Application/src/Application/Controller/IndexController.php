@@ -17,68 +17,15 @@ use Zend\Json\Json;
 
 class IndexController extends AbstractActionController
 {
-    public function indexAction()
-    {
-        
-        $serviceLocator = $this->getServiceLocator();
-        $config = $serviceLocator->get('config');
-        $en_produccion = $config['en_produccion'];
-        
-        $constantes = $config['constantes'];
-        $moneda = $config['moneda'];
-
-        $user_session = new Container('user');
-        $user_session->facebook = array('id' => $constantes["id_facebook"],
-                                        've' => $constantes["ve_facebook"]);
-        
-        $pais = $config['id_pais'];
-        $capital = $config['id_capital'];
-        
-        $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
-        $departamentos = $departamentoTable->getDepartamentosxPaisFavoritos($pais);
-        
-        $provinciaTable = $serviceLocator->get('Dashboard\Model\UbiprovinciaTable');
-        $provincias = $provinciaTable->getProvinciasxDepartamento($pais, $capital);
-        
-        $this->layout()->pais = $pais;
-        $this->layout()->capital = $capital;
-        $this->layout()->departamentos = $departamentos;
-        $this->layout()->provincias = $provincias;
-        
-        $campanaTable = $serviceLocator->get('Dashboard\Model\CupcampanaTable');
-        $datos = $campanaTable->getCampanasAll();
-        
-        $data = array();
-        foreach ($datos as $dato) {
-             $data[] = $dato;
-        }
-        
-        $datosG = $campanaTable->getCampanaGrupo();
-        
-        $dataG = array();
-        foreach ($datosG as $dato) {
-             $dataG[] = $dato;
-        }
-        
-        return new ViewModel(array('data' => $data, 
-                                   'dataG' => $dataG,
-                                   'user_session' => $user_session,
-                                   'moneda' => $moneda
-                                   ));
-    }
-    
-    public function phpinfoAction()
-    {
-        return new ViewModel();
-    }
-    
 //    public function indexAction()
 //    {
-//        $this->layout('layout/layout_afiliacion');
 //        
 //        $serviceLocator = $this->getServiceLocator();
 //        $config = $serviceLocator->get('config');
+//        $en_produccion = $config['en_produccion'];
+//        
 //        $constantes = $config['constantes'];
+//        $moneda = $config['moneda'];
 //
 //        $user_session = new Container('user');
 //        $user_session->facebook = array('id' => $constantes["id_facebook"],
@@ -86,7 +33,6 @@ class IndexController extends AbstractActionController
 //        
 //        $pais = $config['id_pais'];
 //        $capital = $config['id_capital'];
-//        $existepromocion = false; 
 //        
 //        $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
 //        $departamentos = $departamentoTable->getDepartamentosxPaisFavoritos($pais);
@@ -94,23 +40,77 @@ class IndexController extends AbstractActionController
 //        $provinciaTable = $serviceLocator->get('Dashboard\Model\UbiprovinciaTable');
 //        $provincias = $provinciaTable->getProvinciasxDepartamento($pais, $capital);
 //        
-//        $tipodocumentoTable = $serviceLocator->get('Dashboard\Model\GentipodocumentoTable');
-//        $tipodocumentos = $tipodocumentoTable->fetchAll();
+//        $this->layout()->pais = $pais;
+//        $this->layout()->capital = $capital;
+//        $this->layout()->departamentos = $departamentos;
+//        $this->layout()->provincias = $provincias;
 //        
-//        $categoriaTable = $serviceLocator->get('Dashboard\Model\GencategoriaTable');
-//        $categorias = $categoriaTable->fetchAll();
+//        $campanaTable = $serviceLocator->get('Dashboard\Model\CupcampanaTable');
+//        $datos = $campanaTable->getCampanasAll();
 //        
+//        $data = array();
+//        foreach ($datos as $dato) {
+//             $data[] = $dato;
+//        }
 //        
-//        return new ViewModel(array('departamentos' => $departamentos, 
-//                                   'provincias' => $provincias,
-//                                   'tipodocumentos' => $tipodocumentos, 
-//                                   'categorias' => $categorias,
-//                                   'pais' => $pais, 
-//                                   'capital' => $capital, 
+//        $datosG = $campanaTable->getCampanaGrupo();
+//        
+//        $dataG = array();
+//        foreach ($datosG as $dato) {
+//             $dataG[] = $dato;
+//        }
+//        
+//        return new ViewModel(array('data' => $data, 
+//                                   'dataG' => $dataG,
 //                                   'user_session' => $user_session,
-//                                   'existepromocion' => $existepromocion));
+//                                   'moneda' => $moneda
+//                                   ));
 //    }
-//    
+    
+    public function phpinfoAction()
+    {
+        return new ViewModel();
+    }
+    
+    public function indexAction()
+    {
+        $this->layout('layout/layout_afiliacion');
+        
+        $serviceLocator = $this->getServiceLocator();
+        $config = $serviceLocator->get('config');
+        $constantes = $config['constantes'];
+
+        $user_session = new Container('user');
+        $user_session->facebook = array('id' => $constantes["id_facebook"],
+                                        've' => $constantes["ve_facebook"]);
+        
+        $pais = $config['id_pais'];
+        $capital = $config['id_capital'];
+        $existepromocion = false; 
+        
+        $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
+        $departamentos = $departamentoTable->getDepartamentosxPaisFavoritos($pais);
+        
+        $provinciaTable = $serviceLocator->get('Dashboard\Model\UbiprovinciaTable');
+        $provincias = $provinciaTable->getProvinciasxDepartamento($pais, $capital);
+        
+        $tipodocumentoTable = $serviceLocator->get('Dashboard\Model\GentipodocumentoTable');
+        $tipodocumentos = $tipodocumentoTable->fetchAll();
+        
+        $categoriaTable = $serviceLocator->get('Dashboard\Model\GencategoriaTable');
+        $categorias = $categoriaTable->fetchAll();
+        
+        
+        return new ViewModel(array('departamentos' => $departamentos, 
+                                   'provincias' => $provincias,
+                                   'tipodocumentos' => $tipodocumentos, 
+                                   'categorias' => $categorias,
+                                   'pais' => $pais, 
+                                   'capital' => $capital, 
+                                   'user_session' => $user_session,
+                                   'existepromocion' => $existepromocion));
+    }
+    
     public function suscribirmeAction() {
         $datos = $this->params()->fromPost();
         
