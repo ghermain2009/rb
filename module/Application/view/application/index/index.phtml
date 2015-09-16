@@ -27,84 +27,86 @@
     </div>
 </div>
 <div class="promocion-afiliacion" id="promocion-container" style="overflow: hidden; width: 920px; height: 181px;">
-    <div class="formulario-afiliacion" id="formulario-container">
-        <form id="suscribirmeForm" method="post" action="/index/suscribirme" class="">
-            <div class="form-group">
-                <div class="col-xs-5"> 
-                    <div class="logo-fijo-afiliacion"></div>
-                </div>
-                <label for="logo" class="col-xs-7 control-faltan">Faltan pocos días</label>
-            </div>
-            <div class="form-group">
-                <div class="col-xs-12">
-                    <p class="promocion-parrafo"><br/></p>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-xs-12">
-                    <p class="promocion-parrafo">Disfrutar de momentos inolvidables con descuentos de <porcentaje>50% a más</porcentaje> en Ecuador es ya una realidad.</p>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-xs-12">
-                    <p class="promocion-parrafo">Suscríbete y recibirás por las mañanas super ofertas en tu buzón casi como tips de super utilidad.</p>
-                </div>
-            </div>
-            <input type="hidden" name="pais" id="pais" value="<?php echo $pais; ?>">
-            <div class="form-group">
-                <label for="ciudad" class="col-lg-5 control-label afiliacion">Elige tu ciudad:</label>
-                <div class="col-xs-7 validacion"> 
-                    <select class="form-control" name="ciudad" id="ciudad">
-                        <option value="">-- Selecciona tu ciudad --</option>
-                        <?php foreach ($departamentos as $departamento) { ?>
-                            <option value="<?php echo $departamento['id_departamento']; ?>" <?php if ($departamento['id_departamento'] == $capital) {
-                            echo 'selected';
-                        } ?>><?php echo $departamento['descripcion']; ?></option>
-                        <?php } ?>
-                    </select>
-                    <span class="help-block with-errors"></span>
-                </div>
-            </div>
-            <div class="form-group" id="contenido-zona">
-                <?php if( count($provincias) > 0 ) { ?>
-                <label for="zona" class="col-lg-5 control-label afiliacion">Elige tu zona:</label>
-                <div class="col-xs-7 validacion"> 
-                    <select class="form-control" name="zona" id="zona">
-                        <option value="">-- Selecciona tu zona --</option>
-                        <?php foreach ($provincias as $provincia) { ?>
-                            <option value="<?php echo $provincia['id_provincia']; ?>"><?php echo $provincia['descripcion']; ?></option>
-                        <?php } ?>
-                    </select>
-                    <span class="help-block with-errors"></span>
-                </div>
-                <?php } ?>
-            </div>
-            <div class="form-group">
-                <label for="email" class="col-lg-5 control-label afiliacion">Email:</label>
-                <div class="col-xs-7 validacion"> 
-                    <input type="text" class="form-control" name="email" id="email" value="" >
-                    <span class="help-block with-errors"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="genero" class="col-lg-5 control-label afiliacion">Género:</label>
-                <div class="col-xs-7 validacion">
-                    <div class="radio afiliacion" >
-                        <label><input type="radio" name="genero" id="genero" value="M" required>Masculino</label>
+    <div class="contenedor-formulario-promocion" style="display: block">
+        <div class="formulario-afiliacion" id="formulario-container">
+            <form id="suscribirmeForm" method="post" action="/index/suscribirme" class="">
+                <div class="form-group">
+                    <div class="col-xs-5"> 
+                        <div class="logo-fijo-afiliacion"></div>
                     </div>
-                    <div class="radio afiliacion" >
-                        <label><input type="radio" name="genero" id="genero" value="F" required>Femenino</label>
+                    <label for="logo" class="col-xs-7 control-faltan">Faltan pocos días</label>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <p class="promocion-parrafo"><br/></p>
                     </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-xs-12 total">
-                    <button type="submit" class="btn btn-rebueno"  id="suscribirme" disabled="">Suscribirme</button>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <p class="promocion-parrafo">Disfrutar de momentos inolvidables con descuentos de <porcentaje>50% a más</porcentaje> en Ecuador es ya una realidad.</p>
+                    </div>
                 </div>
-            </div>
-        </form>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <p class="promocion-parrafo">Suscríbete y recibirás por las mañanas super ofertas en tu buzón casi como tips de super utilidad.</p>
+                    </div>
+                </div>
+                <input type="hidden" name="pais" id="pais" value="<?php echo $pais; ?>">
+                <div class="form-group">
+                    <label for="ciudad" class="col-lg-5 control-label afiliacion">Elige tu ciudad:</label>
+                    <div class="col-xs-7 validacion"> 
+                        <select class="form-control" name="ciudad" id="ciudad">
+                            <option value="">-- Selecciona tu ciudad --</option>
+                            <?php foreach ($departamentos as $departamento) { ?>
+                                <option value="<?php echo $departamento['id_departamento']; ?>" <?php if ($departamento['id_departamento'] == $capital) {
+                                echo 'selected';
+                            } ?>><?php echo $departamento['descripcion']; ?></option>
+                            <?php } ?>
+                        </select>
+                        <span class="help-block with-errors"></span>
+                    </div>
+                </div>
+                <div class="form-group" id="contenido-zona">
+                    <?php if( count($provincias) > 0 ) { ?>
+                    <label for="zona" class="col-lg-5 control-label afiliacion">Elige tu zona:</label>
+                    <div class="col-xs-7 validacion"> 
+                        <select class="form-control" name="zona" id="zona">
+                            <option value="">-- Selecciona tu zona --</option>
+                            <?php foreach ($provincias as $provincia) { ?>
+                                <option value="<?php echo $provincia['id_provincia']; ?>"><?php echo $provincia['descripcion']; ?></option>
+                            <?php } ?>
+                        </select>
+                        <span class="help-block with-errors"></span>
+                    </div>
+                    <?php } ?>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="col-lg-5 control-label afiliacion">Email:</label>
+                    <div class="col-xs-7 validacion"> 
+                        <input type="text" class="form-control" name="email" id="email" value="" >
+                        <span class="help-block with-errors"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="genero" class="col-lg-5 control-label afiliacion">Género:</label>
+                    <div class="col-xs-7 validacion">
+                        <div class="radio afiliacion" >
+                            <label><input type="radio" name="genero" id="genero" value="M" required>Masculino</label>
+                        </div>
+                        <div class="radio afiliacion" >
+                            <label><input type="radio" name="genero" id="genero" value="F" required>Femenino</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12 total">
+                        <button type="submit" class="btn btn-rebueno"  id="suscribirme" disabled="">Suscribirme</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="imagen-afiliacion-contenedor" id="imagen-container"><img width="495" height="410" src="../img/afiliacion/afiliacion_teclado.jpg"></div>
     </div>
-    <div class="imagen-afiliacion" id="imagen-container"></div>
 </div>
 <div class="registro-actualizacion" id="registro-container">
     <div class="formulario-actualizacion" id="formulario-registro">

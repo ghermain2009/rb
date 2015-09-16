@@ -1130,7 +1130,7 @@ h4 {
     //background-image: url('../img/afiliacion/promociones/promocion1.jpg');
     z-index:1000;
     padding:0px !important;
-    margin:0px !important;
+    margin:0px !important;  
 }
 
 #suscribirme {
@@ -1697,14 +1697,15 @@ h4 {
 /*Afiliacion*/
 .promocion-afiliacion-fija,
 .promocion-saludo {
+    /*width: 845px !important;
+    height: 410px !important;
+    top:calc(100%/2 - 410px/2) !important;
+    left:calc(100%/2 - 845px/2) !important;*/
     width: 60% !important;
-    height: 60% !important; 
+    height: 60% !important;
     top:20% !important;
     left:20% !important;
-    right:20% !important;
     position:absolute;
-    top:0px;
-    left:0px;
     z-index:1000;
     padding:0px !important;
     margin:0px !important;
@@ -1714,7 +1715,19 @@ h4 {
     display: none;
 }
 
-.formulario-afiliacion,
+.formulario-afiliacion {
+    width: 350px;
+    height: 410px;
+    background-color: #FFF;
+    display: none;
+    padding-top: 0px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    padding-bottom: 10px !important;
+    margin:0px !important;
+    float: left;
+}
+
 .formulario-saludo  {
     width: 350px;
     //height: 100%;
@@ -1736,13 +1749,20 @@ h4 {
 }
 
 .imagen-afiliacion {
-    width: calc(100% - 350px);
-    height: 100%; 
-    background-image: url('../img/afiliacion/afiliacion_teclado.jpg');
-    background-size: 100% 100%;
+    width: 495px;
+    height: 410px;  
+    //background-image: url('../img/afiliacion/afiliacion_teclado.jpg');
+    //background-size: 100% 100%;
     display: none;
+    max-width: 100%;
     padding-top: 0px !important;
     margin:0px !important;
+}
+
+.contenedor-formulario-promocion {
+    width: 845px;
+    height: 410px; 
+    margin: 0 auto;
 }
 
 .logo-fijo-afiliacion {
