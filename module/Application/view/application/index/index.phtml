@@ -105,14 +105,14 @@
                 </div>
             </form>
         </div>
-        <div class="imagen-afiliacion-contenedor" id="imagen-container"><img width="495" height="410" src="../img/afiliacion/afiliacion_teclado.jpg"></div>
+        <div class="imagen-afiliacion-contenedor" id="imagen-container"><img width="495" height="100%" src="../img/afiliacion/afiliacion_teclado.jpg"></div>
     </div>
 </div>
 <div class="registro-actualizacion" id="registro-container">
     <div class="formulario-actualizacion" id="formulario-registro">
         <form id="actualizarForm" method="post" action="/index/suscribirme">
             <div class="form-group">
-                <div class="col-xs-7"> 
+                <div class="col-xs-6"> 
                     <div class="logo-fijo-afiliacion"></div>
                 </div>
                 <label for="logo" class="col-xs-7 control-faltan">Crear Cuenta</label>
@@ -179,14 +179,14 @@
     </div>
     <div class="facebook-actualizacion" id="facebook-contenedor">
         <div class="facebook-datos" id="facebook-registro">
-            <h3>Registrarme con Facebook</h3></br>
+            <h3 class="facebook-titulo">Registrarme con Facebook</h3></br>
             <div class="form-group">
                 <label class="col-lg-10 control-label">Conecta tu cuenta de Facebook para registrarte a Rebueno</label>
             </div>
             <div class="form-group">
                 <div class="col-xs-10">
                     <a class="btn btn-block btn-lg btn-social btn-facebook btn-facerebueno" href="javascript:loginFacebook();">
-                        <i class="fa fa-facebook"></i> Registrar con Facebook
+                        <i class="fa fa-facebook"></i> Registrar con<br>Facebook
                     </a>
                 </div>
             </div>
@@ -225,7 +225,7 @@
             </div>
         </form>
     </div>
-    <div class="imagen-afiliacion" id="imagen-saludo"></div>
+    <div class="imagen-afiliacion" id="imagen-saludo"><img width="495" height="100%" src="../img/afiliacion/afiliacion_teclado.jpg"></div>
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -350,7 +350,7 @@
             var ciudad = $('#ciudad').val();
             $.ajax({
                 type: "POST",
-                url: "/zonificacion",
+                url: "/index/zonificacion",
                 data: {pais: pais, ciudad: ciudad},
                 success: function (data) {
                     $('#contenido-zona').html(data);
