@@ -43,7 +43,8 @@ class EmpresaController extends AbstractActionController {
                 unset($data['submit']);
                 $rs = $empresaTable->addEmpresa($data);
                 if ($rs) {
-                    $form = new EmpresaForm($tipoDocumentoTable);
+                    //$form = new EmpresaForm($tipoDocumentoTable);
+                    $this->redirect()->toRoute('dash_empresa_edit', array('id' => $rs));
                 }
             }
         }
@@ -185,6 +186,9 @@ class EmpresaController extends AbstractActionController {
                 $form->get('ubicacion_gps')->setValue($empresa['ubicacion_gps']);
                 $form->get('numero_cuenta')->setValue($empresa['numero_cuenta']);
                 $form->get('descripcion')->setValue($empresa['descripcion']);
+                $form->get('tipo_documento_representante')->setValue($empresa['tipo_documento_representante']);
+                $form->get('documento_representante')->setValue($empresa['documento_representante']);
+                $form->get('nombre_representante')->setValue($empresa['nombre_representante']);
                 $form->get('id_operador')->setValue($empresa['id_operador']);
             //}
         }
