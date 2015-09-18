@@ -57,16 +57,13 @@ class CupcampanaTable {
                       'precio_especial'  => new Expression("MIN(precio_especial)") ,
                       'vendidos'  => new Expression("SUM(IFNULL(vendidos,0))") ,
                       'descuento'  => new Expression("100-ROUND(MIN(precio_especial)*100/MIN(precio_regular))") ,
-                    ));
-        //->where->addPredicate(new Between(new Expression("NOW()"), new Expression("CONCAT(DATE_FORMAT(cup_campana.fecha_inicio,'%Y-%m-%d'),' ',cup_campana.hora_inicio)"), new Expression("CONCAT(DATE_FORMAT(cup_campana.fecha_final,'%Y-%m-%d'),' ',cup_campana.hora_final)")));
+                    ))
+        ->where("NOW() >= CONCAT(DATE_FORMAT(cup_campana.fecha_inicio,'%Y-%m-%d'),' ',TIME_FORMAT(cup_campana.hora_inicio,'%H:%i:%s'))")
+        ->where("NOW() <= CONCAT(DATE_FORMAT(cup_campana.fecha_final,'%Y-%m-%d'),' ',TIME_FORMAT(cup_campana.hora_final,'%H:%i:%s'))");
         
         $select->group(array('cup_campana.id_campana'));
         $select->group(array('cup_campana.subtitulo'));
         
-        
-        /*echo $select->getSqlString();
-        
-        exit();*/
         $statement = $sql->prepareStatementForSqlObject($select);
         $result = $statement->execute();
 
@@ -92,6 +89,8 @@ class CupcampanaTable {
                       'descuento'  => new Expression("100-ROUND(MIN(precio_especial)*100/MIN(precio_regular))") ,
                     ));
       
+        $select->where("NOW() >= CONCAT(DATE_FORMAT(cup_campana.fecha_inicio,'%Y-%m-%d'),' ',TIME_FORMAT(cup_campana.hora_inicio,'%H:%i:%s'))");
+        $select->where("NOW() <= CONCAT(DATE_FORMAT(cup_campana.fecha_final,'%Y-%m-%d'),' ',TIME_FORMAT(cup_campana.hora_final,'%H:%i:%s'))");
         $select->where->notIn('cup_campana.id_campana', array($id_campana)) ;
         $select->group(array('cup_campana.id_campana'));
         $select->group(array('cup_campana.subtitulo'));
@@ -123,16 +122,13 @@ class CupcampanaTable {
         ->join('cup_campana_categoria', new Expression("cup_campana.id_campana = cup_campana_categoria.id_campana"), array())
         ->join('gen_sub_categoria', new Expression("cup_campana_categoria.id_sub_categoria = gen_sub_categoria.id_sub_categoria"),array())
         ->join('gen_categoria', new Expression("gen_sub_categoria.id_categoria = gen_categoria.id_categoria"),array('categoria' => 'descripcion','id_categoria'));
-        //->where->addPredicate(new Between('FECHA_EMISION_DOC', new Expression("TO_DATE('".$fecha." 00:00:00','YYYY-MM-DD HH24:MI:SS')"), new Expression("TO_DATE('".$fecha." 23:59:59','YYYY-MM-DD HH24:MI:SS')")));
+        $select->where("NOW() >= CONCAT(DATE_FORMAT(cup_campana.fecha_inicio,'%Y-%m-%d'),' ',TIME_FORMAT(cup_campana.hora_inicio,'%H:%i:%s'))");
+        $select->where("NOW() <= CONCAT(DATE_FORMAT(cup_campana.fecha_final,'%Y-%m-%d'),' ',TIME_FORMAT(cup_campana.hora_final,'%H:%i:%s'))");
         $select->group(array('gen_categoria.descripcion'));
         $select->group(array('gen_categoria.id_categoria'));
         $select->group(array('cup_campana.id_campana'));
         $select->group(array('cup_campana.subtitulo'));
         
-        
-        /*echo $select->getSqlString();
-        
-        exit();*/
         $statement = $sql->prepareStatementForSqlObject($select);
         $result = $statement->execute();
 
