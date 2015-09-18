@@ -57,7 +57,7 @@ class CupcampanaTable {
                       'precio_especial'  => new Expression("MIN(precio_especial)") ,
                       'vendidos'  => new Expression("SUM(IFNULL(vendidos,0))") ,
                       'descuento'  => new Expression("100-ROUND(MIN(precio_especial)*100/MIN(precio_regular))") ,
-                    ))
+                    ));
         //->where->addPredicate(new Between(new Expression("NOW()"), new Expression("CONCAT(DATE_FORMAT(cup_campana.fecha_inicio,'%Y-%m-%d'),' ',cup_campana.hora_inicio)"), new Expression("CONCAT(DATE_FORMAT(cup_campana.fecha_final,'%Y-%m-%d'),' ',cup_campana.hora_final)")));
         
         $select->group(array('cup_campana.id_campana'));
