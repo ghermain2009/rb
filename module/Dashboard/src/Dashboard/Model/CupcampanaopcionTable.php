@@ -141,4 +141,15 @@ class CupcampanaopcionTable {
         return $datos;
     }
 
+    public function delOpcionxCampanaId($id_opcion, $id_campana) {
+        $sql = new Sql($this->tableGateway->adapter);
+
+        $select = $sql->delete('cup_campana_opcion');
+        $select->where(array('id_campana_opcion' => $id_opcion, 'id_campana' => $id_campana));
+
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $result = $statement->execute();
+
+        return $result;
+    }
 }

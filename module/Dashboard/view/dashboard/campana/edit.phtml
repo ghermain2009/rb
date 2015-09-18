@@ -198,13 +198,15 @@ $contador = -1;
                             foreach ($opciones as $opcion) {
                                 $contador++;
                                 ?>
-                            <tr class="warning">
+                            <tr class="warning" id="filaOpcion<?php echo $opcion['id_campana_opcion']; ?>">
                                     <td><span class="badge"><?php echo $contador; ?></span></td>
                                     <td><div id="descripcion<?php echo $opcion['id_campana_opcion']; ?>"><?php echo $opcion['descripcion']; ?></div></td>
                                     <td><?php echo $opcion['precio_regular']; ?></td>
                                     <td><?php echo $opcion['precio_especial']; ?></td>
                                     <td><?php echo $opcion['comision']; ?></td>
-                                    <td><div class="btn btn-warning" onclick="javascript:edicionOpcion('<?php echo $opcion['id_campana_opcion']; ?>', '<?php echo $opcion['id_campana']; ?>')" title="Modificar opción de venta"><span class="glyphicon glyphicon-edit"></span></div></td>
+                                    <td><div class="btn btn-warning" onclick="javascript:edicionOpcion('<?php echo $opcion['id_campana_opcion']; ?>', '<?php echo $opcion['id_campana']; ?>','filaOpcion<?php echo $opcion['id_campana_opcion']; ?>')" title="Modificar opción de venta"><span class="glyphicon glyphicon-edit"></span></div>
+                                        <div class="btn btn-success" onclick="javascript:eliminarOpcion('<?php echo $opcion['id_campana_opcion']; ?>', '<?php echo $opcion['id_campana']; ?>','filaOpcion<?php echo $opcion['id_campana_opcion']; ?>')" title="Eliminar opción de venta"><span class="glyphicon glyphicon-trash"></span></div>
+                                    </td>
                                 </tr>
                             <?php } ?>
                         </tbody>
@@ -244,6 +246,7 @@ $contador = -1;
                     <div class="form-group">
                         <label for="precio_regular" class="col-lg-4 control-label">Precio Regular:</label>
                         <div class="col-xs-9"> 
+                            <input type="hidden" class="form-control" name="pk_idfila" id="pk_idfila" value="">
                             <input type="hidden" class="form-control" name="pk_campana_opcion" id="pk_campana_opcion" value="">
                             <input type="hidden" class="form-control" name="pk_campana" id="pk_campana" value="">
                             <input type="text" class="form-control" name="precio_regular" id="precio_regular" value="">
@@ -434,7 +437,7 @@ foreach ($ficheros2 as $file) {
 
     });
 
-    function edicionOpcion(id_opcion, id_campana) {
+    function edicionOpcion(id_opcion, id_campana, idFila) {
         $.ajax({
             type: "POST",
             url: "/dashboard/campana/editopcion",
@@ -443,6 +446,7 @@ foreach ($ficheros2 as $file) {
                 var datos = $.parseJSON(data);
                 if (datos[0]) {
                     $('#content').html(datos[0].descripcion);
+                    $('#pk_idfila').val(idFila);
                     $('#precio_regular').val(datos[0].precio_regular);
                     $('#precio_especial').val(datos[0].precio_especial);
                     $('#comision').val(datos[0].comision);
@@ -454,9 +458,23 @@ foreach ($ficheros2 as $file) {
             }
         });
     }
+    
+    function eliminarOpcion(id_opcion, id_campana, idFila) {
+        
+        $.ajax({
+            type: "POST",
+            url: "/dashboard/campana/deleteopcion",
+            data: {opcion: id_opcion, campana: id_campana},
+            success: function (data) {
+                $('#' + idFila ).remove();
+            }
+        });
+        
+    }
 
     function nuevaOpcion() {
         $('#content').html('');
+        $('#pk_idfila').val('');
         $('#precio_regular').val('0.00');
         $('#precio_especial').val('0.00');
         $('#comision').val('0.00');
@@ -469,6 +487,7 @@ foreach ($ficheros2 as $file) {
     function grabaOpcion() {
 
         var id_campana = $('#pk_campana').val();
+        var filaEditada = $('#pk_idfila').val();
         var id_campana_opcion = $('#pk_campana_opcion').val();
         var descripcion = $('#content').data('liveEdit').getXHTMLBody();
         var precio_regular = $('#precio_regular').val();
@@ -485,7 +504,12 @@ foreach ($ficheros2 as $file) {
                 if (datos) {
                     $('#descripcion' + id_campana_opcion).html(descripcion);
                     if (datos.resultado == 'I') {
-                        $('#js-tabla-opciones tr:last').after('<tr><td></td><td><div id="descripcion' + datos.id + '">' + descripcion + '</div></td><td>' + precio_regular + '</td><td>' + precio_especial + '</td><td>' + comision + '</td><td><div class="btn btn-success" onclick="javascript:edicionOpcion(\'' + datos.id + '\',\'' + id_campana + '\')">Editar</div></td></tr>');
+                        $('#js-tabla-opciones tr:last').after('<tr id="filaOpcion' + datos.id + '"><td></td><td></td><td>' + precio_regular + '</td><td>' + precio_especial + '</td><td>' + comision + '</td><td><div class="btn btn-success" onclick="javascript:edicionOpcion(\'' + datos.id + '\',\'' + id_campana + '\',\'filaOpcion' + datos.id + '\')">Editar</div></td></tr>');
+                    } else {
+                        $('#' + filaEditada).find('td').eq(1).html('<div id="descripcion' + datos.id + '">' + descripcion + '</div>');
+                        $('#' + filaEditada).find('td').eq(2).html(precio_regular);
+                        $('#' + filaEditada).find('td').eq(3).html(precio_especial);
+                        $('#' + filaEditada).find('td').eq(4).html(comision);
                     }
                     $('#modalEditor').modal('hide');
 

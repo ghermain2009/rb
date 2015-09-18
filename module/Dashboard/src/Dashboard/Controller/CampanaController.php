@@ -234,6 +234,20 @@ class CampanaController extends AbstractActionController {
 
         return $this->getResponse()->setContent(Json::encode($datos));
     }
+    
+    public function deleteopcionAction() {
+
+        $opcion = $this->params()->fromPost("opcion", null);
+        $campana = $this->params()->fromPost("campana", null);
+
+
+        $serviceLocator = $this->getServiceLocator();
+        $campanaOpcionTable = $serviceLocator->get('Dashboard\Model\CupcampanaopcionTable');
+
+        $campanaOpcionTable->delOpcionxCampanaId($opcion, $campana);
+
+        return $this->getResponse()->setContent(Json::encode(array('data' => '1')));
+    }
 
     public function saveopcionAction() {
 
