@@ -181,7 +181,7 @@ foreach ($dataG as $dato) {
                     </div>
                     <div class="campana-tarifario-<?php echo $ultimo;?>">
                         <s><?php echo $moneda['simbolo'];?> <?php echo $dato['precio_regular']; ?></s><span class="campana-precio-oferta-<?php echo $ultimo;?>"><?php echo $moneda['simbolo'];?> <?php echo $dato['precio_especial']; ?></span>
-                        <a class="btn btn-ver-oferta-<?php echo $ultimo;?>" href="/campana/detalle/crearUrl($dato['subtitulo']).'--'.<?php echo base64_encode($dato['id_campana']); ?>.html" title="Ver oferta">Ver oferta »</a>
+                        <a class="btn btn-ver-oferta-<?php echo $ultimo;?>" href="/campana/detalle/<?php echo crearUrl($dato['subtitulo']).'--'.base64_encode($dato['id_campana']); ?>.html" title="Ver oferta">Ver oferta »</a>
                     </div>
                     <p class="campana-vendidos-<?php echo $ultimo;?>">Vendidos: <?php echo $dato['vendidos']; ?> ofertas</p>
                 </div>
