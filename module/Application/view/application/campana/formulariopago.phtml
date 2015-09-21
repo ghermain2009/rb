@@ -220,11 +220,6 @@
                 <div class="subtotal"><br><b>Sub total: </b><span id="lblSubtotal" class="price_subtotal"><?php echo $moneda['simbolo'];?> <?php echo $dato['precio_especial']; ?></span></div>
                 <div class="subtotal"><br><b>Total: </b><span id="lblTotal" class="price"><?php echo $moneda['simbolo'];?> <?php echo $dato['precio_especial']; ?></span>
                 </div>
-                <div class="offer_alert hide">
-                    <span class="ico"></span>
-                    <span class="text">Al efectuar la compra, tu nuevo saldo de crédito OferTOP será de <br>
-                        <b id="lblRemainingCredit"><?php echo $moneda['simbolo'];?> 0</b></span>
-                </div>
             </div>
         </div>
     <?php } ?>
@@ -239,6 +234,12 @@
                 <label for="radPayVisa" class="ioption">
                     <input id="radPayVisa" name="metodo" type="radio" value="001" checked><span><img src="/img/tarjetas/visa.jpg"></span>
                     <div class="cb">Paga con Tarjeta de Crédito Visa</div>
+                </label>
+            </div>
+            <div class="metodo_pago">
+                <label for="radPayBanco" class="ioption">
+                    <input id="radPayBanco" name="metodo" type="radio" value="999"><span><img src="/img/tarjetas/banco.jpg"></span>
+                    <div class="cb">Paga con transferencia o depósito Bancario</div>
                 </label>
             </div>
             <div class="metodo_pago terminos">

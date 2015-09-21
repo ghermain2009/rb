@@ -59,6 +59,7 @@ class CampanaController extends AbstractActionController {
             'dir_image' => $dir_image,
             'sep_path' => $sep_path,
             'moneda' => $moneda,
+            'localhost' => $localhost
             ));
     }
 
@@ -104,37 +105,49 @@ class CampanaController extends AbstractActionController {
         $serviceLocator = $this->getServiceLocator();
 
         $clienteTable = $serviceLocator->get('Dashboard\Model\CupclienteTable');
-        $resultado = $clienteTable->addCliente($datos);
+        $clienteTable->addCliente($datos);
 
         $cuponTable = $serviceLocator->get('Dashboard\Model\CupcuponTable');
-        $resultado = $cuponTable->addCupon($datos,$serviceLocator);
-
-        $config = $serviceLocator->get('config');
-        $postURL = $config["tarjetas"];
+        $idTransaccion = $cuponTable->addCupon($datos,$serviceLocator);
         
-        $url = $postURL[$datos['metodo']]['url'];
-        $usuario = $postURL[$datos['metodo']]['user'];
-        $password = $postURL[$datos['metodo']]['pass'];
-        
-        $request = new Request;
-        $request->getHeaders()->addHeaders([
-            'Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8'
-        ]);
-        $request->setUri($url);
-        $request->setMethod('POST'); //uncomment this if the POST is used
-        $request->getPost()->set('operacion', $resultado);
-        $request->getPost()->set('monto', $datos['PriceTotal']);
-        $request->getPost()->set('usuario', $usuario);
-        $request->getPost()->set('password', $password);
+        switch($datos['metodo']) {
+            case '001':
 
-        $client = new Client;
+                $config = $serviceLocator->get('config');
+                $postURL = $config["tarjetas"];
 
-        $client->setAdapter("Zend\Http\Client\Adapter\Curl");
+                $url = $postURL[$datos['metodo']]['url'];
+                $usuario = $postURL[$datos['metodo']]['user'];
+                $password = $postURL[$datos['metodo']]['pass'];
 
-        $response = $client->dispatch($request);
-        
-        return $response;
+                $request = new Request;
+                $request->getHeaders()->addHeaders([
+                    'Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8'
+                ]);
+                $request->setUri($url);
+                $request->setMethod('POST'); //uncomment this if the POST is used
+                $request->getPost()->set('operacion', $idTransaccion);
+                $request->getPost()->set('monto', $datos['PriceTotal']);
+                $request->getPost()->set('usuario', $usuario);
+                $request->getPost()->set('password', $password);
 
+                $client = new Client;
+
+                $client->setAdapter("Zend\Http\Client\Adapter\Curl");
+
+                $response = $client->dispatch($request);
+
+                return $response;
+                
+                break;
+            
+            default :
+                
+                return  new ViewModel(array('operacion' => $idTransaccion,
+                                            'peciototal' => $datos['PriceTotal']));
+                
+                break;
+        }
     }
 
     public function categoriaAction() {

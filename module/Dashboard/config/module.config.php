@@ -400,6 +400,7 @@ return array(
             'Dashboard\Controller\Campana' => 'Dashboard\Controller\CampanaController',
             'Dashboard\Controller\Empresa' => 'Dashboard\Controller\EmpresaController',
             'Dashboard\Controller\Micampana' => 'Dashboard\Controller\MicampanaController',
+            'Dashboard\Controller\Pagobancario' => 'Dashboard\Controller\PagobancarioController',
             'Dashboard\Cron\Controller\Generaliquidacion' => 'Dashboard\Cron\Controller\GeneraliquidacionController',
         ),
     ),

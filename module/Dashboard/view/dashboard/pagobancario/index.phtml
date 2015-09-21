@@ -1,0 +1,95 @@
+<?php echo $this->form()->openTag($this->form); ?>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h4 class="panel-title">Registrar Empresa</h4>
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            <label for="subtitulo" class="col-lg-2 control-label">Razón Social :</label>
+            <div class="col-lg-8">
+                <?php echo $this->formRow($this->form->get('razon_social')); ?>
+                <?php echo $this->formRow($this->form->get('id_empresa')); ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="titulo" class="col-lg-2 control-label">Registro Contribuyente:</label>
+            <div class="col-lg-8">
+                <?php echo $this->formRow($this->form->get('registro_contribuyente')); ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="titulo" class="col-lg-2 control-label">Dirección Facturación:</label>
+            <div class="col-lg-8">
+                <?php echo $this->formRow($this->form->get('direccion_facturacion')); ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="titulo" class="col-lg-2 control-label">Dirección Comercial:</label>
+            <div class="col-lg-8">
+                <?php echo $this->formRow($this->form->get('direccion_comercial')); ?>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="titulo" class="col-lg-2 control-label">Teléfonos:</label>
+            <div class="col-lg-8">
+                <?php echo $this->formRow($this->form->get('telefono')); ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="titulo" class="col-lg-2 control-label">Horario Atención:</label>
+            <div class="col-lg-8">
+                <?php echo $this->formRow($this->form->get('horario')); ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="titulo" class="col-lg-2 control-label">Site:</label>
+            <div class="col-lg-8">
+                <?php echo $this->formRow($this->form->get('web_site')); ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="titulo" class="col-lg-2 control-label">Ubicación GPS:</label>
+            <div class="col-lg-8">
+                <?php echo $this->formRow($this->form->get('ubicacion_gps')); ?>
+                <span class="label"><a href="http://gmaps-samples.googlecode.com/svn/trunk/simplewizard/makestaticmap.html" target="_blank">Crear Mapa de Ubicación</a> Tamaño sugerido 200 x 200 pixeles</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="titulo" class="col-lg-2 control-label">Numero de cuenta:</label>
+            <div class="col-lg-8">
+                <?php echo $this->formRow($this->form->get('numero_cuenta')); ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="titulo" class="col-lg-2 control-label">Descripción:</label>
+            <div class="col-lg-8">
+                <?php echo $this->formRow($this->form->get('descripcion')); ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="titulo" class="col-lg-2 control-label">Tipo Doc. Representante:</label>
+            <div class="col-lg-8">
+                <?php echo $this->formRow($this->form->get('tipo_documento_representante')); ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="titulo" class="col-lg-2 control-label">N° Doc. Representante:</label>
+            <div class="col-lg-8">
+                <?php echo $this->formRow($this->form->get('documento_representante')); ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="titulo" class="col-lg-2 control-label">Nombre Representante:</label>
+            <div class="col-lg-8">
+                <?php echo $this->formRow($this->form->get('nombre_representante')); ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-offset-2 col-lg-7">
+                <?php echo $this->formRow($this->form->get('submit')); ?>
+            </div>
+        </div>
+    </div>
+</div>
+<?php echo $this->form()->closeTag(); ?>
