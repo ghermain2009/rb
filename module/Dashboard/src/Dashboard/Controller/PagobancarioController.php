@@ -125,11 +125,11 @@ class PagobancarioController extends AbstractActionController {
         
         $conBtn = new Column\Action\Button();
         $conBtn->setLabel(' ');
-        $conBtn->setAttribute('class', 'btn btn-info glyphicon glyphicon-list-alt');
-        $conBtn->setAttribute('href', 'javascript:registrarcontrato('.$conBtn->getRowIdPlaceholder().');');
+        $conBtn->setAttribute('class', 'btn btn-success glyphicon glyphicon-usd');
+        $conBtn->setAttribute('href', 'javascript:registrarpagobancario('.$conBtn->getRowIdPlaceholder().');');
         $conBtn->setAttribute('data-toggle', 'tooltip');
         $conBtn->setAttribute('data-placement', 'left');
-        $conBtn->setAttribute('title', 'Contrato Pagobancario');
+        $conBtn->setAttribute('title', 'Confirmar Pago');
 
         $col = new Column\Action();
         $col->addAction($editBtn);
@@ -373,5 +373,43 @@ class PagobancarioController extends AbstractActionController {
         }
         
         return $nombre;
+    }
+    
+    public function prepagadoAction() {
+        
+        $id = $this->params()->fromPost("id", null);
+        
+        $serviceLocator = $this->getServiceLocator();
+        $cuponTable = $serviceLocator->get('Dashboard\Model\CupcuponTable');
+        $prepagado = $cuponTable->getCuponPrepagado($id);
+        
+        if( count($prepagado) > 0) {
+            $pagado = 1; 
+        } else {
+            $pagado = -1;
+        }
+        
+        return $this->getResponse()->setContent(Json::encode(array('pagado' => $pagado,
+                                                                   'prepagado' => $prepagado)));
+        
+    }
+    
+    public function registrarpagobancarioAction(){
+        $id_cupon = $this->params()->fromPost("id_cupon", null);
+        $numero_operacion     = $this->params()->fromPost("numero_operacion", null);
+        $fecha_operacion      = $this->params()->fromPost("fecha_operacion", null);
+        
+        $serviceLocator = $this->getServiceLocator();
+        $contratoTable = $serviceLocator->get('Dashboard\Model\ConcontratoTable');
+        
+        $contrato = array('id_empresa'      => $id_empresa,
+                          'nombre_contacto' => $nombre,
+                          'email_contacto'  => $email,
+                          'id_estado'       => '1'
+                          );
+        
+        $id_contrato = $contratoTable->addContrato($contrato);
+        
+        return $this->getResponse()->setContent(Json::encode(array('id_contrato' => $id_contrato)));
     }
 }

@@ -17,8 +17,13 @@ switch ($this->controllerName()) {
         $titulo = "Administración de Empresas";
         $enlace = "Nueva Empresa";
         break;
+    case 'Dashboard\Controller\Pagobancario' :
+        $titulo = "Administración de Pagos Bancarios";
+        $enlace = "";
+        break;
     default :
         $titulo = "";
+        $enlace = "";
         break;
 }
 ?>
@@ -29,8 +34,10 @@ switch ($this->controllerName()) {
                 <span class="titulo-tabla-grilla">
                     <?php echo $titulo; ?>
                 </span>
+                <?php if( $enlace != "") { ?>
                 <button class="btn btn-danger boton-nuevo-grilla" id="btnAdd" name="btnAdd" value="add"><span class="glyphicon glyphicon-open-file" aria-hidden="true"></span> <?php echo $enlace; ?>
                 </button>
+                <?php } ?>
             </div>
         </div>
     </div>
@@ -87,6 +94,42 @@ switch ($this->controllerName()) {
         </div>
     </div>
 </div>
+<div class="modal fade" id="modalPagobancario" tabindex="-1" role="dialog" aria-labelledby="modalPagobancarioLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalPagobancarioLabel">Confirmación de Pago Bancario</h4>
+            </div>
+            <div class="modal-body" id="bodyPagobancario">
+                <div class="container-fluid">
+                    <form name="frmregistro_Pagobancario" id="frmregistro_Pagobancario" role="form">
+                        <div class="form-group">
+                            <label for="numero_operacion" class="col-lg-5 control-label afiliacion">Nro. Operación:</label>
+                            <div class="col-xs-7 validacion"> 
+                                <input type="hidden" class="form-control" name="id_cupon" id="id_cupon" value="" >
+                                <input type="text" class="form-control" name="numero_operacion" id="numero_operacion" value="" >
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="col-lg-5 control-label afiliacion">Fecha operación:</label>
+                            <div class="col-xs-7 validacion"> 
+                                <input type="text" class="form-control" name="fecha_operacion" id="fecha_operacion" value="" >
+                                <span class="help-block with-errors"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12 total">
+                                <button type="button" class="btn btn-rebueno" name="generar_Pagobancario" id="generar_Pagobancario" onclick="javascript:generarpagobancario();">Registrar Pago Bancario</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
@@ -126,6 +169,28 @@ switch ($this->controllerName()) {
         });
     }
     
+    function registrarpagobancario(cupon){
+        $.ajax({
+            type: "POST",
+            url: "/dashboard/pagobancario/prepagado",
+            data: {id: cupon},
+            success: function (data) {
+                var prepago = $.parseJSON(data);
+                if (prepago) {
+                    if (prepago.pagado == -1) {
+                        $('#numero_operacion').val('');
+                        $('#fecha_operacion').val('');
+                    } else {
+                        $('#numero_operacion').val(prepago.prepagado[0]);
+                        $('#fecha_operacion').val(prepago.prepagado[1]);
+                    } 
+                    $('#id_cupon').val(cupon);
+                    $('#modalPagobancario').modal('show');
+                }
+            }
+        });
+    }
+    
     function generarcontrato(){
         var id_empresa = $("#id_empresa").val();
         var nombre = $("#nombre").val();
@@ -151,4 +216,28 @@ switch ($this->controllerName()) {
         });
     } 
     
+    function generarpagobancario(){
+        var id_cupon         = $("#id_cupon").val();
+        var numero_operacion = $("#numero_operacion").val();
+        var fecha_operacion  = $("#fecha_operacion").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/dashboard/pagobancario/registrarpagobancario",
+            data: {id_cupon:id_cupon, numero_operacion:numero_operacion, fecha_operacion:fecha_operacion},
+            success: function (data) {
+                var contrato = $.parseJSON(data);
+                if (contrato) {
+                    if (contrato.id_contrato == -1) {
+                        $('#modalContrato').modal('hide');
+                    } else {
+                        var form = $('<form method="post" action="/dashboard/empresa/editarcontrato">' +
+                                     '<input type="hidden" name="id_contrato" value="' + contrato.id_contrato + '">' +
+                                     '</form>');
+                        $(form).submit();
+                    }
+                }
+            }
+        });
+    } 
 </script>

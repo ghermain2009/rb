@@ -96,7 +96,8 @@ class CupcuponTable {
                 'precio_unitario' => (isset($datos['PriceUnit'])) ? $datos['PriceUnit'] : null,
                 'precio_total' => (isset($datos['PriceTotal'])) ? $datos['PriceTotal'] : null,
                 'id_tarjeta' => (isset($datos['metodo'])) ? $datos['metodo'] : null,
-                'id_estado_compra' => '1'
+                'id_estado_compra' => '1',
+                'fecha_registro' => new Expression("NOW()")
             ));
             
             $statement = $sql->prepareStatementForSqlObject($insert);
@@ -467,6 +468,26 @@ class CupcuponTable {
         $result = $statement->execute();
 
         return ArrayUtils::iteratorToArray($result);
+    }
+    
+    public function getCuponPrepagado($id_cupon) {
+    
+            $sql = new Sql($this->tableGateway->getAdapter());
+    
+            $select = $sql->select();
+
+            $select->columns(array('observacion',
+                                   'fecha_compra' => new Expression("DATE_FORMAT(fecha_compra,'%d-%m-%Y')")))
+                    ->from('cup_cupon')
+                    ->where(array('cup_cupon.id_cupon' => $id_cupon))
+                    ->where(new In('cup_cupon.id_estado_compra', array('3','5','7')));
+
+            $stmt = $sql->prepareStatementForSqlObject($select);
+
+            $result = $stmt->execute();
+            
+            return ArrayUtils::iteratorToArray($result);
+    
     }
     
 }
