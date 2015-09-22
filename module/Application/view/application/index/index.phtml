@@ -82,7 +82,7 @@ foreach ($data as $dato) {
     if ($dato['categoria'] != $anterior) {
         ?>
         <section id="<?php echo base64_encode($dato['categoria']); ?>">
-            <div class="box_center"><h2><?php echo $dato['categoria']; ?>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://ofertop.pe/ofertas/lima/nuevo" title="Ver Todos" >Ver Todos »</a></h2></div>
+            <div class="box_center"><h2><?php echo $dato['categoria']; ?>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/campana/categoria" title="Ver Todos" >Ver Todos »</a></h2></div>
             <div class="box_center"><div>
                     <?php
                 }

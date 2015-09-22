@@ -156,11 +156,15 @@ class CupcampanaTable {
         ->join('cup_campana_categoria', new Expression("cup_campana.id_campana = cup_campana_categoria.id_campana"), array())
         ->join('gen_sub_categoria', new Expression("cup_campana_categoria.id_sub_categoria = gen_sub_categoria.id_sub_categoria"),array('subcategoria' => 'descripcion','id_sub_categoria'))
         ->join('gen_categoria', new Expression("gen_sub_categoria.id_categoria = gen_categoria.id_categoria"),array('categoria' => 'descripcion','id_categoria'));
-        if( $id_subcategoria == null ) {
-            $select->where(array('gen_categoria.id_categoria' => $id_categoria));
-        } else {
+        if( $id_subcategoria != null ) {
             $select->where(array('gen_categoria.id_categoria' => $id_categoria, 'cup_campana_categoria.id_sub_categoria' => $id_subcategoria));
+        } else {
+            if( $id_categoria != null ) {
+                $select->where(array('gen_categoria.id_categoria' => $id_categoria));
+            }
         }
+        $select->where("NOW() >= CONCAT(DATE_FORMAT(cup_campana.fecha_inicio,'%Y-%m-%d'),' ',TIME_FORMAT(cup_campana.hora_inicio,'%H:%i:%s'))");
+        $select->where("NOW() <= CONCAT(DATE_FORMAT(cup_campana.fecha_final,'%Y-%m-%d'),' ',TIME_FORMAT(cup_campana.hora_final,'%H:%i:%s'))");
 
         $select->group(array('gen_categoria.descripcion'));
         $select->group(array('gen_categoria.id_categoria'));
@@ -371,7 +375,6 @@ class CupcampanaTable {
         $select->group(array('cup_campana.fecha_inicio'));
         $select->group(array('cup_campana.fecha_final'));
         $select->group(array('cup_campana.descripcion'));
-
         
         $stmt = $sql->prepareStatementForSqlObject($select);
         
