@@ -16,6 +16,7 @@ use Zend\Mime\Mime;
 use Zend\Mail\Transport\SmtpOptions;
 use QRCode\Service\QRCode;
 use Zend\Barcode\Barcode;
+use Zend\Session\Container;
 /**
  * Description of Variados
  *
@@ -123,7 +124,9 @@ class Variados {
 
         }
         
-        $email = 'ghermain@gmail.com';
+        $user_session = new Container('user');
+        
+        $email = $user_session->username;
 
         if($activo == '1') {
             
