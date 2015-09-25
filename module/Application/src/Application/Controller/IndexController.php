@@ -45,6 +45,7 @@ class IndexController extends AbstractActionController
         $this->layout()->capital = $capital;
         $this->layout()->departamentos = $departamentos;
         $this->layout()->provincias = $provincias;
+        $this->layout()->telefono_empresa = $telefono_empresa;
         
         $campanaTable = $serviceLocator->get('Dashboard\Model\CupcampanaTable');
         $datos = $campanaTable->getCampanasAll();
@@ -61,7 +62,7 @@ class IndexController extends AbstractActionController
              $dataG[] = $dato;
         }
         
-        $this->layout()->telefono_empresa = $telefono_empresa;
+        
         
         return new ViewModel(array('data' => $data, 
                                    'dataG' => $dataG,

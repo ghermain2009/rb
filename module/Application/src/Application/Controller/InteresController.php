@@ -21,6 +21,21 @@ class InteresController extends AbstractActionController {
         $config = $serviceLocator->get('config');
         $empresa = $config['empresa'];
         $telefono_empresa = $config['empresa']['telefono'];
+        
+        $pais = $config['id_pais'];
+        $capital = $config['id_capital'];
+        
+        $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
+        $departamentos = $departamentoTable->getDepartamentosxPaisFavoritos($pais);
+        
+        $provinciaTable = $serviceLocator->get('Dashboard\Model\UbiprovinciaTable');
+        $provincias = $provinciaTable->getProvinciasxDepartamento($pais, $capital);
+        
+        $this->layout()->pais = $pais;
+        $this->layout()->capital = $capital;
+        $this->layout()->departamentos = $departamentos;
+        $this->layout()->provincias = $provincias;
+        
         $this->layout()->telefono_empresa = $telefono_empresa;
         return new ViewModel(array('empresa' => $empresa));
     }
@@ -29,6 +44,21 @@ class InteresController extends AbstractActionController {
         $serviceLocator = $this->getServiceLocator();
         $config = $serviceLocator->get('config');
         $telefono_empresa = $config['empresa']['telefono'];
+        
+        $pais = $config['id_pais'];
+        $capital = $config['id_capital'];
+        
+        $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
+        $departamentos = $departamentoTable->getDepartamentosxPaisFavoritos($pais);
+        
+        $provinciaTable = $serviceLocator->get('Dashboard\Model\UbiprovinciaTable');
+        $provincias = $provinciaTable->getProvinciasxDepartamento($pais, $capital);
+        
+        $this->layout()->pais = $pais;
+        $this->layout()->capital = $capital;
+        $this->layout()->departamentos = $departamentos;
+        $this->layout()->provincias = $provincias;
+        
         $this->layout()->telefono_empresa = $telefono_empresa;
         return new ViewModel();
     }
@@ -38,6 +68,21 @@ class InteresController extends AbstractActionController {
         $config = $serviceLocator->get('config');
         $empresa = $config['empresa'];
         $telefono_empresa = $config['empresa']['telefono'];
+        
+        $pais = $config['id_pais'];
+        $capital = $config['id_capital'];
+        
+        $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
+        $departamentos = $departamentoTable->getDepartamentosxPaisFavoritos($pais);
+        
+        $provinciaTable = $serviceLocator->get('Dashboard\Model\UbiprovinciaTable');
+        $provincias = $provinciaTable->getProvinciasxDepartamento($pais, $capital);
+        
+        $this->layout()->pais = $pais;
+        $this->layout()->capital = $capital;
+        $this->layout()->departamentos = $departamentos;
+        $this->layout()->provincias = $provincias;
+        
         $this->layout()->telefono_empresa = $telefono_empresa;
         return new ViewModel(array('empresa' => $empresa));
     }
@@ -46,6 +91,21 @@ class InteresController extends AbstractActionController {
         $serviceLocator = $this->getServiceLocator();
         $config = $serviceLocator->get('config');
         $telefono_empresa = $config['empresa']['telefono'];
+        
+        $pais = $config['id_pais'];
+        $capital = $config['id_capital'];
+        
+        $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
+        $departamentos = $departamentoTable->getDepartamentosxPaisFavoritos($pais);
+        
+        $provinciaTable = $serviceLocator->get('Dashboard\Model\UbiprovinciaTable');
+        $provincias = $provinciaTable->getProvinciasxDepartamento($pais, $capital);
+        
+        $this->layout()->pais = $pais;
+        $this->layout()->capital = $capital;
+        $this->layout()->departamentos = $departamentos;
+        $this->layout()->provincias = $provincias;
+        
         $this->layout()->telefono_empresa = $telefono_empresa;
         return new ViewModel();
     }
@@ -55,6 +115,21 @@ class InteresController extends AbstractActionController {
         $config = $serviceLocator->get('config');
         $empresa = $config['empresa'];
         $telefono_empresa = $config['empresa']['telefono'];
+        
+        $pais = $config['id_pais'];
+        $capital = $config['id_capital'];
+        
+        $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
+        $departamentos = $departamentoTable->getDepartamentosxPaisFavoritos($pais);
+        
+        $provinciaTable = $serviceLocator->get('Dashboard\Model\UbiprovinciaTable');
+        $provincias = $provinciaTable->getProvinciasxDepartamento($pais, $capital);
+        
+        $this->layout()->pais = $pais;
+        $this->layout()->capital = $capital;
+        $this->layout()->departamentos = $departamentos;
+        $this->layout()->provincias = $provincias;
+        
         $this->layout()->telefono_empresa = $telefono_empresa;
         return new ViewModel(array('empresa' => $empresa));
     }
@@ -63,6 +138,21 @@ class InteresController extends AbstractActionController {
         $serviceLocator = $this->getServiceLocator();
         $config = $serviceLocator->get('config');
         $telefono_empresa = $config['empresa']['telefono'];
+        
+        $pais = $config['id_pais'];
+        $capital = $config['id_capital'];
+        
+        $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
+        $departamentos = $departamentoTable->getDepartamentosxPaisFavoritos($pais);
+        
+        $provinciaTable = $serviceLocator->get('Dashboard\Model\UbiprovinciaTable');
+        $provincias = $provinciaTable->getProvinciasxDepartamento($pais, $capital);
+        
+        $this->layout()->pais = $pais;
+        $this->layout()->capital = $capital;
+        $this->layout()->departamentos = $departamentos;
+        $this->layout()->provincias = $provincias;
+        
         $this->layout()->telefono_empresa = $telefono_empresa;
         return new ViewModel();
     }
@@ -72,6 +162,21 @@ class InteresController extends AbstractActionController {
         $categoriaTable = $serviceLocator->get('Dashboard\Model\GencategoriaTable');
         $categorias = $categoriaTable->fetchAll();
         $telefono_empresa = $config['empresa']['telefono'];
+        
+        $pais = $config['id_pais'];
+        $capital = $config['id_capital'];
+        
+        $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
+        $departamentos = $departamentoTable->getDepartamentosxPaisFavoritos($pais);
+        
+        $provinciaTable = $serviceLocator->get('Dashboard\Model\UbiprovinciaTable');
+        $provincias = $provinciaTable->getProvinciasxDepartamento($pais, $capital);
+        
+        $this->layout()->pais = $pais;
+        $this->layout()->capital = $capital;
+        $this->layout()->departamentos = $departamentos;
+        $this->layout()->provincias = $provincias;
+        
         $this->layout()->telefono_empresa = $telefono_empresa;
         return new ViewModel(array('categorias' => $categorias));
     }
