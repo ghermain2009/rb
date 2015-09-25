@@ -50,10 +50,21 @@ class Variados {
         $cuenta   = $config['correo']['cuenta-envio-cupones'];
 
         $body = new MimeMessage();
+        
+        $this->renderer = $sl->get('ViewRenderer');  
+        $contenido = $this->renderer->render('application/email-template/cupon-rebueno-tpl', array('localhost' => $localhost)); 
+        
+        $html = new MimePart($contenido);
+        $html->type = Mime::TYPE_HTML;
+        $html->disposition = Mime::DISPOSITION_INLINE;
+        $html->encoding = Mime::ENCODING_QUOTEDPRINTABLE;
+        $html->charset = 'iso-8859-1';
+        
+        $body->addPart($html);
 
         for($i=0;$i<count($datos);$i++) {
-        //for($i=0;$i<1;$i++) {
-            if($i==0) {
+            //for($i=0;$i<1;$i++) {
+            //if($i==0) {
                 
                 /*********Codigo de Barra Code128****************/
                 $barcodeOptions = array('text' => $datos[$i]["codigo_cupon"]);
@@ -100,24 +111,21 @@ class Variados {
                 $documentoPdf->setTerminal(true);
                 $documentoPdf->setTemplate('application/campana/cuponbuenaso-pdf.phtml');
                 $htmlPdf = $sl->get('viewPdfrenderer')->getHtmlRenderer()->render($documentoPdf);
-                $engine = $sl->get('viewPdfrenderer')->getEngine();
+                //$engine = $sl->get('viewPdfrenderer')->getEngine();
+                $engine = new \DOMPDF();
                 // Cargamos el HTML en DOMPDF
                 $engine->load_html($htmlPdf);
                 $engine->render();
                 // Obtenemos el PDF en memoria
-                $pdfCode = $engine->output();
+                $pdfCode = $engine->output(array("compress" => 0));
                 //unset($documentoPdf);
                 //$documentoPdf->clearOptions();
-            }
+            //}
             
             $attachment = new MimePart($pdfCode);
             $attachment->type = 'application/pdf';
             $attachment->filename = 'cupon-'.$datos[$i]["codigo_cupon"].'.pdf';
-            /*if($i==0) {
-                $attachment->disposition = Mime::DISPOSITION_INLINE;
-            } else {*/
-                $attachment->disposition = Mime::DISPOSITION_ATTACHMENT;
-            //}
+            $attachment->disposition = Mime::DISPOSITION_ATTACHMENT;
             $attachment->encoding = Mime::ENCODING_BASE64;
             
             $body->addPart($attachment);
