@@ -23,6 +23,7 @@ class IndexController extends AbstractActionController
         $serviceLocator = $this->getServiceLocator();
         $config = $serviceLocator->get('config');
         $en_produccion = $config['en_produccion'];
+        $telefono_empresa = $config['empresa']['telefono'];
         
         $constantes = $config['constantes'];
         $moneda = $config['moneda'];
@@ -59,6 +60,8 @@ class IndexController extends AbstractActionController
         foreach ($datosG as $dato) {
              $dataG[] = $dato;
         }
+        
+        $this->layout()->telefono_empresa = $telefono_empresa;
         
         return new ViewModel(array('data' => $data, 
                                    'dataG' => $dataG,

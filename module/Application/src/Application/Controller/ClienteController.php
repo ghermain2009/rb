@@ -45,6 +45,8 @@ class ClienteController extends AbstractActionController {
         $username = $config['correo']['username'];
         $password = $config['correo']['password'];
         $cuenta   = $config['correo']['cuenta-recuperar-clave'];
+        $localhost = $config['constantes']['localhost'];
+        $telefono = $config['empresa']['telefono'];
 
         $data = array();
         foreach ($datos as $dato) {
@@ -98,7 +100,9 @@ class ClienteController extends AbstractActionController {
                 $viewModel = new ViewModel();
                 $viewModel->setTemplate('mailLayout')->setVariables(array(
                     'nombre' => $nombre,
-                    'token' => $token
+                    'token' => $token,
+                    'localhost' => $localhost,
+                    'telefono' => $telefono
                 ));
 
                 $content = $rendered->render($viewModel);
@@ -128,6 +132,7 @@ class ClienteController extends AbstractActionController {
         $email = base64_decode($token);
 
         $serviceLocator = $this->getServiceLocator();
+        $config = $serviceLocator->get('config');
         $clienteTable = $serviceLocator->get('Dashboard\Model\CupclienteTable');
         $datos = $clienteTable->getUsuarioByUser($email);
 
@@ -141,6 +146,9 @@ class ClienteController extends AbstractActionController {
         } else {
             $email = $data[0]['email_cliente'];
         }
+        
+        $telefono_empresa = $config['empresa']['telefono'];
+        $this->layout()->telefono_empresa = $telefono_empresa;
         
         return new ViewModel(array('email' => $email) );
     }

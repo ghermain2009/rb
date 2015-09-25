@@ -1,6 +1,5 @@
-<div class="box_center">
-    <div class="box_center">
-        <h2>Recuperar Contraseña</h2>
+<div class="container">
+        <h2>Registrar Contraseña</h2>
         <hr>
         <span id="mensajeerror"></span>
         <?php if ($email == '') { ?>
@@ -9,7 +8,7 @@
             </form>
         <?php } else { ?>
         <form id="frmcambiarclave" role="form" validate>
-            <p class="mb20">Por favor introduzca su email si desea recibir una nueva contraseña.</p>
+            <p class="mb20">Por favor registre una nueva contraseña.</p>
             <div class="form_control col-lg-8">
                 <div class="form-group">
                     <label for="clave" class="col-xs-4 control-label">Nueva Contraseña:</label>
@@ -24,7 +23,7 @@
                         <input type="password" class="form-control" data-match="#clave" name="clave2" id="clave2" value="" maxlength="50" required >
                         <span class="help-block with-errors"></span>
                         <!--div name="enviar" id="enviar" class="btn btn-danger" onclick="javascript:recuperaPass();" >Enviar Contraseña</div-->
-                         <button type="submit" class="btn btn-danger">Enviar Contraseña</button>
+                         <button type="submit" class="btn btn-danger">Registrar Contraseña</button>
                          <input type="hidden" id="email" name="email" value="<?php echo $email;?>">
                     </div>
                 </div>
@@ -32,7 +31,6 @@
             </div>
         </form>
         <?php } ?>
-    </div>
 </div>
 <script type="text/javascript">
     $("#frmcambiarclave").submit(function (e) {

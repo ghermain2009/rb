@@ -50,6 +50,9 @@ class CampanaController extends AbstractActionController {
         $data_p = $campanaTable->getCampanasAllNotId($id);
 
         $data_e = $empresaTable->getEmpresaByCampana($id);
+        
+        $telefono_empresa = $config['empresa']['telefono'];
+        $this->layout()->telefono_empresa = $telefono_empresa;
 
         return new ViewModel(array('data' => $data,
             'data_o' => $data_o,
@@ -81,6 +84,9 @@ class CampanaController extends AbstractActionController {
         $this->layout('layout/layout_pago');
 
         $user_session = new Container('user');
+        
+        $telefono_empresa = $config['empresa']['telefono'];
+        $this->layout()->telefono_empresa = $telefono_empresa;
 
         /* if ($fl == null) {
           return new ViewModel(array('id' => $id,
@@ -161,6 +167,9 @@ class CampanaController extends AbstractActionController {
         $data = $campanaTable->getCampanaCategoria($id,$op);
         
         $moneda = $config['moneda'];
+        
+        $telefono_empresa = $config['empresa']['telefono'];
+        $this->layout()->telefono_empresa = $telefono_empresa;
 
         return new ViewModel(array('data' => $data, 
                                    'subcategoria' => $op,
@@ -289,6 +298,9 @@ class CampanaController extends AbstractActionController {
             'curloptions' => array(CURLOPT_CONNECTTIMEOUT => 0)
         );
         
+        $telefono_empresa = $config['empresa']['telefono'];
+        $this->layout()->telefono_empresa = $telefono_empresa;
+        
         $client = new Client($url, $confCurl);
 
         $response = $client->dispatch($request);
@@ -297,10 +309,19 @@ class CampanaController extends AbstractActionController {
     }
 
     public function recuperarAction() {
+        $serviceLocator = $this->getServiceLocator();
+        $config = $serviceLocator->get('config');
+        $telefono_empresa = $config['empresa']['telefono'];
+        $this->layout()->telefono_empresa = $telefono_empresa;
         return new ViewModel();
     }
 
     public function registrarAction() {
+        $serviceLocator = $this->getServiceLocator();
+        $config = $serviceLocator->get('config');
+        $telefono_empresa = $config['empresa']['telefono'];
+        $this->layout()->telefono_empresa = $telefono_empresa;
+        
         $flag = $this->params()->fromPost('id',null);
         return new ViewModel(array('flag' => $flag));
     }
@@ -333,11 +354,14 @@ class CampanaController extends AbstractActionController {
         $datos = $this->params()->fromPost();
         
         $serviceLocator = $this->getServiceLocator();
+        $config = $serviceLocator->get('config');
         $cuponTable = $serviceLocator->get('Dashboard\Model\CupcuponTable');
         $datosCupon = $cuponTable->getCupon($datos["orden"]);
         $datosArray = $datosCupon[0];
         //$variados = new Variados($serviceLocator);
         //$variados->obtenerCuponPdf($datosArray);
+        $telefono_empresa = $config['empresa']['telefono'];
+        $this->layout()->telefono_empresa = $telefono_empresa;
         
         return new ViewModel(array('datos' => $datosArray));
         
