@@ -568,21 +568,16 @@ $user_session = new Container('user');
         arrNodes = [].slice.call(nodeList);
         for (var i in arrNodes)
         {
-            alert('1');
             var n = arrNodes[i];
             while (n.scrollHeight - n.offsetHeight > 0)
             {
-                alert(3)M
                 var text = (n.innerText != undefined) ? n.innerText : n.textContent;
                 if (n.innerText != undefined)
                 {
-                    alert('1');
                     n.innerText = text.replace(/\W*\s(\S)*$/, '...');
-                    
                 }
                 else
                 {
-                    alert('2');
                     // Para Firefox
                     n.textContent = text.replace(/\W*\s(\S)*$/, '...');
                 }
