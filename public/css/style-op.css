@@ -1266,15 +1266,19 @@ h4 {
 .close.rebueno {
     padding: 5px !important;
     //background-color: #ffffff !important;
-    color: #ffffff !important;
-    opacity: 0.5 !important;
+    opacity: 0.9 !important;
+    position: relative !important;
+    top:-430px !important;
+    z-index: 3000 !important;
 }
-.close.rebueno > span {
+.close.rebueno > button > span {
     font-size: 30px !important;
     font-weight: bold;
+    color: #ffffff !important;
 }
 .promocion-afiliacion-dialog {
     width: 60%;
+    max-width:845px;
     height: 480px; 
     position:absolute;
     top:calc(100%/2 - 480px/2 );

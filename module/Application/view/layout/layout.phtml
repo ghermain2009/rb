@@ -191,88 +191,93 @@ $user_session = new Container('user');
         <div id="fb-root"></div>
         <div class="footer_rebueno" >
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="promocion-afiliacion-dialog" id="promocion-container">
-                    <div class="formulario-afiliacion" id="formulario-container" style="display:inline-block">
-                        <form id="suscribirmeForm" method="post" action="/index/suscribirme">
-                            <div class="form-group">
-                                <div class="col-xs-5"> 
-                                    <div class="logo-fijo-afiliacion"></div>
-                                </div>
-                                <label for="logo" class="col-xs-7 control-faltan">Faltan pocos días</label>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <p class="promocion-parrafo"><br/></p>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <p class="promocion-parrafo">Disfrutar de momentos inolvidables con descuentos de <porcentaje>50% a más</porcentaje> en Ecuador es ya una realidad.</p>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <p class="promocion-parrafo">Suscríbete y recibirás por las mañanas super ofertas en tu buzón casi como tips de super utilidad.</p>
-                                </div>
-                            </div>
-                            <input type="hidden" name="pais" id="pais" value="<?php echo $pais; ?>">
-                            <div class="form-group">
-                                <label for="ciudad" class="col-lg-5 control-label afiliacion">Elige tu ciudad:</label>
-                                <div class="col-xs-7 validacion"> 
-                                    <select class="form-control" name="ciudad" id="ciudad">
-                                        <option value="">-- Selecciona tu ciudad --</option>
-                                        <?php foreach ($departamentos as $departamento) { ?>
-                                            <option value="<?php echo $departamento['id_departamento']; ?>" <?php
-                                            if ($departamento['id_departamento'] == $capital) {
-                                                echo 'selected';
-                                            }
-                                            ?>><?php echo $departamento['descripcion']; ?></option>
-<?php } ?>
-                                    </select>
-                                    <span class="help-block with-errors"></span>
-                                </div>
-                            </div>
-                            <div class="form-group" id="contenido-zona">
-<?php if (count($provincias) > 0) { ?>
-                                    <label for="zona" class="col-lg-5 control-label afiliacion">Elige tu zona:</label>
-                                    <div class="col-xs-7 validacion"> 
-                                        <select class="form-control" name="zona" id="zona">
-                                            <option value="">-- Selecciona tu zona --</option>
-                                            <?php foreach ($provincias as $provincia) { ?>
-                                                <option value="<?php echo $provincia['id_provincia']; ?>"><?php echo $provincia['descripcion']; ?></option>
-    <?php } ?>
-                                        </select>
-                                        <span class="help-block with-errors"></span>
+                <div class="promocion-afiliacion-dialog" id="promocion-container-total">
+                    <div class="promocion-afiliacion" id="promocion-container" style="overflow: hidden; width: 100%; height: 100%;">
+                        <div class="contenedor-formulario-promocion">
+                            <div class="formulario-afiliacion" id="formulario-container" style="display: block">
+                                <form id="suscribirmeForm" method="post" action="/index/suscribirme">
+                                    <div class="form-group">
+                                        <div class="col-xs-5"> 
+                                            <div class="logo-fijo-afiliacion"></div>
+                                        </div>
+                                        <label for="logo" class="col-xs-7 control-faltan">Faltan pocos días</label>
                                     </div>
-<?php } ?>
-                            </div>
-                            <div class="form-group">
-                                <label for="email" class="col-lg-5 control-label afiliacion">Email:</label>
-                                <div class="col-xs-7 validacion"> 
-                                    <input type="text" class="form-control" name="email" id="email" value="" >
-                                    <span class="help-block with-errors"></span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="genero" class="col-lg-5 control-label afiliacion">Género:</label>
-                                <div class="col-xs-7 validacion">
-                                    <div class="radio afiliacion" >
-                                        <label><input type="radio" name="genero" id="genero" value="M" required>Masculino</label>
+                                    <div class="form-group">
+                                        <div class="col-xs-12">
+                                            <p class="promocion-parrafo"><br/></p>
+                                        </div>
                                     </div>
-                                    <div class="radio afiliacion" >
-                                        <label><input type="radio" name="genero" id="genero" value="F" required>Femenino</label>
+                                    <div class="form-group">
+                                        <div class="col-xs-12">
+                                            <p class="promocion-parrafo">Disfrutar de momentos inolvidables con descuentos de <porcentaje>50% a más</porcentaje> en Ecuador es ya una realidad.</p>
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="form-group">
+                                        <div class="col-xs-12">
+                                            <p class="promocion-parrafo">Suscríbete y recibirás por las mañanas super ofertas en tu buzón casi como tips de super utilidad.</p>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="pais" id="pais" value="<?php echo $pais; ?>">
+                                    <div class="form-group">
+                                        <label for="ciudad" class="col-lg-5 control-label afiliacion">Elige tu ciudad:</label>
+                                        <div class="col-xs-7 validacion"> 
+                                            <select class="form-control" name="ciudad" id="ciudad">
+                                                <option value="">-- Selecciona tu ciudad --</option>
+                                                <?php foreach ($departamentos as $departamento) { ?>
+                                                    <option value="<?php echo $departamento['id_departamento']; ?>" <?php
+                                                    if ($departamento['id_departamento'] == $capital) {
+                                                        echo 'selected';
+                                                    }
+                                                    ?>><?php echo $departamento['descripcion']; ?></option>
+                                                        <?php } ?>
+                                            </select>
+                                            <span class="help-block with-errors"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" id="contenido-zona">
+                                        <?php if (count($provincias) > 0) { ?>
+                                            <label for="zona" class="col-lg-5 control-label afiliacion">Elige tu zona:</label>
+                                            <div class="col-xs-7 validacion"> 
+                                                <select class="form-control" name="zona" id="zona">
+                                                    <option value="">-- Selecciona tu zona --</option>
+                                                    <?php foreach ($provincias as $provincia) { ?>
+                                                        <option value="<?php echo $provincia['id_provincia']; ?>"><?php echo $provincia['descripcion']; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                                <span class="help-block with-errors"></span>
+                                            </div>
+                                        <?php } ?>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email" class="col-lg-5 control-label afiliacion">Email:</label>
+                                        <div class="col-xs-7 validacion"> 
+                                            <input type="text" class="form-control" name="email" id="email" value="" >
+                                            <span class="help-block with-errors"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="genero" class="col-lg-5 control-label afiliacion">Género:</label>
+                                        <div class="col-xs-7 validacion">
+                                            <div class="radio afiliacion" >
+                                                <label><input type="radio" name="genero" id="genero" value="M" required>Masculino</label>
+                                            </div>
+                                            <div class="radio afiliacion" >
+                                                <label><input type="radio" name="genero" id="genero" value="F" required>Femenino</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-xs-12 total">
+                                            <button type="submit" class="btn btn-rebueno"  id="suscribirme" disabled="">Suscribirme</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="form-group">
-                                <div class="col-xs-12 total">
-                                    <button type="submit" class="btn btn-rebueno"  id="suscribirme" disabled="">Suscribirme</button>
-                                </div>
+                            <div class="imagen-afiliacion-contenedor" id="imagen-container">
+                                <img width="495" height="100%" src="../img/afiliacion/afiliacion_teclado.jpg">
                             </div>
-                        </form>
-                    </div>
-                    <div class="imagen-afiliacion" id="imagen-container" style="display:inline-block">
-                        <button type="button" class="close rebueno" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="close rebueno"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
                     </div>
                 </div>
             </div>
@@ -304,7 +309,7 @@ $user_session = new Container('user');
                                 <ul>
                                     <li>
                                         <span class="btn-social-icon btn-lg btn-github"><i class="fa fa-phone"></i></span>
-                                        <div><?php echo $telefono_empresa;?></div>
+                                        <div><?php echo $telefono_empresa; ?></div>
                                     </li>
                                     <li>
                                         <span class="btn-social-icon btn-lg btn-github"><i class="fa fa-envelope"></i></span>
@@ -349,7 +354,7 @@ $user_session = new Container('user');
             </div>
         </div>
 
-<?php echo $this->inlineScript() ?>
+        <?php echo $this->inlineScript() ?>
         <form name='envio' id='envio' method="post">
             <input type="hidden" name="id" id="id" />
             <input type="hidden" name="op" id="op" />
