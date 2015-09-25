@@ -991,6 +991,12 @@ h4 {
     margin-top: 20px;
 }
 
+.separacion-banco{
+    display: block;
+    width: 100%;
+    padding: 10px;
+}
+
 .separacion-cupon{
     border-bottom-style:solid;
     border-bottom-width:2px;
@@ -1007,6 +1013,15 @@ h4 {
 
 .en-linea {
     display:inline-block;
+}
+
+.en-linea.logo-banco {
+    width: 40%
+}
+
+.en-linea.logo-banco img {
+    width: 254px;
+    height: 52px;
 }
 
 .en-linea.logo-oferta {

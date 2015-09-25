@@ -19,6 +19,13 @@ use Zend\Http\Request;
 use Zend\Http\Client;
 use Zend\File\Transfer\Adapter\Http;
 use Zend\Filter\File\Rename;
+use Zend\Mail\Message;
+use Zend\Mail\Transport\Smtp as SmtpTransport;
+use Zend\Mime\Message as MimeMessage;
+use Zend\Mime\Part as MimePart;
+use Zend\Mail\Transport\SmtpOptions;
+use Zend\View\Renderer\PhpRenderer;
+use Zend\View\Resolver\TemplateMapResolver;
 
 use Application\Services\Variados;
 
@@ -177,6 +184,97 @@ class CampanaController extends AbstractActionController {
             
             default :
                 
+                $config = $serviceLocator->get('config');
+                
+                $pais = $config['id_pais'];
+                $capital = $config['id_capital'];
+
+                $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
+                $departamentos = $departamentoTable->getDepartamentosxPaisFavoritos($pais);
+
+                $provinciaTable = $serviceLocator->get('Dashboard\Model\UbiprovinciaTable');
+                $provincias = $provinciaTable->getProvinciasxDepartamento($pais, $capital);
+                
+                $telefono_empresa = $config['empresa']['telefono'];
+                
+                $activo   = $config['correo']['activo'];
+                $name     = $config['correo']['name'];
+                $host     = $config['correo']['host'];
+                $port     = $config['correo']['port'];
+                $tls      = $config['correo']['tls'];
+                $username = $config['correo']['username'];
+                $password = $config['correo']['password'];
+                $cuenta   = $config['correo']['cuenta-recuperar-clave'];
+                $localhost = $config['constantes']['localhost'];
+                $telefono = $config['empresa']['telefono'];
+                
+                if( $activo == '1' ) {
+
+                    $email = $datos['email'];
+                    
+                    $message = new Message();
+                    $message->addTo($email)
+                            ->addFrom($cuenta)
+                            ->setSubject('Estas muy cerca de obtener una oferta Rebuena...‏');
+
+                    if( $tls ) {
+                        $connection_config = array(
+                            'ssl' => 'tls',
+                            'username' => $username,
+                            'password' => $password
+                        );
+                    } else {
+                        $connection_config = array(
+                            'username' => $username,
+                            'password' => $password
+                        );
+                    }
+
+                    $transport = new SmtpTransport();
+                    $options = new SmtpOptions(array(
+                        'name' => $name,
+                        'host' => $host,
+                        'port' => $port,
+                        'connection_class' => 'login',
+                        'connection_config' => $connection_config
+                    ));
+
+                    $resolver = new TemplateMapResolver();
+                    $resolver->setMap(array(
+                        'mailLayout' => __DIR__ . '/../../../../Application/view/application/campana/pago-bancario.phtml'
+                    ));
+
+                    $rendered = new PhpRenderer();
+                    $rendered->setResolver($resolver);
+
+                    $viewModel = new ViewModel();
+                    $viewModel->setTemplate('mailLayout')->setVariables(array(
+                        'localhost' => $localhost,
+                        'telefono' => $telefono,
+                        'operacion' => $idTransaccion,
+                        'peciototal' => $datos['PriceTotal']
+                    ));
+
+                    $content = $rendered->render($viewModel);
+
+                    $html = new MimePart($content);
+                    $html->type = "text/html";
+
+                    $body = new MimeMessage();
+                    $body->addPart($html);
+
+                    $message->setBody($body);
+
+                    $transport->setOptions($options);
+                    $transport->send($message);
+                }
+
+                $this->layout()->pais = $pais;
+                $this->layout()->capital = $capital;
+                $this->layout()->departamentos = $departamentos;
+                $this->layout()->provincias = $provincias;
+                $this->layout()->telefono_empresa = $telefono_empresa;
+
                 return  new ViewModel(array('operacion' => $idTransaccion,
                                             'peciototal' => $datos['PriceTotal']));
                 
