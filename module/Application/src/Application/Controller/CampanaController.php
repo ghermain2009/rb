@@ -204,7 +204,7 @@ class CampanaController extends AbstractActionController {
                 $tls      = $config['correo']['tls'];
                 $username = $config['correo']['username'];
                 $password = $config['correo']['password'];
-                $cuenta   = $config['correo']['cuenta-recuperar-clave'];
+                $cuenta   = $config['correo']['cuenta-envio-cupones'];
                 $localhost = $config['constantes']['localhost'];
                 $telefono = $config['empresa']['telefono'];
                 
