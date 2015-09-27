@@ -13,27 +13,39 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
                 <div class="item active">
-                    <div class="slider" style="background-image: url('img/banner/bnr_bg_bsi_1_1.jpg');"></div>
+                    <div class="slider">
+                        <img src="img/banner/bnr_bg_bsi_1_1.jpg">
+                    </div>
                     <div class="carousel-caption"></div>
                 </div>
                 <div class="item">
-                    <div class="slider" style="background-image: url('img/banner/bnr_bg_bsi_1_2.jpg');"></div>
+                    <div class="slider">
+                        <img src="img/banner/bnr_bg_bsi_1_2.jpg">
+                    </div>
                     <div class="carousel-caption"></div>
                 </div>
                 <div class="item">
-                    <div class="slider" style="background-image: url('img/banner/bnr_bg_bsi_1_3.jpg');"></div>
+                    <div class="slider">
+                        <img src="img/banner/bnr_bg_bsi_1_3.jpg">
+                    </div>
                     <div class="carousel-caption"></div>
                 </div>
                 <div class="item">
-                    <div class="slider" style="background-image: url('img/banner/bnr_bg_bsi_1_4.jpg');"></div>
+                    <div class="slider">
+                        <img src="img/banner/bnr_bg_bsi_1_4.jpg">
+                    </div>
                     <div class="carousel-caption"></div>
                 </div>
                 <div class="item">
-                    <div class="slider" style="background-image: url('img/banner/bnr_bg_bsi_1_5.jpg');"></div>
+                    <div class="slider">
+                        <img src="img/banner/bnr_bg_bsi_1_5.jpg">
+                    </div>
                     <div class="carousel-caption"></div>
                 </div>
                 <div class="item">
-                    <div class="slider" style="background-image: url('img/banner/bnr_bg_bsi_1_6.jpg');"></div>
+                    <div class="slider">
+                        <img src="img/banner/bnr_bg_bsi_1_6.jpg">
+                    </div>
                     <div class="carousel-caption"></div>
                 </div>
                 <a class="left carousel-control" href="#slider-principal" role="button" data-slide="prev">
@@ -50,16 +62,24 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
                 <div class="item derecha active">
-                    <div class="slider" style="background-image: url('img/banner_derecha/bnr_bg_bsi_1_0.jpg');"></div>
+                    <div class="slider">
+                        <img src="img/banner_derecha/bnr_bg_bsi_1_0.jpg">
+                    </div>
                 </div>
                 <div class="item derecha">
-                    <div class="slider" style="background-image: url('img/banner_derecha/bnr_bg_bsi_1_1.jpg');"></div>
+                    <div class="slider">
+                        <img src="img/banner_derecha/bnr_bg_bsi_1_1.jpg">
+                    </div>
                 </div>
                 <div class="item derecha">
-                    <div class="slider" style="background-image: url('img/banner_derecha/bnr_bg_bsi_1_2.jpg');"></div>
+                    <div class="slider">
+                        <img src="img/banner_derecha/bnr_bg_bsi_1_2.jpg">
+                    </div>
                 </div>
                 <div class="item derecha">
-                    <div class="slider" style="background-image: url('img/banner_derecha/bnr_bg_bsi_1_3.jpg');"></div>
+                    <div class="slider">
+                        <img src="img/banner_derecha/bnr_bg_bsi_1_3.jpg">
+                    </div>
                 </div>
             </div>
         </div>
@@ -91,16 +111,34 @@ foreach ($data as $dato) {
                     if($contador > 3) {
                         $contador = 1;
                         $ultimo = 'dos';
+                        $position = ' left';
+                    } else {
+                        switch($contador) {
+                            case 1: $position = ' left';
+                                break;
+                            case 2: $position = ' center';
+                                break;
+                            case 3: $position = ' right';
+                                break;
+                        }
                     }
                 } else {
                     if($contador > 2) {
                         $contador = 1;
                         $ultimo = 'uno';
+                        $position = ' left';
+                    } else {
+                        switch($contador) {
+                            case 1: $position = ' left';
+                                break;
+                            case 2: $position = ' right';
+                                break;
+                        }
                     }
                 }
                     
                 ?>
-                <div class="campana-stilo-<?php echo $ultimo;?>" data-id="<?php echo $dato['id_campana']; ?>">
+                <div class="campana-stilo-<?php echo $ultimo.$position;?>" data-id="<?php echo $dato['id_campana']; ?>">
                     <a href="/campana/detalle/<?php echo crearUrl($dato['subtitulo']).'--'.base64_encode($dato['id_campana']); ?>.html">
                         <span class=""></span>
                     </a>
@@ -141,6 +179,8 @@ foreach ($dataG as $dato) {
             $ultimo = 'uno';
         }
         
+        $position = ' left';
+        
         if ($anterior != '') {
             ?>
             </div> 
@@ -157,15 +197,33 @@ foreach ($dataG as $dato) {
                     if($contador > 3) {
                         $contador = 1;
                         $ultimo = 'dos';
+                        $position = ' left';
+                    } else {
+                        switch($contador) {
+                            case 1: $position = ' left';
+                                break;
+                            case 2: $position = ' center';
+                                break;
+                            case 3: $position = ' right';
+                                break;
+                        }
                     }
                 } else {
                     if($contador > 2) {
                         $contador = 1;
                         $ultimo = 'uno';
+                        $position = ' left';
+                    } else {
+                        switch($contador) {
+                            case 1: $position = ' left';
+                                break;
+                            case 2: $position = ' right';
+                                break;
+                        }
                     }
                 }
                 ?>
-                <div class="campana-stilo-<?php echo $ultimo;?>" data-id="<?php echo $dato['id_campana']; ?>">
+                <div class="campana-stilo-<?php echo $ultimo.$position;?>" data-id="<?php echo $dato['id_campana']; ?>">
                     <a href="/campana/detalle/<?php echo crearUrl($dato['subtitulo']).'--'.base64_encode($dato['id_campana']); ?>.html">
                         <span class=""></span>
                     </a>

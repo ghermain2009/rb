@@ -55,7 +55,9 @@ foreach ($data as $detalle) {
                     $contador++;
                     ?>
                     <div class="item<?php if ($contador == 0) { ?>  active<?php } ?>">
-                        <div class="slider-detalle" style="background-image: url('../../img/<?php echo $detalle['id_campana']; ?>/small/<?php echo $file; ?>');"></div>
+                        <div class="slider-detalle">
+                            <img src="../../img/<?php echo $detalle['id_campana']; ?>/small/<?php echo $file; ?>">
+                        </div>
                         <div class="carousel-caption"></div>
                     </div>
                     <?php
@@ -119,8 +121,8 @@ foreach ($data as $detalle) {
                             <li><span >Comparte:</span></li>
                             <li><a href="javascript:shareFacebook();" title="Comparte en Facebook" class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></a></li>
                             <li><a target="_blank" title="Comparte en Twitter" class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="javascript:;" title="Comparte en Google+" class="btn btn-social-icon btn-google-plus"><i class="fa fa-google-plus"></i>></a></li>
-                            <li><a href="javascript:;" title="Comparte por email" class="mail addthis_button_email"></a></li>
+                            <!--li><a href="javascript:;" title="Comparte en Google+" class="btn btn-social-icon btn-google-plus"><i class="fa fa-google-plus"></i>></a></li>
+                            <li><a href="javascript:;" title="Comparte por email" class="mail addthis_button_email"></a></li-->
                         </ul>
                     </div>                
                 </div>
@@ -157,8 +159,8 @@ foreach ($data as $detalle) {
         <div>
             <ul>
                 <li><a href="javascript:;" class="reftab" data-tab="taboferta"><ta class="btn btn-rebueno"><i class="glyphicon glyphicon-thumbs-up"></i></ta>  Todo sobre la oferta</a></li>
-                <li><a href="javascript:;" class="reftab" data-tab="tabsaber"><ta class="btn btn-rebueno"><i class="glyphicon glyphicon-eye-open"></i></ta>  Lo que debes saber</a></li>
-                <li><a href="javascript:;" class="reftab" data-tab="tabempresa"><ta class="btn btn-rebueno"><i class="glyphicon glyphicon-home"></i></ta>  La Empresa</a></li>
+                <li class="hidde"><a href="javascript:;" class="reftab" data-tab="tabsaber"><ta class="btn btn-rebueno"><i class="glyphicon glyphicon-eye-open"></i></ta>  Lo que debes saber</a></li>
+                <li class="hidde"><a href="javascript:;" class="reftab" data-tab="tabempresa"><ta class="btn btn-rebueno"><i class="glyphicon glyphicon-home"></i></ta>  La Empresa</a></li>
             </ul>
         </div>
         <!-- Tab panes -->
@@ -204,7 +206,20 @@ foreach ($data as $detalle) {
 <?php
 $anterior = '';
 $ultimo   = 'uno';
+$contador = 0;
 foreach ($data_p as $dato) {
+    $contador++;
+    if($contador > 3) {
+        $contador = 1;
+    }
+    switch($contador) {
+        case 1: $position = ' left';
+            break;
+        case 2: $position = ' center';
+            break;
+        case 3: $position = ' right';
+            break;
+    }
     if ($dato['categoria'] != $anterior) {
         ?>
         <section id="<?php echo $dato['categoria']; ?>">
@@ -213,7 +228,7 @@ foreach ($data_p as $dato) {
                     <?php
                 }
                 ?>
-                <div class="campana-stilo-<?php echo $ultimo;?>" data-id="<?php echo $dato['id_campana']; ?>">
+                <div class="campana-stilo-<?php echo $ultimo.$position;?>" data-id="<?php echo $dato['id_campana']; ?>">
                     <a href="../../campana/detalle/<?php echo crearUrl($dato['subtitulo']).'--'.base64_encode($dato['id_campana']); ?>.html">
                         <span class=""></span>
                     </a>

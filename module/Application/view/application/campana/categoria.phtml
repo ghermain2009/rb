@@ -2,10 +2,24 @@
 <?php
 $anterior = '';
 $contador = 0;
-$ultimo   = 'uno';
+$ultimo   = '';
 foreach ($data as $dato) {
     if ($dato['categoria'] != $anterior) {
-        ?>
+        $contador = 0;
+        if( $ultimo == 'uno' ) {
+            $ultimo = 'dos';
+        } else {
+            $ultimo = 'uno';
+        }
+        
+        $position = ' left';
+        
+        if ($anterior != '') {
+            ?>
+            </div> 
+            </div>
+            </section>
+        <?php } ?>
         <section id="<?php echo base64_encode($dato['categoria']); ?>">
             <div class="titulo_ofertas_categoria">Mostrando resultados para <b><?php echo $dato['categoria']; ?><?php if( $subcategoria != null ) { ?> ( <?php echo $dato['subcategoria']; ?> )<?php } ?></b></div>
             <div class="box_center"><div>
@@ -16,15 +30,33 @@ foreach ($data as $dato) {
                     if($contador > 3) {
                         $contador = 1;
                         $ultimo = 'dos';
+                        $position = ' left';
+                    } else {
+                        switch($contador) {
+                            case 1: $position = ' left';
+                                break;
+                            case 2: $position = ' center';
+                                break;
+                            case 3: $position = ' right';
+                                break;
+                        }
                     }
                 } else {
                     if($contador > 2) {
                         $contador = 1;
                         $ultimo = 'uno';
+                        $position = ' left';
+                    } else {
+                        switch($contador) {
+                            case 1: $position = ' left';
+                                break;
+                            case 2: $position = ' right';
+                                break;
+                        }
                     }
                 }
                 ?>
-                <div class="campana-stilo-<?php echo $ultimo;?>" data-id="<?php echo $dato['id_campana']; ?>">
+                <div class="campana-stilo-<?php echo $ultimo.$position;?>" data-id="<?php echo $dato['id_campana']; ?>">
                     <a href="/campana/detalle/<?php echo base64_encode($dato['id_campana']); ?>">
                         <span class=""></span>
                     </a>
