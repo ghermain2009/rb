@@ -13,6 +13,9 @@ $user_session = new Container('user');
         echo $this->headMeta()
                 ->appendName('viewport', 'width=device-width, initial-scale=1.0')
                 ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+                ->appendHttpEquiv('Pragma', 'no-cache')
+                ->appendHttpEquiv('Cache-Control', 'no-cache')
+                ->appendHttpEquiv('Expires', 'Sat, 1 Jan 2000 00:00:00 GMT');
  
         ?>
 
