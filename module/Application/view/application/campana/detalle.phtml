@@ -193,7 +193,7 @@ foreach ($data as $detalle) {
                 <div><?php echo $empresa["horario"]; ?></div>
             </div>
             <div class="contenedor-tabs-panel-mapa">   
-                <?php if($empresa["ubicacion_gps"] != '') { ?>
+                <?php if(!empty($empresa["ubicacion_gps"])) { ?>
                 <img src="<?php echo $empresa["ubicacion_gps"]; ?>">
                 <?php } ?>
             </div>    
