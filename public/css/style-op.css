@@ -1416,6 +1416,10 @@ section {
     color:#fdaf06;
     padding-left: 8px;
     padding-right: 8px;
+    padding-top: 0px;
+    width: 33%;
+    min-width: 100px;
+    display: inline-block;
 }
 
 .campana-tarifario-uno {
@@ -1431,6 +1435,28 @@ section {
 .campana-tarifario-uno > simbolo {
     color: black !important;
     font-size: 12px !important;
+}
+
+.campana-precio-regular {
+    color: black !important;
+    font-size: 12px !important;
+    width: 33% !important;
+    min-width: 75px;
+    display: inline-block;
+    float: left;
+    vertical-align: middle;
+    height: 30px;
+}
+
+.campana-precio-boton {
+    width: 30% !important;
+    display: inline-block;
+    padding-right: 5px;
+    min-width: 110px;
+}
+
+.campana-precio-center {
+    padding: 5% 0;
 }
 
 .btn.btn-ver-oferta-uno {
@@ -1530,6 +1556,9 @@ section {
     color:#fdaf06;
     padding-left: 8px;
     padding-right: 8px;
+    width: 33%;
+    min-width: 115px;
+    display: inline-block;
 }
 
 .campana-tarifario-dos {
