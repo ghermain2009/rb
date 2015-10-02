@@ -1343,6 +1343,11 @@ section {
     //background-size: 100% 240px;
 }
 
+.campana-en-linea {
+    width: 100%;
+    display:table;
+}
+
 .campana-stilo-uno {
     margin-bottom: 10px;
     margin-top: 10px;
@@ -1355,7 +1360,7 @@ section {
     //height: 360px;
     display:inline-block;
     background-color: #ffffff;
-    box-shadow: 0px 0px 3px 3px #d6d3d3;
+    box-shadow: 0px 0px 1px 1px #d6d3d3;
 }
 
 .campana-stilo-uno.left {
@@ -1370,7 +1375,7 @@ section {
 
 
 .campana-stilo-uno:hover {
-    box-shadow: 0px 0px 3px 3px #fdaf06;
+    box-shadow: 0px 0px 2px 2px #fdaf06;
 }
 
 .lazy.campana-imgreferencia-uno{
@@ -1498,7 +1503,7 @@ section {
     //height: 440px;
     display:inline-block;
     background-color: #ffffff;
-    box-shadow: 0px 0px 3px 3px #d6d3d3;
+    box-shadow: 0px 0px 1px 1px #d6d3d3;
 }
 
 .campana-stilo-dos.left {
@@ -1510,7 +1515,7 @@ section {
 }
 
 .campana-stilo-dos:hover {
-    box-shadow: 0px 0px 3px 3px #fdaf06;
+    box-shadow: 0px 0px 2px 2px #fdaf06;
 }
 
 .lazy.campana-imgreferencia-dos{
@@ -2065,7 +2070,7 @@ section {
         //height: 290px;
         display:block;
         background-color: #ffffff;
-        box-shadow: 0px 0px 3px 3px #d6d3d3;
+        box-shadow: 0px 0px 1px 1px #d6d3d3;
     }
     
     .campana-stilo-uno.left,
@@ -2082,7 +2087,7 @@ section {
     
     .campana-stilo-uno:hover,
     .campana-stilo-dos:hover {
-        box-shadow: 0px 0px 3px 3px #fdaf06;  
+        box-shadow: 0px 0px 2px 2px #fdaf06;  
     }
     
     .lazy.campana-imgreferencia-uno,

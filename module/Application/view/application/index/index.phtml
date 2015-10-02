@@ -105,6 +105,7 @@ foreach ($data as $dato) {
         <section id="<?php echo base64_encode($dato['categoria']); ?>">
             <div class="box_center"><h2><?php echo $dato['categoria']; ?>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/campana/categoria" title="Ver Todos" >Ver Todos »</a></h2></div>
             <div class="box_center"><div>
+                    <div class="campana-en-linea">
                     <?php
                 }
                 $contador++;
@@ -113,6 +114,10 @@ foreach ($data as $dato) {
                         $contador = 1;
                         $ultimo = 'dos';
                         $position = ' left';
+                        ?>
+                        </div>
+                        <div class="campana-en-linea">
+                        <?php
                     } else {
                         switch($contador) {
                             case 1: $position = ' left';
@@ -128,6 +133,10 @@ foreach ($data as $dato) {
                         $contador = 1;
                         $ultimo = 'uno';
                         $position = ' left';
+                        ?>
+                        </div>
+                        <div class="campana-en-linea">
+                        <?php
                     } else {
                         switch($contador) {
                             case 1: $position = ' left';
@@ -165,6 +174,7 @@ foreach ($data as $dato) {
             }
             if ($anterior != '') {
                 ?>
+                </div>
             </div> 
         </div>
     </section>
@@ -192,6 +202,7 @@ foreach ($dataG as $dato) {
         <section id="<?php echo base64_encode($dato['categoria']); ?>">
             <div class="box_center"><h2><?php echo $dato['categoria']; ?>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/campana/categoria/<?php echo base64_encode($dato['id_categoria']); ?>" title="Ver Todos" >Ver Todos »</a></h2></div>
             <div class="box_center"><div>
+                    <div class="campana-en-linea">
                     <?php
                 }
                 $contador++;
@@ -200,6 +211,10 @@ foreach ($dataG as $dato) {
                         $contador = 1;
                         $ultimo = 'dos';
                         $position = ' left';
+                        ?>
+                        </div>
+                        <div class="campana-en-linea">
+                        <?php
                     } else {
                         switch($contador) {
                             case 1: $position = ' left';
@@ -215,6 +230,10 @@ foreach ($dataG as $dato) {
                         $contador = 1;
                         $ultimo = 'uno';
                         $position = ' left';
+                        ?>
+                        </div>
+                        <div class="campana-en-linea">
+                        <?php
                     } else {
                         switch($contador) {
                             case 1: $position = ' left';
@@ -251,6 +270,7 @@ foreach ($dataG as $dato) {
             }
             if ($anterior != '') {
                 ?>
+                </div>
             </div> 
         </div>
     </section>

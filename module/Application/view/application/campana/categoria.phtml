@@ -33,6 +33,7 @@ foreach ($data as $dato) {
         <section id="<?php echo base64_encode($dato['categoria']); ?>">
             <div class="titulo_ofertas_categoria">Mostrando resultados para <b><?php echo $dato['categoria']; ?><?php if( $subcategoria != null ) { ?> ( <?php echo $dato['subcategoria']; ?> )<?php } ?></b></div>
             <div class="box_center"><div>
+                    <div class="campana-en-linea">
                     <?php
                 }
                 $contador++;
@@ -41,6 +42,10 @@ foreach ($data as $dato) {
                         $contador = 1;
                         $ultimo = 'dos';
                         $position = ' left';
+                        ?>
+                        </div>
+                        <div class="campana-en-linea">
+                        <?php
                     } else {
                         switch($contador) {
                             case 1: $position = ' left';
@@ -56,6 +61,10 @@ foreach ($data as $dato) {
                         $contador = 1;
                         $ultimo = 'uno';
                         $position = ' left';
+                        ?>
+                        </div>
+                        <div class="campana-en-linea">
+                        <?php
                     } else {
                         switch($contador) {
                             case 1: $position = ' left';
@@ -97,6 +106,7 @@ foreach ($data as $dato) {
                 ?>
             </div> 
         </div>
+                </div>
     </section>
     <?php
 }
