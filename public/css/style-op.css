@@ -1368,6 +1368,7 @@ section {
 }
 .campana-stilo-uno.center {
     transform: translate(12%, 0%) !important;
+    -webkit-transform: translate(12%, 0%) !important;
 }
 .campana-stilo-uno.right {
     float: right !important;
