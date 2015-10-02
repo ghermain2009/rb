@@ -1474,6 +1474,9 @@ section {
     font-size: 14px;
     color:white;
     background: linear-gradient(to bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
+    background: -webkit-linear-gradient(bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
+    background: -moz-linear-gradient(bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
+    background: -o-linear-gradient(bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
     padding-top: 4px;
     padding-bottom: 4px;
     padding-left: 8px;
@@ -1482,6 +1485,9 @@ section {
 
 .btn.btn-ver-oferta-uno:hover {
     background: linear-gradient(#93ba2f,#93ba2f);
+    background: -webkit-linear-gradient(#93ba2f,#93ba2f);
+    background: -moz-linear-gradient(#93ba2f,#93ba2f);
+    background: -o-linear-gradient(#93ba2f,#93ba2f);
 }
 
 .campana-vendidos-uno{
