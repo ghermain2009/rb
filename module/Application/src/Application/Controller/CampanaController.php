@@ -26,7 +26,6 @@ use Zend\Mime\Part as MimePart;
 use Zend\Mail\Transport\SmtpOptions;
 use Zend\View\Renderer\PhpRenderer;
 use Zend\View\Resolver\TemplateMapResolver;
-
 use Application\Services\Variados;
 
 
@@ -151,15 +150,20 @@ class CampanaController extends AbstractActionController {
         $cuponTable = $serviceLocator->get('Dashboard\Model\CupcuponTable');
         $idTransaccion = $cuponTable->addCupon($datos,$serviceLocator);
         
+        $config = $serviceLocator->get('config');
+        
+        //var_dump($datos);
+        
         switch($datos['metodo']) {
+            //Tarjetas Independientes
             case '001':
 
-                $config = $serviceLocator->get('config');
                 $postURL = $config["tarjetas"];
 
                 $url = $postURL[$datos['metodo']]['url'];
                 $usuario = $postURL[$datos['metodo']]['user'];
                 $password = $postURL[$datos['metodo']]['pass'];
+                
 
                 $request = new Request;
                 $request->getHeaders()->addHeaders([
@@ -181,10 +185,117 @@ class CampanaController extends AbstractActionController {
                 return $response;
                 
                 break;
-            
-            default :
+            //Pasarela Payme
+            case 'PAY':
                 
-                $config = $serviceLocator->get('config');
+                $clientePaymeTable = $serviceLocator->get('Dashboard\Model\CupclientepaymeTable');
+                
+                $datosPayme   = $config['payme'];
+                $id_commerce = $datosPayme['id_commerce'];
+                $id_adquirer  = $datosPayme['id_adquirer'];
+                $clave_wallet = $datosPayme['clave_wallet'];
+                $url_wallet   = $datosPayme['url_wallet'];
+                $clave_vpos   = $datosPayme['clave_vpos'];
+                $url_vpos     = $datosPayme['url_vpos'];
+                
+                
+                $idEntCommerce = $id_commerce;
+                $codCardHolderCommerce = $clientePaymeTable->addClientePayme($datos['email']);
+                $nombres = preg_split('/\s/',$datos['nombre']);
+                $names = $nombres[0];
+                $apellidos = preg_split('/\s/',$datos['apellido']);
+                $lastNames = $apellidos[0];
+                $mail = $datos['email'];
+                $reserved1 = '';
+                $reserved2 = '';
+                $reserved3 = '';
+
+                //Clave SHA-2.
+                $claveSecreta = $datosPayme['clave_wallet'];
+
+                //Codigo de Verificacion
+                $registerVerification = openssl_digest($idEntCommerce . $codCardHolderCommerce . $mail . $claveSecreta, 'sha512');
+
+                //Referencia al Servicio Web de Wallet            
+                $wsdl = $datosPayme['url_wallet'];
+                //$client = new SoapClient($wsdl);
+
+                            //Creación de Arreglo para el almacenamiento y envío de parametros. 
+                $params = array(
+                    'idEntCommerce'=>$idEntCommerce,
+                    'codCardHolderCommerce'=>$codCardHolderCommerce,
+                    'names'=>$names,
+                    'lastNames'=>$lastNames,
+                    'mail'=>$mail,
+                    'reserved1'=>$reserved1,
+                    'reserved2'=>$reserved2,
+                    'reserved3'=>$reserved3,
+                    'registerVerification'=>$registerVerification
+                );
+                
+                //Consumo del metodo RegisterCardHolder
+                //$result = $client->RegisterCardHolder($params);
+                //$codAsoCardHolderWallet = $result->codAsoCardHolderWallet;
+                $result = array('codasocardholderwallet' => 'fggGGHHGHHJJ=GGXXXkllll');
+                $codAsoCardHolderWallet = $result['codasocardholderwallet'];
+                
+                $clientePaymeTable->updClientepayme($mail,$codAsoCardHolderWallet);
+                
+                //enviamos informacion al VPOS
+                $acquirerId = $id_adquirer;
+                $idCommerce = $id_commerce;
+                $purchaseOperationNumber = $idTransaccion;
+                $purchaseAmount = str_replace('.','',$datos['PriceTotal']);
+                $purchaseCurrencyCode = '804'; //DOLARES AMERICANOS
+                
+                $claveSecretaVpos = $datosPayme['clave_vpos'];
+			
+                $purchaseVerification = openssl_digest($acquirerId . $idCommerce . $purchaseOperationNumber . $purchaseAmount . $purchaseCurrencyCode . $claveSecretaVpos, 'sha512');     
+            
+                $request = new Request;
+                $request->getHeaders()->addHeaders([
+                    'Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8'
+                ]);
+                
+                $postURL = $config["tarjetas"];
+                $url_vpos = $postURL['001']['url'];
+
+                $request->setUri($url_vpos);
+                $request->setMethod('POST'); //uncomment this if the POST is used
+                
+                $request->getPost()->set('acquirerId', $acquirerId);
+                $request->getPost()->set('idCommerce', $idCommerce);
+                $request->getPost()->set('purchaseOperationNumber', $purchaseOperationNumber);
+                $request->getPost()->set('purchaseAmount', $purchaseAmount);
+                $request->getPost()->set('purchaseCurrencyCode', $purchaseCurrencyCode); 
+                $request->getPost()->set('language', 'ES');
+                $request->getPost()->set('shippingFirstName', $nombres[0]);
+                $request->getPost()->set('shippingLastName', $apellidos[0]);
+                $request->getPost()->set('shippingEmail', $mail);
+                $request->getPost()->set('shippingAddress', '');
+                $request->getPost()->set('shippingZIP', '');
+                $request->getPost()->set('shippingCity', '');
+                $request->getPost()->set('shippingState', '');
+                $request->getPost()->set('shippingCountry', '');
+                $request->getPost()->set('userCommerce', '');
+                $request->getPost()->set('userCodePayme', '');
+                $request->getPost()->set('descriptionProducts', '');
+                $request->getPost()->set('programmingLanguage', 'PHP');
+                $request->getPost()->set('reserved1', 'Prueba Reservado');
+                $request->getPost()->set('purchaseVerification', $purchaseVerification);
+                
+
+                $client = new Client;
+
+                $client->setAdapter("Zend\Http\Client\Adapter\Curl");
+
+                $response = $client->dispatch($request);
+
+                return $response;
+                
+                break;
+            //Pago en banco
+            default :
                 
                 $pais = $config['id_pais'];
                 $capital = $config['id_capital'];
@@ -401,8 +512,22 @@ class CampanaController extends AbstractActionController {
         
         set_time_limit(0);
         
-        $orden = $datos["transaccion"];
-        $estado = $datos["estado"];
+        $orden = $datos["purchaseOperationNumber"];
+        $estado_pasarela = $datos["authorizationResult"];
+        $tipo_tarjeta = $datos["brand"];
+        $numero_tarjeta = $datos["paymentReferenceCode"];
+        $autorizacion = $datos["authorizationCode"];
+        $codigo_error = $datos["errorCode"];
+        $mensaje_error = $datos["errorMessage"];
+        
+        switch($estado_pasarela) {
+            case '00' :
+                $estado = '3';
+                break;
+            default :
+                $estado = '8';
+                break;
+        }
 
         $serviceLocator = $this->getServiceLocator();
         
@@ -410,33 +535,64 @@ class CampanaController extends AbstractActionController {
         $localhost = $config['constantes']['localhost'];
         $cuponTable = $serviceLocator->get('Dashboard\Model\CupcuponTable');
         $opcion_campana = $cuponTable->updEstadoVenta($orden, $estado);
+        
+        $set = array('estado_payme' => $estado_pasarela,  
+                     'brand_payme' => $tipo_tarjeta,
+                     'tarjeta_payme' => $numero_tarjeta,
+                     'autorizacion_payme' => $autorizacion,
+                     'error_code_payme' => $codigo_error,
+                     'error_message_payme' => $mensaje_error);
+        
+        $where = array('id_cupon' => $orden);
+        $datos_payme = $cuponTable->updDatosPayme($set, $where);
 
         if ($estado == '3') {
+            
             $campanaopcionTable = $serviceLocator->get('Dashboard\Model\CupcampanaopcionTable');
             $campanaopcionTable->updCantidadVendidos($opcion_campana['id_campana'], $opcion_campana['id_campana_opcion'], $opcion_campana['cantidad']);
+        
+            /*Enviamos el correo*/
+            $datosCupon = $cuponTable->getCupon($orden);
+            $variados = new Variados($serviceLocator);
+            $variados->obtenerCuponPdf($datosCupon);
+            /********************/
+
+            $url = $localhost."/campana/cuponbuenaso";
+
+            $request = new Request;
+            $request->getHeaders()->addHeaders([
+                'Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8'
+            ]);
+            $request->setUri($url);
+            $request->setMethod('POST'); 
+            $request->getPost()->set('orden', $orden);
+            $request->getPost()->set('estado', $estado);
+
+            $confCurl = array(
+                'adapter'   => 'Zend\Http\Client\Adapter\Curl',
+                'curloptions' => array(CURLOPT_CONNECTTIMEOUT => 0)
+            );
+            
+        } else {
+            
+            //Mostramos Mensaje de error en caso la compra no sea satisfactoria
+            $url = $localhost."/campana/errorcompra";
+
+            $request = new Request;
+            $request->getHeaders()->addHeaders([
+                'Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8'
+            ]);
+            $request->setUri($url);
+            $request->setMethod('POST'); 
+            $request->getPost()->set('orden', $orden);
+            $request->getPost()->set('estado', $estado);
+
+            $confCurl = array(
+                'adapter'   => 'Zend\Http\Client\Adapter\Curl',
+                'curloptions' => array(CURLOPT_CONNECTTIMEOUT => 0)
+            );
+            
         }
-        
-        /*Enviamos el correo*/
-        $datosCupon = $cuponTable->getCupon($orden);
-        $variados = new Variados($serviceLocator);
-        $variados->obtenerCuponPdf($datosCupon);
-        /********************/
-
-        $url = $localhost."/campana/cuponbuenaso";
-
-        $request = new Request;
-        $request->getHeaders()->addHeaders([
-            'Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8'
-        ]);
-        $request->setUri($url);
-        $request->setMethod('POST'); 
-        $request->getPost()->set('orden', $orden);
-        $request->getPost()->set('estado', $estado);
-        
-        $confCurl = array(
-            'adapter'   => 'Zend\Http\Client\Adapter\Curl',
-            'curloptions' => array(CURLOPT_CONNECTTIMEOUT => 0)
-        );
         
         $pais = $config['id_pais'];
         $capital = $config['id_capital'];

@@ -63,6 +63,9 @@ use Dashboard\Model\ConestadocontratoTable;
 use Dashboard\Model\Contipoobservacion;
 use Dashboard\Model\ContipoobservacionTable;
 
+use Dashboard\Model\Cupclientepayme;
+use Dashboard\Model\CupclientepaymeTable;
+
 class Module implements AutoloaderProviderInterface, ConfigProviderInterface
 {
     public function onBootstrap(MvcEvent $e)
@@ -388,6 +391,18 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
                         $rsPrototype = new ResultSet();
                         $rsPrototype->setArrayObjectPrototype(new Contipoobservacion());
                         $tableGateway = new TableGateway('con_tipo_observacion', $adapter, null, $rsPrototype);
+                        return $tableGateway;
+                    },
+                    'Dashboard\Model\CupclientepaymeTable' => function($sl){
+                        $gateway = $sl->get('CupclientepaymeTableGateway');
+                        $table = new CupclientepaymeTable($gateway);
+                        return $table;
+                    },
+                    'CupclientepaymeTableGateway' => function($sl) {
+                        $adapter = $sl->get('Zend\Db\Adapter\Adapter');
+                        $rsPrototype = new ResultSet();
+                        $rsPrototype->setArrayObjectPrototype(new Cupclientepayme());
+                        $tableGateway = new TableGateway('cup_cliente_payme', $adapter, null, $rsPrototype);
                         return $tableGateway;
                     },
                 )

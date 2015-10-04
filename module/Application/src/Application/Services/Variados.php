@@ -61,10 +61,14 @@ class Variados {
         $html->charset = 'iso-8859-1';
         
         $body->addPart($html);
+        
+        $email = '';
 
         for($i=0;$i<count($datos);$i++) {
             //for($i=0;$i<1;$i++) {
-            //if($i==0) {
+                if($i==0) {
+                    $email = $datos[$i]['email_cliente'];
+                }
                 
                 /*********Codigo de Barra Code128****************/
                 $barcodeOptions = array('text' => $datos[$i]["codigo_cupon"]);
@@ -132,9 +136,11 @@ class Variados {
 
         }
         
-        $user_session = new Container('user');
+        //$user_session = new Container('user');
         
-        $email = $user_session->username;
+        //$email = $user_session->username;
+        //$email = 'ghermain@gmail.com';
+        
 
         if($activo == '1') {
             

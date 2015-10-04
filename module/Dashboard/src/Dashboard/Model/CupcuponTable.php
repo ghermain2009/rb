@@ -46,6 +46,7 @@ class CupcuponTable {
 
         $select->columns(array(
             'id_cupon',
+            'email_cliente',
             'id_campana',
             'id_campana_opcion',
             'cantidad',
@@ -125,6 +126,13 @@ class CupcuponTable {
 
             return $id_cuponera; /* Se inserto Informacion */
         }
+    }
+    
+    public function updDatosPayme($set, $where) {
+        
+        $rs = $this->tableGateway->update($set, $where);
+        
+        return $rs;
     }
 
     public function updEstadoVenta($orden, $estado) {
