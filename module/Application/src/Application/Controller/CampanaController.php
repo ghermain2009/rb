@@ -575,8 +575,16 @@ class CampanaController extends AbstractActionController {
             
         } else {
             
+            switch($estado_pasarela) {
+                case '01':
+                    $mensaje = 'Operación Denegada.';
+                    break;
+                case '05':
+                    $mensaje = 'Operación Rechazada.';
+                    break;
+            }
             //Mostramos Mensaje de error en caso la compra no sea satisfactoria
-            $url = $localhost."/campana/errorcompra";
+            $url = $localhost."/campana/errorpagopayme";
 
             $request = new Request;
             $request->getHeaders()->addHeaders([
@@ -585,7 +593,7 @@ class CampanaController extends AbstractActionController {
             $request->setUri($url);
             $request->setMethod('POST'); 
             $request->getPost()->set('orden', $orden);
-            $request->getPost()->set('estado', $estado);
+            $request->getPost()->set('mensaje', $mensaje);
 
             $confCurl = array(
                 'adapter'   => 'Zend\Http\Client\Adapter\Curl',
@@ -593,6 +601,21 @@ class CampanaController extends AbstractActionController {
             );
             
         }
+        
+        $client = new Client($url, $confCurl);
+
+        $response = $client->dispatch($request);
+
+        return $response;
+    }
+    
+    public function errorpagopaymeAction() {
+        
+        $datos = $this->params()->fromPost();
+        
+        $serviceLocator = $this->getServiceLocator();
+        
+        $config = $serviceLocator->get('Config');
         
         $pais = $config['id_pais'];
         $capital = $config['id_capital'];
@@ -611,11 +634,8 @@ class CampanaController extends AbstractActionController {
         $telefono_empresa = $config['empresa']['telefono'];
         $this->layout()->telefono_empresa = $telefono_empresa;
         
-        $client = new Client($url, $confCurl);
-
-        $response = $client->dispatch($request);
-
-        return $response;
+        return new ViewModel(array('orden' => $datos['orden'],
+                                   'mensaje' => $datos['mensaje']));
     }
 
     public function recuperarAction() {
