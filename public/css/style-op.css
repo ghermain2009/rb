@@ -112,6 +112,24 @@ a:hover {
     background-color: #57b04c;
 }
 
+.btn.btn_buy_action_opcion {
+    font-family:gotham-medium, 'arial', 'sans-serif';
+    font-size: 20px;
+    color:white;
+    background-color: #6ddd5f;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 120px !important;
+    position: relative;
+    top:10px;
+}
+
+.btn.btn_buy_action_opcion:hover {
+    background-color: #57b04c;
+}
+
 .tar {
     text-align: right;
     padding-bottom: 6px;

@@ -143,7 +143,7 @@ foreach ($data as $detalle) {
                                     <form class="form-horizontal" role="form">
                                         <div class="form-group">
                                             <label for="message-text" class="col-lg-9 control-label"><span class="text-opcion">OPCIÓN <?php echo $cantidad;?> :</span> <b><?php echo $opciones['descripcion']; ?></b><span class="text-precio">Precio Regular : <?php echo $moneda['simbolo'];?> <?php echo $opciones['precio_regular']; ?> - Descuento : <?php echo $opciones['descuento']; ?> % - Ahorra : <?php echo $moneda['simbolo'];?> <?php echo $opciones['ahorro']; ?></span></label>
-                                            <a data-id="10699" data-opcion="1" href="../../campana/formulariopago/<?php echo base64_encode($opciones['id_campana']); ?>/<?php echo base64_encode($opciones['id_campana_opcion']); ?>" title="Comprar" class="btn btn_buy_action btn-sm"><?php echo $moneda['simbolo'];?> <?php echo $opciones['precio_especial']; ?></a>
+                                            <a data-id="10699" data-opcion="1" href="../../campana/formulariopago/<?php echo base64_encode($opciones['id_campana']); ?>/<?php echo base64_encode($opciones['id_campana_opcion']); ?>" title="Comprar" class="btn btn_buy_action_opcion btn-sm"><?php echo $moneda['simbolo'];?> <?php echo $opciones['precio_especial']; ?></a>
                                         </div>
                                     </form>
                                 </div>
