@@ -257,9 +257,21 @@
                 <input type="hidden" name="terminospay" value="0"><input type="checkbox" name="terminospay" id="chkTermsPay" value="1" checked="checked" required="" data-parsley-trigger="change" data-parsley-errors-container=".terms_error_pay">
                 Acepto los <a href="/interes/terminosycondiciones" target="_blank" title="Términos y Condiciones">Términos y Condiciones</a>, y <a href="/interes/politicasdeprivacidad" title="Políticas de Privacidad" target="_blank">Políticas de Privacidad</a>
             </div>
+            <?php if (($fl != null && $fl == '2') || isset($user_session->username) ) { ?>
             <div class="metodo_pago">
                 <button type="submit" class="btn btn_buy_action">Pagar</button>
             </div>
+            <?php } else { ?>
+                <?php if ($fl != null) { ?>
+                <div class="metodo_pago">
+                    <button type="submit" class="btn btn_buy_action disabled">Pagar</button>
+                </div>
+                <?php } else { ?>
+                <div class="metodo_pago">
+                    <button type="submit" class="btn btn_buy_action">Pagar</button>
+                </div>
+                <?php } ?>
+            <?php } ?>
         </div>
     </div>
 </form>

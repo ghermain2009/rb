@@ -92,6 +92,13 @@ class CampanaController extends AbstractActionController {
         $op = base64_decode($this->params()->fromRoute("op", null));
         $fl = base64_decode($this->params()->fromRoute("fl", null));
         $em = base64_decode($this->params()->fromRoute("em", null));
+        
+        if( empty($id) ) {
+            $id = base64_decode($this->params()->fromPost("id", null));
+            $op = base64_decode($this->params()->fromPost("op", null));
+            $fl = base64_decode($this->params()->fromPost("fl", null));
+            $em = base64_decode($this->params()->fromPost("em", null));
+        }
 
         $serviceLocator = $this->getServiceLocator();
         $campanaTable = $serviceLocator->get('Dashboard\Model\CupcampanaTable');
