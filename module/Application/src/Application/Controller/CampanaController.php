@@ -27,6 +27,7 @@ use Zend\Mail\Transport\SmtpOptions;
 use Zend\View\Renderer\PhpRenderer;
 use Zend\View\Resolver\TemplateMapResolver;
 use Application\Services\Variados;
+use Zend\Soap\Client as ClienteSoap;
 
 
 class CampanaController extends AbstractActionController {
@@ -200,10 +201,10 @@ class CampanaController extends AbstractActionController {
                 $datosPayme   = $config['payme'];
                 $id_commerce = $datosPayme['id_commerce'];
                 $id_adquirer  = $datosPayme['id_adquirer'];
-                $clave_wallet = $datosPayme['clave_wallet'];
-                $url_wallet   = $datosPayme['url_wallet'];
-                $clave_vpos   = $datosPayme['clave_vpos'];
-                $url_vpos     = $datosPayme['url_vpos'];
+                //$clave_wallet = $datosPayme['clave_wallet'];
+                //$url_wallet   = $datosPayme['url_wallet'];
+                //$clave_vpos   = $datosPayme['clave_vpos'];
+                //$url_vpos     = $datosPayme['url_vpos'];
                 
                 
                 $idEntCommerce = $id_commerce;
@@ -225,9 +226,9 @@ class CampanaController extends AbstractActionController {
 
                 //Referencia al Servicio Web de Wallet            
                 $wsdl = $datosPayme['url_wallet'];
-                //$client = new SoapClient($wsdl);
+                $client = new ClienteSoap($wsdl);
 
-                            //Creación de Arreglo para el almacenamiento y envío de parametros. 
+                //Creación de Arreglo para el almacenamiento y envío de parametros. 
                 $params = array(
                     'idEntCommerce'=>$idEntCommerce,
                     'codCardHolderCommerce'=>$codCardHolderCommerce,
@@ -240,11 +241,16 @@ class CampanaController extends AbstractActionController {
                     'registerVerification'=>$registerVerification
                 );
                 
+                var_dump($params);
+                echo $wsdl;
+                
                 //Consumo del metodo RegisterCardHolder
-                //$result = $client->RegisterCardHolder($params);
-                //$codAsoCardHolderWallet = $result->codAsoCardHolderWallet;
-                $result = array('codasocardholderwallet' => 'fggGGHHGHHJJ=GGXXXkllll');
-                $codAsoCardHolderWallet = $result['codasocardholderwallet'];
+                $result = $client->RegisterCardHolder($params);
+                $codAsoCardHolderWallet = $result->codAsoCardHolderWallet;
+                
+                var_dump($codAsoCardHolderWallet);
+                //$result = array('codasocardholderwallet' => 'fggGGHHGHHJJ=GGXXXkllll');
+                //$codAsoCardHolderWallet = $result['codasocardholderwallet'];
                 
                 $clientePaymeTable->updClientepayme($mail,$codAsoCardHolderWallet);
                 
@@ -264,9 +270,9 @@ class CampanaController extends AbstractActionController {
                     'Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8'
                 ]);
                 
-                $postURL = $config["tarjetas"];
-                $url_vpos = $postURL['001']['url'];
-
+                //$postURL = $config["tarjetas"];
+                //$url_vpos = $postURL['001']['url'];
+                $url_vpos     = $datosPayme['url_vpos'];
                 $request->setUri($url_vpos);
                 $request->setMethod('POST'); //uncomment this if the POST is used
                 
