@@ -310,6 +310,7 @@ class CampanaController extends AbstractActionController {
                 $config = array(
                       'curloptions' => array(
                           CURLOPT_SSL_VERIFYPEER => 0,
+                          CURLOPT_POSTREDIR => CURL_REDIR_POST_ALL
                       )
                 );
                 
