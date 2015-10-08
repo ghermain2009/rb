@@ -306,6 +306,13 @@ class CampanaController extends AbstractActionController {
                 $client = new Client;
 
                 $client->setAdapter("Zend\Http\Client\Adapter\Curl");
+                
+                $config = array(
+                      'curloptions' => array(CURLOPT_SSL_VERIFYHOST => false,
+                                             CURLOPT_SSL_VERIFYPEER => true)
+                );
+                
+                $client->setOptions($config);
 
                 $response = $client->dispatch($request);
 
