@@ -309,7 +309,7 @@ class CampanaController extends AbstractActionController {
                 $config = array(
                       'curloptions' => array(
                           CURLOPT_RETURNTRANSFER => true,
-                          CURLOPT_FOLLOWLOCATIO => true,
+                          CURLOPT_FOLLOWLOCATION => true,
                           CURLOPT_SSL_VERIFYPEER => 0
                       )
                 );
