@@ -275,9 +275,9 @@ class CampanaController extends AbstractActionController {
                     'Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8'
                 ]);
                 
-                $postURL = $config["tarjetas"];
-                $url_vpos = $postURL['001']['url'];
-                //$url_vpos     = $datosPayme['url_vpos'];
+                //$postURL = $config["tarjetas"];
+                //$url_vpos = $postURL['001']['url'];
+                $url_vpos     = $datosPayme['url_vpos'];
                 $request->setUri($url_vpos);
                 $request->setMethod('POST'); //uncomment this if the POST is used
                 
