@@ -306,7 +306,7 @@ class CampanaController extends AbstractActionController {
                                     );
 
                 $user_session = new Container('datos_payme');
-                $user_session->solicitud = datosEnvioPayme;
+                $user_session->solicitud = $datosEnvioPayme;
                 
                 return $this->redirect()->toRoute('pagopayme');
                 
