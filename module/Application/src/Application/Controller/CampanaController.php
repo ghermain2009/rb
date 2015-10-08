@@ -147,6 +147,27 @@ class CampanaController extends AbstractActionController {
     }
     
     public function pagopaymeAction() {
+        
+        $serviceLocator = $this->getServiceLocator();
+        
+        $config = $serviceLocator->get('Config');
+        
+        $pais = $config['id_pais'];
+        $capital = $config['id_capital'];
+        
+        $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
+        $departamentos = $departamentoTable->getDepartamentosxPaisFavoritos($pais);
+        
+        $provinciaTable = $serviceLocator->get('Dashboard\Model\UbiprovinciaTable');
+        $provincias = $provinciaTable->getProvinciasxDepartamento($pais, $capital);
+        
+        $this->layout()->pais = $pais;
+        $this->layout()->capital = $capital;
+        $this->layout()->departamentos = $departamentos;
+        $this->layout()->provincias = $provincias;
+        
+        $telefono_empresa = $config['empresa']['telefono'];
+        $this->layout()->telefono_empresa = $telefono_empresa;
            
         $user_session = new Container('datos_payme');
         $datos_payme = $user_session->solicitud;
