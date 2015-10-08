@@ -154,7 +154,7 @@ class CampanaController extends AbstractActionController {
         $form = new \Application\Form\EnviopaymeForm($datos_payme);
         
         $viewModel = new ViewModel(array('form' => $form));        
-        $viewModel->setTerminal(true);
+        //$viewModel->setTerminal(true);
         return $viewModel;
     }
 
