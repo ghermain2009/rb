@@ -302,13 +302,14 @@ class CampanaController extends AbstractActionController {
                 $request->getPost()->set('reserved1', 'Prueba Reservado');
                 $request->getPost()->set('purchaseVerification', $purchaseVerification);
                 
-
                 $client = new Client;
 
                 $client->setAdapter("Zend\Http\Client\Adapter\Curl");
                 
-                $config = array(CURLOPT_SSL_VERIFYHOST => false,
-                                CURLOPT_SSL_VERIFYPEER => true);
+                $config = array(
+                      'curloptions' => array(CURLOPT_SSL_VERIFYHOST => false,
+                                             CURLOPT_SSL_VERIFYPEER => false)
+                );
                 
                 $client->setOptions($config);
 
