@@ -1,5 +1,6 @@
 <div class="container">
 <form name="frmpago" role="form" action="/campana/pago" method="POST" data-parsley-validate>
+    <div>
     <div class="section_payment">
         <?php if (($fl != null && $fl == '2') || isset($user_session->username) ) { ?>
             <h3>Tus Datos</h3>
@@ -235,16 +236,17 @@
         <div class="box_payment">
             <h4 class="titulo_negro">Método de Pago </h4>
             <!-- P3_Comprar -->
-            <div class="metodo_pago">
+            <!--div class="metodo_pago">
                 <label for="radPayVisa" class="ioption">
                     <input id="radPayVisa" name="metodo" type="radio" value="001" checked><span><img src="/img/tarjetas/visa.jpg"></span>
                     <div class="cb">Paga con Tarjeta de Crédito Visa</div>
                 </label>
-            </div>
+            </div-->
             <div class="metodo_pago">
                 <label for="radPayPayme" class="ioption">
-                    <input id="radPayPayme" name="metodo" type="radio" value="PAY" checked><span><img src="/img/tarjetas/visa.jpg"></span>
-                    <div class="cb">Paga con Payme</div>
+                    <input id="radPayPayme" name="metodo" type="radio" value="PAY" checked><span><img src="/img/tarjetas/payme.jpg"></span>
+                    <div class="cb">Paga en linea con total seguridad sin necesidad de ingresar tus datos personales, ni los de tu tarjeta en tus próximas compras, trabajamos con las tarjetas de mayor acepatación.</div>
+                    <div class="cb-todas"><img src="/img/tarjetas/aceptadas.jpg"></div>
                 </label>
             </div>
             <div class="metodo_pago">
@@ -258,21 +260,22 @@
                 Acepto los <a href="/interes/terminosycondiciones" target="_blank" title="Términos y Condiciones">Términos y Condiciones</a>, y <a href="/interes/politicasdeprivacidad" title="Políticas de Privacidad" target="_blank">Políticas de Privacidad</a>
             </div>
             <?php if (($fl != null && $fl == '2') || isset($user_session->username) ) { ?>
-            <div class="metodo_pago">
+            <div class="metodo_pago-total">
                 <button type="submit" class="btn btn_buy_action">Pagar</button>
             </div>
             <?php } else { ?>
                 <?php if ($fl != null) { ?>
-                <div class="metodo_pago">
+                <div class="metodo_pago-total">
                     <button type="submit" class="btn btn_buy_action disabled">Pagar</button>
                 </div>
                 <?php } else { ?>
-                <div class="metodo_pago">
+                <div class="metodo_pago-total">
                     <button type="submit" class="btn btn_buy_action">Pagar</button>
                 </div>
                 <?php } ?>
             <?php } ?>
         </div>
+    </div>
     </div>
 </form>
 </div>
