@@ -310,14 +310,15 @@ class CampanaController extends AbstractActionController {
                       'curloptions' => array(
                           CURLOPT_RETURNTRANSFER => true,
                           CURLOPT_FOLLOWLOCATION => true,
-                          CURLOPT_SSL_VERIFYPEER => 0
+                          CURLOPT_SSL_VERIFYPEER => 0,
+                          CURLOPT_REFERER => 'https://test2.alignetsac.com/VPOS/MM'
                       )
                 );
                 
                 $client->setOptions($config);
 
-                $response = $client->send($request);
-
+                $response = $client->dispatch($request);
+                
                 return $response;
                 
                 break;
