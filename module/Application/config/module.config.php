@@ -38,6 +38,16 @@ return array(
                     ),
                 ),
             ),
+            'pagopayme' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route'    => '/campana/pagopayme',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Campana',
+                        'action'     => 'pagopayme',
+                    ),
+                ),
+            ),
             'voucher' => array(
                 'type' => 'Literal',
                 'options' => array(

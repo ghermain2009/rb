@@ -145,6 +145,18 @@ class CampanaController extends AbstractActionController {
                 ));
         //}
     }
+    
+    public function pagopaymeAction() {
+           
+        $user_session = new Container('datos_payme');
+        $datos_payme = $user_session->solicitud;
+        
+        $form = new \Application\Form\EnviopaymeForm($datos_payme);
+        
+        $viewModel = new ViewModel(array('form' => $form));        
+        $viewModel->setTerminal(true);
+        return $viewModel;
+    }
 
     public function pagoAction() {
 
@@ -269,8 +281,36 @@ class CampanaController extends AbstractActionController {
                 $claveSecretaVpos = $datosPayme['clave_vpos'];
 			
                 $purchaseVerification = openssl_digest($acquirerId . $idCommerce . $purchaseOperationNumber . $purchaseAmount . $purchaseCurrencyCode . $claveSecretaVpos, 'sha512');     
-            
-                $request = new Request;
+                
+                $datosEnvioPayme = array('url_vpos' => $datosPayme['url_vpos'],
+                                    'acquirerId' => $acquirerId,
+                                    'idCommerce' => $idCommerce,
+                                    'purchaseOperationNumber' => $purchaseOperationNumber,
+                                    'purchaseAmount' => $purchaseAmount,
+                                    'purchaseCurrencyCode' => $purchaseCurrencyCode, 
+                                    'language' => 'ES',
+                                    'shippingFirstName' => $nombres[0],
+                                    'shippingLastName' => $apellidos[0],
+                                    'shippingEmail' => $mail,
+                                    'shippingAddress' => '',
+                                    'shippingZIP' => '',
+                                    'shippingCity' => '',
+                                    'shippingState' => '',
+                                    'shippingCountry' => '',
+                                    'userCommerce' => '',
+                                    'userCodePayme' => '',
+                                    'descriptionProducts' => '',
+                                    'programmingLanguage' => 'PHP',
+                                    'reserved1' => 'Prueba Reservado',
+                                    'purchaseVerification' => $purchaseVerification
+                                    );
+
+                $user_session = new Container('datos_payme');
+                $user_session->solicitud = datosEnvioPayme;
+                
+                return $this->redirect()->toRoute('pagopayme');
+                
+                /*$request = new Request;
                 $request->getHeaders()->addHeaders([
                     'Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8'
                 ]);
@@ -318,7 +358,8 @@ class CampanaController extends AbstractActionController {
 
                 $response = $client->dispatch($request);
                 
-                return $response;
+                return $response;*/
+                
                 
                 break;
             //Pago en banco
