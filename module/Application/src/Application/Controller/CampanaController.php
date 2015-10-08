@@ -27,7 +27,7 @@ use Zend\Mail\Transport\SmtpOptions;
 use Zend\View\Renderer\PhpRenderer;
 use Zend\View\Resolver\TemplateMapResolver;
 use Application\Services\Variados;
-use Zend\Soap\Client as ClienteSoap;
+use Zend\Soap\Client as SoapClient;
 
 
 class CampanaController extends AbstractActionController {
@@ -226,7 +226,12 @@ class CampanaController extends AbstractActionController {
 
                 //Referencia al Servicio Web de Wallet            
                 $wsdl = $datosPayme['url_wallet'];
-                $client = new ClienteSoap($wsdl);
+                $opt = array(
+                    'uri' => $wsdl,
+                    'location' => $wsdl
+                );
+
+                $client = new SoapClient(NULL, $opt);
 
                 //Creación de Arreglo para el almacenamiento y envío de parametros. 
                 $params = array(
