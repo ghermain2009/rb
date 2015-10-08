@@ -230,28 +230,31 @@ class CampanaController extends AbstractActionController {
                     'uri' => $wsdl,
                     'location' => $wsdl
                 );
+                try {
+                    $client = new SoapClient(NULL, $opt);
 
-                $client = new SoapClient(NULL, $opt);
+                    //Creación de Arreglo para el almacenamiento y envío de parametros. 
+                    $params = array(
+                        'idEntCommerce'=>$idEntCommerce,
+                        'codCardHolderCommerce'=>$codCardHolderCommerce,
+                        'names'=>$names,
+                        'lastNames'=>$lastNames,
+                        'mail'=>$mail,
+                        'reserved1'=>$reserved1,
+                        'reserved2'=>$reserved2,
+                        'reserved3'=>$reserved3,
+                        'registerVerification'=>$registerVerification
+                    );
 
-                //Creación de Arreglo para el almacenamiento y envío de parametros. 
-                $params = array(
-                    'idEntCommerce'=>$idEntCommerce,
-                    'codCardHolderCommerce'=>$codCardHolderCommerce,
-                    'names'=>$names,
-                    'lastNames'=>$lastNames,
-                    'mail'=>$mail,
-                    'reserved1'=>$reserved1,
-                    'reserved2'=>$reserved2,
-                    'reserved3'=>$reserved3,
-                    'registerVerification'=>$registerVerification
-                );
-                
-                var_dump($params);
-                echo $wsdl;
-                
-                //Consumo del metodo RegisterCardHolder
-                $result = $client->RegisterCardHolder($params);
-                $codAsoCardHolderWallet = $result->codAsoCardHolderWallet;
+                    var_dump($params);
+                    echo $wsdl;
+
+                    //Consumo del metodo RegisterCardHolder
+                    $result = $client->RegisterCardHolder($params);
+                    $codAsoCardHolderWallet = $result->codAsoCardHolderWallet;
+                } catch (\SoapFault $e) {
+                    echo $e->getMessage();
+                }
                 
                 var_dump($codAsoCardHolderWallet);
                 //$result = array('codasocardholderwallet' => 'fggGGHHGHHJJ=GGXXXkllll');
