@@ -27,7 +27,7 @@ use Zend\Mail\Transport\SmtpOptions;
 use Zend\View\Renderer\PhpRenderer;
 use Zend\View\Resolver\TemplateMapResolver;
 use Application\Services\Variados;
-use Zend\Soap\Client as SoapClient;
+use Zend\Soap\Client as NSoapClient;
 
 
 class CampanaController extends AbstractActionController {
@@ -226,12 +226,9 @@ class CampanaController extends AbstractActionController {
 
                 //Referencia al Servicio Web de Wallet            
                 $wsdl = $datosPayme['url_wallet'];
-                $opt = array(
-                    'uri' => $wsdl,
-                    'location' => $wsdl
-                );
+
                 try {
-                    $client = new SoapClient(NULL, $opt);
+                    $clientWS = new NSoapClient($wsdl);
 
                     //Creación de Arreglo para el almacenamiento y envío de parametros. 
                     $params = array(
@@ -250,7 +247,7 @@ class CampanaController extends AbstractActionController {
                     echo $wsdl;
 
                     //Consumo del metodo RegisterCardHolder
-                    $result = $client->RegisterCardHolder($params);
+                    $result = $clientWS->RegisterCardHolder($params);
                     $codAsoCardHolderWallet = $result->codAsoCardHolderWallet;
                 } catch (\SoapFault $e) {
                     echo $e->getMessage();
