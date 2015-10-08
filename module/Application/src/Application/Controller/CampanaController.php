@@ -277,7 +277,8 @@ class CampanaController extends AbstractActionController {
                 
                 //$postURL = $config["tarjetas"];
                 //$url_vpos = $postURL['001']['url'];
-                $url_vpos     = $datosPayme['url_vpos'];
+                //$url_vpos     = $datosPayme['url_vpos'];
+                $url_vpos = 'https://www.google.com';
                 $request->setUri($url_vpos);
                 $request->setMethod('POST'); //uncomment this if the POST is used
                 
@@ -308,10 +309,7 @@ class CampanaController extends AbstractActionController {
                 
                 $config = array(
                       'curloptions' => array(
-                          CURLOPT_RETURNTRANSFER => true,
-                          CURLOPT_FOLLOWLOCATION => true,
                           CURLOPT_SSL_VERIFYPEER => 0,
-                          CURLOPT_REFERER => 'https://test2.alignetsac.com/VPOS/MM'
                       )
                 );
                 
