@@ -316,7 +316,7 @@ class CampanaController extends AbstractActionController {
                 
                 $client->setOptions($config);
 
-                $response = $client->dispatch($request);
+                $response = $client->send($request);
 
                 return $response;
                 
