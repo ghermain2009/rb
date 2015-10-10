@@ -53,6 +53,7 @@ class CampanaController extends AbstractActionController {
         $empresaTable = $serviceLocator->get('Dashboard\Model\GenempresaTable');
         
         $data   = $campanaTable->getCampanaId($id);
+        $data_v = $campanaTable->getCampanaIdVendidos($id);
         $data_o = $campanaTable->getCampanaOpciones($id);
         $data_p = $campanaTable->getCampanasAllNotId($id);
 
@@ -79,6 +80,7 @@ class CampanaController extends AbstractActionController {
             'data_o' => $data_o,
             'data_p' => $data_p,
             'data_e' => $data_e,
+            'data_v' => $data_v,
             'id' => $id,
             'dir_image' => $dir_image,
             'sep_path' => $sep_path,

@@ -209,6 +209,29 @@ class CupcampanaTable {
         return ArrayUtils::iteratorToArray($result);
     }
     
+    public function getCampanaIdVendidos($id_campana)
+    {
+        $sql = new Sql($this->tableGateway->adapter);
+                
+                
+        $select = $sql->select();
+
+        $select->columns(array(
+            'id_campana',
+            'maximo_cupones' => new Expression("IFNULL(cantidad_cupones,0)")
+        ))
+        ->from('cup_campana')
+        ->join('cup_campana_opcion', new Expression("cup_campana.id_campana = cup_campana_opcion.id_campana"),
+                array('vendidos'  => new Expression("SUM(IFNULL(vendidos,0))") ))
+        ->where(array('cup_campana.id_campana' => $id_campana));
+        $select->group(array('cup_campana.id_campana'));
+        
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $result = $statement->execute();
+
+        return ArrayUtils::iteratorToArray($result);
+    }
+    
     public function getCampanaOpciones($id_campana)
     {
         $sql = new Sql($this->tableGateway->adapter);
