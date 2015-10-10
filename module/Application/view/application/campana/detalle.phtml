@@ -209,6 +209,7 @@ $anterior = '';
 $ultimo   = 'uno';
 $contador = 0;
 foreach ($data_p as $dato) {
+    if ($dato['mostrar'] == 0 ) continue;
     $contador++;
     if($contador > 3) {
         $contador = 1;
@@ -238,6 +239,16 @@ foreach ($data_p as $dato) {
                             <span class=""></span>
                             <img  class="lazy campana-imgreferencia-<?php echo $ultimo;?>" data-original="../../img/<?php echo $dato['id_campana']; ?>/small2/image1.jpg" src="../../img/buenisimo_placeholder.png" alt="<?php echo $dato['subtitulo']; ?>" />
                             <span class="campana-texto-descuento-<?php echo $ultimo;?>">-<?php echo $dato['descuento']; ?>%</span>
+                            <?php if( $dato['maximo_cupones'] > 0 ) { 
+                                    $quedan = $dato['maximo_cupones'] - $dato['vendidos'];
+                                    if( $quedan <= 10 ) { 
+                                        if( $quedan <= 0 ) { ?>
+                                    <span class="campana-quedan-agotado-<?php echo $ultimo;?>">¡Agotado!</span>
+                                        <?php } else { ?>
+                                    <span class="campana-quedan-<?php echo $ultimo;?>">Sólo quedan<br><?php echo $quedan;?> ofertas</span>
+                                        <?php }
+                                    }
+                                } ?>
                         </a>
                     </div>
                     <div class="campana-texto-detalle-<?php echo $ultimo;?>">

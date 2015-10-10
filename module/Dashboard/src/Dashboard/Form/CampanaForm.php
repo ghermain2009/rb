@@ -134,6 +134,27 @@ class CampanaForm extends Form
             ),
           ));
         $this->add(array(
+            'name' => 'cantidad_cupones',
+            'attributes' => array(
+                'type'  => 'text',
+                'class' => 'form-control input-sm',
+            ),
+          ));
+        $this->add(array(
+            'name' => 'tiempo_online',
+            'attributes' => array(
+                'type'  => 'text',
+                'class' => 'form-control input-sm',
+            ),
+          ));
+        $this->add(array(
+            'name' => 'tiempo_offline',
+            'attributes' => array(
+                'type'  => 'text',
+                'class' => 'form-control input-sm',
+            ),
+          ));
+        $this->add(array(
             'name' => 'submit',
             'attributes' => array(
                 'type'  => 'submit',

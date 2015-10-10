@@ -136,6 +136,32 @@ $contador = -1;
             </div>
         </div>
         <div class="form-group">
+            <label for="cantidad_cupones" class="col-lg-2 control-label">Cantidad Cupones :</label>
+            <div class="col-lg-2">
+                <div class="input-group" id='cantidad_cupones'>
+                    <?php echo $this->formRow($this->form->get('cantidad_cupones')); ?>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="tiempo_online" class="col-lg-2 control-label">Tiempo Online :</label>
+            <div class="col-lg-1">
+                <div class="input-group" id='tiempo_online'>
+                    <?php echo $this->formRow($this->form->get('tiempo_online')); ?>
+                </div>
+            </div>
+            <label class="col-lg-1 control-label">Horas</label>
+        </div>
+        <div class="form-group">
+            <label for="tiempo_offline" class="col-lg-2 control-label">Tiempo Offline :</label>
+            <div class="col-lg-1">
+                <div class="input-group date" id='tiempo_offline'>
+                    <?php echo $this->formRow($this->form->get('tiempo_offline')); ?>
+                </div>
+            </div>
+            <label class="col-lg-1 control-label">Horas</label>
+        </div>
+        <div class="form-group">
             <label for="categoria" class="col-lg-2 control-label">Categoría :</label>
             <div class="col-lg-8">
                 <input type="hidden" id="id_categoria" name="id_categoria" value="">

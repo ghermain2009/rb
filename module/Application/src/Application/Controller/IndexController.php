@@ -48,22 +48,10 @@ class IndexController extends AbstractActionController
         $this->layout()->telefono_empresa = $telefono_empresa;
         
         $campanaTable = $serviceLocator->get('Dashboard\Model\CupcampanaTable');
-        $datos = $campanaTable->getCampanasAll();
-        
-        $data = array();
-        foreach ($datos as $dato) {
-             $data[] = $dato;
-        }
-        
-        $datosG = $campanaTable->getCampanaGrupo();
-        
-        $dataG = array();
-        foreach ($datosG as $dato) {
-             $dataG[] = $dato;
-        }
-        
-        
-        
+
+        $data = $campanaTable->getCampanasAll();
+        $dataG = $campanaTable->getCampanaGrupo();
+
         return new ViewModel(array('data' => $data, 
                                    'dataG' => $dataG,
                                    'user_session' => $user_session,

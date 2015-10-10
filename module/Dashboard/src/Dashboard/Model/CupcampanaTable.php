@@ -49,7 +49,9 @@ class CupcampanaTable {
         $select->columns(array(
             'categoria' => new Expression("'Lo más nuevo'"),
             'id_campana',
-            'subtitulo'
+            'subtitulo',
+            'maximo_cupones' => new Expression("IFNULL(cantidad_cupones,0)"),
+            'mostrar' => new Expression("case when IFNULL(tiempo_online,0) >= 0 and IFNULL(tiempo_offline,0) > 0 then CASE WHEN MOD(ROUND(TIME_TO_SEC(TIMEDIFF(NOW(),STR_TO_DATE(CONCAT(DATE_FORMAT(fecha_inicio,'%d/%m/%Y'),' ',hora_inicio),'%d/%m/%Y %H:%i:%s'))) / 3600),tiempo_online + tiempo_offline) > tiempo_online THEN 0 ELSE 1 END else 1 end"),
         ))
         ->from('cup_campana')
         ->join('cup_campana_opcion', new Expression("cup_campana.id_campana = cup_campana_opcion.id_campana"),
@@ -67,7 +69,7 @@ class CupcampanaTable {
         $statement = $sql->prepareStatementForSqlObject($select);
         $result = $statement->execute();
 
-        return $result;
+        return ArrayUtils::iteratorToArray($result);
     }
     
     public function getCampanasAllNotId($id_campana)
@@ -79,7 +81,9 @@ class CupcampanaTable {
         $select->columns(array(
             'categoria' => new Expression("'Lo más nuevo'"),
             'id_campana',
-            'subtitulo'
+            'subtitulo',
+            'maximo_cupones' => new Expression("IFNULL(cantidad_cupones,0)"),
+            'mostrar' => new Expression("case when IFNULL(tiempo_online,0) >= 0 and IFNULL(tiempo_offline,0) > 0 then CASE WHEN MOD(ROUND(TIME_TO_SEC(TIMEDIFF(NOW(),STR_TO_DATE(CONCAT(DATE_FORMAT(fecha_inicio,'%d/%m/%Y'),' ',hora_inicio),'%d/%m/%Y %H:%i:%s'))) / 3600),tiempo_online + tiempo_offline) > tiempo_online THEN 0 ELSE 1 END else 1 end"),
         ))
         ->from('cup_campana')
         ->join('cup_campana_opcion', new Expression("cup_campana.id_campana = cup_campana_opcion.id_campana"),
@@ -110,7 +114,9 @@ class CupcampanaTable {
 
         $select->columns(array(
             'id_campana',
-            'subtitulo'
+            'subtitulo',
+            'maximo_cupones' => new Expression("IFNULL(cantidad_cupones,0)"),
+            'mostrar' => new Expression("case when IFNULL(tiempo_online,0) >= 0 and IFNULL(tiempo_offline,0) > 0 then CASE WHEN MOD(ROUND(TIME_TO_SEC(TIMEDIFF(NOW(),STR_TO_DATE(CONCAT(DATE_FORMAT(fecha_inicio,'%d/%m/%Y'),' ',hora_inicio),'%d/%m/%Y %H:%i:%s'))) / 3600),tiempo_online + tiempo_offline) > tiempo_online THEN 0 ELSE 1 END else 1 end"),
         ))
         ->from('cup_campana')
         ->join('cup_campana_opcion', new Expression("cup_campana.id_campana = cup_campana_opcion.id_campana"),
@@ -132,7 +138,7 @@ class CupcampanaTable {
         $statement = $sql->prepareStatementForSqlObject($select);
         $result = $statement->execute();
 
-        return $result;
+        return ArrayUtils::iteratorToArray($result);
     }
     
     public function getCampanaCategoria($id_categoria, $id_subcategoria)
@@ -144,7 +150,9 @@ class CupcampanaTable {
 
         $select->columns(array(
             'id_campana',
-            'subtitulo'
+            'subtitulo',
+            'maximo_cupones' => new Expression("IFNULL(cantidad_cupones,0)"),
+            'mostrar' => new Expression("case when IFNULL(tiempo_online,0) >= 0 and IFNULL(tiempo_offline,0) > 0 then CASE WHEN MOD(ROUND(TIME_TO_SEC(TIMEDIFF(NOW(),STR_TO_DATE(CONCAT(DATE_FORMAT(fecha_inicio,'%d/%m/%Y'),' ',hora_inicio),'%d/%m/%Y %H:%i:%s'))) / 3600),tiempo_online + tiempo_offline) > tiempo_online THEN 0 ELSE 1 END else 1 end"),
         ))
         ->from('cup_campana')
         ->join('cup_campana_opcion', new Expression("cup_campana.id_campana = cup_campana_opcion.id_campana"),
