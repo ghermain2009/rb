@@ -1416,9 +1416,11 @@ section {
 .campana-quedan-uno {
     font-family:gotham-medium, 'arial', 'sans-serif';
     font-size: 12px;
-    color:#C54C1E;
+    //color:#C54C1E;
+    color:#7d6022;
     position: relative;
-    background-color: #fdaf06;
+    //background-color: #fdaf06;
+    background-color: #fbff80;
     border-bottom: 0px solid #ffffff;
     border-left: 0px solid transparent;
     border-right: 10px solid transparent;
@@ -1608,9 +1610,11 @@ section {
 .campana-quedan-dos {
     font-family:gotham-medium, 'arial', 'sans-serif';
     font-size: 15px;
-    color:#C54C1E;
+    //color:#C54C1E;
+    color:#7d6022;
     position: relative;
-    background-color: #fdaf06;
+    //background-color: #fdaf06;
+    background-color: #fbff80;
     border-bottom: 0px solid #ffffff;
     border-left: 0px solid transparent;
     border-right: 10px solid transparent;
@@ -2215,9 +2219,11 @@ section {
     .campana-quedan-dos{
         font-family:gotham-medium, 'arial', 'sans-serif';
         font-size: 12px;
-        color:#C54C1E;
+        //color:#C54C1E;
+        color:#7d6022;
         position: relative;
-        background-color: #fdaf06;
+        //background-color: #fdaf06;
+        background-color: #fbff80;
         border-bottom: 0px solid #ffffff;
         border-left: 0px solid transparent;
         border-right: 10px solid transparent;
