@@ -64,7 +64,6 @@ class EmpresaController extends AbstractActionController {
         }
 
         $sl = $this->getServiceLocator();
-        $dbAdapter = $sl->get('Zend\Db\Adapter\Adapter');
         $grid = $sl->get('ZfcDatagrid\Datagrid');
         $grid->setDefaultItemsPerPage(5);
         $grid->setToolbarTemplate('layout/list-toolbar');
@@ -130,7 +129,7 @@ class EmpresaController extends AbstractActionController {
         $col->addAction($editBtn);
         $col->addAction($conBtn);
         $grid->addColumn($col);
-
+        
         return $grid->getResponse();
         
     }

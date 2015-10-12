@@ -1,3 +1,4 @@
+<div>
 <?php
 //echo $this->controllerName();
 switch ($this->controllerName()) {
@@ -43,96 +44,7 @@ switch ($this->controllerName()) {
     </div>
 </div>
 <!-- Modal -->
-<div class="modal fade bs-example-modal-lg" id="modalPreview" tabindex="-1" role="dialog" aria-labelledby="modalPreviewLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="modalPreviewLabel">Preview Campaña</h4>
-            </div>
-            <div class="modal-body" id="bodyPreview">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
 </div>
-<div class="modal fade" id="modalContrato" tabindex="-1" role="dialog" aria-labelledby="modalContratoLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="modalContratoLabel">Generación de Contrato</h4>
-            </div>
-            <div class="modal-body" id="bodyContrato">
-                <div class="container-fluid">
-                    <form name="frmregistro_contrato" id="frmregistro_contrato" role="form">
-                        <div class="form-group">
-                            <label for="nombre" class="col-lg-5 control-label afiliacion">Nombre Contacto:</label>
-                            <div class="col-xs-7 validacion"> 
-                                <input type="hidden" class="form-control" name="id_empresa" id="id_empresa" value="" >
-                                <input type="text" class="form-control" name="nombre" id="nombre" value="" >
-                                <span class="help-block with-errors"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="email" class="col-lg-5 control-label afiliacion">Email Contacto:</label>
-                            <div class="col-xs-7 validacion"> 
-                                <input type="text" class="form-control" name="email" id="email" value="" >
-                                <span class="help-block with-errors"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-xs-12 total">
-                                <button type="button" class="btn btn-rebueno" name="generar_contrato" id="generar_contrato" onclick="javascript:generarcontrato();">Generar Contrato</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="modalPagobancario" tabindex="-1" role="dialog" aria-labelledby="modalPagobancarioLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="modalPagobancarioLabel">Confirmación de Pago Bancario</h4>
-            </div>
-            <div class="modal-body" id="bodyPagobancario">
-                <div class="container-fluid">
-                    <form name="frmregistro_Pagobancario" id="frmregistro_Pagobancario" role="form">
-                        <div class="form-group">
-                            <label for="numero_operacion" class="col-lg-5 control-label afiliacion">Nro. Operación:</label>
-                            <div class="col-xs-7 validacion"> 
-                                <input type="hidden" class="form-control" name="id_cupon" id="id_cupon" value="" >
-                                <input type="text" class="form-control" name="numero_operacion" id="numero_operacion" value="" >
-                                <span class="help-block with-errors"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="email" class="col-lg-5 control-label afiliacion">Fecha operación:</label>
-                            <div class="col-xs-7 validacion"> 
-                                <input type="text" class="form-control" name="fecha_operacion" id="fecha_operacion" value="" >
-                                <span class="help-block with-errors"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-xs-12 total">
-                                <button type="button" class="btn btn-rebueno" name="generar_Pagobancario" id="generar_Pagobancario" onclick="javascript:generarpagobancario();">Registrar Pago Bancario</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
 <script type="text/javascript">
 
     function visualizar(campana){
