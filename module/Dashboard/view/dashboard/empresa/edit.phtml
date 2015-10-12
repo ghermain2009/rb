@@ -89,7 +89,8 @@
         
         <div class="form-group">
             <div class="col-lg-offset-3 col-lg-7">
-                <?php echo $this->formRow($this->form->get('submit')); ?>
+                <?php echo $this->formRow($this->form->get('submit')); ?>&nbsp;&nbsp;&nbsp;&nbsp;
+                <?php echo $this->formRow($this->form->get('btn-regresar')); ?>
             </div>
         </div>
     </div>
@@ -288,6 +289,24 @@
                 $("#modalConfirmacion").hide();
                 
                 
+            }
+        );
+
+        $("#btn-regresar").click(
+            function (e) {
+                $("#modalCancelacion").modal();
+            }
+        );
+
+        $("#modal-cancelacion-si").click(
+            function (e) {
+                $(location).attr('href','/dashboard/empresa/list');
+            }
+        );
+
+        $("#modal-cancelacion-no").click(
+            function (e) {
+                $("#modalCancelacion").hide();
             }
         );
     });
