@@ -1,10 +1,5 @@
 <?php
 
-/**
- * CampanaController - This allows add, delete and edit users
- * @autor Francis Gonzales <fgonzalestello91@gmail.com>
- */
-
 namespace Dashboard\Controller;
 
 use Dashboard\Form\CampanaForm;
@@ -181,6 +176,9 @@ class CampanaController extends AbstractActionController {
                 $form->get('fecha_final')->setValue($campana['fecha_final']);
                 $form->get('hora_final')->setValue($campana['hora_final']);
                 $form->get('fecha_validez')->setValue($campana['fecha_validez']);
+                $form->get('cantidad_cupones')->setValue($campana['cantidad_cupones']);
+                $form->get('tiempo_online')->setValue($campana['tiempo_online']);
+                $form->get('tiempo_offline')->setValue($campana['tiempo_offline']);
             }
         }
 

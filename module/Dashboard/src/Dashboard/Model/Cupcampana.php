@@ -27,117 +27,144 @@ class Cupcampana {
     public  $id_empresa;
     public  $id_user;
     public  $fecha_registro;
-    
-    function getId_campana() {
+    public  $cantidad_cupones;
+    public  $tiempo_online;
+    public  $tiempo_offline;
+            
+    public function getId_campana() {
         return $this->id_campana;
     }
 
-    function getTitulo() {
+    public function getTitulo() {
         return $this->titulo;
     }
 
-    function getSubtitulo() {
+    public function getSubtitulo() {
         return $this->subtitulo;
     }
 
-    function getDescripcion() {
+    public function getDescripcion() {
         return $this->descripcion;
     }
-    
-    function getSobre_campana() {
+
+    public function getSobre_campana() {
         return $this->sobre_campana;
     }
-    
-    function getObservaciones() {
+
+    public function getObservaciones() {
         return $this->observaciones;
     }
 
-    function getFecha_inicio() {
+    public function getFecha_inicio() {
         return $this->fecha_inicio;
     }
 
-    function getHora_inicio() {
+    public function getHora_inicio() {
         return $this->hora_inicio;
     }
 
-    function getFecha_final() {
+    public function getFecha_final() {
         return $this->fecha_final;
     }
 
-    function getHora_final() {
+    public function getHora_final() {
         return $this->hora_final;
     }
 
-    function getFecha_validez() {
+    public function getFecha_validez() {
         return $this->fecha_validez;
     }
 
-    function getId_empresa() {
+    public function getId_empresa() {
         return $this->id_empresa;
     }
 
-    function getId_user() {
+    public function getId_user() {
         return $this->id_user;
     }
 
-    function getFecha_registro() {
+    public function getFecha_registro() {
         return $this->fecha_registro;
     }
 
-    function setId_campana($id_campana) {
+    public function getCantidad_cupones() {
+        return $this->cantidad_cupones;
+    }
+
+    public function getTiempo_online() {
+        return $this->tiempo_online;
+    }
+
+    public function getTiempo_offline() {
+        return $this->tiempo_offline;
+    }
+
+    public function setId_campana($id_campana) {
         $this->id_campana = $id_campana;
     }
 
-    function setTitulo($titulo) {
+    public function setTitulo($titulo) {
         $this->titulo = $titulo;
     }
 
-    function setSubtitulo($subtitulo) {
+    public function setSubtitulo($subtitulo) {
         $this->subtitulo = $subtitulo;
     }
 
-    function setDescripcion($descripcion) {
+    public function setDescripcion($descripcion) {
         $this->descripcion = $descripcion;
     }
-    
-    function setSobre_campana($sobre_campana) {
+
+    public function setSobre_campana($sobre_campana) {
         $this->sobre_campana = $sobre_campana;
     }
-    
-    function setObservaciones($observaciones) {
+
+    public function setObservaciones($observaciones) {
         $this->observaciones = $observaciones;
     }
 
-    function setFecha_inicio($fecha_inicio) {
+    public function setFecha_inicio($fecha_inicio) {
         $this->fecha_inicio = $fecha_inicio;
     }
 
-    function setHora_inicio($hora_inicio) {
+    public function setHora_inicio($hora_inicio) {
         $this->hora_inicio = $hora_inicio;
     }
 
-    function setFecha_final($fecha_final) {
+    public function setFecha_final($fecha_final) {
         $this->fecha_final = $fecha_final;
     }
 
-    function setHora_final($hora_final) {
+    public function setHora_final($hora_final) {
         $this->hora_final = $hora_final;
     }
 
-    function setFecha_validez($fecha_validez) {
+    public function setFecha_validez($fecha_validez) {
         $this->fecha_validez = $fecha_validez;
     }
 
-    function setId_empresa($id_empresa) {
+    public function setId_empresa($id_empresa) {
         $this->id_empresa = $id_empresa;
     }
 
-    function setId_user($id_user) {
+    public function setId_user($id_user) {
         $this->id_user = $id_user;
     }
 
-    function setFecha_registro($fecha_registro) {
+    public function setFecha_registro($fecha_registro) {
         $this->fecha_registro = $fecha_registro;
+    }
+
+    public function setCantidad_cupones($cantidad_cupones) {
+        $this->cantidad_cupones = $cantidad_cupones;
+    }
+
+    public function setTiempo_online($tiempo_online) {
+        $this->tiempo_online = $tiempo_online;
+    }
+
+    public function setTiempo_offline($tiempo_offline) {
+        $this->tiempo_offline = $tiempo_offline;
     }
 
     public function exchangeArray($data)
@@ -156,12 +183,15 @@ class Cupcampana {
         $this->id_empresa = (isset($data['id_empresa'])) ? $data['id_empresa'] : null;
         $this->id_user = (isset($data['id_user'])) ? $data['id_user'] : null;
         $this->fecha_registro = (isset($data['fecha_registro'])) ? $data['fecha_registro'] : null;
+        $this->cantidad_cupones = (isset($data['cantidad_cupones'])) ? $data['cantidad_cupones'] : null;
+        $this->tiempo_online = (isset($data['tiempo_online'])) ? $data['tiempo_online'] : null;
+        $this->tiempo_offline = (isset($data['tiempo_offline'])) ? $data['tiempo_offline'] : null;
         
     }
- 
+    
     public function getArrayCopy()
     {
         return get_object_vars($this);
     }
-    
+
 }
