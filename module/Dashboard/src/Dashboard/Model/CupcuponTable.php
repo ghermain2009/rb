@@ -395,7 +395,7 @@ class CupcuponTable {
                 
         $select = $sql->select();
         $select->columns(array(
-            'cantidad_pagados' => new Expression("sum(cantidad_cupones)"),
+            'cantidad_pagados' => new Expression("sum(cup_liquidacion.cantidad_cupones)"),
             'total_pagados' => new Expression("sum(total_liquidacion)")
         ))
         ->from('cup_liquidacion')
