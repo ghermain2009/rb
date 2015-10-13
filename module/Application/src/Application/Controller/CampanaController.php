@@ -321,7 +321,7 @@ class CampanaController extends AbstractActionController {
                                     'shippingState' => '',
                                     'shippingCountry' => '',
                                     'userCommerce' => '',
-                                    'userCodePayme' => '',
+                                    'userCodePayme' => $codAsoCardHolderWallet,
                                     'descriptionProducts' => '',
                                     'programmingLanguage' => 'PHP',
                                     'reserved1' => 'Prueba Reservado',
