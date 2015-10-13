@@ -242,7 +242,7 @@ class CampanaController extends AbstractActionController {
                 //$url_vpos     = $datosPayme['url_vpos'];
                 
                 
-                $idEntCommerce = $id_commerce;
+                $idEntCommerce = 198;//$id_commerce;
                 $codCardHolderCommerce = $clientePaymeTable->addClientePayme($datos['email']);
                 $nombres = preg_split('/\s/',$datos['nombre']);
                 $names = $nombres[0];
