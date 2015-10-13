@@ -324,8 +324,8 @@ class CampanaController extends AbstractActionController {
                                     'userCodePayme' => $codAsoCardHolderWallet,
                                     'descriptionProducts' => 'N/A',
                                     'programmingLanguage' => 'PHP',
-                                    'reserved1' => 'Prueba Reservado',
-                                    'purchaseVerification' => $purchaseVerification
+                                    'purchaseVerification' => $purchaseVerification,
+                                    'reserved1' => 'Prueba Reservado'
                                     );
 
                 $user_session = new Container('datos_payme');
