@@ -205,15 +205,15 @@ class EnviopaymeForm extends Form {
             ),
         ));
         
-        $this->add(array(
-            'name' => 'submitbutton',
-            'attributes' => array(
-                'type'  => 'submit',
-                'value' => 'Enviar',
-                'id' => 'submitbutton',
-                'class'  => 'btn btn-default',
-            ),
-        ));
+//        $this->add(array(
+//            'name' => 'submitbutton',
+//            'attributes' => array(
+//                'type'  => 'submit',
+//                'value' => 'Enviar',
+//                'id' => 'submitbutton',
+//                'class'  => 'btn btn-default',
+//            ),
+//        ));
 
     }
 }
