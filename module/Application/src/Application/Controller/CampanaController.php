@@ -299,7 +299,7 @@ class CampanaController extends AbstractActionController {
                 $idCommerce = $id_commerce;
                 $purchaseOperationNumber = $idTransaccion;
                 $purchaseAmount = str_replace('.','',$datos['PriceTotal']);
-                $purchaseCurrencyCode = '804'; //DOLARES AMERICANOS
+                $purchaseCurrencyCode = '840'; //DOLARES AMERICANOS
                 
                 $claveSecretaVpos = $datosPayme['clave_vpos'];
 			
