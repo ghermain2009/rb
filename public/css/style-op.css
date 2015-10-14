@@ -1618,7 +1618,7 @@ section {
     border-bottom: 0px solid #ffffff;
     border-left: 0px solid transparent;
     border-right: 10px solid transparent;
-    width: 150px;
+    width: 120px;
     height: 42px;
     top: -42px;
     float: right;
@@ -1639,13 +1639,13 @@ section {
     border-bottom: 0px solid #ffffff;
     border-left: 0px solid transparent;
     border-right: 10px solid transparent;
-    width: 150px;
-    height: 42px;
-    top: -42px;
+    width: 110px;
+    height: 32px;
+    top: -32px;
     float: right;
     display:inherit;
-    padding-left: 20px;
-    padding-top: 12px;
+    padding-left: 10px;
+    padding-top: 7px;
     line-height: 1.0em;
     border-top-left-radius: 10px;
     //font-weight: 600;
@@ -2149,6 +2149,134 @@ section {
     } 
 }
 
+@media only screen and (min-width: 602px) and (max-width: 750px) {
+    
+    .campana-texto-descuento-uno {
+        font-family:gotham-medium, 'arial', 'sans-serif';
+        font-size: 16px;
+        color:white;
+        background: linear-gradient(to bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
+        background: -webkit-linear-gradient(bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
+        background: -moz-linear-gradient(bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
+        background: -o-linear-gradient(bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
+        position: relative;
+        top: -30px;
+        padding: 8px;
+    }
+    
+    .campana-texto-oferta-uno {
+        font-family:gotham-medium, 'arial', 'sans-serif';
+        font-size: 8px;
+        color:white;
+        background: linear-gradient(to bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
+        background: -webkit-linear-gradient(bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
+        background: -moz-linear-gradient(bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
+        background: -o-linear-gradient(bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
+        position: relative;
+        top: -30px;
+        padding: 8px;
+    }
+    
+    .campana-texto-descuento-dos {
+        font-family:gotham-medium, 'arial', 'sans-serif';
+        font-size: 19px;
+        color:white;
+        background: linear-gradient(to bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
+        background: -webkit-linear-gradient(bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
+        background: -moz-linear-gradient(bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
+        background: -o-linear-gradient(bottom, #A8CF45 0%,#A8CF45 50%,#000000 50%,#93ba2f 50%,#93ba2f 100%);
+        position: relative;
+        top: -35px;
+        padding: 8px;
+    }
+    
+    .campana-quedan-uno {
+        font-family:gotham-medium, 'arial', 'sans-serif';
+        font-size: 11px;
+        //color:#C54C1E;
+        color:#ffffff;
+        position: relative;
+        //background-color: #fdaf06;
+        background-color: #60b524;
+        border-bottom: 0px solid #ffffff;
+        border-left: 0px solid transparent;
+        border-right: 10px solid transparent;
+        width: 85px;
+        height: 32px;
+        top: -32px;
+        float: right;
+        display:inherit;
+        padding-left: 5px;
+        padding-top: 5px;
+        line-height: 1.0em;
+        border-top-left-radius: 10px;
+    }
+
+    .campana-quedan-agotado-uno {
+        font-family:gotham-medium, 'arial', 'sans-serif';
+        font-size: 13px;
+        color:white;
+        position: relative;
+        background-color: red;
+        border-bottom: 0px solid #ffffff;
+        border-left: 0px solid transparent;
+        border-right: 10px solid transparent;
+        width: 75px;
+        height: 25px;
+        top: -25px;
+        float: right;
+        display:inherit;
+        padding-left: 5px;
+        padding-top: 5px;
+        line-height: 1.0em;
+        border-top-left-radius: 10px;
+    }
+    
+    .campana-quedan-dos {
+        font-family:gotham-medium, 'arial', 'sans-serif';
+        font-size: 13px;
+        //color:#C54C1E;
+        color:#ffffff;
+        position: relative;
+        //background-color: #fdaf06;
+        background-color: #60b524;
+        border-bottom: 0px solid #ffffff;
+        border-left: 0px solid transparent;
+        border-right: 10px solid transparent;
+        width: 100px;
+        height: 37px;
+        top: -37px;
+        float: right;
+        display:inherit;
+        padding-left: 7px;
+        padding-top: 5px;
+        line-height: 1.0em;
+        border-top-left-radius: 10px;
+        //font-weight: 600;
+    }
+
+    .campana-quedan-agotado-dos {
+        font-family:gotham-medium, 'arial', 'sans-serif';
+        font-size: 15px;
+        color:white;
+        position: relative;
+        background-color: red;
+        border-bottom: 0px solid #ffffff;
+        border-left: 0px solid transparent;
+        border-right: 10px solid transparent;
+        width: 90px;
+        height: 25px;
+        top: -25px;
+        float: right;
+        display:inherit;
+        padding-left: 7px;
+        padding-top: 5px;
+        line-height: 1.0em;
+        border-top-left-radius: 10px;
+        //font-weight: 600;
+    }
+}
+
 @media only screen and (max-width: 602px) {
     
     .reftab ta i {
@@ -2218,7 +2346,7 @@ section {
     .campana-quedan-uno,
     .campana-quedan-dos{
         font-family:gotham-medium, 'arial', 'sans-serif';
-        font-size: 12px;
+        font-size: 11px;
         //color:#C54C1E;
         color:#ffffff;
         position: relative;
@@ -2227,12 +2355,12 @@ section {
         border-bottom: 0px solid #ffffff;
         border-left: 0px solid transparent;
         border-right: 10px solid transparent;
-        width: 100px;
+        width: 85px;
         height: 32px;
         top: -32px;
         float: right;
         display:inherit;
-        padding-left: 10px;
+        padding-left: 5px;
         padding-top: 5px;
         line-height: 1.0em;
         border-top-left-radius: 10px;
@@ -2242,20 +2370,20 @@ section {
     .campana-quedan-agotado-uno,
     .campana-quedan-agotado-dos {
         font-family:gotham-medium, 'arial', 'sans-serif';
-        font-size: 15px;
+        font-size: 13px;
         color:white;
         position: relative;
         background-color: red;
         border-bottom: 0px solid #ffffff;
         border-left: 0px solid transparent;
         border-right: 10px solid transparent;
-        width: 100px;
-        height: 32px;
-        top: -32px;
+        width: 75px;
+        height: 25px;
+        top: -25px;
         float: right;
         display:inherit;
-        padding-left: 10px;
-        padding-top: 8px;
+        padding-left: 5px;
+        padding-top: 5px;
         line-height: 1.0em;
         border-top-left-radius: 10px;
         //font-weight: 600;

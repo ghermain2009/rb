@@ -157,7 +157,11 @@ foreach ($data as $dato) {
                         <a href="/campana/detalle/<?php echo crearUrl($dato['subtitulo']).'--'.base64_encode($dato['id_campana']); ?>.html">
                             <span class=""></span>
                             <img  class="lazy campana-imgreferencia-<?php echo $ultimo;?>" data-original="img/<?php echo $dato['id_campana']; ?>/small2/image1.jpg" src="img/buenisimo_placeholder.png" alt="<?php echo $dato['subtitulo']; ?>" />
+                            <?php if( $dato['descuento'] <= 40) { ?>
                             <span class="campana-texto-descuento-<?php echo $ultimo;?>">-<?php echo $dato['descuento']; ?>%</span>
+                            <?php } else { ?>
+                            <span class="campana-texto-descuento-<?php echo $ultimo;?>">-<?php echo $dato['descuento']; ?>%</span>
+                            <?php } ?>
                                 <?php if( $dato['maximo_cupones'] > 0 ) { 
                                     $quedan = $dato['maximo_cupones'] - $dato['vendidos'];
                                     if( $quedan <= 10 ) { 
