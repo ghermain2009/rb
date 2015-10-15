@@ -326,7 +326,7 @@ class CampanaController extends AbstractActionController {
                                     'descriptionProducts' => $desProducts,
                                     'programmingLanguage' => 'PHP',
                                     'purchaseVerification' => $purchaseVerification,
-                                    'reserved1' => 'Prueba Reservado'
+                                    'reserved1' => 'N/A'
                                     );
                 
                 error_log(print_r($datosEnvioPayme,true));
