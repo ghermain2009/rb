@@ -235,6 +235,10 @@ foreach ($data_p as $dato) {
     $contador++;
     if($contador > 3) {
         $contador = 1;
+         ?>
+        </div>
+        <div class="campana-en-linea">
+        <?php
     }
     switch($contador) {
         case 1: $position = ' left';
@@ -249,6 +253,7 @@ foreach ($data_p as $dato) {
         <section id="<?php echo $dato['categoria']; ?>">
             <h2 class="box_center">Otras buenas ofertas del día</h2>
             <div class="box_center"><div>
+                    <div class="campana-en-linea">
                     <?php
                 }
                 ?>
