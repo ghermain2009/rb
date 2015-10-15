@@ -279,17 +279,17 @@ class CampanaController extends AbstractActionController {
                         'registerVerification'=>$registerVerification
                     );
 
-                    var_dump($params);
-                    echo $wsdl;
+                    error_log(print_r($params,true));
 
                     //Consumo del metodo RegisterCardHolder
                     $result = $clientWS->RegisterCardHolder($params);
                     $codAsoCardHolderWallet = $result->codAsoCardHolderWallet;
+                    
                 } catch (\SoapFault $e) {
                     echo $e->getMessage();
                 }
                 
-                var_dump($codAsoCardHolderWallet);
+                error_log('codAsoCardHolderWallet -> '.$codAsoCardHolderWallet);
                 //$result = array('codasocardholderwallet' => 'fggGGHHGHHJJ=GGXXXkllll');
                 //$codAsoCardHolderWallet = $result['codasocardholderwallet'];
                 
