@@ -1,6 +1,9 @@
 <div class="container">
 <form name="frmpago" role="form" action="/campana/pago" method="POST" data-parsley-validate>
     <div>
+    <?php foreach ($data_o as $dato) { ?>
+    <input type="hidden" class="form-control" name="nameproducto" id="nameproducto" value="<?php echo strip_tags($dato['descripcion']); ?>">
+    <?php } ?>
     <div class="section_payment">
         <?php if (($fl != null && $fl == '2') || isset($user_session->username) ) { ?>
             <h3>Tus Datos</h3>
@@ -19,7 +22,6 @@
                 <label for="nombre" class="col-lg-2 control-label">Nombres:</label>
                 <div class="col-xs-7"> 
                     <input type="text" class="form-control" name="nombres" id="nombres" value="<?php echo $user_session->nombres;?>"  disabled>
-                    
                     <span class="help-block with-errors"></span>
                 </div>
             </div>
@@ -42,7 +44,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="tpdoc" class="col-lg-2 control-label">Tipo de documento:</label>
+                <label for="tpdoc" class="col-lg-2 control-label">Tipo documento:</label>
                 <div class="col-xs-7">
                     <select class="form-control" name="tipdoc" id="tipdoc" data-error="Seleccione una opción." required disabled>
                         <option value="DNI" label="DNI">DNI</option>
@@ -54,7 +56,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="numdoc" class="col-lg-2 control-label">Número de documento:</label>
+                <label for="numdoc" class="col-lg-2 control-label">Número documento:</label>
                 <div class="col-xs-7">
                     <input type="text" class="form-control" name="numdoc" id="numdoc" pattern="^[A-z0-9-ñáéíóúÑÁÉÍÓÚ]+$" data-error="Solo letras, números y guiones (-)." required  value="<?php echo $user_session->numdoc;?>" disabled>
                     <span class="help-block with-errors"></span>
@@ -95,11 +97,9 @@
             </div>
             <!--div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false" onlogin="checkLoginState();">Conectar con Facebook</div-->
             <a class="btn btn-block btn-social btn-facebook" href="javascript:loginFacebook();">
-                                        <i class="fa fa-facebook"></i> Conectar con Facebook
-                                    </a>
-            <br>
+                <i class="fa fa-facebook"></i> Conectar con Facebook
+                </a>
             <hr class="special">
-            <br>
             <div class="form-group">
                 <label for="email" class="col-lg-2 control-label"><span class="required">* </span>Email:</label>
                 <div class="col-xs-7">
@@ -150,7 +150,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="tpdoc" class="col-lg-2 control-label"><span class="required">* </span>Tipo de documento:</label>
+                    <label for="tpdoc" class="col-lg-2 control-label"><span class="required">* </span>Tipo documento:</label>
                     <div class="col-xs-7">
                         <select class="form-control" name="tipdoc" id="tipdoc" data-error="Seleccione una opción." required>
                             <option value="DNI" label="DNI">DNI</option>
@@ -162,7 +162,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="numdoc" class="col-lg-2 control-label"><span class="required">* </span>Número de documento:</label>
+                    <label for="numdoc" class="col-lg-2 control-label"><span class="required">* </span>Número documento:</label>
                     <div class="col-xs-7">
                         <input type="text" class="form-control" name="numdoc" id="numdoc" pattern="^[A-z0-9-ñáéíóúÑÁÉÍÓÚ]+$" data-error="Solo letras, números y guiones (-)." required>
                         <span class="help-block with-errors"></span>
@@ -205,7 +205,7 @@
                 <h4 class="titulo_negro">Producto</h4>
                 <div class="box_center_info">
                     <img class="img_container_pago" src="/img/<?php echo $id; ?>/small2/image1.jpg">
-                    <span><?php echo $dato['descripcion']; ?></span>
+                    <span class="confirma-detalle"><?php echo strip_tags($dato['descripcion']); ?></span>
                 </div>
                 <div class="box_quantity">
                     <span class="quantity">
@@ -244,9 +244,9 @@
             </div-->
             <div class="metodo_pago">
                 <label for="radPayPayme" class="ioption">
-                    <input id="radPayPayme" name="metodo" type="radio" value="PAY" checked><span><img src="/img/tarjetas/payme.jpg"></span>
+                    <input id="radPayPayme" name="metodo" type="radio" value="PAY" checked><span><img src="/img/tarjetas/aceptadas.jpg"></span>
                     <div class="cb">Paga en linea con total seguridad sin necesidad de ingresar tus datos personales, ni los de tu tarjeta en tus próximas compras, trabajamos con las tarjetas de mayor acepatación.</div>
-                    <div class="cb-todas"><img src="/img/tarjetas/aceptadas.jpg"></div>
+                    <div class="cb-todas"><img src="/img/tarjetas/payme.jpg"></div>
                 </label>
             </div>
             <div class="metodo_pago">

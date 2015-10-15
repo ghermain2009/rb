@@ -252,6 +252,7 @@ class CampanaController extends AbstractActionController {
                 $reserved1 = '';
                 $reserved2 = '';
                 $reserved3 = '';
+                $desProducts = $datos['nameproducto'];
 
                 //Clave SHA-2.
                 $claveSecreta = $datosPayme['clave_wallet'];
@@ -322,7 +323,7 @@ class CampanaController extends AbstractActionController {
                                     'shippingCountry' => 'N/A',
                                     'userCommerce' => $codCardHolderCommerce,
                                     'userCodePayme' => $codAsoCardHolderWallet,
-                                    'descriptionProducts' => 'N/A',
+                                    'descriptionProducts' => $desProducts,
                                     'programmingLanguage' => 'PHP',
                                     'purchaseVerification' => $purchaseVerification,
                                     'reserved1' => 'Prueba Reservado'
