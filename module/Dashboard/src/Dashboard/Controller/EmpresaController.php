@@ -41,6 +41,7 @@ class EmpresaController extends AbstractActionController {
                 
                 $empresaTable = $serviceLocator->get('Dashboard\Model\GenempresaTable');
                 unset($data['submit']);
+                unset($data['btn-regresar']);
                 $rs = $empresaTable->addEmpresa($data);
                 if ($rs) {
                     //$form = new EmpresaForm($tipoDocumentoTable);
@@ -163,6 +164,7 @@ class EmpresaController extends AbstractActionController {
             if ($form->isValid()) {
                 $data = $form->getData();
                 unset($data['submit']);
+                unset($data['btn-regresar']);
                 $dataId = array('id_empresa' => $empresaId);
                 $empresaTable->editEmpresa($data, $dataId);
 
