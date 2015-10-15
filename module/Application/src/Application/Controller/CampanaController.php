@@ -328,6 +328,8 @@ class CampanaController extends AbstractActionController {
                                     'purchaseVerification' => $purchaseVerification,
                                     'reserved1' => 'Prueba Reservado'
                                     );
+                
+                error_log(print_r($datosEnvioPayme,false));
 
                 $user_session = new Container('datos_payme');
                 $user_session->solicitud = $datosEnvioPayme;
