@@ -301,8 +301,8 @@ class CampanaController extends AbstractActionController {
                 $acquirerId = $id_adquirer;
                 $idCommerce = $id_commerce;
                 $purchaseOperationNumber = $idTransaccion;
-                //$purchaseAmount = str_replace('.','',$datos['PriceTotal']);
-                $purchaseAmount = '080';
+                $purchaseAmount = str_replace('.','',$datos['PriceTotal']);
+                //$purchaseAmount = '080';
                 $purchaseCurrencyCode = '840'; //DOLARES AMERICANOS
                 
                 $claveSecretaVpos = $datosPayme['clave_vpos'];
