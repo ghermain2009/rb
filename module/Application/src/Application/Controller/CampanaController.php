@@ -191,8 +191,8 @@ class CampanaController extends AbstractActionController {
         $clienteTable->addCliente($datos);
 
         $cuponTable = $serviceLocator->get('Dashboard\Model\CupcuponTable');
-        //$idTransaccion = $cuponTable->addCupon($datos,$serviceLocator);
-        $idTransaccion = 171;
+        $idTransaccion = $cuponTable->addCupon($datos,$serviceLocator);
+        //$idTransaccion = 171;
         
         
         $config = $serviceLocator->get('config');
@@ -301,7 +301,8 @@ class CampanaController extends AbstractActionController {
                 $acquirerId = $id_adquirer;
                 $idCommerce = $id_commerce;
                 $purchaseOperationNumber = $idTransaccion;
-                $purchaseAmount = str_replace('.','',$datos['PriceTotal']);
+                //$purchaseAmount = str_replace('.','',$datos['PriceTotal']);
+                $purchaseAmount = '080';
                 $purchaseCurrencyCode = '840'; //DOLARES AMERICANOS
                 
                 $claveSecretaVpos = $datosPayme['clave_vpos'];
