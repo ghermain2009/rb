@@ -28,7 +28,7 @@ class EnviopaymeForm extends Form {
         $this->add(array(
             'name' => 'acquirerId',
             'attributes' => array(
-                'type'  => 'text',
+                'type'  => 'hidden',
                 'class' => 'form-control input-sm',
                 'value' => $datos['acquirerId']
             ),
@@ -37,7 +37,7 @@ class EnviopaymeForm extends Form {
         $this->add(array(
             'name' => 'idCommerce',
             'attributes' => array(
-                'type'  => 'text',
+                'type'  => 'hidden',
                 'class' => 'form-control input-sm',
                 'value' => $datos['idCommerce']
             ),
@@ -46,7 +46,7 @@ class EnviopaymeForm extends Form {
         $this->add(array(
             'name' => 'purchaseOperationNumber',
             'attributes' => array(
-                'type'  => 'text',
+                'type'  => 'hidden',
                 'class' => 'form-control input-sm',
                 'value' => $datos['purchaseOperationNumber']
             ),
@@ -55,7 +55,7 @@ class EnviopaymeForm extends Form {
         $this->add(array(
             'name' => 'purchaseAmount',
             'attributes' => array(
-                'type'  => 'text',
+                'type'  => 'hidden',
                 'class' => 'form-control input-sm',
                 'value' => $datos['purchaseAmount']
             ),
@@ -64,7 +64,7 @@ class EnviopaymeForm extends Form {
         $this->add(array(
             'name' => 'purchaseCurrencyCode',
             'attributes' => array(
-                'type'  => 'text',
+                'type'  => 'hidden',
                 'class' => 'form-control input-sm',
                 'value' => $datos['purchaseCurrencyCode']
             ),
@@ -73,7 +73,7 @@ class EnviopaymeForm extends Form {
         $this->add(array(
             'name' => 'language',
             'attributes' => array(
-                'type'  => 'text',
+                'type'  => 'hidden',
                 'class' => 'form-control input-sm',
                 'value' => $datos['language']
             ),
@@ -82,7 +82,7 @@ class EnviopaymeForm extends Form {
         $this->add(array(
             'name' => 'shippingFirstName',
             'attributes' => array(
-                'type'  => 'text',
+                'type'  => 'hidden',
                 'class' => 'form-control input-sm',
                 'value' => $datos['shippingFirstName']
             ),
@@ -91,7 +91,7 @@ class EnviopaymeForm extends Form {
         $this->add(array(
             'name' => 'shippingLastName',
             'attributes' => array(
-                'type'  => 'text',
+                'type'  => 'hidden',
                 'class' => 'form-control input-sm',
                 'value' => $datos['shippingLastName']
             ),
@@ -100,7 +100,7 @@ class EnviopaymeForm extends Form {
         $this->add(array(
             'name' => 'shippingEmail',
             'attributes' => array(
-                'type'  => 'text',
+                'type'  => 'hidden',
                 'class' => 'form-control input-sm',
                 'value' => $datos['shippingEmail']
             ),
@@ -109,7 +109,7 @@ class EnviopaymeForm extends Form {
         $this->add(array(
             'name' => 'shippingAddress',
             'attributes' => array(
-                'type'  => 'text',
+                'type'  => 'hidden',
                 'class' => 'form-control input-sm',
                 'value' => $datos['shippingAddress']
             ),
@@ -118,7 +118,7 @@ class EnviopaymeForm extends Form {
         $this->add(array(
             'name' => 'shippingZIP',
             'attributes' => array(
-                'type'  => 'text',
+                'type'  => 'hidden',
                 'class' => 'form-control input-sm',
                 'value' => $datos['shippingZIP']
             ),
@@ -127,7 +127,7 @@ class EnviopaymeForm extends Form {
         $this->add(array(
             'name' => 'shippingCity',
             'attributes' => array(
-                'type'  => 'text',
+                'type'  => 'hidden',
                 'class' => 'form-control input-sm',
                 'value' => $datos['shippingCity']
             ),
@@ -136,7 +136,7 @@ class EnviopaymeForm extends Form {
         $this->add(array(
             'name' => 'shippingState',
             'attributes' => array(
-                'type'  => 'text',
+                'type'  => 'hidden',
                 'class' => 'form-control input-sm',
                 'value' => $datos['shippingState']
             ),
@@ -145,7 +145,7 @@ class EnviopaymeForm extends Form {
         $this->add(array(
             'name' => 'shippingCountry',
             'attributes' => array(
-                'type'  => 'text',
+                'type'  => 'hidden',
                 'class' => 'form-control input-sm',
                 'value' => $datos['shippingCountry']
             ),
@@ -154,7 +154,7 @@ class EnviopaymeForm extends Form {
         $this->add(array(
             'name' => 'userCommerce',
             'attributes' => array(
-                'type'  => 'text',
+                'type'  => 'hidden',
                 'class' => 'form-control input-sm',
                 'value' => $datos['userCommerce']
             ),
@@ -163,7 +163,7 @@ class EnviopaymeForm extends Form {
         $this->add(array(
             'name' => 'userCodePayme',
             'attributes' => array(
-                'type'  => 'text',
+                'type'  => 'hidden',
                 'class' => 'form-control input-sm',
                 'value' => $datos['userCodePayme']
             ),
@@ -172,7 +172,7 @@ class EnviopaymeForm extends Form {
         $this->add(array(
             'name' => 'descriptionProducts',
             'attributes' => array(
-                'type'  => 'text',
+                'type'  => 'hidden',
                 'class' => 'form-control input-sm',
                 'value' => $datos['descriptionProducts']
             ),
@@ -181,7 +181,7 @@ class EnviopaymeForm extends Form {
         $this->add(array(
             'name' => 'programmingLanguage',
             'attributes' => array(
-                'type'  => 'text',
+                'type'  => 'hidden',
                 'class' => 'form-control input-sm',
                 'value' => $datos['programmingLanguage']
             ),
@@ -190,7 +190,7 @@ class EnviopaymeForm extends Form {
         $this->add(array(
             'name' => 'reserved1',
             'attributes' => array(
-                'type'  => 'text',
+                'type'  => 'hidden',
                 'class' => 'form-control input-sm',
                 'value' => $datos['reserved1']
             ),
@@ -199,21 +199,21 @@ class EnviopaymeForm extends Form {
         $this->add(array(
             'name' => 'purchaseVerification',
             'attributes' => array(
-                'type'  => 'text',
+                'type'  => 'hidden',
                 'class' => 'form-control input-sm',
                 'value' => $datos['purchaseVerification']
             ),
         ));
         
-        $this->add(array(
-            'name' => 'submitbutton',
-            'attributes' => array(
-                'type'  => 'submit',
-                'value' => 'Enviar',
-                'id' => 'submitbutton',
-                'class'  => 'btn btn-default',
-            ),
-        ));
+//        $this->add(array(
+//            'name' => 'submitbutton',
+//            'attributes' => array(
+//                'type'  => 'submit',
+//                'value' => 'Enviar',
+//                'id' => 'submitbutton',
+//                'class'  => 'btn btn-default',
+//            ),
+//        ));
 
     }
 }
