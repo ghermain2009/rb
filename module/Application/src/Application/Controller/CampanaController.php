@@ -606,6 +606,8 @@ class CampanaController extends AbstractActionController {
         
         set_time_limit(0);
         
+        error_log(print_r($datos,true));
+        
         $orden = $datos["purchaseOperationNumber"];
         $estado_pasarela = $datos["authorizationResult"];
         $tipo_tarjeta = $datos["brand"];
