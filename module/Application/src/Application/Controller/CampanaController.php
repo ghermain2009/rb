@@ -252,7 +252,7 @@ class CampanaController extends AbstractActionController {
                 $reserved1 = '';
                 $reserved2 = '';
                 $reserved3 = '';
-                $desProducts = substr($datos['nameproducto'],0,30);
+                $desProducts = $datos['nameproducto'];
 
                 //Clave SHA-2.
                 $claveSecreta = $datosPayme['clave_wallet'];
