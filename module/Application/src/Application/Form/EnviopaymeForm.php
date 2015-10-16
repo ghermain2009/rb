@@ -174,7 +174,7 @@ class EnviopaymeForm extends Form {
             'attributes' => array(
                 'type'  => 'hidden',
                 'class' => 'form-control input-sm',
-                'value' => $datos['descriptionProducts']
+                'value' => utf8_decode($datos['descriptionProducts'])
             ),
         ));
         
