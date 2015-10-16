@@ -191,7 +191,9 @@ class CampanaController extends AbstractActionController {
         $clienteTable->addCliente($datos);
 
         $cuponTable = $serviceLocator->get('Dashboard\Model\CupcuponTable');
-        $idTransaccion = $cuponTable->addCupon($datos,$serviceLocator);
+        //$idTransaccion = $cuponTable->addCupon($datos,$serviceLocator);
+        $idTransaccion = 171;
+        
         
         $config = $serviceLocator->get('config');
         
