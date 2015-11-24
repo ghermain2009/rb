@@ -244,7 +244,8 @@ class CampanaController extends AbstractActionController {
                 //$url_vpos     = $datosPayme['url_vpos'];
                 
                 
-                $idEntCommerce = 198;//$id_commerce;
+                //$idEntCommerce = 198;//$id_commerce;
+                $idEntCommerce = 199;//$id_commerce;
                 $codCardHolderCommerce = $clientePaymeTable->addClientePayme($datos['email']);
                 $nombres = preg_split('/\s/',$datos['nombre']);
                 $names = $nombres[0];
@@ -301,8 +302,8 @@ class CampanaController extends AbstractActionController {
                 $acquirerId = $id_adquirer;
                 $idCommerce = $id_commerce;
                 $purchaseOperationNumber = $idTransaccion;
-                //$purchaseAmount = str_replace('.','',$datos['PriceTotal']);
-                $purchaseAmount = '80';
+                $purchaseAmount = str_replace('.','',$datos['PriceTotal']);
+                //$purchaseAmount = '80';
                 $purchaseCurrencyCode = '840'; //DOLARES AMERICANOS
                 
                 $claveSecretaVpos = $datosPayme['clave_vpos'];
