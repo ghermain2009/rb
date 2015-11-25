@@ -58,6 +58,16 @@ return array(
                     ),
                 ),
             ),
+            'pagorequest' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route'    => '/campana/pagorequest',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Campana',
+                        'action'     => 'pagorequest',
+                    ),
+                ),
+            ),
             'detalle' => array(
                 'type' => 'Segment',
                 'options' => array(
