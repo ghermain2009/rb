@@ -613,39 +613,46 @@ class CampanaController extends AbstractActionController {
         
         error_log(print_r($datos,true));
         
-        $orden = $datos["purchaseOperationNumber"];
-        $estado_pasarela = $datos["authorizationResult"];
-        $tipo_tarjeta = $datos["brand"];
-        $numero_tarjeta = $datos["paymentReferenceCode"];
-        $autorizacion = $datos["authorizationCode"];
-        $codigo_error = $datos["errorCode"];
-        $mensaje_error = $datos["errorMessage"];
+        if( count($datos) > 0 ) {
         
-        switch($estado_pasarela) {
-            case '00' :
-                $estado = '3';
-                break;
-            default :
-                $estado = '8';
-                break;
-        }
+            $orden = $datos["purchaseOperationNumber"];
+            $estado_pasarela = $datos["authorizationResult"];
+            $tipo_tarjeta = $datos["brand"];
+            $numero_tarjeta = $datos["paymentReferenceCode"];
+            $autorizacion = $datos["authorizationCode"];
+            $codigo_error = $datos["errorCode"];
+            $mensaje_error = $datos["errorMessage"];
 
-        $serviceLocator = $this->getServiceLocator();
-        
-        $config = $serviceLocator->get('Config');
-        $localhost = $config['constantes']['localhost'];
-        $cuponTable = $serviceLocator->get('Dashboard\Model\CupcuponTable');
-        $opcion_campana = $cuponTable->updEstadoVenta($orden, $estado);
-        
-        $set = array('estado_payme' => $estado_pasarela,  
-                     'brand_payme' => $tipo_tarjeta,
-                     'tarjeta_payme' => $numero_tarjeta,
-                     'autorizacion_payme' => $autorizacion,
-                     'error_code_payme' => $codigo_error,
-                     'error_message_payme' => $mensaje_error);
-        
-        $where = array('id_cupon' => $orden);
-        $datos_payme = $cuponTable->updDatosPayme($set, $where);
+            switch($estado_pasarela) {
+                case '00' :
+                    $estado = '3';
+                    break;
+                default :
+                    $estado = '8';
+                    break;
+            }
+
+            $serviceLocator = $this->getServiceLocator();
+
+            $config = $serviceLocator->get('Config');
+            $localhost = $config['constantes']['localhost'];
+            $cuponTable = $serviceLocator->get('Dashboard\Model\CupcuponTable');
+            $opcion_campana = $cuponTable->updEstadoVenta($orden, $estado);
+
+            $set = array('estado_payme' => $estado_pasarela,  
+                         'brand_payme' => $tipo_tarjeta,
+                         'tarjeta_payme' => $numero_tarjeta,
+                         'autorizacion_payme' => $autorizacion,
+                         'error_code_payme' => $codigo_error,
+                         'error_message_payme' => $mensaje_error);
+
+            $where = array('id_cupon' => $orden);
+            $datos_payme = $cuponTable->updDatosPayme($set, $where);
+            
+        } else {
+            $estado = '9';
+            $estado_pasarela = '99';
+        }
 
         if ($estado == '3') {
             
@@ -682,6 +689,9 @@ class CampanaController extends AbstractActionController {
                     break;
                 case '05':
                     $mensaje = 'Operación Rechazada.';
+                    break;
+                case '99':
+                    $mensaje = 'Datos de la pasarela no fueron recibidos correctamente.';
                     break;
             }
             //Mostramos Mensaje de error en caso la compra no sea satisfactoria
