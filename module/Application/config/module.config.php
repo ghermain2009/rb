@@ -38,13 +38,13 @@ return array(
                     ),
                 ),
             ),
-            'errorpayme' => array(
+            'errorpagopayme' => array(
                 'type' => 'Literal',
                 'options' => array(
-                    'route'    => '/campana/errorpayme',
+                    'route'    => '/campana/errorpagopayme',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Campana',
-                        'action'     => 'errorpayme',
+                        'action'     => 'errorpagopayme',
                     ),
                 ),
             ),
