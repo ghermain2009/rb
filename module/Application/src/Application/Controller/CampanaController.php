@@ -615,6 +615,7 @@ class CampanaController extends AbstractActionController {
         
         if( count($datos) > 0 ) {
         
+            error_log('linea 0');
             
             $orden = $datos["purchaseOperationNumber"];
             $estado_pasarela = $datos["authorizationResult"];
@@ -651,6 +652,7 @@ class CampanaController extends AbstractActionController {
                          'error_code_payme' => $codigo_error,
                          'error_message_payme' => $mensaje_error);
 
+            error_log('linea 1');
             $where = array('id_cupon' => $orden);
             $datos_payme = $cuponTable->updDatosPayme($set, $where);
             
@@ -688,6 +690,7 @@ class CampanaController extends AbstractActionController {
             
         } else {
             
+            error_log('linea 2');
             switch($estado_pasarela) {
                 case '01':
                     $mensaje = 'Operación Denegada.';
@@ -710,6 +713,8 @@ class CampanaController extends AbstractActionController {
             $request->setMethod('POST'); 
             $request->getPost()->set('orden', $orden);
             $request->getPost()->set('mensaje', $mensaje);
+            
+            error_log('linea 3');
 
             $confCurl = array(
                 'adapter'   => 'Zend\Http\Client\Adapter\Curl',
