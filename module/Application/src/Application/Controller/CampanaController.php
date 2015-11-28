@@ -238,14 +238,8 @@ class CampanaController extends AbstractActionController {
                 $datosPayme   = $config['payme'];
                 $id_commerce = $datosPayme['id_commerce'];
                 $id_adquirer  = $datosPayme['id_adquirer'];
-                //$clave_wallet = $datosPayme['clave_wallet'];
-                //$url_wallet   = $datosPayme['url_wallet'];
-                //$clave_vpos   = $datosPayme['clave_vpos'];
-                //$url_vpos     = $datosPayme['url_vpos'];
-                
-                
-                //$idEntCommerce = 198;//$id_commerce;
-                $idEntCommerce = 41;//$id_commerce;
+                $idEntCommerce = $datosPayme['id_ent_commerce'];
+
                 $codCardHolderCommerce = $clientePaymeTable->addClientePayme($datos['email']);
                 $nombres = preg_split('/\s/',$datos['nombre']);
                 $names = $nombres[0];
@@ -615,8 +609,6 @@ class CampanaController extends AbstractActionController {
         
         if( count($datos) > 0 ) {
         
-            error_log('linea 0');
-            
             $orden = $datos["purchaseOperationNumber"];
             $estado_pasarela = $datos["authorizationResult"];
             $tipo_tarjeta = $datos["brand"];
@@ -652,7 +644,6 @@ class CampanaController extends AbstractActionController {
                          'error_code_payme' => $codigo_error,
                          'error_message_payme' => $mensaje_error);
 
-            error_log('linea 1');
             $where = array('id_cupon' => $orden);
             $datos_payme = $cuponTable->updDatosPayme($set, $where);
             
@@ -689,8 +680,7 @@ class CampanaController extends AbstractActionController {
             );
             
         } else {
-            
-            error_log('linea 2');
+
             switch($estado_pasarela) {
                 case '01':
                     $mensaje = 'Operación Denegada.';
@@ -714,8 +704,6 @@ class CampanaController extends AbstractActionController {
             $request->getPost()->set('orden', $orden);
             $request->getPost()->set('mensaje', $mensaje);
             
-            error_log('linea 3');
-
             $confCurl = array(
                 'adapter'   => 'Zend\Http\Client\Adapter\Curl',
                 'curloptions' => array(CURLOPT_CONNECTTIMEOUT => 0)
