@@ -615,10 +615,15 @@ class CampanaController extends AbstractActionController {
         
         if( count($datos) > 0 ) {
         
+            
             $orden = $datos["purchaseOperationNumber"];
             $estado_pasarela = $datos["authorizationResult"];
             $tipo_tarjeta = $datos["brand"];
-            $numero_tarjeta = $datos["paymentReferenceCode"];
+            if( !isset($datos["paymentReferenceCode"])) {
+                $numero_tarjeta = '';
+            } else {
+                $numero_tarjeta = $datos["paymentReferenceCode"];
+            }
             $autorizacion = $datos["authorizationCode"];
             $codigo_error = $datos["errorCode"];
             $mensaje_error = $datos["errorMessage"];
