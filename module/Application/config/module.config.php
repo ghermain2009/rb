@@ -38,6 +38,16 @@ return array(
                     ),
                 ),
             ),
+            'errorpayme' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route'    => '/campana/errorpayme',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Campana',
+                        'action'     => 'errorpayme',
+                    ),
+                ),
+            ),
             'pagopayme' => array(
                 'type' => 'Literal',
                 'options' => array(
