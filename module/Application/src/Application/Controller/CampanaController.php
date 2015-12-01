@@ -319,7 +319,7 @@ class CampanaController extends AbstractActionController {
                                     'shippingZIP' => 'N/A',
                                     'shippingCity' => 'N/A',
                                     'shippingState' => 'N/A',
-                                    'shippingCountry' => 'N/A',
+                                    'shippingCountry' => 'EC',
                                     'userCommerce' => $codCardHolderCommerce,
                                     'userCodePayme' => $codAsoCardHolderWallet,
                                     'descriptionProducts' => $desProducts,
