@@ -2,7 +2,7 @@
 <form name="frmpago" role="form" action="/campana/pago" method="POST" data-parsley-validate>
     <div>
     <?php foreach ($data_o as $dato) { ?>
-    <input type="hidden" class="form-control" name="nameproducto" id="nameproducto" value="<?php echo strip_tags($dato['descripcion']); ?>">
+    <input type="hidden" class="form-control" name="nameproducto" id="nameproducto" value="<?php echo substr(strip_tags($dato['descripcion']),0,30); ?>">
     <?php } ?>
     <div class="section_payment">
         <?php if (($fl != null && $fl == '2') || isset($user_session->username) ) { ?>
