@@ -222,6 +222,10 @@ $user_session = new Container('user');
             var fname = response.first_name;
             var lname = response.last_name;
             var sex;
+            console.log('email -> ' + email);
+            console.log('fname -> ' + fname);
+            console.log('lname -> ' + lname);
+            console.log('sexo  -> ' + response.gender);
             if (response.gender === 'male')
                 sex = 'M';
             else
