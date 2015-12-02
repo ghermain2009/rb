@@ -616,7 +616,7 @@ $user_session = new Container('user');
         FB.login(function (response) {
             if (response.status === 'connected')
                 testAPI();
-        });
+        },{scope: 'public_profile,email'});
     }
 
     function shareFacebook() {
