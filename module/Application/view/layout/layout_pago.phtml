@@ -197,10 +197,9 @@ $user_session = new Container('user');
         FB.login(function (response) {
             if (response.status === 'connected')
                 testAPI();
-        });
-    }
-
-    function shareFacebook() {
+        },{scope: 'email'});
+        
+      function shareFacebook() {
         FB.ui(
                 {
                     method: 'share',
