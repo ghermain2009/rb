@@ -14,7 +14,7 @@
             <div class="form-group">
                 <label for="email_contacto" class="col-lg-2 control-label">Email Contacto :</label>
                 <div class="col-lg-8">
-                    <input class="form-control input-sm" type="text" name="email_contacto" id="nombre_contacto" value="<?php echo $contra['email_contacto'];?>">
+                    <input class="form-control input-sm" type="text" name="email_contacto" id="email_contacto" value="<?php echo $contra['email_contacto'];?>">
                 </div>
             </div>
             <div class="form-group">
@@ -25,7 +25,7 @@
             </div>
             <div class="form-group">
                 <div class="col-lg-offset-2 col-lg-7">
-                    <a class="btn btn-success btn-sm" id="enviar_contrato"><span class="glyphicon glyphicon-envelope"></span> Enviar Contrato</a>
+                    <a class="btn btn-success btn-sm" id="enviar_contrato"><span class="glyphicon glyphicon-envelope"></span> Enviar Contrato para Firma</a>
                 </div>
             </div>
         </div>
@@ -47,9 +47,21 @@
     });
     
     $('#enviar_contrato').click(function() {
-        var params = 'nombre_documento=<?php echo $contra['nombre_documento'];?>';
-
-        window.open('/dashboard/empresa/obtener-pdf-contrato?' + params, '_blank');
+        var email_contacto;
+        var nombre_contacto;
+        var id_contrato = '<?php echo $contra['id_contrato'];?>';
+        
+        email_contacto  = $('#email_contacto').val();
+        nombre_contacto = $('#nombre_contacto').val();
+        
+        $.ajax({
+            type: "POST",
+            url: "/dashboard/empresa/enviar-contrato",
+            data: {email_contacto: email_contacto, nombre_contacto: nombre_contacto, id_contrato: id_contrato},
+            success: function (data) {
+                alert('ya lo envie');
+            }
+        });
     });
                                     
 </script>

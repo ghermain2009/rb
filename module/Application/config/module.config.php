@@ -25,6 +25,17 @@ return array(
                     
                 ),
             ),
+            'empresa' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/empresa[/:action]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Empresa',
+                        'action'     => 'index',
+                    ),
+                    
+                ),
+            ),
             'interes' => array(
                 'type' => 'segment',
                 'options' => array(
@@ -164,6 +175,7 @@ return array(
             'Application\Controller\Campana' => 'Application\Controller\CampanaController',
             'Application\Controller\Interes' => 'Application\Controller\InteresController',
             'Application\Controller\Cliente' => 'Application\Controller\ClienteController',
+            'Application\Controller\Empresa' => 'Application\Controller\EmpresaController',
             ),
     ),
     'view_manager' => array(

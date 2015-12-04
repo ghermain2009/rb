@@ -15,6 +15,13 @@ use ZfcDatagrid\Column;
 use Zend\Session\Container;
 use Zend\Json\Json;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Mail\Message;
+use Zend\Mail\Transport\Smtp as SmtpTransport;
+use Zend\Mime\Message as MimeMessage;
+use Zend\Mime\Part as MimePart;
+use Zend\Mail\Transport\SmtpOptions;
+use Zend\View\Renderer\PhpRenderer;
+use Zend\View\Resolver\TemplateMapResolver;
 /**
  * Description of EmpresaController
  *
@@ -442,4 +449,97 @@ class EmpresaController extends AbstractActionController {
         
         return $nombre;
     }
+    
+    public function enviarContratoAction() {
+
+        $email_contacto = $this->params()->fromPost("email_contacto", null);
+        $nombre_contacto = $this->params()->fromPost("nombre_contacto", null);
+        $id_contrato = $this->params()->fromPost("id_contrato", null);
+
+        $serviceLocator = $this->getServiceLocator();
+        $config = $serviceLocator->get('Config');
+        
+        $activo   = $config['correo']['activo'];
+        $name     = $config['correo']['name'];
+        $host     = $config['correo']['host'];
+        $port     = $config['correo']['port'];
+        $tls      = $config['correo']['tls'];
+        $username = $config['correo']['username'];
+        $password = $config['correo']['password'];
+        $cuenta   = $config['correo']['cuenta-recuperar-clave'];
+        $localhost = $config['constantes']['localhost'];
+        $telefono = $config['empresa']['telefono'];
+
+        $data = array();
+        $data[0]['validar'] = '2';
+        
+        $nombre = $nombre_contacto;
+        $token = base64_encode($id_contrato);
+
+        if( $activo == '1' ) {
+
+            $message = new Message();
+            $message->addTo($email_contacto)
+                    ->addBcc("german@rebueno.ec")
+                    ->addFrom($cuenta)
+                    ->setSubject('Firma de Contrato Rebueno!‏');
+
+            if( $tls ) {
+                $connection_config = array(
+                    'ssl' => 'tls',
+                    'username' => $username,
+                    'password' => $password
+                );
+            } else {
+                $connection_config = array(
+                    'username' => $username,
+                    'password' => $password
+                );
+            }
+
+            $transport = new SmtpTransport();
+            $options = new SmtpOptions(array(
+                'name' => $name,
+                'host' => $host,
+                'port' => $port,
+                'connection_class' => 'login',
+                'connection_config' => $connection_config
+            ));
+
+            $resolver = new TemplateMapResolver();
+            $resolver->setMap(array(
+                'mailLayout' => __DIR__ . '/../../../../Dashboard/view/dashboard/empresa/emailcontrato.phtml'
+            ));
+
+            $rendered = new PhpRenderer();
+            $rendered->setResolver($resolver);
+
+            $viewModel = new ViewModel();
+            $viewModel->setTemplate('mailLayout')->setVariables(array(
+                'nombre' => $nombre,
+                'token' => $token,
+                'localhost' => $localhost,
+                'telefono' => $telefono
+            ));
+
+            $content = $rendered->render($viewModel);
+
+            $html = new MimePart($content);
+            $html->type = "text/html";
+
+            $body = new MimeMessage();
+            $body->addPart($html);
+
+            $message->setBody($body);
+
+            $transport->setOptions($options);
+            $transport->send($message);
+            
+            $data[0]['validar'] = '1';
+            
+        }
+
+        return $this->getResponse()->setContent(Json::encode($data));
+    }
+    
 }
