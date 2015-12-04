@@ -23,14 +23,21 @@ class EmpresaController extends AbstractActionController {
         $token = $this->params()->fromQuery("token", null);
 
         $id_contrato = base64_decode($token);
+        
+        error_log($id_contrato);
 
         $serviceLocator = $this->getServiceLocator();
         $config = $serviceLocator->get('config');
-        //$clienteTable = $serviceLocator->get('Dashboard\Model\CupclienteTable');
-        //$datos = $clienteTable->getUsuarioByUser($email);
-
         
+        $contratoTable = $serviceLocator->get('Dashboard\Model\ConcontratoTable');
+        $contrato = $contratoTable->getContratoId($id_contrato);
         
+        $nombre_documento = '';
+        
+        foreach( $contrato as $cont ) {
+            $nombre_documento = $cont["nombre_documento"];
+        }
+                
         $pais = $config['id_pais'];
         $capital = $config['id_capital'];
         
@@ -48,7 +55,36 @@ class EmpresaController extends AbstractActionController {
         $telefono_empresa = $config['empresa']['telefono'];
         $this->layout()->telefono_empresa = $telefono_empresa;
         
-        return new ViewModel(array('nombre_documento' => $id_contrato) );
+        return new ViewModel(array('nombre_documento' => $nombre_documento) );
     }
     
+    public function verContratoPdfAction() 
+    {
+        $serviceLocator = $this->getServiceLocator();
+        $response = $this->getResponse();
+        $config = $serviceLocator->get('Config');
+        $dir_image = $config['constantes']['dir_image'];
+        $sep_path  = $config['constantes']['sep_path'];
+        
+        $directorio = $dir_image.$sep_path."..".$sep_path."..".$sep_path."data".$sep_path."contratos".$sep_path;
+        
+        $params = $this->params()->fromQuery();
+        
+        $nombreDocumento = !empty($params['nombre_documento']) ? $params['nombre_documento'] : '';
+        
+        $rutaDocumento = $directorio. 
+                         $nombreDocumento.'.pdf';
+        
+        $contenidoDocumento = file_get_contents($rutaDocumento);
+        $response->setContent($contenidoDocumento);
+
+        $headers = $response->getHeaders();
+        $headers->clearHeaders()
+                ->addHeaderLine('Content-Type', 'application/pdf')
+                ->addHeaderLine('Content-Disposition', 'inline; filename="'.$nombreDocumento.'.pdf"')
+                ->addHeaderLine('Content-Length', strlen($contenidoDocumento));
+
+
+        return $this->response;
+    }
 }
