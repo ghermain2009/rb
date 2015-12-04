@@ -27,6 +27,7 @@ class Genempresa {
     public $tipo_documento_representante;
     public $documento_representante;
     public $nombre_representante;
+    public $rubro;
     public $id_operador;
     
     public function getId_empresa() {
@@ -83,6 +84,10 @@ class Genempresa {
 
     public function getNombre_representante() {
         return $this->nombre_representante;
+    }
+    
+    public function getRubro() {
+        return $this->rubro;
     }
 
     public function getId_operador() {
@@ -144,6 +149,10 @@ class Genempresa {
     public function setNombre_representante($nombre_representante) {
         $this->nombre_representante = $nombre_representante;
     }
+    
+    public function setRubro($rubro) {
+        $this->rubro = $rubro;
+    }
 
     public function setId_operador($id_operador) {
         $this->id_operador = $id_operador;
@@ -165,6 +174,7 @@ class Genempresa {
         $this->tipo_documento_representante = (isset($data['tipo_documento_representante'])) ? $data['tipo_documento_representante'] : null;
         $this->documento_representante = (isset($data['documento_representante'])) ? $data['documento_representante'] : null;
         $this->nombre_representante = (isset($data['nombre_representante'])) ? $data['nombre_representante'] : null;
+        $this->rubro = (isset($data['rubro'])) ? $data['rubro'] : null;
         $this->id_operador = (isset($data['id_operador'])) ? $data['id_operador'] : null;
     }
  

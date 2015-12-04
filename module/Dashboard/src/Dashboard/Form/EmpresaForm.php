@@ -143,6 +143,15 @@ class EmpresaForm extends Form
         ));
         
         $this->add(array(
+            'name' => 'rubro',
+            'attributes' => array(
+                'type'  => 'text',
+                'class' => 'form-control input-sm',
+                'placeholder' => 'Ingrese el Rubro de la Empresa'
+            ),
+        ));
+        
+        $this->add(array(
             'name' => 'id_operador',
             'attributes' => array(
                 'type'  => 'text',

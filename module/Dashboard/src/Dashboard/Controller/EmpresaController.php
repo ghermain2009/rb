@@ -190,6 +190,7 @@ class EmpresaController extends AbstractActionController {
                 $form->get('tipo_documento_representante')->setValue($empresa['tipo_documento_representante']);
                 $form->get('documento_representante')->setValue($empresa['documento_representante']);
                 $form->get('nombre_representante')->setValue($empresa['nombre_representante']);
+                $form->get('rubro')->setValue($empresa['rubro']);
                 $form->get('id_operador')->setValue($empresa['id_operador']);
             //}
         }
@@ -285,6 +286,7 @@ class EmpresaController extends AbstractActionController {
                     'tipdoc_representante' => $datosEmpresa[0]['tipo_documento'],
                     'numero_representante' => $datosEmpresa[0]['documento_representante'],
                     'nombre_representante' => $datosEmpresa[0]['nombre_representante'],
+                    'rubro' => $datosEmpresa[0]['rubro'],
                     'nombre_mes' => $this->_obtenerNombreMes(date('m'))
                 ));
 
@@ -303,6 +305,76 @@ class EmpresaController extends AbstractActionController {
         }
         
         return new ViewModel(array('contrato' => $contrato ));
+        
+    }
+    
+    public function actualizacontratoAction() {
+        
+        set_time_limit(0);
+        
+        $id_contrato = $this->params()->fromQuery("id_contrato", null);
+        
+        
+        
+        $serviceLocator = $this->getServiceLocator();
+        $response = $this->getResponse();
+        $contratoTable = $serviceLocator->get('Dashboard\Model\ConcontratoTable');
+        $contrato = $contratoTable->getContratoId($id_contrato);
+        
+        $config = $serviceLocator->get('Config');
+        $dir_image = $config['constantes']['dir_image'];
+        $sep_path = $config['constantes']['sep_path'];
+        
+        $directorio = $dir_image.$sep_path."..".$sep_path."..".$sep_path."data".$sep_path."contratos".$sep_path;
+        $rutaDocumento = '';
+        $nombreDocumento = '';
+        foreach( $contrato as $cont ) {
+            
+            $empresaTable = $serviceLocator->get('Dashboard\Model\GenempresaTable');
+            $datosEmpresa = $empresaTable->getEmpresa($cont['id_empresa']);
+        
+            //if(!is_file($directorio.$cont["nombre_documento"].'.pdf')) {
+                $documentoPdf = new PdfModel();
+                $documentoPdf->setOption('filename', $cont["nombre_documento"].'.pdf');
+                $documentoPdf->setOption('paperOrientation', 'portrait');
+                $documentoPdf->setVariables(array(
+                    'ruc' => $datosEmpresa[0]['registro_contribuyente'],
+                    'razon' => $datosEmpresa[0]['razon_social'],
+                    'direccion' => $datosEmpresa[0]['direccion_facturacion'],
+                    'tipdoc_representante' => $datosEmpresa[0]['tipo_documento'],
+                    'numero_representante' => $datosEmpresa[0]['documento_representante'],
+                    'nombre_representante' => $datosEmpresa[0]['nombre_representante'],
+                    'rubro' => $datosEmpresa[0]['rubro'],
+                    'nombre_mes' => $this->_obtenerNombreMes(date('m'))
+                ));
+
+                $documentoPdf->setTerminal(true);
+                $documentoPdf->setTemplate('dashboard/empresa/contrato-pdf.phtml');
+                $htmlPdf = $serviceLocator->get('viewPdfrenderer')->getHtmlRenderer()->render($documentoPdf);
+                $engine = $serviceLocator->get('viewPdfrenderer')->getEngine();
+                // Cargamos el HTML en DOMPDF
+                $engine->load_html($htmlPdf);
+                $engine->render();
+                // Obtenemos el PDF en memoria
+                $pdfCode = $engine->output();
+                
+                $nombreDocumento = $cont["nombre_documento"];
+                $rutaDocumento = $directorio.$nombreDocumento.'.pdf';
+                file_put_contents($rutaDocumento, $pdfCode);
+            //}
+        }
+        
+        $contenidoDocumento = file_get_contents($rutaDocumento);
+        $response->setContent($contenidoDocumento);
+
+        $headers = $response->getHeaders();
+        $headers->clearHeaders()
+                ->addHeaderLine('Content-Type', 'application/pdf')
+                ->addHeaderLine('Content-Disposition', 'attachment; filename="'.$nombreDocumento.'.pdf"')
+                ->addHeaderLine('Content-Length', strlen($contenidoDocumento));
+
+
+        return $this->response;
         
     }
     

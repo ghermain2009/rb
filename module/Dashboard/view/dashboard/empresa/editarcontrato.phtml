@@ -2,7 +2,7 @@
     <?php foreach($contrato as $contra) {?>
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <div>Contrato Nro. <?php echo $contra['nombre_documento'];?><div style="float:right;margin: 0px;padding: 0px; position: relative; top:-5px "><a class="btn btn-primary btn-sm" id="descarga_documento"><span class="glyphicon glyphicon-download"></span> Descargar</a></div></div>
+            <div>Contrato Nro. <?php echo $contra['nombre_documento'];?><div style="float:right;margin: 0px;padding: 0px; position: relative; top:-5px "><a class="btn btn-danger btn-sm" id="refresca_documento"><span class="glyphicon glyphicon-refresh"></span> Actualizar Contrato</a>&nbsp;&nbsp;&nbsp;<a class="btn btn-primary btn-sm" id="descarga_documento"><span class="glyphicon glyphicon-download"></span> Descargar</a></div></div>
         </div>
         <div class="panel-body">
             <div class="form-group">
@@ -38,6 +38,12 @@
         var params = 'nombre_documento=<?php echo $contra['nombre_documento'];?>';
 
         window.open('/dashboard/empresa/obtener-pdf-contrato?' + params, '_blank');
+    });
+    
+    $('#refresca_documento').click(function() {
+        var params = 'id_contrato=<?php echo $contra['id_contrato'];?>';
+        
+        window.open('/dashboard/empresa/actualiza-contrato?' + params, '_blank');
     });
     
     $('#enviar_contrato').click(function() {
