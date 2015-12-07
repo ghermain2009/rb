@@ -68,6 +68,8 @@ class ConcontratoTable {
                                'nombre_contacto' => 'nombre_contacto',
                                'email_contacto' => 'email_contacto',
                                'fecha_registro' => new Expression("DATE_FORMAT(fecha_registro,'%d-%m-%Y %h:%i:%s')") ,
+                               'firma_documento' => 'firma_documento',
+                               'fecha_firma' => new Expression("DATE_FORMAT(fecha_firma,'%d-%m-%Y %h:%i:%s')") ,
                                'nombre_documento' => 'nombre_documento',
                                'id_estado'   => 'id_estado'));
         $select->from('con_contrato')
@@ -77,5 +79,12 @@ class ConcontratoTable {
         $result = $statement->execute();
 
         return ArrayUtils::iteratorToArray($result);
+    }
+    
+    public function editContrato($set, $where)
+    {
+      
+        $rs = $this->tableGateway->update($set, $where);
+        return $rs;
     }
 }

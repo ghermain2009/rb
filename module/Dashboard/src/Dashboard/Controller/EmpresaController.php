@@ -459,6 +459,14 @@ class EmpresaController extends AbstractActionController {
         $serviceLocator = $this->getServiceLocator();
         $config = $serviceLocator->get('Config');
         
+        $set = array('nombre_contacto' => $nombre_contacto,
+                     'email_contacto' => $email_contacto);
+        
+        $where = array('id_contrato' => $id_contrato);
+        
+        $campanaTable = $serviceLocator->get('Dashboard\Model\ConcontratoTable');
+        $campanaTable->editContrato($set,$where);
+        
         $activo   = $config['correo']['activo'];
         $name     = $config['correo']['name'];
         $host     = $config['correo']['host'];
@@ -466,7 +474,7 @@ class EmpresaController extends AbstractActionController {
         $tls      = $config['correo']['tls'];
         $username = $config['correo']['username'];
         $password = $config['correo']['password'];
-        $cuenta   = $config['correo']['cuenta-recuperar-clave'];
+        $cuenta   = $config['correo']['cuenta-mensajes-empresas'];
         $localhost = $config['constantes']['localhost'];
         $telefono = $config['empresa']['telefono'];
 

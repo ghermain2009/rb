@@ -35,9 +35,11 @@ class EmpresaController extends AbstractActionController {
         $contrato = $contratoTable->getContratoId($id_contrato);
         
         $nombre_documento = '';
+        $id_estado = '';
         
         foreach( $contrato as $cont ) {
             $nombre_documento = $cont["nombre_documento"];
+            $id_estado = $cont["id_estado"];
         }
                 
         $pais = $config['id_pais'];
@@ -58,7 +60,8 @@ class EmpresaController extends AbstractActionController {
         $this->layout()->telefono_empresa = $telefono_empresa;
         
         return new ViewModel(array('nombre_documento' => $nombre_documento,
-                                   'id_contrato' => $token) );
+                                   'id_contrato' => $token,
+                                   'id_estado' => $id_estado) );
     }
     
     public function verContratoPdfAction() 
@@ -162,6 +165,15 @@ class EmpresaController extends AbstractActionController {
             file_put_contents($directorio.$nombre_documento.'.pdf', $pdfCode);
             
         }
+        
+        $set = array('firma_documento' => $nombre_firmante,
+                     'fecha_firma' => date('Y-m-d H:i:s'),
+                     'id_estado' => '2');
+        
+        $where = array('id_contrato' => $id_contrato);
+        
+        $campanaTable = $serviceLocator->get('Dashboard\Model\ConcontratoTable');
+        $campanaTable->editContrato($set,$where);
         
         $pais = $config['id_pais'];
         $capital = $config['id_capital'];

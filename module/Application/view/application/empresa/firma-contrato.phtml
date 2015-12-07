@@ -1,5 +1,9 @@
 <br/>
+<?php if($id_estado == '2') { ?>
+<div class="container"><b>Contrato Rebueno Firmado</b></div>
+<?php } else { ?>
 <div class="container"><b>Firma de Contrato Rebueno</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-success btn-sm" id="registrar_firma"><span class="glyphicon glyphicon-user"></span> Registrar Firma</a></div>
+<?php } ?>
 <br/>
 <div class="container">
     <iframe src='/empresa/ver-contrato-pdf?nombre_documento=<?php echo $nombre_documento;?>' class="container" style="height:600px"></iframe>
