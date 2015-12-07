@@ -4,7 +4,7 @@
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
         <title>Documento PDF</title>
         <style type="text/css">
-            body {
+             body {
                 font-family: Helvetica;
                 font-size: 9px;
             }
@@ -64,11 +64,29 @@
                 width: 50%;
                 text-align: center;
             }
-
+            
+            .table-firma {
+                padding: 0px;
+                margin: 0px;
+                width: 150px;
+            }
+            
             ul {
                 margin-left: 0px;
                 padding-left: 0px;
             }
+            
+            .centrar-div {
+                margin: 0 auto;
+            }
+            
+            .centrar-div.corrida {
+                height: 55px;
+                font-family: 'journal';
+                font-size: 2.875em;
+                color: #165595;
+            }
+            
         </style>
     </head>
     <body>
@@ -277,10 +295,30 @@
                 <p><b>DÉCIMA TERCERA: DERECHO APLICABLE Y JURISDICCIÓN</b></p>
                 <p class='justificado'>Este Acuerdo está sujeto a las Leyes de la República del Ecuador. Todo litigio, controversia, desavenencia o reclamo resultante, relacionada o derivada del presente acuerdo o que guarde relación con él, incluidas las relativas a su validez, eficacia o terminación, serán resueltas ante los jueces de la ciudad de Guayaquil, renunciando a cualquier otra jurisdicción.</p>
                 <p class='justificado borde-top'>Las partes suscriben el presente documento en señal de conformidad con lo expresado en el presente acuerdo de alianza estratégica, en la ciudad de Guayaquil a los <?php echo date('d');?> días del mes de <?php echo $nombre_mes;?> del año <?php echo date('Y');?>.</p>
+                
+                <?php if(empty($this->nombre_firmante)) { ?>
                 <div class="firma-contenedor">
                     <div class="firma">ECUADORPUNTOCOM C.L.</div>
                     <div class="firma">ALIADO ESTRATÉGICO</div>
                 </div>
+                <?php } else { ?>
+                <div class="firma-contenedor">
+                    <div class="firma">
+                        <div class="centrar-div corrida">Carolina Granda Barzola</div>
+                        <div class="centrar-div">CAROLINA GRANDA BARZOLA</div>
+                        <div class="centrar-div">ECUADORPUNTOCOM C.L.</div>
+                    </div>
+                    <div class="firma">
+                        <?php if( $this->img_firma == '' ) { ?>
+                        <div class="centrar-div corrida"><?php echo $this->nombre_firmante; ?></div>
+                        <?php } else { ?>
+                        <div class="centrar-div corrida"><img src="<?php echo $this->img_firma; ?>" width="150" height="55"/></div>
+                        <?php } ?>
+                        <div class="centrar-div"><?php echo strtoupper($this->nombre_firmante); ?></div>
+                        <div class="centrar-div">ALIADO ESTRATÉGICO</div>
+                    </div>
+                </div>
+                <?php } ?>
             </div>
         </div>
     </body>

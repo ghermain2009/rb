@@ -15,6 +15,8 @@ namespace Application\Controller;
  */
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Application\Services\Variados;
+use DOMPDFModule\View\Model\PdfModel;
 
 class EmpresaController extends AbstractActionController {
 
@@ -55,7 +57,8 @@ class EmpresaController extends AbstractActionController {
         $telefono_empresa = $config['empresa']['telefono'];
         $this->layout()->telefono_empresa = $telefono_empresa;
         
-        return new ViewModel(array('nombre_documento' => $nombre_documento) );
+        return new ViewModel(array('nombre_documento' => $nombre_documento,
+                                   'id_contrato' => $token) );
     }
     
     public function verContratoPdfAction() 
@@ -86,5 +89,129 @@ class EmpresaController extends AbstractActionController {
 
 
         return $this->response;
+    }
+    
+    public function registrarFirmaAction() {
+        
+        set_time_limit(0);
+        
+        $json = $this->params()->fromPost("output",null);
+        $id_contrato = base64_decode($this->params()->fromPost("id_contrato", null));
+        $nombre_firmante = $this->params()->fromPost("name",null);
+        
+        $serviceLocator = $this->getServiceLocator();
+        $contratoTable = $serviceLocator->get('Dashboard\Model\ConcontratoTable');
+        $contrato = $contratoTable->getContratoId($id_contrato);
+        //$response = $this->getResponse();
+        $config = $serviceLocator->get('Config');
+        $dir_image = $config['constantes']['dir_image'];
+        $sep_path  = $config['constantes']['sep_path'];
+        
+        $directorio = $dir_image.$sep_path."..".$sep_path."..".$sep_path."data".$sep_path."contratos".$sep_path;
+        
+        if( !empty($json)) {
+        
+            $auxiliar = new Variados($this->serviceLocator);
+
+            $data = $auxiliar->_sigJsonToImage($json);
+            
+            ob_start();
+            imagepng($data);
+            $imagedata = ob_get_contents();
+            ob_end_clean();
+            $img_firma = 'data:image/png;base64,'.base64_encode($imagedata);
+            
+        } else {
+            $img_firma = '';
+        }
+        
+        foreach( $contrato as $cont ) {
+            
+            $empresaTable = $serviceLocator->get('Dashboard\Model\GenempresaTable');
+            $datosEmpresa = $empresaTable->getEmpresa($cont['id_empresa']);
+            
+            $variables = array(
+                'ruc' => $datosEmpresa[0]['registro_contribuyente'],
+                'razon' => $datosEmpresa[0]['razon_social'],
+                'direccion' => $datosEmpresa[0]['direccion_facturacion'],
+                'tipdoc_representante' => $datosEmpresa[0]['tipo_documento'],
+                'numero_representante' => $datosEmpresa[0]['documento_representante'],
+                'nombre_representante' => $datosEmpresa[0]['nombre_representante'],
+                'rubro' => $datosEmpresa[0]['rubro'],
+                'nombre_mes' => $this->_obtenerNombreMes(date('m')),
+                'nombre_firmante' => $nombre_firmante,
+                'img_firma' => $img_firma 
+            );
+        
+            $documentoPdf = new PdfModel();
+            $documentoPdf->setOption('filename', $cont["nombre_documento"].'.pdf');
+            $documentoPdf->setOption('paperOrientation', 'portrait');
+            $documentoPdf->setVariables($variables);
+
+            $documentoPdf->setTerminal(true);
+            $documentoPdf->setTemplate('dashboard/empresa/contrato-pdf.phtml');
+            $htmlPdf = $serviceLocator->get('viewPdfrenderer')->getHtmlRenderer()->render($documentoPdf);
+            $engine = $serviceLocator->get('viewPdfrenderer')->getEngine();
+            // Cargamos el HTML en DOMPDF
+            $engine->load_html($htmlPdf);
+            $engine->render();
+            // Obtenemos el PDF en memoria
+            $pdfCode = $engine->output();
+            
+            $nombre_documento = $cont["nombre_documento"];
+            file_put_contents($directorio.$nombre_documento.'.pdf', $pdfCode);
+            
+        }
+        
+        $pais = $config['id_pais'];
+        $capital = $config['id_capital'];
+        
+        $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
+        $departamentos = $departamentoTable->getDepartamentosxPaisFavoritos($pais);
+        
+        $provinciaTable = $serviceLocator->get('Dashboard\Model\UbiprovinciaTable');
+        $provincias = $provinciaTable->getProvinciasxDepartamento($pais, $capital);
+        
+        $this->layout()->pais = $pais;
+        $this->layout()->capital = $capital;
+        $this->layout()->departamentos = $departamentos;
+        $this->layout()->provincias = $provincias;
+        
+        $telefono_empresa = $config['empresa']['telefono'];
+        $this->layout()->telefono_empresa = $telefono_empresa;
+        
+        return new ViewModel(array('nombre_documento' => $nombre_documento));
+        
+    }
+    
+     private function _obtenerNombreMes($mes) {
+        switch($mes) {
+            case '01' : $nombre = 'Enero';
+                break;
+            case '02' : $nombre = 'Febrero';
+                break;
+            case '03' : $nombre = 'Marzo';
+                break;
+            case '04' : $nombre = 'Abril';
+                break;
+            case '05' : $nombre = 'Mayo';
+                break;
+            case '06' : $nombre = 'Junio';
+                break;
+            case '07' : $nombre = 'Julio';
+                break;
+            case '08' : $nombre = 'Agosto';
+                break;
+            case '09' : $nombre = 'Setiembre';
+                break;
+            case '10' : $nombre = 'Octubre';
+                break;
+            case '11' : $nombre = 'Noviembre';
+                break;
+            case '12' : $nombre = 'Diciembre';
+                break;
+        }
+        
+        return $nombre;
     }
 }
