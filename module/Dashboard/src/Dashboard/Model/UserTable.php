@@ -1,10 +1,5 @@
 <?php
 
-/**
- * User Table
- * @autor Francis Gonzales <fgonzalestello91@gmail.com>
- */
-
 namespace Dashboard\Model;
 
 use Zend\Db\TableGateway\TableGateway;
@@ -83,8 +78,13 @@ class UserTable
     public function addUser($params)
     {
         $params['password'] = sha1($params['password']);
-        $rs = $this->tableGateway->insert($params);
-        return $rs;
+
+        $sql = new Sql($this->tableGateway->getAdapter());
+        $insert = $sql->insert('user')->values($params);
+                
+        $stmt = $sql->prepareStatementForSqlObject($insert);
+        
+        return $stmt->execute()->getGeneratedValue();
     }
     
     /**

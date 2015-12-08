@@ -12,40 +12,49 @@
             </div>
         <?php } ?>
         <div class="form-group">
-            <label for="full_name" class="col-lg-2 control-label">Nombre :</label>
-            <div class="col-lg-3">
+            <label for="full_name" class="col-lg-3 control-label">Nombre Usuario :</label>
+            <div class="col-lg-7">
                 <?php echo $this->formRow($this->form->get('full_name')); ?>
+                <?php echo $this->formRow($this->form->get('id')); ?>
             </div>
         </div>
         <div class="form-group">
-            <label for="username" class="col-lg-2 control-label">Usuario :</label>
-            <div class="col-lg-3">
+            <label for="username" class="col-lg-3 control-label">Usuario:</label>
+            <div class="col-lg-7">
                 <?php echo $this->formRow($this->form->get('username')); ?>
             </div>
         </div>
         <div class="form-group">
-            <label for="password" class="col-lg-2 control-label">Clave :</label>
-            <div class="col-lg-3">
+            <label for="password" class="col-lg-3 control-label">Password:</label>
+            <div class="col-lg-7">
                 <?php echo $this->formRow($this->form->get('password')); ?>
             </div>
         </div>
         <div class="form-group">
-            <label for="email" class="col-lg-2 control-label">Email :</label>
-            <div class="col-lg-3">
+            <label for="email" class="col-lg-3 control-label">Email:</label>
+            <div class="col-lg-7">
                 <?php echo $this->formRow($this->form->get('email')); ?>
             </div>
         </div>
         <div class="form-group">
-            <label for="role_id" class="col-lg-2 control-label">Role :</label>
-            <div class="col-lg-3">
+            <label for="role_id" class="col-lg-3 control-label">Rol:</label>
+            <div class="col-lg-7">
                 <?php echo $this->formRow($this->form->get('role_id')); ?>
             </div>
         </div>
         <div class="form-group">
-            <div class="col-lg-offset-2 col-lg-7">
-                <?php echo $this->formRow($this->form->get('submit')); ?>
+            <label for="id_empresa" class="col-lg-3 control-label">Empresa:</label>
+            <div class="col-lg-7">
+                <?php echo $this->formRow($this->form->get('id_empresa')); ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-offset-3 col-lg-7">
+                <?php echo $this->formRow($this->form->get('submit')); ?>&nbsp;&nbsp;&nbsp;&nbsp;
+                <?php echo $this->formRow($this->form->get('btn-regresar')); ?>
             </div>
         </div>
     </div>
 </div>
 <?php echo $this->form()->closeTag(); ?>
+

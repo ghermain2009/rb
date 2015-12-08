@@ -19,7 +19,8 @@ class UserController extends AbstractActionController
         $viewmodel = new ViewModel();
         $sl = $this->getServiceLocator();
         $roleTable = $sl->get('Dashboard/Model/RoleTable');
-        $form = new UserForm($roleTable);
+        $empresaTable = $sl->get('Dashboard/Model/GenempresaTable');
+        $form = new UserForm($roleTable, $empresaTable);
         $request = $this->getRequest();
         $serviceLocator = $this->getServiceLocator();
         $form->get('submit');
@@ -33,10 +34,13 @@ class UserController extends AbstractActionController
                 $data = $form->getData();
                 $userTable = $serviceLocator->get('Dashboard\Model\UserTable');
                 unset($data['submit']);
+                unset($data['btn-regresar']);
+                if($data['id_empresa'] == 0) $data['id_empresa'] = NULL;
                 
                 $rs = $userTable->addUser($data);
                 if ($rs) {
-                    $form = new UserForm($roleTable);
+                    //$form = new UserForm($roleTable, $empresaTable);
+                    $this->redirect()->toRoute('dash_user_edit', array('id' => $rs));
                 }
             }
         }
@@ -133,7 +137,8 @@ class UserController extends AbstractActionController
         $sl = $this->getServiceLocator();
         $roleTable = $sl->get('Dashboard\Model\RoleTable');
         $userTable = $sl->get('Dashboard\Model\UserTable');
-        $form = new UserForm($roleTable);
+        $empresaTable = $sl->get('Dashboard/Model/GenempresaTable');
+        $form = new UserForm($roleTable, $empresaTable);
         
         if ($request->isPost()) {
             // @TODO addfilters
@@ -142,15 +147,21 @@ class UserController extends AbstractActionController
             if ($form->isValid()) {
                 $data = $form->getData();
                 unset($data['submit']);
+                unset($data['btn-regresar']);
+                if($data['id_empresa'] == 0) $data['id_empresa'] = NULL;
                 $dataId = array('id' => $userId);
                 $userTable->editUser($data, $dataId);
             }
         } else {
             $userData = $userTable->getUser($userId);
             foreach ($userData as $user) {
+                $form->get('id')->setValue($user['id']);
                 $form->get('username')->setValue($user['username']);
                 $form->get('email')->setValue($user['email']);
                 $form->get('role_id')->setValue($user['role_id']);
+                $form->get('full_name')->setValue($user['full_name']);
+                //$form->get('password')->setValue($user['password']);
+                $form->get('id_empresa')->setValue($user['id_empresa']);
             }
         }
        

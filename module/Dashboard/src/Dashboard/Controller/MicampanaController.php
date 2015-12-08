@@ -16,12 +16,23 @@ use Zend\View\Model\ViewModel;
 use ZfcDatagrid\Column;
 use Zend\Session\Container;
 use Zend\Json\Json;
+use Zend\Authentication\AuthenticationService;
     
 class MicampanaController extends AbstractActionController {
     //put your code here
     public function indexAction() {
         
-        $id_empresa = $this->params()->fromRoute("empresa", null);
+        $auth = new AuthenticationService();
+
+	if ($auth->hasIdentity()) {
+            $identity = $auth->getIdentity();
+            
+            if($identity->role_id == '3') {
+                $id_empresa = $identity->id_empresa;
+            } else {
+                $id_empresa = $this->params()->fromRoute("empresa", null);
+            }
+        }
         
         $serviceLocator = $this->getServiceLocator();
         $empresaTable = $serviceLocator->get('Dashboard\Model\GenempresaTable');
@@ -31,21 +42,30 @@ class MicampanaController extends AbstractActionController {
         
         $datosEmpresas = $empresaTable->getEmpresaAutorizadas();
         
-        $selectEmpresas = "<select id='id_empresa_sel' class='selectpicker'>";
-        foreach( $datosEmpresas as $empresa ) {
-           if( $empresa['razon_social'] != '' ) {
-                if ( empty($id_empresa) ) {
-                    $id_empresa = $empresa['id_empresa'];
-                }
+        if($identity->role_id == '3') {
+            foreach( $datosEmpresas as $empresa ) {
                 if( $id_empresa == $empresa['id_empresa'] ) {
-                    $sel = 'selected';
-                } else {
-                    $sel = '';
-                }
-                $selectEmpresas.= "<option value='".$empresa['id_empresa']."' ".$sel.">".$empresa['razon_social']."</option>";
-           }
+                    $selectEmpresas = $empresa['razon_social'];
+                    continue;
+                } 
+            }
+        } else {
+            $selectEmpresas = "<select id='id_empresa_sel' class='selectpicker'>";
+            foreach( $datosEmpresas as $empresa ) {
+               if( $empresa['razon_social'] != '' ) {
+                    if ( empty($id_empresa) ) {
+                        $id_empresa = $empresa['id_empresa'];
+                    }
+                    if( $id_empresa == $empresa['id_empresa'] ) {
+                        $sel = 'selected';
+                    } else {
+                        $sel = '';
+                    }
+                    $selectEmpresas.= "<option value='".$empresa['id_empresa']."' ".$sel.">".$empresa['razon_social']."</option>";
+               }
+            }
+            $selectEmpresas.= "</select>";
         }
-        $selectEmpresas.= "</select>";
                
         $datosEmpresa = $empresaTable->getEmpresa($id_empresa);
         $datosCuponV = $cuponTable->getCuponValidado($id_empresa,3);
