@@ -242,6 +242,41 @@ class EmpresaController extends AbstractActionController {
         
     }
     
+    public function anexocontratoAction() {
+        
+        $id = $this->params()->fromPost("id", null);
+        
+        $serviceLocator = $this->getServiceLocator();
+        $empresaTable = $serviceLocator->get('Dashboard\Model\CupcampanaTable');
+        $contratos = $empresaTable->getContratoxCampana($id);
+        
+        if( count($contratos) > 0) {
+            $id_contrato = $contratos[0]['id_contrato'];
+            
+            if( !empty($contratos[0]['nombre_documento_contrato']) ) {
+                $id_contrato = $contratos[0]['id_contrato'];
+                $email_contacto = $contratos[0]['email_contacto'];
+                $nombre_contacto = $contratos[0]['nombre_contacto'];
+                $nombre_contrato = $contratos[0]['nombre_documento_contrato'];
+                if( !empty($contratos[0]['nombre_documento_anexo']) ) {
+                    $id_anexocontrato = 0;
+                } else {
+                    $id_anexocontrato = -1;
+                }
+            } else {
+                $id_contrato = -1;
+                $id_anexocontrato = -1;
+            }
+        } 
+        
+        return $this->getResponse()->setContent(Json::encode(array('id_contrato' => $id_contrato,
+                                                                   'id_anexocontrato' => $id_anexocontrato,
+                                                                   'email_contacto' => $email_contacto,
+                                                                   'nombre_contacto' => $nombre_contacto,
+                                                                   'nombre_contrato' => $nombre_contrato)));
+        
+    }
+    
     public function registrarcontratoAction() {
         $id_empresa = $this->params()->fromPost("id_empresa", null);
         $nombre     = $this->params()->fromPost("nombre", null);
@@ -259,6 +294,32 @@ class EmpresaController extends AbstractActionController {
         $id_contrato = $contratoTable->addContrato($contrato);
         
         return $this->getResponse()->setContent(Json::encode(array('id_contrato' => $id_contrato)));
+    }
+    
+    public function registraranexocontratoAction() {
+        $id_contrato     = $this->params()->fromPost("id_contrato", null);
+        $id_campana      = $this->params()->fromPost("id_campana", null);
+        $nombre_contrato = $this->params()->fromPost("nombre_contrato", null);
+        $nombre_contacto = $this->params()->fromPost("nombre_contacto", null);
+        $email_contacto  = $this->params()->fromPost("email_contacto", null);
+        
+        $serviceLocator = $this->getServiceLocator();
+        $contratoTable = $serviceLocator->get('Dashboard\Model\ConcontratoanexoTable');
+        
+        $nombre_anexo = $nombre_contrato.'_ANEXO_'.date('Ymd');
+        
+        $anexocontrato = array('id_contrato'      => $id_contrato,
+                               'id_campana'       => $id_campana,
+                               'nombre_documento' => $nombre_anexo,
+                               'nombre_contacto'  => $nombre_contacto,
+                               'email_contacto'   => $email_contacto,
+                               'id_estado'        => '1'
+                          );
+        
+        $contratoTable->addAnexoContrato($anexocontrato);
+        
+        return $this->getResponse()->setContent(Json::encode(array('id_anexocontrato' => 0,
+                                                                   'id_contrato' => $id_contrato)));
     }
     
     public function editarcontratoAction() {
@@ -299,6 +360,61 @@ class EmpresaController extends AbstractActionController {
 
                 $documentoPdf->setTerminal(true);
                 $documentoPdf->setTemplate('dashboard/empresa/contrato-pdf.phtml');
+                $htmlPdf = $serviceLocator->get('viewPdfrenderer')->getHtmlRenderer()->render($documentoPdf);
+                $engine = $serviceLocator->get('viewPdfrenderer')->getEngine();
+                // Cargamos el HTML en DOMPDF
+                $engine->load_html($htmlPdf);
+                $engine->render();
+                // Obtenemos el PDF en memoria
+                $pdfCode = $engine->output();
+
+                file_put_contents($directorio.$cont["nombre_documento"].'.pdf', $pdfCode);
+            }
+        }
+        
+        return new ViewModel(array('contrato' => $contrato ));
+        
+    }
+    
+    public function editaranexocontratoAction() {
+        
+        set_time_limit(0);
+        
+        $id_contrato = $this->params()->fromPost("id_contrato", null);
+        $id_campana = $this->params()->fromPost("id_campana", null);
+        
+        $serviceLocator = $this->getServiceLocator();
+        $contratoTable = $serviceLocator->get('Dashboard\Model\ConcontratoanexoTable');
+        $contrato = $contratoTable->getContratoAnexoId($id_contrato, $id_campana);
+        
+        $config = $serviceLocator->get('Config');
+        $dir_image = $config['constantes']['dir_image'];
+        $sep_path = $config['constantes']['sep_path'];
+        
+        $directorio = $dir_image.$sep_path."..".$sep_path."..".$sep_path."data".$sep_path."contratos".$sep_path;
+        
+        foreach( $contrato as $cont ) {
+            
+            $empresaTable = $serviceLocator->get('Dashboard\Model\GenempresaTable');
+            $campanaTable = $serviceLocator->get('Dashboard\Model\CupcampanaTable');
+            
+            $datosEmpresa = $empresaTable->getEmpresa($cont['id_empresa']);
+            $datosCampana   = $campanaTable->getCampanaId($id_campana);
+            $opcionesCampana = $campanaTable->getCampanaOpciones($id_campana);
+        
+            if(!is_file($directorio.$cont["nombre_documento"].'.pdf')) {
+                $documentoPdf = new PdfModel();
+                $documentoPdf->setOption('filename', $cont["nombre_documento"].'.pdf');
+                $documentoPdf->setOption('paperOrientation', 'portrait');
+                $documentoPdf->setVariables(array(
+                    'nombre_mes' => $this->_obtenerNombreMes(date('m')),
+                    'datos_campana' => $datosCampana,
+                    'opciones_campana' => $opcionesCampana,
+                    'datos_empresa' => $datosEmpresa
+                ));
+
+                $documentoPdf->setTerminal(true);
+                $documentoPdf->setTemplate('dashboard/empresa/anexo-contrato-pdf.phtml');
                 $htmlPdf = $serviceLocator->get('viewPdfrenderer')->getHtmlRenderer()->render($documentoPdf);
                 $engine = $serviceLocator->get('viewPdfrenderer')->getEngine();
                 // Cargamos el HTML en DOMPDF
@@ -357,6 +473,75 @@ class EmpresaController extends AbstractActionController {
 
                 $documentoPdf->setTerminal(true);
                 $documentoPdf->setTemplate('dashboard/empresa/contrato-pdf.phtml');
+                $htmlPdf = $serviceLocator->get('viewPdfrenderer')->getHtmlRenderer()->render($documentoPdf);
+                $engine = $serviceLocator->get('viewPdfrenderer')->getEngine();
+                // Cargamos el HTML en DOMPDF
+                $engine->load_html($htmlPdf);
+                $engine->render();
+                // Obtenemos el PDF en memoria
+                $pdfCode = $engine->output();
+                
+                $nombreDocumento = $cont["nombre_documento"];
+                $rutaDocumento = $directorio.$nombreDocumento.'.pdf';
+                file_put_contents($rutaDocumento, $pdfCode);
+            //}
+        }
+        
+        $contenidoDocumento = file_get_contents($rutaDocumento);
+        $response->setContent($contenidoDocumento);
+
+        $headers = $response->getHeaders();
+        $headers->clearHeaders()
+                ->addHeaderLine('Content-Type', 'application/pdf')
+                ->addHeaderLine('Content-Disposition', 'attachment; filename="'.$nombreDocumento.'.pdf"')
+                ->addHeaderLine('Content-Length', strlen($contenidoDocumento));
+
+
+        return $this->response;
+        
+    }
+    
+    public function actualizaanexocontratoAction() {
+        
+        set_time_limit(0);
+        
+        $id_contrato = $this->params()->fromQuery("id_contrato", null);
+        $id_campana = $this->params()->fromQuery("id_campana", null);
+        
+        $serviceLocator = $this->getServiceLocator();
+        $response = $this->getResponse();
+        $contratoTable = $serviceLocator->get('Dashboard\Model\ConcontratoanexoTable');
+        $contrato = $contratoTable->getContratoAnexoId($id_contrato, $id_campana);
+        
+        $config = $serviceLocator->get('Config');
+        $dir_image = $config['constantes']['dir_image'];
+        $sep_path = $config['constantes']['sep_path'];
+        
+        $directorio = $dir_image.$sep_path."..".$sep_path."..".$sep_path."data".$sep_path."contratos".$sep_path;
+        $rutaDocumento = '';
+        $nombreDocumento = '';
+        foreach( $contrato as $cont ) {
+            
+            $empresaTable = $serviceLocator->get('Dashboard\Model\GenempresaTable');
+            $campanaTable = $serviceLocator->get('Dashboard\Model\CupcampanaTable');
+            
+            $datosEmpresa = $empresaTable->getEmpresa($cont['id_empresa']);
+            $datosCampana   = $campanaTable->getCampanaId($id_campana);
+            $opcionesCampana = $campanaTable->getCampanaOpciones($id_campana);
+        
+            //if(!is_file($directorio.$cont["nombre_documento"].'.pdf')) {
+                $documentoPdf = new PdfModel();
+                $documentoPdf->setOption('filename', $cont["nombre_documento"].'.pdf');
+                $documentoPdf->setOption('paperOrientation', 'portrait');
+                $documentoPdf->setVariables(array(
+                    'nombre_mes' => $this->_obtenerNombreMes(date('m')),
+                    'datos_campana' => $datosCampana,
+                    'opciones_campana' => $opcionesCampana,
+                    'datos_empresa' => $datosEmpresa
+                ));
+
+                $documentoPdf->setTerminal(true);
+                $documentoPdf->setTemplate('dashboard/empresa/anexo-contrato-pdf.phtml');
                 $htmlPdf = $serviceLocator->get('viewPdfrenderer')->getHtmlRenderer()->render($documentoPdf);
                 $engine = $serviceLocator->get('viewPdfrenderer')->getEngine();
                 // Cargamos el HTML en DOMPDF
@@ -526,6 +711,110 @@ class EmpresaController extends AbstractActionController {
             $viewModel->setTemplate('mailLayout')->setVariables(array(
                 'nombre' => $nombre,
                 'token' => $token,
+                'localhost' => $localhost,
+                'telefono' => $telefono
+            ));
+
+            $content = $rendered->render($viewModel);
+
+            $html = new MimePart($content);
+            $html->type = "text/html";
+
+            $body = new MimeMessage();
+            $body->addPart($html);
+
+            $message->setBody($body);
+
+            $transport->setOptions($options);
+            $transport->send($message);
+            
+            $data[0]['validar'] = '1';
+            
+        }
+
+        return $this->getResponse()->setContent(Json::encode($data));
+    }
+    
+    public function enviarAnexoContratoAction() {
+
+        $email_contacto = $this->params()->fromPost("email_contacto", null);
+        $nombre_contacto = $this->params()->fromPost("nombre_contacto", null);
+        $id_contrato = $this->params()->fromPost("id_contrato", null);
+        $id_campana = $this->params()->fromPost("id_campana", null);
+
+        $serviceLocator = $this->getServiceLocator();
+        $config = $serviceLocator->get('Config');
+        
+        $set = array('nombre_contacto' => $nombre_contacto,
+                     'email_contacto' => $email_contacto);
+        
+        $where = array('id_contrato' => $id_contrato,
+                       'id_campana' => $id_campana);
+        
+        $campanaTable = $serviceLocator->get('Dashboard\Model\ConcontratoanexoTable');
+        $campanaTable->editAnexoContrato($set,$where);
+        
+        $activo   = $config['correo']['activo'];
+        $name     = $config['correo']['name'];
+        $host     = $config['correo']['host'];
+        $port     = $config['correo']['port'];
+        $tls      = $config['correo']['tls'];
+        $username = $config['correo']['username'];
+        $password = $config['correo']['password'];
+        $cuenta   = $config['correo']['cuenta-mensajes-empresas'];
+        $localhost = $config['constantes']['localhost'];
+        $telefono = $config['empresa']['telefono'];
+
+        $data = array();
+        $data[0]['validar'] = '2';
+        
+        $nombre = $nombre_contacto;
+        $token = base64_encode($id_contrato);
+        $token_campana = base64_encode($id_campana);
+
+        if( $activo == '1' ) {
+
+            $message = new Message();
+            $message->addTo($email_contacto)
+                    ->addBcc("german@rebueno.ec")
+                    ->addFrom($cuenta)
+                    ->setSubject('Firma de Anexo Contrato Rebueno!‏');
+
+            if( $tls ) {
+                $connection_config = array(
+                    'ssl' => 'tls',
+                    'username' => $username,
+                    'password' => $password
+                );
+            } else {
+                $connection_config = array(
+                    'username' => $username,
+                    'password' => $password
+                );
+            }
+
+            $transport = new SmtpTransport();
+            $options = new SmtpOptions(array(
+                'name' => $name,
+                'host' => $host,
+                'port' => $port,
+                'connection_class' => 'login',
+                'connection_config' => $connection_config
+            ));
+
+            $resolver = new TemplateMapResolver();
+            $resolver->setMap(array(
+                'mailLayout' => __DIR__ . '/../../../../Dashboard/view/dashboard/empresa/emailanexocontrato.phtml'
+            ));
+
+            $rendered = new PhpRenderer();
+            $rendered->setResolver($resolver);
+
+            $viewModel = new ViewModel();
+            $viewModel->setTemplate('mailLayout')->setVariables(array(
+                'nombre' => $nombre,
+                'token' => $token,
+                'token_campana' => $token_campana,
                 'localhost' => $localhost,
                 'telefono' => $telefono
             ));

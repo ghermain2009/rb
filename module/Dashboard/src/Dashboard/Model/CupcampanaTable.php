@@ -209,6 +209,37 @@ class CupcampanaTable {
         return ArrayUtils::iteratorToArray($result);
     }
     
+    public function getContratoxCampana($id_campana)
+    {
+        $sql = new Sql($this->tableGateway->adapter);
+                
+        $select = $sql->select();
+        
+        $select->columns(array(
+            'id_campana',
+            'titulo',
+            'subtitulo',
+            'descripcion',
+            'sobre_campana',
+            'observaciones',
+            'fecha_final' => new Expression("DATE_FORMAT(ADDTIME(fecha_final, hora_final),'%m/%d/%Y %l:%i %p')")
+        ))
+        ->from('cup_campana')
+        ->join('con_contrato', new Expression("cup_campana.id_empresa = con_contrato.id_empresa"),
+                array('nombre_contacto',
+                      'email_contacto',
+                      'nombre_documento_contrato' => 'nombre_documento',
+                      'id_contrato'),'left')
+        ->join('con_contrato_anexo', new Expression("con_contrato.id_contrato = con_contrato_anexo.id_contrato and '".$id_campana."' = con_contrato_anexo.id_campana"),
+                array('nombre_documento_anexo' => 'nombre_documento'),'left')
+        ->where(array('cup_campana.id_campana' => $id_campana));
+
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $result = $statement->execute();
+
+        return ArrayUtils::iteratorToArray($result);
+    }
+    
     public function getCampanaIdVendidos($id_campana)
     {
         $sql = new Sql($this->tableGateway->adapter);
@@ -246,7 +277,8 @@ class CupcampanaTable {
             'precio_especial',
             'vendidos' => new Expression("IFNULL(vendidos,0)"),
             'ahorro' => new Expression("precio_regular - precio_especial"),
-            'descuento' => new Expression("100-ROUND(precio_especial*100/precio_regular)")
+            'descuento' => new Expression("100-ROUND(precio_especial*100/precio_regular)"),
+            'cantidad'
         ))
         ->from('cup_campana_opcion')
         ->where(array('id_campana' => $id_campana));

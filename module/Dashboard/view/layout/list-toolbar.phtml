@@ -81,6 +81,37 @@ switch ($this->controllerName()) {
         });
     }
     
+    function registraranexocontrato(campana){
+        $.ajax({
+            type: "POST",
+            url: "/dashboard/empresa/anexocontrato",
+            data: {id: campana},
+            success: function (data) {
+                var contrato = $.parseJSON(data);
+                if (contrato) {
+                    if (contrato.id_contrato == -1 && contrato.id_anexocontrato == -1) {
+                        alert('Debe registrar el contrato para generar el anexo.');
+                    } else {
+                        if (contrato.id_anexocontrato == -1) {
+                            $('#id_contrato').val(contrato.id_contrato);
+                            $('#id_campana').val(campana);
+                            $('#nombre_contrato').val(contrato.nombre_contrato);
+                            $('#nombre_contacto').val(contrato.nombre_contacto);
+                            $('#email_contacto').val(contrato.email_contacto);
+                            $('#modalAnexoContrato').modal('show');
+                        } else {
+                            var form = $('<form method="post" action="/dashboard/empresa/editaranexocontrato">' +
+                                         '<input type="hidden" name="id_contrato" value="' + contrato.id_contrato + '">' +
+                                         '<input type="hidden" name="id_campana" value="' + campana + '">' +
+                                         '</form>');
+                            $(form).submit();
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
     function registrarpagobancario(cupon){
         $.ajax({
             type: "POST",
@@ -120,6 +151,34 @@ switch ($this->controllerName()) {
                     } else {
                         var form = $('<form method="post" action="/dashboard/empresa/editarcontrato">' +
                                      '<input type="hidden" name="id_contrato" value="' + contrato.id_contrato + '">' +
+                                     '</form>');
+                        $(form).submit();
+                    }
+                }
+            }
+        });
+    } 
+    
+    function generaranexocontrato(){
+        var id_contrato = $("#id_contrato").val();
+        var id_campana = $("#id_campana").val();
+        var nombre_contacto = $("#nombre_contacto").val();
+        var email_contacto = $("#email_contacto").val();
+        var nombre_contrato = $("#nombre_contrato").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/dashboard/empresa/registraranexocontrato",
+            data: {id_contrato:id_contrato,id_campana:id_campana, nombre_contacto:nombre_contacto, email_contacto:email_contacto, nombre_contrato:nombre_contrato},
+            success: function (data) {
+                var contrato = $.parseJSON(data);
+                if (contrato) {
+                    if (contrato.id_anexocontrato == -1) {
+                        $('#modalAnexoContrato').modal('hide');
+                    } else {
+                        var form = $('<form method="post" action="/dashboard/empresa/editaranexocontrato">' +
+                                     '<input type="hidden" name="id_contrato" value="' + contrato.id_contrato + '">' +
+                                     '<input type="hidden" name="id_campana" value="' + id_campana + '">' +
                                      '</form>');
                         $(form).submit();
                     }

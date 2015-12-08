@@ -107,7 +107,7 @@ class CampanaController extends AbstractActionController {
         $conBtn = new Column\Action\Button();
         $conBtn->setLabel(' ');
         $conBtn->setAttribute('class', 'btn btn-info glyphicon glyphicon-list-alt');
-        $conBtn->setAttribute('href', 'javascript:registrarcontrato('. $conBtn->getRowIdPlaceholder().');');
+        $conBtn->setAttribute('href', 'javascript:registraranexocontrato('. $conBtn->getRowIdPlaceholder().');');
         $conBtn->setAttribute('data-toggle', 'tooltip');
         $conBtn->setAttribute('data-placement', 'left');
         $conBtn->setAttribute('title', 'Contrato Campaña');

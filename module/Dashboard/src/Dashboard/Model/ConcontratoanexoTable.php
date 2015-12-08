@@ -37,4 +37,51 @@ class ConcontratoanexoTable {
         $resultSet = $this->tableGateway->select();
         return $resultSet;
     }
+    
+    public function addAnexoContrato($params)
+    {
+        $params['fecha_registro'] = date('Y-m-d H:i:s');
+
+        $sql = new Sql($this->tableGateway->getAdapter());
+        $insert = $sql->insert('con_contrato_anexo')->values($params);
+                
+        $stmt = $sql->prepareStatementForSqlObject($insert);
+        
+        $stmt->execute();
+
+        return 1;
+    }
+    
+    public function getContratoAnexoId($id_contrato, $id_campana)
+    {
+        $sql = new Sql($this->tableGateway->adapter);
+                
+        $select = $sql->select();
+        $select->columns(array('id_contrato' => 'id_contrato',
+                               'id_campana'  => 'id_campana',
+                               'nombre_contacto' => 'nombre_contacto',
+                               'email_contacto' => 'email_contacto',
+                               'fecha_registro' => new Expression("DATE_FORMAT(con_contrato_anexo.fecha_registro,'%d-%m-%Y %h:%i:%s')") ,
+                               'firma_documento' => 'firma',
+                               'fecha_firma' => new Expression("DATE_FORMAT(con_contrato_anexo.fecha_firma,'%d-%m-%Y %h:%i:%s')") ,
+                               'nombre_documento' => 'nombre_documento',
+                               'id_estado'   => 'id_estado'));
+        $select->from('con_contrato_anexo')
+        ->join('con_contrato', new Expression("con_contrato_anexo.id_contrato = con_contrato.id_contrato"),
+                array('id_empresa'))
+        ->where(array('con_contrato_anexo.id_contrato' => $id_contrato,
+                      'id_campana' => $id_campana));
+
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $result = $statement->execute();
+
+        return ArrayUtils::iteratorToArray($result);
+    }
+    
+    public function editAnexoContrato($set, $where)
+    {
+      
+        $rs = $this->tableGateway->update($set, $where);
+        return $rs;
+    }
 }
