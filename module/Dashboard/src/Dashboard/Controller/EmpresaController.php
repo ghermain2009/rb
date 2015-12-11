@@ -192,13 +192,23 @@ class EmpresaController extends AbstractActionController {
                 $form->get('horario')->setValue($empresa['horario']);
                 $form->get('web_site')->setValue($empresa['web_site']);
                 $form->get('ubicacion_gps')->setValue($empresa['ubicacion_gps']);
-                $form->get('numero_cuenta')->setValue($empresa['numero_cuenta']);
                 $form->get('descripcion')->setValue($empresa['descripcion']);
                 $form->get('tipo_documento_representante')->setValue($empresa['tipo_documento_representante']);
                 $form->get('documento_representante')->setValue($empresa['documento_representante']);
                 $form->get('nombre_representante')->setValue($empresa['nombre_representante']);
                 $form->get('rubro')->setValue($empresa['rubro']);
                 $form->get('id_operador')->setValue($empresa['id_operador']);
+                
+                $form->get('nombre_comercial')->setValue($empresa['nombre_comercial']);
+                $form->get('persona_contacto')->setValue($empresa['persona_contacto']);
+                $form->get('email_contacto')->setValue($empresa['email_contacto']);
+                $form->get('titular_cuenta')->setValue($empresa['titular_cuenta']);
+                $form->get('ruc_titular')->setValue($empresa['ruc_titular']);
+                $form->get('numero_cuenta')->setValue($empresa['numero_cuenta']);
+                $form->get('tipo_cuenta')->setValue($empresa['tipo_cuenta']);
+                $form->get('email_facturacion')->setValue($empresa['email_facturacion']);
+                $form->get('banco_cuenta')->setValue($empresa['banco_cuenta']);
+                
             //}
         }
 

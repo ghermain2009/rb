@@ -121,14 +121,14 @@
             <div class="centrar-div">
                 <table class="tabla-bordeada">
                     <tr class="titulo"><td colspan="2" class="celda-bordeada derecha"><b>INFORMACIÓN LEGAL</b></td></tr>
-                    <tr><td style="width:40%" class="celda-bordeada">Nombre Comercial :</td><td class="celda-bordeada derecha"></td></tr>
+                    <tr><td style="width:40%" class="celda-bordeada">Nombre Comercial :</td><td class="celda-bordeada derecha"><?php echo $datos_empresa[0]['nombre_comercial'];?></td></tr>
                     <tr><td class="celda-bordeada">Razón Social :</td><td class="celda-bordeada derecha"><?php echo $datos_empresa[0]['razon_social'];?></td></tr>
                     <tr><td class="celda-bordeada">RUC :</td><td class="celda-bordeada derecha"><?php echo $datos_empresa[0]['registro_contribuyente'];?></td></tr>
                     <tr><td class="celda-bordeada">Dirección :</td><td class="celda-bordeada derecha"><?php echo $datos_empresa[0]['direccion_facturacion'];?></td></tr>
                     <tr><td class="celda-bordeada">Sitio Web :</td><td class="celda-bordeada derecha"><?php echo $datos_empresa[0]['web_site'];?></td></tr>
                     <tr><td class="celda-bordeada">Teléfono :</td><td class="celda-bordeada derecha"><?php echo $datos_empresa[0]['telefono'];?></td></tr>
-                    <tr><td class="celda-bordeada">Persona de Contacto :</td><td class="celda-bordeada derecha"></td></tr>
-                    <tr><td class="celda-bordeada derecha-cierre">Email :</td><td class="celda-bordeada derecha derecha-cierre"></td></tr>
+                    <tr><td class="celda-bordeada">Persona de Contacto :</td><td class="celda-bordeada derecha"><?php echo $datos_empresa[0]['persona_contacto'];?></td></tr>
+                    <tr><td class="celda-bordeada derecha-cierre">Email :</td><td class="celda-bordeada derecha derecha-cierre"><?php echo $datos_empresa[0]['email_contacto'];?></td></tr>
                 </table>
                 <br/>
                 <br/>
@@ -139,13 +139,13 @@
                     ?>
                     <tr><td colspan="2">&nbsp;</td></tr>
                     <tr><td colspan="2"><b>OPCIÓN <?php echo $cont;?></b></td></tr>
-                    <tr><td style="width:40%" class="celda-bordeada">Titular Sugerido :</td><td class="celda-bordeada derecha"><?php echo $opciones['descripcion'];?></td></tr>
+                    <tr><td style="width:40%" class="celda-bordeada">Titular Sugerido :</td><td class="celda-bordeada derecha"><?php echo strip_tags($opciones['descripcion']);?></td></tr>
                     <tr><td class="celda-bordeada">Precio Original :</td><td class="celda-bordeada derecha"><?php echo $opciones['precio_regular'];?></td></tr>
                     <tr><td class="celda-bordeada">Descuento en % :</td><td class="celda-bordeada derecha"><?php echo $opciones['descuento'];?></td></tr>
                     <tr><td class="celda-bordeada">Precio Rebueno :</td><td class="celda-bordeada derecha"><?php echo $opciones['precio_especial'];?></td></tr>
                     <tr><td class="celda-bordeada">Comisión Rebueno incluido IVA 35% :</td><td class="celda-bordeada derecha"><?php echo round($opciones['precio_especial'] * 0.35,2);?></td></tr>
                     <tr><td class="celda-bordeada">Ingreso neto por Cliente :</td><td class="celda-bordeada derecha"><?php echo $opciones['precio_especial'] - round($opciones['precio_especial'] * 0.35,2);?></td></tr>
-                    <tr><td class="celda-bordeada">Número máximo de cupones :</td><td class="celda-bordeada derecha"><?php echo $opciones['cantidad'];?></td></tr>
+                    <tr><td class="celda-bordeada">Número máximo de cupones :</td><td class="celda-bordeada derecha"><?php if(empty($opciones['cantidad'])) { echo '100'; } else { echo $opciones['cantidad']; }?></td></tr>
                     <tr><td class="celda-bordeada derecha-cierre">Vigencia :</td><td class="celda-bordeada derecha derecha-cierre"></td></tr>
                     <?php $cont++;
                           } ?>
@@ -153,34 +153,29 @@
                 <br/>
                 <br/>
                 <table class="tabla-bordeada">
-                    <tr class="titulo"><td colspan="2" class="celda-bordeada derecha"><b>CONDICIONES DE LA OFERTA</b></td></tr>
-                    <tr><td style="width:40%" class="celda-bordeada">Horario de validez de la oferta :</td><td class="celda-bordeada derecha"></td></tr>
-                    <tr><td class="celda-bordeada">Política Reservaciones :</td><td class="celda-bordeada derecha"></td></tr>
-                    <tr><td class="celda-bordeada">Política de Anulaciones :</td><td class="celda-bordeada derecha"></td></tr>
-                    <tr><td class="celda-bordeada">Política Deliverys :</td><td class="celda-bordeada derecha"></td></tr>
-                    <tr><td class="celda-bordeada">Locales donde aplica la oferta :</td><td class="celda-bordeada derecha"></td></tr>
-                    <tr><td class="celda-bordeada derecha-cierre">Política de Feriados y fines de semana :</td><td class="celda-bordeada derecha derecha-cierre"></td></tr>
+                    <tr class="titulo"><td class="celda-bordeada derecha"><b>CONDICIONES DE LA OFERTA</b></td></tr>
+                    <tr><td style="width:100%" class="celda-bordeada derecha derecha-cierre"><div style="width:96%;margin:0 auto;"><p style="text-align:justify"><?php echo strip_tags($datos_campana[0]['sobre_campana']);?></p></div></td></tr>
                 </table>
                 <br/>
                 <br/>
-                <table class="tabla-bordeada">
+                <!--table class="tabla-bordeada">
                     <tr class="titulo"><td colspan="2" class="celda-bordeada derecha"><b>DESCRIPCIÓN DEL ESTABLECIMIENTO DONDE APLICA LA OFERTA</b></td></tr>
-                    <tr><td style="width:40%" class="celda-bordeada">Dirección :</td><td class="celda-bordeada derecha"><?php echo $datos_empresa[0]['direccion_comercial'];?></td></tr>
-                    <tr><td class="celda-bordeada">Sitio Web /Fanpage / Blog :</td><td class="celda-bordeada derecha"><?php echo $datos_empresa[0]['web_site'];?></td></tr>
-                    <tr><td class="celda-bordeada">Teléfonos atención al cliente :</td><td class="celda-bordeada derecha"><?php echo $datos_empresa[0]['telefono'];?></td></tr>
-                    <tr><td class="celda-bordeada">Horarios de atención :</td><td class="celda-bordeada derecha"><?php echo $datos_empresa[0]['horario'];?></td></tr>
+                    <tr><td style="width:40%" class="celda-bordeada">Dirección :</td><td class="celda-bordeada derecha"><?php // echo $datos_empresa[0]['direccion_comercial'];?></td></tr>
+                    <tr><td class="celda-bordeada">Sitio Web /Fanpage / Blog :</td><td class="celda-bordeada derecha"><?php // echo $datos_empresa[0]['web_site'];?></td></tr>
+                    <tr><td class="celda-bordeada">Teléfonos atención al cliente :</td><td class="celda-bordeada derecha"><?php //echo $datos_empresa[0]['telefono'];?></td></tr>
+                    <tr><td class="celda-bordeada">Horarios de atención :</td><td class="celda-bordeada derecha"><?php //echo $datos_empresa[0]['horario'];?></td></tr>
                     <tr><td class="celda-bordeada derecha-cierre">Email de contacto del establecimiento :</td><td class="celda-bordeada derecha derecha-cierre"></td></tr>
                 </table>
                 <br/>
-                <br/>
+                <br/-->
                 <table class="tabla-bordeada">
                     <tr class="titulo"><td colspan="2" class="celda-bordeada derecha"><b>INFORMACIÓN PARA PAGOS</b></td></tr>
-                    <tr><td style="width:40%" class="celda-bordeada">Titular de la Cuenta :</td><td class="celda-bordeada derecha"></td></tr>
-                    <tr><td class="celda-bordeada">RUC Titular :</td><td class="celda-bordeada derecha"></td></tr>
-                    <tr><td class="celda-bordeada">Banco :</td><td class="celda-bordeada derecha"></td></tr>
-                    <tr><td class="celda-bordeada">Tipo de Cuenta :</td><td class="celda-bordeada derecha"></td></tr>
-                    <tr><td class="celda-bordeada">Nº de Cuenta :</td><td class="celda-bordeada derecha"></td></tr>
-                    <tr><td class="celda-bordeada derecha-cierre">Email de Facturación :</td><td class="celda-bordeada derecha derecha-cierre"></td></tr>
+                    <tr><td style="width:40%" class="celda-bordeada">Titular de la Cuenta :</td><td class="celda-bordeada derecha"><?php echo $datos_empresa[0]['titular_cuenta'];?></td></tr>
+                    <tr><td class="celda-bordeada">RUC Titular :</td><td class="celda-bordeada derecha"><?php echo $datos_empresa[0]['ruc_titular'];?></td></tr>
+                    <tr><td class="celda-bordeada">Banco :</td><td class="celda-bordeada derecha"><?php echo $datos_empresa[0]['banco_cuenta'];?></td></tr>
+                    <tr><td class="celda-bordeada">Tipo de Cuenta :</td><td class="celda-bordeada derecha"><?php echo $datos_empresa[0]['tipo_cuenta'];?></td></tr>
+                    <tr><td class="celda-bordeada">Nº de Cuenta :</td><td class="celda-bordeada derecha"><?php echo $datos_empresa[0]['numero_cuenta'];?></td></tr>
+                    <tr><td class="celda-bordeada derecha-cierre">Email de Facturación :</td><td class="celda-bordeada derecha derecha-cierre"><?php echo $datos_empresa[0]['email_facturacion'];?></td></tr>
                 </table>
             </div>
         </div>

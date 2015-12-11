@@ -38,6 +38,18 @@ class EmpresaForm extends Form
                 'placeholder' => 'Ingrese la Razón Social de la Empresa'
             ),
         ));
+        
+        $this->add(array(
+            'name' => 'nombre_comercial',
+            'attributes' => array(
+                'type'  => 'text',
+                'class' => 'form-control input-sm',
+                'rows'=>'2',
+                'placeholder' => 'Ingrese el Nombre Comercial de la Empresa'
+            ),
+        ));
+        
+        
         $this->add(array(
             'name' => 'registro_contribuyente',
             'attributes' => array(
@@ -97,14 +109,6 @@ class EmpresaForm extends Form
             ),
         ));
         $this->add(array(
-            'name' => 'numero_cuenta',
-            'attributes' => array(
-                'type'  => 'text',
-                'class' => 'form-control input-sm',
-                'placeholder' => 'Ingrese el número de cuenta de la Empresa'
-            ),
-        ));
-        $this->add(array(
             'name' => 'descripcion',
             'attributes' => array(
                 'type'  => 'textarea',
@@ -143,6 +147,23 @@ class EmpresaForm extends Form
         ));
         
         $this->add(array(
+            'name' => 'persona_contacto',
+            'attributes' => array(
+                'type'  => 'text',
+                'class' => 'form-control input-sm',
+                'placeholder' => 'Persona Contacto.'
+            ),
+        ));
+        $this->add(array(
+            'name' => 'email_contacto',
+            'attributes' => array(
+                'type'  => 'text',
+                'class' => 'form-control input-sm',
+                'placeholder' => 'Email Persona de Contacto'
+            ),
+        ));
+        
+        $this->add(array(
             'name' => 'rubro',
             'attributes' => array(
                 'type'  => 'text',
@@ -158,6 +179,56 @@ class EmpresaForm extends Form
                 'class' => 'form-control input-sm'
             ),
         ));
+        
+        $this->add(array(
+            'name' => 'titular_cuenta',
+            'attributes' => array(
+                'type'  => 'text',
+                'class' => 'form-control input-sm',
+                'placeholder' => 'Ingrese el Titular de la Cuenta'
+            ),
+        ));
+        $this->add(array(
+            'name' => 'ruc_titular',
+            'attributes' => array(
+                'type'  => 'text',
+                'class' => 'form-control input-sm',
+                'placeholder' => 'Ingrese el RUC del Titular de la Cuenta'
+            ),
+        ));
+        $this->add(array(
+            'name' => 'numero_cuenta',
+            'attributes' => array(
+                'type'  => 'text',
+                'class' => 'form-control input-sm',
+                'placeholder' => 'Ingrese el Número de Cuenta'
+            ),
+        ));
+        $this->add(array(
+            'name' => 'tipo_cuenta',
+            'attributes' => array(
+                'type'  => 'text',
+                'class' => 'form-control input-sm',
+                'placeholder' => 'Ingrese el Tipo de Cuenta'
+            ),
+        ));
+        $this->add(array(
+            'name' => 'email_facturacion',
+            'attributes' => array(
+                'type'  => 'text',
+                'class' => 'form-control input-sm',
+                'placeholder' => 'Ingrese el Email de Facturación'
+            ),
+        ));
+        $this->add(array(
+            'name' => 'banco_cuenta',
+            'attributes' => array(
+                'type'  => 'text',
+                'class' => 'form-control input-sm',
+                'placeholder' => 'Ingrese el Banco de la Cuenta'
+            ),
+        ));
+        
         $this->add(array(
             'name' => 'submit',
             'attributes' => array(

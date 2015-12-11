@@ -22,7 +22,6 @@ class Genempresa {
     public $horario;
     public $web_site;
     public $ubicacion_gps;
-    public $numero_cuenta;
     public $descripcion;
     public $tipo_documento_representante;
     public $documento_representante;
@@ -30,134 +29,209 @@ class Genempresa {
     public $rubro;
     public $id_operador;
     
-    public function getId_empresa() {
+    public $nombre_comercial;
+    public $persona_contacto;
+    public $email_contacto;
+    public $titular_cuenta;
+    public $ruc_titular;
+    public $numero_cuenta;
+    public $tipo_cuenta;
+    public $email_facturacion;
+    public $banco_cuenta;
+    
+    function getId_empresa() {
         return $this->id_empresa;
     }
 
-    public function getRazon_social() {
+    function getRazon_social() {
         return $this->razon_social;
     }
 
-    public function getRegistro_contribuyente() {
+    function getRegistro_contribuyente() {
         return $this->registro_contribuyente;
     }
 
-    public function getDireccion_facturacion() {
+    function getDireccion_facturacion() {
         return $this->direccion_facturacion;
     }
 
-    public function getDirecciion_comercial() {
+    function getDirecciion_comercial() {
         return $this->direcciion_comercial;
     }
 
-    public function getTelefono() {
+    function getTelefono() {
         return $this->telefono;
     }
 
-    public function getHorario() {
+    function getHorario() {
         return $this->horario;
     }
 
-    public function getWeb_site() {
+    function getWeb_site() {
         return $this->web_site;
     }
 
-    public function getUbicacion_gps() {
+    function getUbicacion_gps() {
         return $this->ubicacion_gps;
     }
 
-    public function getNumero_cuenta() {
-        return $this->numero_cuenta;
-    }
-
-    public function getDescripcion() {
+    function getDescripcion() {
         return $this->descripcion;
     }
 
-    public function getTipo_documento_representante() {
+    function getTipo_documento_representante() {
         return $this->tipo_documento_representante;
     }
 
-    public function getDocumento_representante() {
+    function getDocumento_representante() {
         return $this->documento_representante;
     }
 
-    public function getNombre_representante() {
+    function getNombre_representante() {
         return $this->nombre_representante;
     }
-    
-    public function getRubro() {
+
+    function getRubro() {
         return $this->rubro;
     }
 
-    public function getId_operador() {
+    function getId_operador() {
         return $this->id_operador;
     }
 
-    public function setId_empresa($id_empresa) {
+    function getNombre_comercial() {
+        return $this->nombre_comercial;
+    }
+
+    function getPersona_contacto() {
+        return $this->persona_contacto;
+    }
+
+    function getEmail_contacto() {
+        return $this->email_contacto;
+    }
+
+    function getTitular_cuenta() {
+        return $this->titular_cuenta;
+    }
+
+    function getRuc_titular() {
+        return $this->ruc_titular;
+    }
+
+    function getNumero_cuenta() {
+        return $this->numero_cuenta;
+    }
+
+    function getTipo_cuenta() {
+        return $this->tipo_cuenta;
+    }
+
+    function getEmail_facturacion() {
+        return $this->email_facturacion;
+    }
+
+    function getBanco_cuenta() {
+        return $this->banco_cuenta;
+    }
+
+    function setId_empresa($id_empresa) {
         $this->id_empresa = $id_empresa;
     }
 
-    public function setRazon_social($razon_social) {
+    function setRazon_social($razon_social) {
         $this->razon_social = $razon_social;
     }
 
-    public function setRegistro_contribuyente($registro_contribuyente) {
+    function setRegistro_contribuyente($registro_contribuyente) {
         $this->registro_contribuyente = $registro_contribuyente;
     }
 
-    public function setDireccion_facturacion($direccion_facturacion) {
+    function setDireccion_facturacion($direccion_facturacion) {
         $this->direccion_facturacion = $direccion_facturacion;
     }
 
-    public function setDirecciion_comercial($direcciion_comercial) {
+    function setDirecciion_comercial($direcciion_comercial) {
         $this->direcciion_comercial = $direcciion_comercial;
     }
 
-    public function setTelefono($telefono) {
+    function setTelefono($telefono) {
         $this->telefono = $telefono;
     }
 
-    public function setHorario($horario) {
+    function setHorario($horario) {
         $this->horario = $horario;
     }
 
-    public function setWeb_site($web_site) {
+    function setWeb_site($web_site) {
         $this->web_site = $web_site;
     }
 
-    public function setUbicacion_gps($ubicacion_gps) {
+    function setUbicacion_gps($ubicacion_gps) {
         $this->ubicacion_gps = $ubicacion_gps;
     }
 
-    public function setNumero_cuenta($numero_cuenta) {
-        $this->numero_cuenta = $numero_cuenta;
-    }
-
-    public function setDescripcion($descripcion) {
+    function setDescripcion($descripcion) {
         $this->descripcion = $descripcion;
     }
 
-    public function setTipo_documento_representante($tipo_documento_representante) {
+    function setTipo_documento_representante($tipo_documento_representante) {
         $this->tipo_documento_representante = $tipo_documento_representante;
     }
 
-    public function setDocumento_representante($documento_representante) {
+    function setDocumento_representante($documento_representante) {
         $this->documento_representante = $documento_representante;
     }
 
-    public function setNombre_representante($nombre_representante) {
+    function setNombre_representante($nombre_representante) {
         $this->nombre_representante = $nombre_representante;
     }
-    
-    public function setRubro($rubro) {
+
+    function setRubro($rubro) {
         $this->rubro = $rubro;
     }
 
-    public function setId_operador($id_operador) {
+    function setId_operador($id_operador) {
         $this->id_operador = $id_operador;
     }
-    
+
+    function setNombre_comercial($nombre_comercial) {
+        $this->nombre_comercial = $nombre_comercial;
+    }
+
+    function setPersona_contacto($persona_contacto) {
+        $this->persona_contacto = $persona_contacto;
+    }
+
+    function setEmail_contacto($email_contacto) {
+        $this->email_contacto = $email_contacto;
+    }
+
+    function setTitular_cuenta($titular_cuenta) {
+        $this->titular_cuenta = $titular_cuenta;
+    }
+
+    function setRuc_titular($ruc_titular) {
+        $this->ruc_titular = $ruc_titular;
+    }
+
+    function setNumero_cuenta($numero_cuenta) {
+        $this->numero_cuenta = $numero_cuenta;
+    }
+
+    function setTipo_cuenta($tipo_cuenta) {
+        $this->tipo_cuenta = $tipo_cuenta;
+    }
+
+    function setEmail_facturacion($email_facturacion) {
+        $this->email_facturacion = $email_facturacion;
+    }
+
+    function setBanco_cuenta($banco_cuenta) {
+        $this->banco_cuenta = $banco_cuenta;
+    }
+
+        
     public function exchangeArray($data)
     {
         $this->id_empresa = (isset($data['id_empresa'])) ? $data['id_empresa'] : null;
@@ -169,13 +243,23 @@ class Genempresa {
         $this->horario = (isset($data['horario'])) ? $data['horario'] : null;
         $this->web_site = (isset($data['web_site'])) ? $data['web_site'] : null;
         $this->ubicacion_gps = (isset($data['ubicacion_gps'])) ? $data['ubicacion_gps'] : null;
-        $this->numero_cuenta = (isset($data['numero_cuenta'])) ? $data['numero_cuenta'] : null;
         $this->descripcion = (isset($data['descripcion'])) ? $data['descripcion'] : null;
         $this->tipo_documento_representante = (isset($data['tipo_documento_representante'])) ? $data['tipo_documento_representante'] : null;
         $this->documento_representante = (isset($data['documento_representante'])) ? $data['documento_representante'] : null;
         $this->nombre_representante = (isset($data['nombre_representante'])) ? $data['nombre_representante'] : null;
         $this->rubro = (isset($data['rubro'])) ? $data['rubro'] : null;
         $this->id_operador = (isset($data['id_operador'])) ? $data['id_operador'] : null;
+        
+        $this->nombre_comercial = (isset($data['nombre_comercial'])) ? $data['nombre_comercial'] : null;
+        $this->persona_contacto = (isset($data['persona_contacto'])) ? $data['persona_contacto'] : null;
+        $this->email_contacto = (isset($data['email_contacto'])) ? $data['email_contacto'] : null;
+        $this->titular_cuenta = (isset($data['titular_cuenta'])) ? $data['titular_cuenta'] : null;
+        $this->ruc_titular = (isset($data['ruc_titular'])) ? $data['ruc_titular'] : null;
+        $this->numero_cuenta = (isset($data['numero_cuenta'])) ? $data['numero_cuenta'] : null;
+        $this->tipo_cuenta = (isset($data['tipo_cuenta'])) ? $data['tipo_cuenta'] : null;
+        $this->email_facturacion = (isset($data['email_facturacion'])) ? $data['email_facturacion'] : null;
+        $this->banco_cuenta = (isset($data['banco_cuenta'])) ? $data['banco_cuenta'] : null;
+        
     }
  
     public function getArrayCopy()
