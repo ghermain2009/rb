@@ -946,6 +946,23 @@ class CampanaController extends AbstractActionController {
                 "small" .
                 $sep_path;
         
+        $pais = $config['id_pais'];
+        $capital = $config['id_capital'];
+        
+        $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
+        $departamentos = $departamentoTable->getDepartamentosxPaisFavoritos($pais);
+        
+        $provinciaTable = $serviceLocator->get('Dashboard\Model\UbiprovinciaTable');
+        $provincias = $provinciaTable->getProvinciasxDepartamento($pais, $capital);
+        
+        $this->layout()->pais = $pais;
+        $this->layout()->capital = $capital;
+        $this->layout()->departamentos = $departamentos;
+        $this->layout()->provincias = $provincias;
+        
+        $telefono_empresa = $config['empresa']['telefono'];
+        $this->layout()->telefono_empresa = $telefono_empresa;
+        
         if (!file_exists($ruta_int)) mkdir($ruta_int);
         if (!file_exists($ruta)) mkdir($ruta);
 
@@ -1009,6 +1026,23 @@ class CampanaController extends AbstractActionController {
                 "small" .
                 $sep_path .
                 $nombre_file;
+        
+        $pais = $config['id_pais'];
+        $capital = $config['id_capital'];
+        
+        $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
+        $departamentos = $departamentoTable->getDepartamentosxPaisFavoritos($pais);
+        
+        $provinciaTable = $serviceLocator->get('Dashboard\Model\UbiprovinciaTable');
+        $provincias = $provinciaTable->getProvinciasxDepartamento($pais, $capital);
+        
+        $this->layout()->pais = $pais;
+        $this->layout()->capital = $capital;
+        $this->layout()->departamentos = $departamentos;
+        $this->layout()->provincias = $provincias;
+        
+        $telefono_empresa = $config['empresa']['telefono'];
+        $this->layout()->telefono_empresa = $telefono_empresa;
 
         if(unlink($ruta)) {
             $datos = array();
@@ -1048,6 +1082,23 @@ class CampanaController extends AbstractActionController {
         $ruta = $ruta_int .
                 "small2" .
                 $sep_path;
+        
+        $pais = $config['id_pais'];
+        $capital = $config['id_capital'];
+        
+        $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
+        $departamentos = $departamentoTable->getDepartamentosxPaisFavoritos($pais);
+        
+        $provinciaTable = $serviceLocator->get('Dashboard\Model\UbiprovinciaTable');
+        $provincias = $provinciaTable->getProvinciasxDepartamento($pais, $capital);
+        
+        $this->layout()->pais = $pais;
+        $this->layout()->capital = $capital;
+        $this->layout()->departamentos = $departamentos;
+        $this->layout()->provincias = $provincias;
+        
+        $telefono_empresa = $config['empresa']['telefono'];
+        $this->layout()->telefono_empresa = $telefono_empresa;
         
         if (!file_exists($ruta_int)) mkdir($ruta_int);
         if (!file_exists($ruta)) mkdir($ruta);
@@ -1114,6 +1165,23 @@ class CampanaController extends AbstractActionController {
                 "small2" .
                 $sep_path .
                 "image1.jpg";
+        
+        $pais = $config['id_pais'];
+        $capital = $config['id_capital'];
+        
+        $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
+        $departamentos = $departamentoTable->getDepartamentosxPaisFavoritos($pais);
+        
+        $provinciaTable = $serviceLocator->get('Dashboard\Model\UbiprovinciaTable');
+        $provincias = $provinciaTable->getProvinciasxDepartamento($pais, $capital);
+        
+        $this->layout()->pais = $pais;
+        $this->layout()->capital = $capital;
+        $this->layout()->departamentos = $departamentos;
+        $this->layout()->provincias = $provincias;
+        
+        $telefono_empresa = $config['empresa']['telefono'];
+        $this->layout()->telefono_empresa = $telefono_empresa;
 
         if(unlink($ruta)) {
             $datos = array();
