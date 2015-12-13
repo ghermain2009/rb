@@ -65,6 +65,9 @@ class CupcampanaTable {
         
         $select->group(array('cup_campana.id_campana'));
         $select->group(array('cup_campana.subtitulo'));
+        $select->order('cup_campana.fecha_inicio DES');
+        $select->limit(6);
+        
         
         $statement = $sql->prepareStatementForSqlObject($select);
         $result = $statement->execute();
