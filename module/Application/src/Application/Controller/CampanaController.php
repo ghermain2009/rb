@@ -565,6 +565,7 @@ class CampanaController extends AbstractActionController {
                                    'subcategoria' => $op,
                                    'moneda' => $moneda,
                                    'directorio' => $ruta_int,
+                                   'sep_path' => $sep_path,
             ));
     }
 

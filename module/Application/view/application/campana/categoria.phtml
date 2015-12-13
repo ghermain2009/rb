@@ -77,7 +77,7 @@ foreach ($data as $dato) {
                 }
                 
                 ob_start();
-                $ruta_imagen_pro = $directorio.$dato['id_campana'].'\small2\image1.jpg';
+                $ruta_imagen_pro = $directorio.$dato['id_campana'].$sep_path.'small2'.$sep_path.'image1.jpg';
                 $resource_image = imagecreatefromjpeg($ruta_imagen_pro);
                 imagejpeg($resource_image);
                 $imagedata = ob_get_clean();
