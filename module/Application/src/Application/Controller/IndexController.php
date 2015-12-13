@@ -71,7 +71,8 @@ class IndexController extends AbstractActionController
                                    'dataG' => $dataG,
                                    'user_session' => $user_session,
                                    'moneda' => $moneda,
-                                   'directorio' => $ruta_int
+                                   'directorio' => $ruta_int,
+                                   'sep_path' => $sep_path
                                    ));
     }
     
