@@ -129,8 +129,23 @@ class CampanaController extends AbstractActionController {
         $config = $serviceLocator->get('Config');
         $dir_image = $config['constantes']['dir_image'];
         $sep_path = $config['constantes']['sep_path'];
-
+        
+        $dir_imagenes = $config['rutas']['dir_principal'] .
+                        $sep_path .
+                        $config['rutas']['dir_imgcampanas'];
+        
         $campanaId = $this->params('id');
+        
+        $ruta_imagenes = $dir_image . 
+                    $sep_path . 
+                    ".." .
+                    $sep_path .
+                    ".." .
+                    $sep_path .
+                    $dir_imagenes .
+                    $sep_path .
+                    $campanaId .
+                    $sep_path;
 
         $edit_campana = new Container('edit_campana');
         $edit_campana->id = $campanaId;
@@ -197,6 +212,7 @@ class CampanaController extends AbstractActionController {
         $viewmodel->form = $form;
         $viewmodel->setVariable('opciones', $opcionCampana);
         $viewmodel->setVariable('categorias', $categoriaCampana);
+        $viewmodel->setVariable('ruta_imagenes', $ruta_imagenes);
 
         return $viewmodel;
     }

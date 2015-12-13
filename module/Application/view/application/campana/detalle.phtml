@@ -10,17 +10,6 @@ function crearUrl($str_cadena) {
     return $nueva_cadena;
 }
 
-$directorio = $dir_image . 
-              $sep_path .
-              ".." .
-              $sep_path .
-              ".." .
-              $sep_path .
-              "public" .
-              $sep_path .
-              "img" .
-              $sep_path;
-
 $maximo_cupones = 0;
 $vendidos = 0;
 foreach ($data_v as $vendidos) {
@@ -38,10 +27,7 @@ foreach ($data as $detalle) {
             <!-- Indicators -->
             <ol class="carousel-indicators">
                 <?php
-                $ficheros = scandir($directorio . 
-                                    $detalle['id_campana'] .
-                                    $sep_path .
-                                    "small");
+                $ficheros = scandir($directorio.$detalle['id_campana'].$sep_path .'small');
                 $contador = -1;
                 foreach ($ficheros as $file) {
                     if ($file == '.' || $file == '..')
@@ -61,10 +47,18 @@ foreach ($data as $detalle) {
                     if ($file == '.' || $file == '..')
                         continue;
                     $contador++;
+                    
+                    ob_start();
+                    $ruta_imagen_pro = $directorio.$detalle['id_campana'].$sep_path .'small'.$sep_path.$file;
+                    $resource_image = imagecreatefromjpeg($ruta_imagen_pro);
+                    imagejpeg($resource_image);
+                    $imagedata = ob_get_clean();
+                    $image = 'data:image/jpeg;base64,'.base64_encode($imagedata);
+                    
                     ?>
                     <div class="item<?php if ($contador == 0) { ?>  active<?php } ?>">
                         <div class="slider-detalle">
-                            <img src="../../img/<?php echo $detalle['id_campana']; ?>/small/<?php echo $file; ?>">
+                            <img src="<?php echo $image; ?>">
                         </div>
                         <div class="carousel-caption"></div>
                     </div>
@@ -248,6 +242,14 @@ foreach ($data_p as $dato) {
         case 3: $position = ' right';
             break;
     }
+    
+    ob_start();
+    $ruta_imagen_pro = $directorio.$dato['id_campana'].'\small2\image1.jpg';
+    $resource_image = imagecreatefromjpeg($ruta_imagen_pro);
+    imagejpeg($resource_image);
+    $imagedata = ob_get_clean();
+    $image = 'data:image/jpeg;base64,'.base64_encode($imagedata);
+                
     if ($dato['categoria'] != $anterior) {
         ?>
         <section id="<?php echo $dato['categoria']; ?>">
@@ -264,7 +266,7 @@ foreach ($data_p as $dato) {
                     <div class="img_container">
                         <a href="../../campana/detalle/<?php echo crearUrl($dato['subtitulo']).'--'.base64_encode($dato['id_campana']); ?>.html">
                             <span class=""></span>
-                            <img  class="lazy campana-imgreferencia-<?php echo $ultimo;?>" data-original="../../img/<?php echo $dato['id_campana']; ?>/small2/image1.jpg" src="../../img/buenisimo_placeholder.png" alt="<?php echo $dato['subtitulo']; ?>" />
+                            <img  class="lazy campana-imgreferencia-<?php echo $ultimo;?>" data-original="<?php echo $image;?>" src="../../img/buenisimo_placeholder.png" alt="<?php echo $dato['subtitulo']; ?>" />
                             <span class="campana-texto-descuento-<?php echo $ultimo;?>">-<?php echo $dato['descuento']; ?>%</span>
                             <?php if( $dato['maximo_cupones'] > 0 ) { 
                                     $quedan = $dato['maximo_cupones'] - $dato['vendidos'];

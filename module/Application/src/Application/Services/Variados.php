@@ -38,6 +38,21 @@ class Variados {
         $config = $sl->get('Config');
         $localhost = $config['constantes']['localhost'];
         
+        $dir_image = $config['constantes']['dir_image'];
+        $sep_path = $config['constantes']['sep_path'];
+        $dir_imagenes = $config['rutas']['dir_principal'] .
+                        $sep_path .
+                        $config['rutas']['dir_imgcampanas'];
+        
+        $directorio = $dir_image . 
+                    $sep_path . 
+                    ".." .
+                    $sep_path .
+                    ".." .
+                    $sep_path .
+                    $dir_imagenes .
+                    $sep_path;
+        
         $is_https = $config['is_https'];
         
         $activo   = $config['correo']['activo'];
@@ -69,6 +84,13 @@ class Variados {
                 if($i==0) {
                     $email = $datos[$i]['email_cliente'];
                 }
+                
+                ob_start();
+                $ruta_imagen_pro = $directorio.$datos['id_campana'].$sep_path .'small2'.$sep_path.'image1.jpg';
+                $resource_image = imagecreatefromjpeg($ruta_imagen_pro);
+                imagejpeg($resource_image);
+                $imagedata = ob_get_clean();
+                $image = 'data:image/jpeg;base64,'.base64_encode($imagedata);
                 
                 /*********Codigo de Barra Code128****************/
                 $barcodeOptions = array('text' => $datos[$i]["codigo_cupon"]);
@@ -109,7 +131,8 @@ class Variados {
                     'horario' => $datos[$i]["horario"],
                     'localhost' => $localhost,
                     'barras_img' => 'data:jpeg;base64,' . base64_encode($data128),
-                    'qr_img' => $qrImg
+                    'qr_img' => $qrImg,
+                    'imagen_campana' => $image
                 ));
 
                 $documentoPdf->setTerminal(true);

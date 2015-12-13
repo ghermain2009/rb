@@ -25,6 +25,21 @@ class IndexController extends AbstractActionController
         $en_produccion = $config['en_produccion'];
         $telefono_empresa = $config['empresa']['telefono'];
         
+        $dir_image = $config['constantes']['dir_image'];
+        $sep_path = $config['constantes']['sep_path'];
+        $dir_imagenes = $config['rutas']['dir_principal'] .
+                        $sep_path .
+                        $config['rutas']['dir_imgcampanas'];
+        
+        $ruta_int = $dir_image . 
+                    $sep_path . 
+                    ".." .
+                    $sep_path .
+                    ".." .
+                    $sep_path .
+                    $dir_imagenes .
+                    $sep_path;
+        
         $constantes = $config['constantes'];
         $moneda = $config['moneda'];
 
@@ -55,7 +70,8 @@ class IndexController extends AbstractActionController
         return new ViewModel(array('data' => $data, 
                                    'dataG' => $dataG,
                                    'user_session' => $user_session,
-                                   'moneda' => $moneda
+                                   'moneda' => $moneda,
+                                   'directorio' => $ruta_int
                                    ));
     }
     

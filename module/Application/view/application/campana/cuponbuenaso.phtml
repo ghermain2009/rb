@@ -1,3 +1,12 @@
+<?php
+    ob_start();
+    $ruta_imagen_pro = $directorio.$datos['id_campana'].$sep_path .'small2'.$sep_path.'image1.jpg';
+    $resource_image = imagecreatefromjpeg($ruta_imagen_pro);
+    imagejpeg($resource_image);
+    $imagedata = ob_get_clean();
+    $image = 'data:image/jpeg;base64,'.base64_encode($imagedata);
+?>
+
 <div class="container">
     <div class="borde-cupon-externo">
         <div class="separacion-cupon">
@@ -5,7 +14,7 @@
             <div class="en-linea texto"><p class="letra-cupon">Número de Cupón: <?php echo $datos["codigo_cupon"];?><?php if($datos["cantidad"] > 1) { echo ' - ...'; }?><br>Válido por <?php echo $datos["cantidad"];?> <?php if($datos["cantidad"] > 1) { echo 'cupones'; } else { echo 'cupón'; }?></p></div>
         </div>
         <div class="separacion-cupon">
-            <div class="en-linea logo-oferta"><img src="../../../img/<?php echo $datos['id_campana']; ?>/small2/image1.jpg"></div>
+            <div class="en-linea logo-oferta"><img src="<?php echo $image; ?>"></div>
             <div class="en-linea texto"><p class="letra-cupon">Tu compra en Rebueno:<br><?php echo $datos["campana_descripcion"];?></p>
                     <p class="letra-cupon-min">Fecha Compra : <?php echo $datos["fecha_compra"];?></p>
                     <?php if( !empty($datos["fecha_validez"]) ) { ?>

@@ -198,13 +198,21 @@
         }
         ?>
     </div>
-    <?php foreach ($data_o as $dato) { ?>
+    <?php foreach ($data_o as $dato) { 
+        
+            ob_start();
+            $ruta_imagen_pro = $directorio.$id.$sep_path .'small2'.$sep_path.'image1.jpg';
+            $resource_image = imagecreatefromjpeg($ruta_imagen_pro);
+            imagejpeg($resource_image);
+            $imagedata = ob_get_clean();
+            $image = 'data:image/jpeg;base64,'.base64_encode($imagedata);
+     ?>
         <div class="section_payment">
             <h3>Confirma tu pedido</h3>
             <div class="box_payment">
                 <h4 class="titulo_negro">Producto</h4>
                 <div class="box_center_info">
-                    <img class="img_container_pago" src="/img/<?php echo $id; ?>/small2/image1.jpg">
+                    <img class="img_container_pago" src="<?php echo $image; ?>">
                     <span class="confirma-detalle"><?php echo strip_tags($dato['descripcion']); ?></span>
                 </div>
                 <div class="box_quantity">

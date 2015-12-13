@@ -26,8 +26,6 @@ class EmpresaController extends AbstractActionController {
 
         $id_contrato = base64_decode($token);
         
-        error_log($id_contrato);
-
         $serviceLocator = $this->getServiceLocator();
         $config = $serviceLocator->get('config');
         
@@ -72,8 +70,6 @@ class EmpresaController extends AbstractActionController {
         $id_contrato = base64_decode($token);
         $id_campana = base64_decode($token_campana);
         
-        //error_log($id_contrato);
-
         $serviceLocator = $this->getServiceLocator();
         $config = $serviceLocator->get('config');
         

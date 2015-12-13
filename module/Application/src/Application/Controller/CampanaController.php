@@ -45,6 +45,21 @@ class CampanaController extends AbstractActionController {
         $localhost = $config['constantes']['localhost'];
         $moneda = $config['moneda'];
         
+        $dir_image = $config['constantes']['dir_image'];
+        $sep_path =  $config['constantes']['sep_path'];
+        $dir_imagenes = $config['rutas']['dir_principal'] .
+                        $sep_path .
+                        $config['rutas']['dir_imgcampanas'];
+        
+        $ruta_int = $dir_image . 
+                    $sep_path . 
+                    ".." .
+                    $sep_path .
+                    ".." .
+                    $sep_path .
+                    $dir_imagenes .
+                    $sep_path;
+        
         $user_session = new Container('user');
         $user_session->id_campana = $id;
         $user_session->localhost = $localhost;
@@ -85,7 +100,8 @@ class CampanaController extends AbstractActionController {
             'dir_image' => $dir_image,
             'sep_path' => $sep_path,
             'moneda' => $moneda,
-            'localhost' => $localhost
+            'localhost' => $localhost,
+            'directorio' => $ruta_int,
             ));
     }
 
@@ -106,6 +122,21 @@ class CampanaController extends AbstractActionController {
         $serviceLocator = $this->getServiceLocator();
         $campanaTable = $serviceLocator->get('Dashboard\Model\CupcampanaTable');
         $config = $serviceLocator->get('config');
+        
+        $dir_image = $config['constantes']['dir_image'];
+        $sep_path =  $config['constantes']['sep_path'];
+        $dir_imagenes = $config['rutas']['dir_principal'] .
+                        $sep_path .
+                        $config['rutas']['dir_imgcampanas'];
+        
+        $ruta_int = $dir_image . 
+                    $sep_path . 
+                    ".." .
+                    $sep_path .
+                    ".." .
+                    $sep_path .
+                    $dir_imagenes .
+                    $sep_path;
         
         $moneda = $config['moneda'];
 
@@ -144,6 +175,8 @@ class CampanaController extends AbstractActionController {
             'data_o' => $data_o,
             'user_session' => $user_session,
             'moneda' => $moneda,
+            'directorio' => $ruta_int,
+            'sep_path' => $sep_path
                 ));
         //}
     }
@@ -277,7 +310,7 @@ class CampanaController extends AbstractActionController {
                         'registerVerification'=>$registerVerification
                     );
 
-                    error_log(print_r($params,true));
+                    //error_log(print_r($params,true));
 
                     //Consumo del metodo RegisterCardHolder
                     $result = $clientWS->RegisterCardHolder($params);
@@ -287,9 +320,7 @@ class CampanaController extends AbstractActionController {
                     echo $e->getMessage();
                 }
                 
-                error_log('codAsoCardHolderWallet -> '.$codAsoCardHolderWallet);
-                //$result = array('codasocardholderwallet' => 'fggGGHHGHHJJ=GGXXXkllll');
-                //$codAsoCardHolderWallet = $result['codasocardholderwallet'];
+                //error_log('codAsoCardHolderWallet -> '.$codAsoCardHolderWallet);
                 
                 $clientePaymeTable->updClientepayme($mail,$codAsoCardHolderWallet);
                 
@@ -328,7 +359,7 @@ class CampanaController extends AbstractActionController {
                                     'reserved1' => 'N/A'
                                     );
                 
-                error_log(print_r($datosEnvioPayme,true));
+                //error_log(print_r($datosEnvioPayme,true));
 
                 $user_session = new Container('datos_payme');
                 $user_session->solicitud = $datosEnvioPayme;
@@ -493,6 +524,21 @@ class CampanaController extends AbstractActionController {
         $serviceLocator = $this->getServiceLocator();
         $campanaTable = $serviceLocator->get('Dashboard\Model\CupcampanaTable');
         $config = $serviceLocator->get('config');
+        
+        $dir_image = $config['constantes']['dir_image'];
+        $sep_path =  $config['constantes']['sep_path'];
+        $dir_imagenes = $config['rutas']['dir_principal'] .
+                        $sep_path .
+                        $config['rutas']['dir_imgcampanas'];
+        
+        $ruta_int = $dir_image . 
+                    $sep_path . 
+                    ".." .
+                    $sep_path .
+                    ".." .
+                    $sep_path .
+                    $dir_imagenes .
+                    $sep_path;
                 
         $data = $campanaTable->getCampanaCategoria($id,$op);
         
@@ -518,6 +564,7 @@ class CampanaController extends AbstractActionController {
         return new ViewModel(array('data' => $data, 
                                    'subcategoria' => $op,
                                    'moneda' => $moneda,
+                                   'directorio' => $ruta_int,
             ));
     }
 
@@ -605,7 +652,7 @@ class CampanaController extends AbstractActionController {
         
         set_time_limit(0);
         
-        error_log(print_r($datos,true));
+        //error_log(print_r($datos,true));
         
         if( count($datos) > 0 ) {
         
@@ -824,6 +871,22 @@ class CampanaController extends AbstractActionController {
         
         $serviceLocator = $this->getServiceLocator();
         $config = $serviceLocator->get('config');
+        
+        $dir_image = $config['constantes']['dir_image'];
+        $sep_path =  $config['constantes']['sep_path'];
+        $dir_imagenes = $config['rutas']['dir_principal'] .
+                        $sep_path .
+                        $config['rutas']['dir_imgcampanas'];
+        
+        $ruta_int = $dir_image . 
+                    $sep_path . 
+                    ".." .
+                    $sep_path .
+                    ".." .
+                    $sep_path .
+                    $dir_imagenes .
+                    $sep_path;
+        
         $cuponTable = $serviceLocator->get('Dashboard\Model\CupcuponTable');
         $datosCupon = $cuponTable->getCupon($datos["orden"]);
         $datosArray = $datosCupon[0];
@@ -847,7 +910,9 @@ class CampanaController extends AbstractActionController {
         $telefono_empresa = $config['empresa']['telefono'];
         $this->layout()->telefono_empresa = $telefono_empresa;
         
-        return new ViewModel(array('datos' => $datosArray));
+        return new ViewModel(array('datos' => $datosArray,
+                                   'directorio' => $ruta_int,
+                                   'sep_path' => $sep_path));
         
     }
 
@@ -861,15 +926,17 @@ class CampanaController extends AbstractActionController {
         $dir_image = $config['constantes']['dir_image'];
         $sep_path = $config['constantes']['sep_path'];
         
+        $dir_imagenes = $config['rutas']['dir_principal'] .
+                        $sep_path .
+                        $config['rutas']['dir_imgcampanas'];
+        
         $ruta_int = $dir_image . 
                     $sep_path . 
                     ".." .
                     $sep_path .
                     ".." .
                     $sep_path .
-                    "public" .
-                    $sep_path .
-                    "img" .
+                    $dir_imagenes .
                     $sep_path .
                     $campana .
                     $sep_path;
@@ -923,23 +990,25 @@ class CampanaController extends AbstractActionController {
         $config = $serviceLocator->get('Config');
         $dir_image = $config['constantes']['dir_image'];
         $sep_path = $config['constantes']['sep_path'];
-
+        
+        $dir_imagenes = $config['rutas']['dir_principal'] .
+                        $sep_path .
+                        $config['rutas']['dir_imgcampanas'];
+        
         $ruta = $dir_image . 
                 $sep_path . 
                 ".." .
                 $sep_path .
                 ".." .
                 $sep_path .
-                "public" .
-                $sep_path .
-                "img" .
+                $dir_imagenes .
                 $sep_path .
                 $campana .
                 $sep_path .
                 "small" .
                 $sep_path .
                 $nombre_file;
-                
+
         if(unlink($ruta)) {
             $datos = array();
         } else {
@@ -960,15 +1029,17 @@ class CampanaController extends AbstractActionController {
         $dir_image = $config['constantes']['dir_image'];
         $sep_path = $config['constantes']['sep_path'];
 
+        $dir_imagenes = $config['rutas']['dir_principal'] .
+                        $sep_path .
+                        $config['rutas']['dir_imgcampanas'];
+        
         $ruta_int = $dir_image . 
                     $sep_path . 
                     ".." .
                     $sep_path .
                     ".." .
                     $sep_path .
-                    "public" .
-                    $sep_path .
-                    "img" .
+                    $dir_imagenes .
                     $sep_path .
                     $campana .
                     $sep_path;
@@ -1022,23 +1093,27 @@ class CampanaController extends AbstractActionController {
         $config = $serviceLocator->get('Config');
         $dir_image = $config['constantes']['dir_image'];
         $sep_path = $config['constantes']['sep_path'];
-
-        $ruta = $dir_image . 
+        
+        $dir_imagenes = $config['rutas']['dir_principal'] .
+                        $sep_path .
+                        $config['rutas']['dir_imgcampanas'];
+        
+        $ruta_int = $dir_image . 
                     $sep_path . 
                     ".." .
                     $sep_path .
                     ".." .
                     $sep_path .
-                    "public" .
-                    $sep_path .
-                    "img" .
+                    $dir_imagenes .
                     $sep_path .
                     $campana .
-                    $sep_path .
-                    "small2" .
-                    $sep_path .
-                    "image1.jpg";
+                    $sep_path;
         
+        $ruta = $ruta_int .
+                "small2" .
+                $sep_path .
+                "image1.jpg";
+
         if(unlink($ruta)) {
             $datos = array();
         } else {
@@ -1058,6 +1133,20 @@ class CampanaController extends AbstractActionController {
         $config = $serviceLocator->get('Config');
         
         $dir_image = $config['constantes']['dir_image'];
+        $sep_path = $config['constantes']['sep_path'];
+        $dir_imagenes = $config['rutas']['dir_principal'] .
+                        $sep_path .
+                        $config['rutas']['dir_imgcampanas'];
+        
+        $ruta_int = $dir_image . 
+                    $sep_path . 
+                    ".." .
+                    $sep_path .
+                    ".." .
+                    $sep_path .
+                    $dir_imagenes .
+                    $sep_path;
+        
         $moneda = $config['moneda'];
 
         $campanaTable = $serviceLocator->get('Dashboard\Model\CupcampanaTable');
@@ -1074,7 +1163,8 @@ class CampanaController extends AbstractActionController {
             'data_p' => $data_p,
             'data_e' => $data_e,
             'id' => $id,
-            'dir_image' => $dir_image,
+            'directorio' => $ruta_int,
+            'sep_path' => $sep_path,
             'moneda' => $moneda,
             ));
         

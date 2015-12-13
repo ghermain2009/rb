@@ -111,7 +111,7 @@
             <div class="en-linea codigo-qr"><img src="<?php echo $this->qr_img;?>" width="90" height="90"/></div>
         </div>
         <div class="separacion-cupon">
-            <div class="en-linea logo-oferta"><img src="<?php echo $localhost; ?>/img/<?php echo $id_campana; ?>/small2/image1.jpg"></div>
+            <div class="en-linea logo-oferta"><img src="<?php echo $this->imagen_campana;?>"></div>
             <div class="en-linea texto"><p class="letra-cupon-cabecera">Tu compra en Rebueno:<br><?php echo $campana_descripcion;?></p>
                     <p class="letra-cupon-min">Fecha Compra : <?php echo $fecha_compra;?></p>
                     <?php if( !empty($fecha_validez) ) { ?>

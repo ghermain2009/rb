@@ -1,5 +1,4 @@
 <?php
-$directorio = $dir_image . "\\..\\..\\public\\";
 
 foreach ($data as $detalle) {
     $fecha_final = $detalle['fecha_final'];
@@ -11,7 +10,7 @@ foreach ($data as $detalle) {
             <!-- Indicators -->
             <ol class="carousel-indicators">
                 <?php
-                $ficheros = scandir($directorio . "img\\" . $detalle['id_campana'] . "\\small");
+                $ficheros = scandir($directorio.$detalle['id_campana'].sep_path."small");
                 $contador = -1;
                 foreach ($ficheros as $file) {
                     if ($file == '.' || $file == '..')
@@ -31,9 +30,17 @@ foreach ($data as $detalle) {
                     if ($file == '.' || $file == '..')
                         continue;
                     $contador++;
+                    
+                    ob_start();
+                    $ruta_imagen_pro = $directorio.$detalle['id_campana'].$sep_path .'small'.$sep_path.$file;
+                    $resource_image = imagecreatefromjpeg($ruta_imagen_pro);
+                    imagejpeg($resource_image);
+                    $imagedata = ob_get_clean();
+                    $image = 'data:image/jpeg;base64,'.base64_encode($imagedata);
+                    
                     ?>
                     <div class="item<?php if ($contador == 0) { ?>  active<?php } ?>">
-                        <img src="../../img/<?php echo $detalle['id_campana']; ?>/small/<?php echo $file; ?>" alt="...">
+                        <img src="<?php echo $image;?>" alt="...">
                         <div class="carousel-caption"></div>
                     </div>
                     <?php
