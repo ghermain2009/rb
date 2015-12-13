@@ -326,12 +326,17 @@ $contador = -1;
 foreach ($ficheros as $file) {
     if ($file == '.' || $file == '..')
         continue;
-    ob_start();
+    
     $ruta_imagen_pro = $directorio.'small'.$sep_path.$file;
-    $resource_image = imagecreatefromjpeg($ruta_imagen_pro);
-    imagejpeg($resource_image);
-    $imagedata = ob_get_clean();
-    $image = 'data:image/jpeg;base64,'.base64_encode($imagedata);
+    if (file_exists($ruta_imagen_pro)){
+        ob_start();
+        $resource_image = imagecreatefromjpeg($ruta_imagen_pro);
+        imagejpeg($resource_image);
+        $imagedata = ob_get_clean();
+        $image = 'data:image/jpeg;base64,'.base64_encode($imagedata);
+    } else {
+        $image = '';
+    }
     ?>
                 '<img src="<?php echo $image;?>" class="file-preview-image">',
 <?php } ?>
@@ -357,12 +362,17 @@ unset($initial);
 foreach ($ficheros2 as $file) {
     if ($file == '.' || $file == '..')
         continue;
-    ob_start();
+    
     $ruta_imagen_pro = $directorio.$sep_path.'small2'.$sep_path.$file;
-    $resource_image = imagecreatefromjpeg($ruta_imagen_pro);
-    imagejpeg($resource_image);
-    $imagedata = ob_get_clean();
-    $image = 'data:image/jpeg;base64,'.base64_encode($imagedata);
+    if (file_exists($ruta_imagen_pro)){
+        ob_start();
+        $resource_image = imagecreatefromjpeg($ruta_imagen_pro);
+        imagejpeg($resource_image);
+        $imagedata = ob_get_clean();
+        $image = 'data:image/jpeg;base64,'.base64_encode($imagedata);
+    } else {
+        $image ='';
+    }
     $initial = $image;
     ?>
                 '<img src="<?php echo $image; ?>" class="file-preview-image">',

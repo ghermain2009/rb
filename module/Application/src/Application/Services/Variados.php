@@ -85,12 +85,16 @@ class Variados {
                     $email = $datos[$i]['email_cliente'];
                 }
                 
-                ob_start();
                 $ruta_imagen_pro = $directorio.$datos['id_campana'].$sep_path .'small2'.$sep_path.'image1.jpg';
-                $resource_image = imagecreatefromjpeg($ruta_imagen_pro);
-                imagejpeg($resource_image);
-                $imagedata = ob_get_clean();
-                $image = 'data:image/jpeg;base64,'.base64_encode($imagedata);
+                if (file_exists($ruta_imagen_pro)){
+                    ob_start();
+                    $resource_image = imagecreatefromjpeg($ruta_imagen_pro);
+                    imagejpeg($resource_image);
+                    $imagedata = ob_get_clean();
+                    $image = 'data:image/jpeg;base64,'.base64_encode($imagedata);
+                } else {
+                    $image = '';
+                }
                 
                 /*********Codigo de Barra Code128****************/
                 $barcodeOptions = array('text' => $datos[$i]["codigo_cupon"]);
