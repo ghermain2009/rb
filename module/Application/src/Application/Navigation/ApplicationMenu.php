@@ -41,21 +41,24 @@ class ApplicationMenu extends DefaultNavigationFactory
         
         $padre = '';
         
+        $order_padre = 0;
         foreach ($dataMenu as $opt) {
             
             if( $opt['categoria'] != $padre ) {
+                $order_padre++;
+                $order_hijo = 0;
                 $menu[$opt['id_categoria']] = array(
                     'label' => $opt['categoria'],
                     'uri' => "",
-                    'order' => $opt['cantidad']
+                    'order' => $order_padre //$opt['cantidad']
                 );
             }
-            
+            $order_hijo++;
             $menu[$opt['id_categoria']]['pages'][] = array(
                 'label' => $opt['subcategoria'],
                 //'uri' => "javascript:postfunction('/campana','categoria','".base64_encode($opt['id_categoria'])."','".base64_encode($opt['id_sub_categoria'])."');",
                 'uri' => "/campana/categoria/".base64_encode($opt['id_categoria'])."/".base64_encode($opt['id_sub_categoria']),
-                'order' => $opt['cantidad']
+                'order' => $order_hijo //$opt['cantidad']
             );
             
             $padre = $opt['categoria'];

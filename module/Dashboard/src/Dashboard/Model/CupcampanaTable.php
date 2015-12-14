@@ -390,7 +390,7 @@ class CupcampanaTable {
                 ->join('cup_campana', new Expression("cup_campana_categoria.id_campana = cup_campana.id_campana AND NOW() BETWEEN ADDTIME(cup_campana.fecha_inicio, cup_campana.hora_inicio) AND ADDTIME(cup_campana.fecha_final, cup_campana.hora_final)"),array());
         
         $select->group(array('gen_categoria.descripcion','gen_categoria.id_categoria','gen_sub_categoria.descripcion','gen_sub_categoria.id_sub_categoria'));
-
+        $select->order('categoria');
         //echo $select->getSqlString();
         
         $stmt = $sql->prepareStatementForSqlObject($select);
