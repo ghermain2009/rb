@@ -14,7 +14,7 @@ foreach ($this->container as $page) {
             <?php
             foreach($page->getPages() as $child) {
             ?>
-                <li><a href="<?php echo $child->getHref(); ?>"><?php echo $child->getLabel(); ?>&nbsp;&nbsp;<spasn class="badge"><?php echo $child->getOrder(); ?></spasn></a></li>
+                <li><a href="<?php echo $child->getHref(); ?>"><?php echo $child->getLabel(); ?>&nbsp;&nbsp;<spasn class="badge"><?php echo $child->getTitle(); ?></spasn></a></li>
             <?php
             }
             ?>

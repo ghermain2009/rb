@@ -50,7 +50,8 @@ class ApplicationMenu extends DefaultNavigationFactory
                 $menu[$opt['id_categoria']] = array(
                     'label' => $opt['categoria'],
                     'uri' => "",
-                    'order' => $order_padre //$opt['cantidad']
+                    'order' => $order_padre,
+                    'title' => $opt['cantidad']
                 );
             }
             $order_hijo++;
@@ -58,7 +59,8 @@ class ApplicationMenu extends DefaultNavigationFactory
                 'label' => $opt['subcategoria'],
                 //'uri' => "javascript:postfunction('/campana','categoria','".base64_encode($opt['id_categoria'])."','".base64_encode($opt['id_sub_categoria'])."');",
                 'uri' => "/campana/categoria/".base64_encode($opt['id_categoria'])."/".base64_encode($opt['id_sub_categoria']),
-                'order' => $order_hijo //$opt['cantidad']
+                'order' => $order_hijo,
+                'title' => $opt['cantidad']
             );
             
             $padre = $opt['categoria'];
