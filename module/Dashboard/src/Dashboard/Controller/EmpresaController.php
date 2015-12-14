@@ -316,7 +316,7 @@ class EmpresaController extends AbstractActionController {
         $serviceLocator = $this->getServiceLocator();
         $contratoTable = $serviceLocator->get('Dashboard\Model\ConcontratoanexoTable');
         
-        $nombre_anexo = $nombre_contrato.'_ANEXO_'.date('Ymd');
+        $nombre_anexo = $nombre_contrato.'_ANEXO_'.$id_campana.'_'.date('Ymd');
         
         $anexocontrato = array('id_contrato'      => $id_contrato,
                                'id_campana'       => $id_campana,
