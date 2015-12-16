@@ -548,8 +548,9 @@ $user_session = new Container('user');
                 }
             });
         }
-        
+        <?php if($pedir_registro == '1') { ?>
         $('#myModal').modal('show');
+        <?php } ?>
 
     });
 

@@ -61,6 +61,7 @@ class IndexController extends AbstractActionController
         $this->layout()->departamentos = $departamentos;
         $this->layout()->provincias = $provincias;
         $this->layout()->telefono_empresa = $telefono_empresa;
+        $this->layout()->pedir_registro = '1';
         
         $campanaTable = $serviceLocator->get('Dashboard\Model\CupcampanaTable');
 
