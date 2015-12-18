@@ -155,6 +155,13 @@ class CampanaForm extends Form
             ),
           ));
         $this->add(array(
+            'name' => 'comision_campana',
+            'attributes' => array(
+                'type'  => 'text',
+                'class' => 'form-control input-sm',
+            ),
+          ));
+        $this->add(array(
             'name' => 'submit',
             'attributes' => array(
                 'type'  => 'submit',

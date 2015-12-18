@@ -194,6 +194,7 @@ class CampanaController extends AbstractActionController {
                 $form->get('cantidad_cupones')->setValue($campana['cantidad_cupones']);
                 $form->get('tiempo_online')->setValue($campana['tiempo_online']);
                 $form->get('tiempo_offline')->setValue($campana['tiempo_offline']);
+                $form->get('comision_campana')->setValue($campana['comision_campana']);
             }
         }
 

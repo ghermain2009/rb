@@ -143,8 +143,8 @@
                     <tr><td class="celda-bordeada">Precio Original :</td><td class="celda-bordeada derecha"><?php echo $opciones['precio_regular'];?></td></tr>
                     <tr><td class="celda-bordeada">Descuento en % :</td><td class="celda-bordeada derecha"><?php echo $opciones['descuento'];?></td></tr>
                     <tr><td class="celda-bordeada">Precio Rebueno :</td><td class="celda-bordeada derecha"><?php echo $opciones['precio_especial'];?></td></tr>
-                    <tr><td class="celda-bordeada">Comisión Rebueno incluido IVA 35% :</td><td class="celda-bordeada derecha"><?php echo round($opciones['precio_especial'] * 0.35,2);?></td></tr>
-                    <tr><td class="celda-bordeada">Ingreso neto por Cliente :</td><td class="celda-bordeada derecha"><?php echo $opciones['precio_especial'] - round($opciones['precio_especial'] * 0.35,2);?></td></tr>
+                    <tr><td class="celda-bordeada">Comisión Rebueno incluido IVA <?php echo $datos_campana[0]['comision_campana'];?>% :</td><td class="celda-bordeada derecha"><?php echo round($opciones['precio_especial'] * ($datos_campana[0]['comision_campana'] / 100),2);?></td></tr>
+                    <tr><td class="celda-bordeada">Ingreso neto por Cliente :</td><td class="celda-bordeada derecha"><?php echo $opciones['precio_especial'] - round($opciones['precio_especial'] * ($datos_campana[0]['comision_campana'] / 100),2);?></td></tr>
                     <tr><td class="celda-bordeada">Número máximo de cupones :</td><td class="celda-bordeada derecha"><?php if(empty($opciones['cantidad'])) { echo '100'; } else { echo $opciones['cantidad']; }?></td></tr>
                     <tr><td class="celda-bordeada derecha-cierre">Vigencia :</td><td class="celda-bordeada derecha derecha-cierre"></td></tr>
                     <?php $cont++;

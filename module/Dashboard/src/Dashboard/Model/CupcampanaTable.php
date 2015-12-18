@@ -201,7 +201,8 @@ class CupcampanaTable {
             'descripcion',
             'sobre_campana',
             'observaciones',
-            'fecha_final' => new Expression("DATE_FORMAT(ADDTIME(fecha_final, hora_final),'%m/%d/%Y %l:%i %p')")
+            'fecha_final' => new Expression("DATE_FORMAT(ADDTIME(fecha_final, hora_final),'%m/%d/%Y %l:%i %p')"),
+            'comision_campana'
         ))
         ->from('cup_campana')
         ->where(array('id_campana' => $id_campana));
