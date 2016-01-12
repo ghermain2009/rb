@@ -119,11 +119,11 @@ class EmpresaController extends AbstractActionController {
 
         $editBtn = new Column\Action\Button();
         $editBtn->setLabel(' ');
-        $editBtn->setAttribute('class', 'btn btn-primary glyphicon glyphicon-edit');
+        $editBtn->setAttribute('class', 'btn btn-success glyphicon glyphicon-edit');
         $editBtn->setAttribute('href', '/dashboard/empresa/edit/id/' . $editBtn->getRowIdPlaceholder());
         $editBtn->setAttribute('data-toggle', 'tooltip');
         $editBtn->setAttribute('data-placement', 'left');
-        $editBtn->setAttribute('title', 'Editar Empresa');
+        $editBtn->setAttribute('title', 'Modificar Empresa');
         
         $conBtn = new Column\Action\Button();
         $conBtn->setLabel(' ');

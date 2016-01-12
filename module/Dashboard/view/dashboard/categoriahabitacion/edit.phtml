@@ -1,14 +1,20 @@
 <?php echo $this->form()->openTag($this->form); ?>
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <h4 class="panel-title">Modificación de Rol</h4>
+        <h4 class="panel-title">Modificación de Tipo de Habitación</h4>
     </div>
     <div class="panel-body">
         <div class="form-group">
-            <label for="name" class="col-lg-3 control-label">Descripción de Rol :</label>
+            <label for="descripcion_categoria" class="col-lg-3 control-label">Descripción de Tipo de Habitación :</label>
             <div class="col-lg-7">
-                <?php echo $this->formRow($this->form->get('name')); ?>
-                <?php echo $this->formRow($this->form->get('id')); ?>
+                <?php echo $this->formRow($this->form->get('descripcion_categoria')); ?>
+                <?php echo $this->formRow($this->form->get('id_categoria')); ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="personas_categoria" class="col-lg-3 control-label">Número de Personas :</label>
+            <div class="col-lg-7">
+                <?php echo $this->formRow($this->form->get('personas_categoria')); ?>
             </div>
         </div>
         <div class="form-group">
@@ -24,7 +30,7 @@
     $(document).ready(function () {
 
         // Delete button popover confirmation
-        $('#roleForm').formValidation({
+        $('#categoriahabitacionForm').formValidation({
             message: 'El valor no es válido.',
             err: {
                 container: 'tooltip'
@@ -35,22 +41,33 @@
                 validating: 'glyphicon glyphicon-refresh',
             },
             fields: {
-                name: {
+                descripcion_categoria: {
                     err: 'popover',
                     validators: {
                         notEmpty: {
-                            message: 'Por favor registre el Rol.'
+                            message: 'Por favor registre el Tipo de Hospedaje.'
                         },
                         regexp: {
                             regexp: /^[a-zA-Z0-9ñáéíóúÑÁÉÍÓÚ& ,.-]+$/
                         },
                         stringLength: {
                             min: 1,
-                            max: 300,
-                            message: 'Este campo debe contener 300 caracteres como máximo.'
+                            max: 45,
+                            message: 'Este campo debe contener 45 caracteres como máximo.'
                         }
                     }
-                }    
+                },
+                personas_categoria: {
+                    err: 'popover',
+                    validators: {
+                        notEmpty: {
+                            message: 'Por favor registre el número de personas de este Tipo de Habitación.'
+                        },
+                        regexp: {
+                            regexp: /^[0-9]+$/
+                        }
+                    }
+                }  
             }
         }).on('success.form.fv', function (e) {
             $("#modalConfirmacion").modal('show');
@@ -81,7 +98,7 @@
 
         $("#modal-cancelacion-si").click(
             function (e) {
-                $(location).attr('href','/dashboard/role/list');
+                $(location).attr('href','/dashboard/categoriahabitacion/list');
             }
         );
 

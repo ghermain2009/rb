@@ -1,18 +1,25 @@
 <?php
 
-/**
- * Role Table
- * @autor Francis Gonzales <fgonzalestello91@gmail.com>
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-
 namespace Dashboard\Model;
 
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
-
-class RoleTable
-{
+use Zend\Db\Sql\Expression;
+use Zend\Authentication\AuthenticationService;
+use Zend\Stdlib\ArrayUtils;
+/**
+ * Description of HosadicionalesTable
+ *
+ * @author Administrador
+ */
+class HosadicionalesTable {
+    //put your code here
     protected $tableGateway;
 
     public function __construct(TableGateway $tableGateway)
@@ -31,10 +38,10 @@ class RoleTable
         return $resultSet;
     }
     
-    public function addRole($data) 
+    public function addAdicionales($data) 
     {
         $sql = new Sql($this->tableGateway->getAdapter());
-        $insert = $sql->insert('role')->values($data);
+        $insert = $sql->insert('hos_adicionales')->values($data);
                 
         $stmt = $sql->prepareStatementForSqlObject($insert);
         
@@ -42,42 +49,39 @@ class RoleTable
     }
     
     
-    public function getRole($roleId)
+    public function getAdicionales($idTipo)
     {
         $sql = new Sql($this->tableGateway->getAdapter());
         $select =  $sql
                     ->select()
-                    ->from(array(
-                    'r' => 'role'
-                    ))
-                    ->where(array('r.id' => $roleId))
-                    ->order('r.id');
+                    ->from('hos_adicionales')
+                    ->where(array('id_adicionales' => $idTipo))
+                    ->order('id_adicionales');
         
         $stmt = $sql->prepareStatementForSqlObject($select);
         $results = $stmt->execute(); 
         return $results;
     }
     
-    public function editRole($set, $where)
+    public function editAdicionales($set, $where)
     {
         $rs = $this->tableGateway->update($set, $where);
         return $rs;
     }
     
-    public function getRoleList()
+    public function getAdicionalesList()
     {
         $select = new Select();
-        $select->from(array(
-                    'r' => 'role'
-                ))
-                ->order('r.id');
+        $select->from(array('a' => 'hos_adicionales'))
+               ->join(array('b' => 'hos_tipo_adicional'), 'a.id_tipo_adicional = b.id_tipo_adicional')
+               ->order('a.id_adicionales');
         
         return $select;
     }
     
-    public function deleteRole($roleId)
+    public function deleteAdicionales($idTipo)
     {
-        $where = array('id' => $roleId);
+        $where = array('id_adicionales' => $idTipo);
         $rs = $this->tableGateway->delete($where);
         return $rs;
     }

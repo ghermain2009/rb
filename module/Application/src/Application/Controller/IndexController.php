@@ -145,6 +145,21 @@ class IndexController extends AbstractActionController
         
     }
     
+    public function departamentosAction()  {
+        
+        $pais   = $this->params()->fromPost("pais", null);
+        
+        $serviceLocator = $this->getServiceLocator();
+   
+        $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
+        $departamentos = $departamentoTable->getDepartamentosxPais($pais);
+        
+        $viewmodel = new ViewModel(array('departamentos' => $departamentos));
+        $viewmodel->setTerminal(true);
+        
+        return $viewmodel;
+    }
+    
     public function zonificacionAction()  {
         
         $pais   = $this->params()->fromPost("pais", null);

@@ -57,4 +57,134 @@
     </div>
 </div>
 <?php echo $this->form()->closeTag(); ?>
+<script type="text/javascript">
+    $(document).ready(function () {
 
+        // Delete button popover confirmation
+        $('#userForm').formValidation({
+            message: 'El valor no es válido.',
+            err: {
+                container: 'tooltip'
+            },
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh',
+            },
+            fields: {
+                full_name: {
+                    err: 'popover',
+                    validators: {
+                        notEmpty: {
+                            message: 'Por favor registre el Nombre del usuario.'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9ñáéíóúÑÁÉÍÓÚ& ,.-]+$/
+                        },
+                        stringLength: {
+                            min: 1,
+                            max: 300,
+                            message: 'Este campo debe contener 300 caracteres como máximo.'
+                        }
+                    }
+                },
+                username: {
+                    err: 'popover',
+                    validators: {
+                        notEmpty: {
+                            message: 'Por favor registre el Código de Usuario.'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9ñáéíóúÑÁÉÍÓÚ_]+$/
+                        },
+                        stringLength: {
+                            min: 1,
+                            max: 40,
+                            message: 'Este campo debe contener 40 caracteres como máximo.'
+                        },
+                        remote: {
+                            message: 'El usuario no esta disponible',
+                            url: '/dashboard/user/existeusuario',
+                            type: 'POST'
+                        }
+                    }
+                },
+                password: {
+                    err: 'popover',
+                    validators: {
+                        notEmpty: {
+                            message: 'Por favor registre el Password del usuario.'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9ñáéíóúÑÁÉÍÓÚ& ,.-]+$/
+                        },
+                        stringLength: {
+                            min: 1,
+                            max: 40,
+                            message: 'Este campo debe contener 40 caracteres como máximo.'
+                        }
+                    }
+                },
+                email: {
+                    validators: {
+                        emailAddress: {
+                            message: 'El valor no es válido para un email.'
+                        },
+                        stringLength: {
+                            min: 1,
+                            max: 300,
+                            message: 'Este campo debe contener 300 caracteres como máximo.'
+                        }
+                    }
+                },
+                role_id: {
+                    err: 'popover',
+                    //icon: false,
+                    validators: {
+                        greaterThan: {
+                            value: 1,
+                            message: 'Por favor seleciione el Rol del Usuario.'
+                        }
+                    }
+                }
+            }
+        }).on('success.form.fv', function (e) {
+            $("#modalConfirmacion").modal('show');
+        });
+
+        $("#modal-confirmacion-si").click(
+            function (e) {
+                $('button').removeClass('fv-hidden-submit disabled').addClass('fv-hidden-submit');
+                $('.fv-hidden-submit').removeAttr('disabled');
+                $("#modalConfirmacion").modal('hide');
+                $('.fv-hidden-submit').click();
+            }
+        );
+
+        $("#modal-confirmacion-no").click(
+            function (e) {
+                $('#submit').removeClass('btn btn-primary disabled').addClass('btn btn-primary');
+                $('#submit').removeAttr('disabled');
+                $("#modalConfirmacion").modal('hide');
+            }
+        );
+
+        $("#btn-regresar").click(
+            function (e) {
+                $("#modalCancelacion").modal('show');
+            }
+        );
+
+        $("#modal-cancelacion-si").click(
+            function (e) {
+                $(location).attr('href','/dashboard/user/list');
+            }
+        );
+
+        $("#modal-cancelacion-no").click(
+            function (e) {
+                $("#modalCancelacion").modal('hide');
+            }
+        );
+    });
+</script>

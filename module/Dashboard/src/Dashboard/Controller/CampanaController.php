@@ -94,7 +94,7 @@ class CampanaController extends AbstractActionController {
         $editBtn->setAttribute('href', '/dashboard/campana/edit/id/' . $editBtn->getRowIdPlaceholder());
         $editBtn->setAttribute('data-toggle', 'tooltip');
         $editBtn->setAttribute('data-placement', 'left');
-        $editBtn->setAttribute('title', 'Editar Campaña');
+        $editBtn->setAttribute('title', 'Modificar Campaña');
 
         $preBtn = new Column\Action\Button();
         $preBtn->setLabel(' ');

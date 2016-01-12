@@ -1,18 +1,25 @@
 <?php
 
-/**
- * Role Table
- * @autor Francis Gonzales <fgonzalestello91@gmail.com>
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-
 namespace Dashboard\Model;
 
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
-
-class RoleTable
-{
+use Zend\Db\Sql\Expression;
+use Zend\Authentication\AuthenticationService;
+use Zend\Stdlib\ArrayUtils;
+/**
+ * Description of HoscategoriahabitacionTable
+ *
+ * @author Administrador
+ */
+class HoscategoriahabitacionTable {
+    //put your code here
     protected $tableGateway;
 
     public function __construct(TableGateway $tableGateway)
@@ -31,10 +38,10 @@ class RoleTable
         return $resultSet;
     }
     
-    public function addRole($data) 
+    public function addCategoriahabitacion($data) 
     {
         $sql = new Sql($this->tableGateway->getAdapter());
-        $insert = $sql->insert('role')->values($data);
+        $insert = $sql->insert('hos_categoria_habitacion')->values($data);
                 
         $stmt = $sql->prepareStatementForSqlObject($insert);
         
@@ -42,43 +49,40 @@ class RoleTable
     }
     
     
-    public function getRole($roleId)
+    public function getCategoriahabitacion($idTipo)
     {
         $sql = new Sql($this->tableGateway->getAdapter());
         $select =  $sql
                     ->select()
-                    ->from(array(
-                    'r' => 'role'
-                    ))
-                    ->where(array('r.id' => $roleId))
-                    ->order('r.id');
+                    ->from('hos_categoria_habitacion')
+                    ->where(array('id_categoria' => $idTipo))
+                    ->order('id_categoria');
         
         $stmt = $sql->prepareStatementForSqlObject($select);
         $results = $stmt->execute(); 
         return $results;
     }
     
-    public function editRole($set, $where)
+    public function editCategoriahabitacion($set, $where)
     {
         $rs = $this->tableGateway->update($set, $where);
         return $rs;
     }
     
-    public function getRoleList()
+    public function getCategoriahabitacionList()
     {
         $select = new Select();
-        $select->from(array(
-                    'r' => 'role'
-                ))
-                ->order('r.id');
+        $select->from('hos_categoria_habitacion')
+                ->order('id_categoria');
         
         return $select;
     }
     
-    public function deleteRole($roleId)
+    public function deleteCategoriahabitacion($idTipo)
     {
-        $where = array('id' => $roleId);
+        $where = array('id_categoria' => $idTipo);
         $rs = $this->tableGateway->delete($where);
         return $rs;
     }
+    
 }

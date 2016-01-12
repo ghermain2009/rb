@@ -1,0 +1,53 @@
+Primera opcion
+> agregar un estado del arte
+ - Pendiente que se genara cuando el cliente firma el anexo
+ - Enviado (Opcion para enviar link lwll enviando su usuario y contraseña para el seguimiento de sus cupones).
+ - Aprobado (No se puede modificar algun dato de la campaña)
+ 
+ - Reenvio de usuario y contraseña del asociado. con manual.
+
+  - Reporte
+  
+       Empresa / Contrato ( firmado vigente.) / Anexos ()  / arte  ( exportable excel )
+	   
+	   
+	   
+	   -- Observacion 
+	   Lista de hotmail (verificar de ips de no vaniables)
+	   Lista de hotmail.com
+	   
+	   > el link del arte va estar 
+	     -- Este arte es solo una previsualizacion no es una promoción activa
+
+			Nom
+			Aceptar ...
+			
+			
+			
+			
+			Felicidades su promocion se encuentra en el area de programación lista para ser publicada en los proximos dias.
+			Si desea mayor información comuniquese con su cliente.
+			
+			Saludos.
+			
+			
+Reporte de Pagos
+  generar liquidacion
+  
+  deposito
+  numero opreracion
+  
+  Pagado.
+  
+  
+  en blanco todo de nuevo
+  
+ queda limpio si se pago o no
+  
+ 
+ Reporte de datos clientes.
+ 
+ Generador de Voucher
+   ----
+   
+   

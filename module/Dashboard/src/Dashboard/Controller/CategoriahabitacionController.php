@@ -1,23 +1,27 @@
 <?php
 
-/**
- * RoleController - This allows add, delete and edit users
- * @autor Francis Gonzales <fgonzalestello91@gmail.com>
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-
 namespace Dashboard\Controller;
 
-use Dashboard\Form\RoleForm;
+use Dashboard\Form\CategoriahabitacionForm;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use ZfcDatagrid\Column;
-
-class RoleController extends AbstractActionController
-{
+/**
+ * Description of CategoriahabitacionController
+ *
+ * @author Administrador
+ */
+class CategoriahabitacionController extends AbstractActionController {
+    //put your code here
     public function indexAction()
     {   
         $viewmodel = new ViewModel();
-        $form = new RoleForm();
+        $form = new CategoriahabitacionForm();
         $request = $this->getRequest();
         $serviceLocator = $this->getServiceLocator();
         $form->get('submit');
@@ -29,14 +33,14 @@ class RoleController extends AbstractActionController
             $form->setData($request->getPost());
             if ($form->isValid()) {
                 $data = $form->getData();
-                $roleTable = $serviceLocator->get('Dashboard\Model\RoleTable');
+                $categoriahabitacionTable = $serviceLocator->get('Dashboard\Model\HoscategoriahabitacionTable');
                 unset($data['submit']);
                 unset($data['btn-regresar']);
-                $rs = $roleTable->addRole($data);
+                $rs = $categoriahabitacionTable->addCategoriahabitacion($data);
                 
                 if ($rs) {
-                    //$form = new RoleForm();
-                    $this->redirect()->toRoute('dash_role_edit', array('id' => $rs));
+                    //$form = new CategoriahabitacionForm();
+                    $this->redirect()->toRoute('dash_categoriahabitacion_edit', array('id' => $rs));
                 }
             }
         }
@@ -52,7 +56,7 @@ class RoleController extends AbstractActionController
         if ($request->isPost()) {
             $postData = $request->getPost();
             if ($postData->btnAdd === 'add') {
-                $this->redirect()->toRoute('dash_role');
+                $this->redirect()->toRoute('dash_categoriahabitacion');
             }
         }
         
@@ -61,50 +65,44 @@ class RoleController extends AbstractActionController
         $grid = $sl->get('ZfcDatagrid\Datagrid');
         $grid->setDefaultItemsPerPage(5);
         $grid->setToolbarTemplate('layout/list-toolbar');
-        $grid->setDataSource($sl->get('Dashboard\Model\RoleTable')
-                                ->getRoleList(), $dbAdapter);
+        $grid->setDataSource($sl->get('Dashboard\Model\HoscategoriahabitacionTable')
+                                ->getCategoriahabitacionList(), $dbAdapter);
         
-        $col = new Column\Select('id', 'r');
+        $col = new Column\Select('id_categoria');
         $col->setLabel('id');
         $col->setWidth(25);
         $col->setIdentity(true);
         $col->setSortDefault(1, 'ASC');
         $grid->addColumn($col);
         
-        $col = new Column\Select('name', 'r');
-        $col->setLabel('Rol');
-        $col->setWidth(75);
+        $col = new Column\Select('descripcion_categoria');
+        $col->setLabel('Tipo Habitación');
+        $col->setWidth(50);
         $grid->addColumn($col);
         
-        /*$editBtn = new Column\Action\Button();
-        $editBtn->setLabel('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar');
-        $editBtn->setAttribute('class', 'btn btn-primary');
-        $editBtn->setAttribute('href', '/dashboard/role/edit/id/' . $editBtn->getRowIdPlaceholder());*/
+        $col = new Column\Select('personas_categoria');
+        $col->setLabel('Cantidad Personas');
+        $col->setWidth(25);
+        $grid->addColumn($col);
         
         $editBtn = new Column\Action\Button();
         $editBtn->setLabel(' ');
         $editBtn->setAttribute('class', 'btn btn-primary glyphicon glyphicon-edit');
-        $editBtn->setAttribute('href', '/dashboard/role/edit/id/' . $editBtn->getRowIdPlaceholder());
+        $editBtn->setAttribute('href', '/dashboard/categoriahabitacion/edit/id/' . $editBtn->getRowIdPlaceholder());
         $editBtn->setAttribute('data-toggle', 'tooltip');
         $editBtn->setAttribute('data-placement', 'left');
-        $editBtn->setAttribute('title', 'Editar Role');
-        
-        /*$delBtn = new Column\Action\Button();
-        $delBtn->setLabel('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Borrar');
-        $delBtn->setAttribute('class', 'btn btn-danger');
-        $delBtn->setAttribute('href', '/dashboard/role/delete/id/' . $delBtn->getRowIdPlaceholder());*/
+        $editBtn->setAttribute('title', 'Modificar Tipo Hospedaje');
         
         $delBtn = new Column\Action\Button();
         $delBtn->setLabel(' ');
         $delBtn->setAttribute('class', 'btn btn-danger glyphicon glyphicon-trash');
-        $delBtn->setAttribute('href', '/dashboard/role/delete/id/' . $delBtn->getRowIdPlaceholder());
+        $delBtn->setAttribute('href', '/dashboard/categoriahabitacion/delete/id/' . $delBtn->getRowIdPlaceholder());
         $delBtn->setAttribute('data-toggle', 'tooltip');
         $delBtn->setAttribute('data-placement', 'left');
-        $delBtn->setAttribute('title', 'Eliminar Role');
+        $delBtn->setAttribute('title', 'Eliminar Tipo Hospedaje');
 
         
         $col = new Column\Action();
-        //$col->setLabel('Acciones');
         $col->addAction($editBtn);
         $col->addAction($delBtn);
         $grid->addColumn($col);
@@ -115,21 +113,21 @@ class RoleController extends AbstractActionController
     public function deleteAction()
     {
         $sl = $this->getServiceLocator();
-        $roleId = $this->params('id');
-        $userTable = $sl->get('Dashboard\Model\RoleTable');
-        $userTable->deleteRole($roleId);
-        $this->redirect()->toRoute('dash_role_list');
+        $categoriahabitacionId = $this->params('id');
+        $userTable = $sl->get('Dashboard\Model\HoscategoriahabitacionTable');
+        $userTable->deleteCategoriahabitacion($categoriahabitacionId);
+        $this->redirect()->toRoute('dash_categoriahabitacion_list');
     }
     
     public function editAction()
     {
-        $roleId = $this->params('id');
+        $categoriahabitacionId = $this->params('id');
         $request = $this->getRequest();
         $viewmodel = new ViewModel();
         $sl = $this->getServiceLocator();
-        $roleTable = $sl->get('Dashboard\Model\RoleTable');
+        $categoriahabitacionTable = $sl->get('Dashboard\Model\HoscategoriahabitacionTable');
         
-        $form = new RoleForm($roleTable);
+        $form = new CategoriahabitacionForm($categoriahabitacionTable);
         
         if ($request->isPost()) {
             // @TODO addfilters
@@ -139,14 +137,15 @@ class RoleController extends AbstractActionController
                 $data = $form->getData();
                 unset($data['submit']);
                 unset($data['btn-regresar']);
-                $dataId = array('id' => $roleId);
-                $roleTable->editRole($data, $dataId);
+                $dataId = array('id_categoria' => $categoriahabitacionId);
+                $categoriahabitacionTable->editCategoriahabitacion($data, $dataId);
             }
         } else {
-            $roleData = $roleTable->getRole($roleId);
-            foreach ($roleData as $role) {
-                $form->get('id')->setValue($role['id']);
-                $form->get('name')->setValue($role['name']);
+            $categoriahabitacionData = $categoriahabitacionTable->getCategoriahabitacion($categoriahabitacionId);
+            foreach ($categoriahabitacionData as $categoriahabitacion) {
+                $form->get('id_categoria')->setValue($categoriahabitacion['id_categoria']);
+                $form->get('descripcion_categoria')->setValue($categoriahabitacion['descripcion_categoria']);
+                $form->get('personas_categoria')->setValue($categoriahabitacion['personas_categoria']);
             }
         }
        

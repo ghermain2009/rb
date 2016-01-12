@@ -5,6 +5,8 @@ namespace Dashboard\Model;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
+use Zend\Db\Sql\Expression;
+use Zend\Stdlib\ArrayUtils;
 
 class UserTable
 {
@@ -58,11 +60,6 @@ class UserTable
         $select = $sql
                   ->select()
                   ->from(array('u' => 'user'))
-                  ->join(
-                        array('r' => 'role'),
-                        'r.id = u.role_id',
-                        array('*')
-                    )
                   ->where(array('u.id' => $userId))
                   ->order('u.id');
         $stmt = $sql->prepareStatementForSqlObject($select);
@@ -109,5 +106,19 @@ class UserTable
         $where = array('id' => $userId);
         $rs = $this->tableGateway->delete($where);
         return $rs;
+    }
+    
+    public function verificarUsuario($username)
+    {
+        $sql = new Sql($this->tableGateway->getAdapter());
+        $select = $sql
+                  ->select()
+                  ->columns(array('existe' => new Expression("count(1)")))
+                  ->from('user')
+                  ->where(array('username' => $username));
+        
+        $stmt = $sql->prepareStatementForSqlObject($select);
+        $result = $stmt->execute(); 
+        return ArrayUtils::iteratorToArray($result);
     }
 }

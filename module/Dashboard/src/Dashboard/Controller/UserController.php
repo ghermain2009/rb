@@ -11,6 +11,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Dashboard\Form\UserForm;
 use ZfcDatagrid\Column;
+use Zend\Json\Json;
 
 class UserController extends AbstractActionController
 {
@@ -70,48 +71,38 @@ class UserController extends AbstractActionController
         
         $col = new Column\Select('id', 'u');
         $col->setLabel('id');
-        $col->setWidth(25);
+        $col->setWidth(20);
         $col->setIdentity(true);
         $col->setSortDefault(1, 'ASC');
         $grid->addColumn($col);
         
         $col = new Column\Select('username', 'u');
         $col->setLabel('Username');
-        $col->setWidth(25);
+        $col->setWidth(15);
         $grid->addColumn($col);
         
         $col = new Column\Select('full_name', 'u');
         $col->setLabel('Name');
-        $col->setWidth(25);
+        $col->setWidth(20);
         $grid->addColumn($col);
         
         $col = new Column\Select('email', 'u');
         $col->setLabel('Email');
-        $col->setWidth(25);
+        $col->setWidth(20);
         $grid->addColumn($col);
         
         $col = new Column\Select('name', 'r');
         $col->setLabel('Rol');
-        $col->setWidth(25);
+        $col->setWidth(15);
         $grid->addColumn($col);
-        
-        /*$editBtn = new Column\Action\Button();
-        $editBtn->setLabel('Edit');
-        $editBtn->setAttribute('class', 'btn btn-primary');
-        $editBtn->setAttribute('href', '/dashboard/user/edit/id/' . $editBtn->getRowIdPlaceholder());
-        
-        $delBtn = new Column\Action\Button();
-        $delBtn->setLabel('Delete');
-        $delBtn->setAttribute('class', 'btn btn-danger');
-        $delBtn->setAttribute('href', '/dashboard/user/delete/id/' . $delBtn->getRowIdPlaceholder());*/
         
         $editBtn = new Column\Action\Button();
         $editBtn->setLabel(' ');
-        $editBtn->setAttribute('class', 'btn btn-primary glyphicon glyphicon-edit');
+        $editBtn->setAttribute('class', 'btn btn-success glyphicon glyphicon-edit');
         $editBtn->setAttribute('href', '/dashboard/user/edit/id/' . $editBtn->getRowIdPlaceholder());
         $editBtn->setAttribute('data-toggle', 'tooltip');
         $editBtn->setAttribute('data-placement', 'left');
-        $editBtn->setAttribute('title', 'Editar Usuario');
+        $editBtn->setAttribute('title', 'Modificar Usuario');
         
         $delBtn = new Column\Action\Button();
         $delBtn->setLabel(' ');
@@ -137,7 +128,7 @@ class UserController extends AbstractActionController
         $sl = $this->getServiceLocator();
         $roleTable = $sl->get('Dashboard\Model\RoleTable');
         $userTable = $sl->get('Dashboard\Model\UserTable');
-        $empresaTable = $sl->get('Dashboard/Model/GenempresaTable');
+        $empresaTable = $sl->get('Dashboard\Model\GenempresaTable');
         $form = new UserForm($roleTable, $empresaTable);
         
         if ($request->isPost()) {
@@ -176,5 +167,19 @@ class UserController extends AbstractActionController
         $userTable = $sl->get('Dashboard\Model\UserTable');
         $userTable->deleteUser($userId);
         $this->redirect()->toRoute('dash_user_list');
+    }
+    
+    public function  existeusuarioAction(){
+        $username = $this->params()->fromPost("username", null);
+        $sl = $this->getServiceLocator();
+        $userTable = $sl->get('Dashboard\Model\UserTable');
+        $datos = $userTable->verificarUsuario($username);
+
+        if( $datos[0]['existe'] == 0 ) {
+            $disponible = array('valid' => true);
+        } else {
+            $disponible = array('valid' => false);
+        }
+        return $this->getResponse()->setContent(Json::encode($disponible));
     }
 }

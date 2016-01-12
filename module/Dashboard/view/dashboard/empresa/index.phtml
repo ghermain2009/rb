@@ -324,7 +324,7 @@
         }).on('success.form.fv', function (e) {
             //$('.fv-hidden-submit').submit();
             //e.preventDefault();
-            $("#modalConfirmacion").modal();
+            $("#modalConfirmacion").modal('show');
             //var $form = $(e.target);
             //$.post($form.attr('action'), $form.serialize(), function (data){});
         });
@@ -333,7 +333,7 @@
             function (e) {
                 $('button').removeClass('fv-hidden-submit disabled').addClass('fv-hidden-submit');
                 $('.fv-hidden-submit').removeAttr('disabled');
-                $("#modalConfirmacion").hide();
+                $("#modalConfirmacion").modal('hide');
                 $('.fv-hidden-submit').click();
             }
         );
@@ -342,13 +342,13 @@
             function (e) {
                 $('#submit').removeClass('btn btn-primary disabled').addClass('btn btn-primary');
                 $('#submit').removeAttr('disabled');
-                $("#modalConfirmacion").hide();
+                $("#modalConfirmacion").modal('hide');
             }
         );
 
         $("#btn-regresar").click(
             function (e) {
-                $("#modalCancelacion").modal();
+                $("#modalCancelacion").modal('show');
             }
         );
 
@@ -360,7 +360,7 @@
 
         $("#modal-cancelacion-no").click(
             function (e) {
-                $("#modalCancelacion").hide();
+                $("#modalCancelacion").modal('hide');
             }
         );
     });

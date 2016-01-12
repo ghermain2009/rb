@@ -20,7 +20,23 @@ switch ($this->controllerName()) {
         break;
     case 'Dashboard\Controller\Pagobancario' :
         $titulo = "Administración de Pagos Bancarios";
-        $enlace = "";
+        $enlace = "Nuevo Pago Bancario";
+        break;
+    case 'Dashboard\Controller\Tipohospedaje' :
+        $titulo = "Administración de Tipo de Hospedaje";
+        $enlace = "Nuevo Tipo de Hospedaje";
+        break;
+    case 'Dashboard\Controller\Adicionales' :
+        $titulo = "Administración de Adicionales del Establecimiento";
+        $enlace = "Nuevo Adicional del Establecimiento";
+        break;
+    case 'Dashboard\Controller\Categoriahabitacion' :
+        $titulo = "Administración de Tipo de Habitación";
+        $enlace = "Nuevo Tipo de Habitación";
+        break;
+    case 'Dashboard\Controller\Hospedaje' :
+        $titulo = "Administración de Hospedajes";
+        $enlace = "Nuevo Hospedaje";
         break;
     default :
         $titulo = "";
@@ -36,7 +52,7 @@ switch ($this->controllerName()) {
                     <?php echo $titulo; ?>
                 </span>
                 <?php if( $enlace != "") { ?>
-                <button class="btn btn-danger boton-nuevo-grilla" id="btnAdd" name="btnAdd" value="add"><span class="glyphicon glyphicon-open-file" aria-hidden="true"></span> <?php echo $enlace; ?>
+                <button class="btn btn-active boton-nuevo-grilla" id="btnAdd" name="btnAdd" value="add"><span class="glyphicon glyphicon-open-file" aria-hidden="true"></span> <?php echo $enlace; ?>
                 </button>
                 <?php } ?>
             </div>

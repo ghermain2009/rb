@@ -1,7 +1,6 @@
 <?php
 /**
  * Description of UserForm
- * @autor Francis Gonzales <fgonzalestello91@gmail.com>
  */
 namespace Dashboard\Form;
 
@@ -11,10 +10,11 @@ use Dashboard\Model\Role;
 class UserForm extends Form
 {
     public function __construct($roleTable, $empresaTable) {
-        parent::__construct('user');
+        parent::__construct('userForm');
         
         $roles = $roleTable->fetchAll();
         $selRol = array();
+        $selRol[0] = 'Seleccione un Rol';
         foreach($roles as $role) {
             $id = $role->getId();
             $selRol[$id] = $role->getName();
@@ -53,6 +53,7 @@ class UserForm extends Form
             'attributes' => array(
                 'type'  => 'text',
                 'class' => 'form-control input-sm',
+                'id' => 'username'
             ),
             /*'options' => array(
                 'label' => 'Usuario',

@@ -6,24 +6,24 @@ namespace Dashboard\Form;
 
 use Zend\Form\Form;
 
-class RoleForm extends Form
+class TipohospedajeForm extends Form
 {
     public function __construct($name = null) {
-        parent::__construct('roleForm');
+        parent::__construct('tipohospedajeForm');
         
         $this->setAttributes(array('method' => 'post',
                                   'class'  => 'form-horizontal',
                                   'role'   => 'form'));
         
         $this->add(array(
-            'name' => 'id',
+            'name' => 'id_tipo',
             'attributes' => array(
                 'type'  => 'hidden',
                 'class' => 'form-control input-sm'
             ),
         ));
         $this->add(array(
-            'name' => 'name',
+            'name' => 'descripcion_tipo',
             'attributes' => array(
                 'type'  => 'text',
                 'class' => 'form-control input-sm',
