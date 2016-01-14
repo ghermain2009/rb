@@ -13,6 +13,7 @@ use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Expression;
 use Zend\Authentication\AuthenticationService;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Db\Sql\Predicate\NotIn;
 /**
  * Description of HosadicionalesTable
  *
@@ -57,6 +58,20 @@ class HosadicionalesTable {
                     ->from('hos_adicionales')
                     ->where(array('id_adicionales' => $idTipo))
                     ->order('id_adicionales');
+        
+        $stmt = $sql->prepareStatementForSqlObject($select);
+        $results = $stmt->execute(); 
+        return $results;
+    }
+    
+    public function getAdicionalesNotIn($idTipo)
+    {
+        $sql = new Sql($this->tableGateway->getAdapter());
+        $select =  $sql
+                    ->select()
+                    ->from('hos_adicionales')
+                    ->where->notIn('id_adicionales', array($idTipo)) 
+                    ->order('id_tipo_adicional');
         
         $stmt = $sql->prepareStatementForSqlObject($select);
         $results = $stmt->execute(); 

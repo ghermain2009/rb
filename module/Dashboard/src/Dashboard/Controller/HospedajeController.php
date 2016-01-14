@@ -143,6 +143,7 @@ class HospedajeController extends AbstractActionController {
         $sl = $this->getServiceLocator();
         $hospedajeTable = $sl->get('Dashboard\Model\HoshospedajeTable');
         $tipohospedajeTable = $sl->get('Dashboard\Model\HostipohospedajeTable');
+        $categoriahabitacionTable = $sl->get('Dashboard\Model\HoscategoriahabitacionTable');
         $paisTable = $sl->get('Dashboard\Model\UbipaisTable');
         $departamentoTable = $sl->get('Dashboard\Model\UbidepartamentoTable');
         
@@ -155,8 +156,6 @@ class HospedajeController extends AbstractActionController {
                                   $paisTable,
                                   $departamentoTable,
                                   $id_pais);
-        
-        var_dump($request->getPost());
         
         if ($request->isPost()) {
             // @TODO addfilters
@@ -191,9 +190,18 @@ class HospedajeController extends AbstractActionController {
         foreach ($adicionales as $adicional) {
             $adicionalesHospedaje[] = $adicional;
         }
+        
+        $categoriasHabitacion = $categoriahabitacionTable->fetchAll();
+        $categoriaHabitacion = array();
+        foreach ($categoriasHabitacion as $categoria) {
+            $categoriaHabitacion[] = $categoria;
+        }
 
         $viewmodel->form = $form;
         $viewmodel->setVariable('adicionalesHospedaje', $adicionalesHospedaje);
+        $viewmodel->setVariable('categoriaHabitacion', $categoriaHabitacion);
+        
+        
         
         return $viewmodel;
     }

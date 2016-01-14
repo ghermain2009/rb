@@ -49,7 +49,8 @@ class HospedajeForm extends Form
             'name' => 'id_hospedaje',
             'attributes' => array(
                 'type'  => 'hidden',
-                'class' => 'form-control input-sm'
+                'class' => 'form-control input-sm',
+                'id' => 'id_hospedaje'
             ),
         ));
         
