@@ -76,6 +76,7 @@ class GenempresaTable
                         array('can_contrato' => new Expression("case when ifnull(id_contrato,-1) = -1 then 0 else 1 end")),
                         'left'
                  )
+                ->where(array('c.id_estado' => '1'))
                 ->order('c.id_empresa');
               
         $statement = $sql->prepareStatementForSqlObject($select);

@@ -56,7 +56,14 @@
                         <a class="btn btn-success btn-sm" id="enviar_arte"><span class="glyphicon glyphicon-envelope"></span> Enviar Arte para Aprobación</a>
                     </div>
                 </div>
+                <?php } else { ?>
+                <div class="form-group">
+                    <div class="col-lg-offset-2 col-lg-7">
+                        Arte aprobado el <b><?php echo $contra['fecha_aceptacion_arte'];?></b>
+                    </div>
+                </div>
                 <?php } ?>
+            
             <?php } ?>
         </div>
     </div>

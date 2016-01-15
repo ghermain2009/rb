@@ -616,6 +616,7 @@ return array(
             'Dashboard\Controller\Hospedaje' => 'Dashboard\Controller\HospedajeController',
             'Dashboard\Controller\Campana' => 'Dashboard\Controller\CampanaController',
             'Dashboard\Controller\Empresa' => 'Dashboard\Controller\EmpresaController',
+            'Dashboard\Controller\Reporte' => 'Dashboard\Controller\ReporteController',
             'Dashboard\Controller\Micampana' => 'Dashboard\Controller\MicampanaController',
             'Dashboard\Controller\Pagobancario' => 'Dashboard\Controller\PagobancarioController',
             'Dashboard\Cron\Controller\Generaliquidacion' => 'Dashboard\Cron\Controller\GeneraliquidacionController',

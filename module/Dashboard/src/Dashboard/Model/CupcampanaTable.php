@@ -202,11 +202,13 @@ class CupcampanaTable {
             'sobre_campana',
             'observaciones',
             'fecha_final' => new Expression("DATE_FORMAT(ADDTIME(fecha_final, hora_final),'%m/%d/%Y %l:%i %p')"),
-            'comision_campana'
+            'comision_campana',
+            'id_empresa'
         ))
         ->from('cup_campana')
         ->join('con_contrato_anexo', new Expression("cup_campana.id_campana = con_contrato_anexo.id_campana"),
-                array('id_estado_arte' => new Expression("ifnull(id_estado_arte,0)")),'left')
+                array('id_estado_arte' => new Expression("ifnull(id_estado_arte,0)"),
+                      'id_contrato'),'left')
         ->where(array('cup_campana.id_campana' => $id_campana));
 
         $statement = $sql->prepareStatementForSqlObject($select);
@@ -445,6 +447,39 @@ class CupcampanaTable {
         $select->group(array('cup_campana.fecha_final'));
         $select->group(array('cup_campana.descripcion'));
         
+        $stmt = $sql->prepareStatementForSqlObject($select);
+        
+        $results = $stmt->execute(); 
+        
+        return ArrayUtils::iteratorToArray($results);
+    }
+    
+    public function getCampanaEstadoDocumentos()
+    {
+        $sql = new Sql($this->tableGateway->getAdapter());
+        $select = $sql->select();
+        
+        $select->columns(array(
+                    'razon_social'
+                ))
+                  ->from(array('a' => 'gen_empresa'))
+                  ->join(array('b' => 'cup_campana'), 
+                         new Expression("a.id_empresa = b.id_empresa"), 
+                         array('subtitulo'))
+                  ->join(array('c' => 'con_contrato'), 
+                         new Expression("a.id_empresa = c.id_empresa"), 
+                         array('estado_contrato' => new Expression("CASE WHEN IFNULL(c.id_estado,'0') = '0' THEN 'NO GENERADO' WHEN IFNULL(c.id_estado,'0') = '1' THEN 'REGISTRADO' WHEN IFNULL(c.id_estado,'0') = '2' THEN 'FIRMADO' END") ),
+                         'left')
+                  ->join(array('d' => 'con_contrato_anexo'), 
+                         new Expression("c.id_contrato = d.id_contrato and b.id_campana = d.id_campana"), 
+                         array('estado_anexo' => new Expression("CASE WHEN IFNULL(d.id_estado,'0') = '0' THEN 'NO GENERADO' WHEN IFNULL(d.id_estado,'0') = '1' THEN 'REGISTRADO' WHEN IFNULL(d.id_estado,'0') = '2' THEN 'FIRMADO' END"),
+                               'estado_arte' => new Expression("CASE WHEN IFNULL(d.id_estado_arte,'0') = '0' THEN 'NO GENERADO' WHEN IFNULL(d.id_estado_arte,'0') = '1' THEN 'GENERADO' WHEN IFNULL(d.id_estado_arte,'0') = '2' THEN 'ENVIADO' WHEN IFNULL(d.id_estado_arte,'0') = '3' THEN 'APROBADO' END"),
+                               'estado_general' => new Expression("CASE WHEN IFNULL(c.id_estado,'0') = '0' and IFNULL(d.id_estado,'0') = '0' and IFNULL(d.id_estado_arte,'0') = '0' THEN 'N' "
+                                                                . "WHEN IFNULL(c.id_estado,'0') = '2' and IFNULL(d.id_estado,'0') = '2' and IFNULL(d.id_estado_arte,'0') = '3' THEN 'F' "
+                                                                . "ELSE 'P' END")),
+                         'left')
+                  ->order(array('a.razon_social'));
+       
         $stmt = $sql->prepareStatementForSqlObject($select);
         
         $results = $stmt->execute(); 

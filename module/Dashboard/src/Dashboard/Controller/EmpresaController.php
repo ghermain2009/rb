@@ -858,13 +858,45 @@ class EmpresaController extends AbstractActionController {
 
         $serviceLocator = $this->getServiceLocator();
         $config = $serviceLocator->get('Config');
+        $passwordReset = 'RebuenoEcuador';
         
         $campanaTable = $serviceLocator->get('Dashboard\Model\CupcampanaTable');
+        $empresaTable = $serviceLocator->get('Dashboard\Model\GenempresaTable');
+        $usuarioTable = $serviceLocator->get('Dashboard\Model\UserTable');
         $campana = $campanaTable->getCampanaId($id_campana);
         $subtitulo = $campana[0]['subtitulo'];
+        $id_empresa = $campana[0]['id_empresa'];
+        $empresa = $empresaTable->getEmpresa($id_empresa);
+        $id_usuario = $empresa[0]['registro_contribuyente'];
+        
+        
+        
+        $existe = $usuarioTable->verificarUsuario($id_usuario);
+        if( $existe[0]['existe'] > 0 ) {
+            
+            $set = array('password' => $passwordReset);
+            
+            $where = array('username' => $id_usuario);
+            
+            $usuarioTable->editUser($set, $where);
+            
+        } else {
+        
+            $nuevo_usuario = array('username' => $id_usuario,
+                  'password' => $passwordReset,
+                  'full_name' => $nombre_contacto,
+                  'email' => $email_contacto,
+                  'role_id' => 3);
+            
+            $usuarioTable->addUser($nuevo_usuario);
+            
+        }
+        
+        
         
         $set = array('nombre_contacto_arte' => $nombre_contacto,
                      'email_contacto_arte' => $email_contacto,
+                     'fecha_envio_arte' => date('Y-m-d H:i:s'),
                      'id_estado_arte' => '2');
         
         $where = array('id_contrato' => $id_contrato,
@@ -934,7 +966,9 @@ class EmpresaController extends AbstractActionController {
                 'token_campana' => $token_campana,
                 'subtitulo' => $subtitulo,
                 'localhost' => $localhost,
-                'telefono' => $telefono
+                'telefono' => $telefono,
+                'usuario' => $id_usuario,
+                'password' => $passwordReset
             ));
 
             $content = $rendered->render($viewModel);
@@ -955,6 +989,24 @@ class EmpresaController extends AbstractActionController {
         }
 
         return $this->getResponse()->setContent(Json::encode($data));
+    }
+    
+    public function aceptarArteAction() {
+        $id_contrato     = base64_decode($this->params()->fromPost("contrato", null));
+        $id_campana      = base64_decode($this->params()->fromPost("campana", null));
+        
+        $serviceLocator = $this->getServiceLocator();
+        $contratoanexoTable = $serviceLocator->get('Dashboard\Model\ConcontratoanexoTable');
+        
+        $set = array('fecha_aceptacion_arte' => date('Y-m-d H:i:s'),
+                     'id_estado_arte'        => '3');
+        
+        $where = array('id_contrato'      => $id_contrato,
+                       'id_campana'       => $id_campana);
+        
+        $contratoanexoTable->editAnexoContrato($set,$where);
+        
+        return $this->getResponse()->setContent(Json::encode(array('respuesta' => 1)));
     }
     
 }

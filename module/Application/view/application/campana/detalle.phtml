@@ -30,15 +30,17 @@ foreach ($data as $detalle) {
             <!-- Indicators -->
             <ol class="carousel-indicators">
                 <?php
-                $ficheros = scandir($directorio.$detalle['id_campana'].$sep_path .'small');
-                $contador = -1;
-                foreach ($ficheros as $file) {
-                    if ($file == '.' || $file == '..')
-                        continue;
-                    $contador++;
-                    ?>
-                    <li data-target="#carousel-detalle-promocion" data-slide-to="<?php echo $contador; ?>" <?php if ($contador == 0) { ?> class="active" <?php } ?>></li>
-                    <?php
+                if (file_exists($directorio.$detalle['id_campana'].$sep_path .'small')){
+                    $ficheros = scandir($directorio.$detalle['id_campana'].$sep_path .'small');
+                    $contador = -1;
+                    foreach ($ficheros as $file) {
+                        if ($file == '.' || $file == '..')
+                            continue;
+                        $contador++;
+                        ?>
+                        <li data-target="#carousel-detalle-promocion" data-slide-to="<?php echo $contador; ?>" <?php if ($contador == 0) { ?> class="active" <?php } ?>></li>
+                        <?php
+                    }
                 }
                 ?>
             </ol>
@@ -46,30 +48,32 @@ foreach ($data as $detalle) {
             <div class="carousel-inner" role="listbox">
                 <?php
                 $contador = -1;
-                foreach ($ficheros as $file) {
-                    if ($file == '.' || $file == '..')
-                        continue;
-                    $contador++;
-                    
-                    $ruta_imagen_pro = $directorio.$detalle['id_campana'].$sep_path .'small'.$sep_path.$file;
-                    if (file_exists($ruta_imagen_pro)){
-                        ob_start();
-                        $resource_image = imagecreatefromjpeg($ruta_imagen_pro);
-                        imagejpeg($resource_image);
-                        $imagedata = ob_get_clean();
-                        $image = 'data:image/jpeg;base64,'.base64_encode($imagedata);
-                    } else {
-                        $image = '';
-                    }
-                    
-                    ?>
-                    <div class="item<?php if ($contador == 0) { ?>  active<?php } ?>">
-                        <div class="slider-detalle">
-                            <img src="<?php echo $image; ?>">
+                if(count($ficheros) > 0) {
+                    foreach ($ficheros as $file) {
+                        if ($file == '.' || $file == '..')
+                            continue;
+                        $contador++;
+
+                        $ruta_imagen_pro = $directorio.$detalle['id_campana'].$sep_path .'small'.$sep_path.$file;
+                        if (file_exists($ruta_imagen_pro)){
+                            ob_start();
+                            $resource_image = imagecreatefromjpeg($ruta_imagen_pro);
+                            imagejpeg($resource_image);
+                            $imagedata = ob_get_clean();
+                            $image = 'data:image/jpeg;base64,'.base64_encode($imagedata);
+                        } else {
+                            $image = '';
+                        }
+
+                        ?>
+                        <div class="item<?php if ($contador == 0) { ?>  active<?php } ?>">
+                            <div class="slider-detalle">
+                                <img src="<?php echo $image; ?>">
+                            </div>
+                            <div class="carousel-caption"></div>
                         </div>
-                        <div class="carousel-caption"></div>
-                    </div>
-                    <?php
+                        <?php
+                    }
                 }
                 ?>
             </div>
@@ -101,7 +105,7 @@ foreach ($data as $detalle) {
                     </div>
 
                     <!-- P1_Comprar -->
-                    <?php if($detalle['id_estado_arte'] != 3 ) { 
+                    <?php if($detalle['id_estado_arte'] == 3 ) { 
                             if( $maximo_cupones > 0 ) { 
                                         $quedan = $maximo_cupones - $vendidos;
                                         if( $quedan <= 10 ) { 
@@ -123,7 +127,7 @@ foreach ($data as $detalle) {
                                <?php } 
                             } 
                           } else { ?>
-                            <a data-id="10699" data-opcion="1" href="../../campana/formulariopago/<?php echo base64_encode($opciones['id_campana']); ?>/<?php echo base64_encode($opciones['id_campana_opcion']); ?>" title="Aprobar" class="btn btn_buy_action">Aprobar</a>       
+                            <a data-id="10699" data-opcion="1" href="javascript:aceptarArteCampana('<?php echo base64_encode($detalle['id_contrato']); ?>','<?php echo base64_encode($opciones['id_campana']); ?>')" title="Aprobar" class="btn btn_buy_action">Aprobar</a>       
                     <?php } ?>
                     <ul class="discount_information">
                         <li><span>Precio Regular</span>
@@ -334,6 +338,24 @@ foreach ($data_p as $dato) {
                 if (cliente[0]) {
                     if (cliente[0].validar == '1') {
                         postfunction('/campana', 'detalle', '<?php echo base64_encode($id); ?>');
+                    }
+                }
+            }
+        });
+
+    }
+    
+    function aceptarArteCampana(contrato, campana) {
+
+        $.ajax({
+            type: "POST",
+            url: "/dashboard/empresa/aceptar-arte",
+            data: {contrato: contrato, campana: campana},
+            success: function (data) {
+                var actualizar = $.parseJSON(data);
+                if (actualizar[0]) {
+                    if (actualizar[0].respuesta == '1') {
+                        alert('Felicidades su promocion se encuentra en el area de programación lista para ser publicada en los próximos dias.');
                     }
                 }
             }
