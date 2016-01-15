@@ -65,7 +65,12 @@ class ConcontratoanexoTable {
                                'firma_documento' => 'firma',
                                'fecha_firma' => new Expression("DATE_FORMAT(con_contrato_anexo.fecha_firma,'%d-%m-%Y %h:%i:%s')") ,
                                'nombre_documento' => 'nombre_documento',
-                               'id_estado'   => 'id_estado'));
+                               'id_estado'   => 'id_estado',
+                               'nombre_contacto_arte' => 'nombre_contacto',
+                               'email_contacto_arte' => 'email_contacto',
+                               'fecha_envio_arte' => new Expression("DATE_FORMAT(con_contrato_anexo.fecha_envio_arte,'%d-%m-%Y %h:%i:%s')") ,
+                               'fecha_aceptacion_arte' => new Expression("DATE_FORMAT(con_contrato_anexo.fecha_aceptacion_arte,'%d-%m-%Y %h:%i:%s')") ,
+                               'id_estado_arte'   => 'id_estado_arte'));
         $select->from('con_contrato_anexo')
         ->join('con_contrato', new Expression("con_contrato_anexo.id_contrato = con_contrato.id_contrato"),
                 array('id_empresa'))

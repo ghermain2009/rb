@@ -22,6 +22,9 @@ foreach ($data as $detalle) {
     ?>
 
     <div style="display:inline-block;width:100%">
+        <?php if($detalle['id_estado_arte'] != 3 ) { ?>
+        <div class="detalle-previsualiza"><p>Este arte es solo una previsualizacion no es una promoción activa</p></div>
+        <?php } ?>
         <div class="detalle-titulo"><p><?php echo $detalle['titulo']; ?></p></div>
         <div id="carousel-detalle-promocion" class="carousel slide carrusel-detalle" data-ride="carousel">
             <!-- Indicators -->
@@ -98,26 +101,30 @@ foreach ($data as $detalle) {
                     </div>
 
                     <!-- P1_Comprar -->
-                    <?php if( $maximo_cupones > 0 ) { 
-                                    $quedan = $maximo_cupones - $vendidos;
-                                    if( $quedan <= 10 ) { 
-                                        if( $quedan <= 0 ) { ?>
-                                            <button type="button" class="btn btn_buy_action disabled" data-toggle="modal" data-target="#exampleModal" >Comprar</button>
-                                  <?php } else { 
-                                            if ($total == 1) { ?>
-                                           <a data-id="10699" data-opcion="1" href="../../campana/formulariopago/<?php echo base64_encode($opciones['id_campana']); ?>/<?php echo base64_encode($opciones['id_campana_opcion']); ?>" title="Comprar" class="btn btn_buy_action">Comprar</a>
-                                       <?php } else { ?> 
-                                           <button type="button" class="btn btn_buy_action" data-toggle="modal" data-target="#exampleModal" >Comprar</button>
-                                       <?php }
+                    <?php if($detalle['id_estado_arte'] != 3 ) { 
+                            if( $maximo_cupones > 0 ) { 
+                                        $quedan = $maximo_cupones - $vendidos;
+                                        if( $quedan <= 10 ) { 
+                                            if( $quedan <= 0 ) { ?>
+                                                <button type="button" class="btn btn_buy_action disabled" data-toggle="modal" data-target="#exampleModal" >Comprar</button>
+                                      <?php } else { 
+                                                if ($total == 1) { ?>
+                                               <a data-id="10699" data-opcion="1" href="../../campana/formulariopago/<?php echo base64_encode($opciones['id_campana']); ?>/<?php echo base64_encode($opciones['id_campana_opcion']); ?>" title="Comprar" class="btn btn_buy_action">Comprar</a>
+                                           <?php } else { ?> 
+                                               <button type="button" class="btn btn_buy_action" data-toggle="modal" data-target="#exampleModal" >Comprar</button>
+                                           <?php }
+                                            }
                                         }
-                                    }
-                    } else {
-                        if ($total == 1) { ?>
-                           <a data-id="10699" data-opcion="1" href="../../campana/formulariopago/<?php echo base64_encode($opciones['id_campana']); ?>/<?php echo base64_encode($opciones['id_campana_opcion']); ?>" title="Comprar" class="btn btn_buy_action">Comprar</a>
-                       <?php } else { ?> 
-                           <button type="button" class="btn btn_buy_action" data-toggle="modal" data-target="#exampleModal" >Comprar</button>
-                       <?php } 
-                    } ?>
+                            } else {
+                                if ($total == 1) { ?>
+                                   <a data-id="10699" data-opcion="1" href="../../campana/formulariopago/<?php echo base64_encode($opciones['id_campana']); ?>/<?php echo base64_encode($opciones['id_campana_opcion']); ?>" title="Comprar" class="btn btn_buy_action">Comprar</a>
+                               <?php } else { ?> 
+                                   <button type="button" class="btn btn_buy_action" data-toggle="modal" data-target="#exampleModal" >Comprar</button>
+                               <?php } 
+                            } 
+                          } else { ?>
+                            <a data-id="10699" data-opcion="1" href="../../campana/formulariopago/<?php echo base64_encode($opciones['id_campana']); ?>/<?php echo base64_encode($opciones['id_campana_opcion']); ?>" title="Aprobar" class="btn btn_buy_action">Aprobar</a>       
+                    <?php } ?>
                     <ul class="discount_information">
                         <li><span>Precio Regular</span>
                             <div class="value">

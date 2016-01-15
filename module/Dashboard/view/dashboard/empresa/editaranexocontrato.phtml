@@ -35,6 +35,28 @@
                     Contrato firmado por : <b><?php echo strtoupper($contra['firma_documento']);?></b> el <b><?php echo $contra['fecha_firma'];?></b>
                 </div>
             </div>
+            <div class="form-group">
+                <label class="col-lg-10 control-label">Arte de la Campaña</label>
+            </div>
+            <div class="form-group">
+                <label for="nombre_contacto_arte" class="col-lg-2 control-label">Nombre Contacto :</label>
+                <div class="col-lg-8">
+                    <input class="form-control input-sm" type="text" name="nombre_contacto_arte" id="nombre_contacto_arte" value="<?php echo $contra['nombre_contacto_arte'];?>" <?php if($contra['id_estado_arte'] == '3') { ?>readonly<?php } ?>>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email_contacto_arte" class="col-lg-2 control-label">Email Contacto :</label>
+                <div class="col-lg-8">
+                    <input class="form-control input-sm" type="text" name="email_contacto_arte" id="email_contacto_arte" value="<?php echo $contra['email_contacto_arte'];?>" <?php if($contra['id_estado_arte'] == '3') { ?>readonly<?php } ?>>
+                </div>
+            </div>
+                <?php if($contra['id_estado_arte'] != '3') { ?>
+                <div class="form-group">
+                    <div class="col-lg-offset-2 col-lg-7">
+                        <a class="btn btn-success btn-sm" id="enviar_arte"><span class="glyphicon glyphicon-envelope"></span> Enviar Arte para Aprobación</a>
+                    </div>
+                </div>
+                <?php } ?>
             <?php } ?>
         </div>
     </div>
@@ -69,6 +91,26 @@
             data: {email_contacto: email_contacto, nombre_contacto: nombre_contacto, id_contrato: id_contrato, id_campana: id_campana},
             success: function (data) {
                 alert('Se envio el contrato correctamente.');
+            }
+        });
+    });
+    
+    
+    $('#enviar_arte').click(function() {
+        var email_contacto_arte;
+        var nombre_contacto_arte;
+        var id_contrato = '<?php echo $contra['id_contrato'];?>';
+        var id_campana = '<?php echo $contra['id_campana'];?>';
+        
+        email_contacto_arte  = $('#email_contacto_arte').val();
+        nombre_contacto_arte = $('#nombre_contacto_arte').val();
+        
+        $.ajax({
+            type: "POST",
+            url: "/dashboard/empresa/enviar-arte",
+            data: {email_contacto: email_contacto_arte, nombre_contacto: nombre_contacto_arte, id_contrato: id_contrato, id_campana: id_campana},
+            success: function (data) {
+                alert('Se envio el arte correctamente.');
             }
         });
     });

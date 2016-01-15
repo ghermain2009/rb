@@ -849,4 +849,112 @@ class EmpresaController extends AbstractActionController {
         return $this->getResponse()->setContent(Json::encode($data));
     }
     
+    public function enviarArteAction() {
+
+        $email_contacto = $this->params()->fromPost("email_contacto", null);
+        $nombre_contacto = $this->params()->fromPost("nombre_contacto", null);
+        $id_contrato = $this->params()->fromPost("id_contrato", null);
+        $id_campana = $this->params()->fromPost("id_campana", null);
+
+        $serviceLocator = $this->getServiceLocator();
+        $config = $serviceLocator->get('Config');
+        
+        $campanaTable = $serviceLocator->get('Dashboard\Model\CupcampanaTable');
+        $campana = $campanaTable->getCampanaId($id_campana);
+        $subtitulo = $campana[0]['subtitulo'];
+        
+        $set = array('nombre_contacto_arte' => $nombre_contacto,
+                     'email_contacto_arte' => $email_contacto,
+                     'id_estado_arte' => '2');
+        
+        $where = array('id_contrato' => $id_contrato,
+                       'id_campana' => $id_campana);
+        
+        $contratoanexoTable = $serviceLocator->get('Dashboard\Model\ConcontratoanexoTable');
+        $contratoanexoTable->editAnexoContrato($set,$where);
+        
+        $activo   = $config['correo']['activo'];
+        $name     = $config['correo']['name'];
+        $host     = $config['correo']['host'];
+        $port     = $config['correo']['port'];
+        $tls      = $config['correo']['tls'];
+        $username = $config['correo']['username'];
+        $password = $config['correo']['password'];
+        $cuenta   = $config['correo']['cuenta-mensajes-empresas'];
+        $localhost = $config['constantes']['localhost'];
+        $telefono = $config['empresa']['telefono'];
+
+        $data = array();
+        $data[0]['validar'] = '2';
+        
+        $nombre = $nombre_contacto;
+        $token_campana = base64_encode($id_campana);
+
+        if( $activo == '1' ) {
+
+            $message = new Message();
+            $message->addTo($email_contacto)
+                    ->addBcc("german@rebueno.ec")
+                    ->addFrom($cuenta)
+                    ->setSubject('Aprobación del Arte Rebueno!‏');
+
+            if( $tls ) {
+                $connection_config = array(
+                    'ssl' => 'tls',
+                    'username' => $username,
+                    'password' => $password
+                );
+            } else {
+                $connection_config = array(
+                    'username' => $username,
+                    'password' => $password
+                );
+            }
+
+            $transport = new SmtpTransport();
+            $options = new SmtpOptions(array(
+                'name' => $name,
+                'host' => $host,
+                'port' => $port,
+                'connection_class' => 'login',
+                'connection_config' => $connection_config
+            ));
+
+            $resolver = new TemplateMapResolver();
+            $resolver->setMap(array(
+                'mailLayout' => __DIR__ . '/../../../../Dashboard/view/dashboard/empresa/emailarteanexo.phtml'
+            ));
+
+            $rendered = new PhpRenderer();
+            $rendered->setResolver($resolver);
+
+            $viewModel = new ViewModel();
+            $viewModel->setTemplate('mailLayout')->setVariables(array(
+                'nombre' => $nombre,
+                'token_campana' => $token_campana,
+                'subtitulo' => $subtitulo,
+                'localhost' => $localhost,
+                'telefono' => $telefono
+            ));
+
+            $content = $rendered->render($viewModel);
+
+            $html = new MimePart($content);
+            $html->type = "text/html";
+
+            $body = new MimeMessage();
+            $body->addPart($html);
+
+            $message->setBody($body);
+
+            $transport->setOptions($options);
+            $transport->send($message);
+            
+            $data[0]['validar'] = '1';
+            
+        }
+
+        return $this->getResponse()->setContent(Json::encode($data));
+    }
+    
 }

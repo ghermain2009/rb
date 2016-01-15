@@ -1,0 +1,32 @@
+<?php
+    function crearUrl($str_cadena) {
+        $nueva_cadena = trim($str_cadena);
+        $nueva_cadena = str_replace('-', ' ', $nueva_cadena);
+        $nueva_cadena = str_replace(' ', '-', $nueva_cadena);
+        $nueva_cadena = str_replace(chr(47), '-', $nueva_cadena);
+        $nueva_cadena = str_replace(chr(63), '', $nueva_cadena);
+        return $nueva_cadena;
+    }
+?>
+<table>
+    <tr>
+        <td>Estimado : <?php echo $nombre;?></td>
+    </tr>
+    <tr>
+        <td><p>Remitimos un enlace seguro para que puedas visualizar el arte de t&uacute; campa&ntilde;a Rebuena.</p>
+            <p>Para hacerlo por favor haz click en el siguiente enlace:</p></td>
+    </tr>
+    <tr><td>
+            <a href="<?php echo $localhost;?>/campana/detalle/<?php echo crearUrl($subtitulo).'--'.$token_campana; ?>.html">Ver Arte Campaña</a>
+            
+            
+            
+        </td>
+    </tr>
+    <tr>
+        <td><p>Si tienes alguna consulta no dudes en escribirnos a clientes@rebueno.ec o llamarnos al <?php echo $telefono;?>.</p></td>
+    </tr>
+    <tr>
+        <td><p>El equipo Rebueno.</p></td>
+    </tr>
+</table>

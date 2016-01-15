@@ -1,0 +1,177 @@
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema buenisimo
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `buenisimo` DEFAULT CHARACTER SET latin1 ;
+USE `buenisimo` ;
+
+-- -----------------------------------------------------
+-- Table `buenisimo`.`cup_tipo_hospedaje`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `buenisimo`.`cup_tipo_hospedaje` (
+  `id_tipo` INT NOT NULL AUTO_INCREMENT,
+  `descripcion_tipo` VARCHAR(45) NULL,
+  PRIMARY KEY (`id_tipo`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `buenisimo`.`cup_hospedaje`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `buenisimo`.`cup_hospedaje` (
+  `id_hospedaje` INT NOT NULL AUTO_INCREMENT,
+  `cup_tipo_hospedaje_id_tipo` INT NOT NULL,
+  `id_pais` INT(11) NOT NULL,
+  `id_departamento` INT(11) NOT NULL,
+  `descripcion_hospedaje` VARCHAR(150) NOT NULL,
+  `categoria_hospedaje` INT NOT NULL DEFAULT 0,
+  `direccion_hospedaje` VARCHAR(300) NULL,
+  `telefono_hospedaje` VARCHAR(100) NULL,
+  PRIMARY KEY (`id_hospedaje`),
+  INDEX `fk_cup_hospedaje_cup_tipo_hospedaje1_idx` (`cup_tipo_hospedaje_id_tipo` ASC),
+  INDEX `fk_cup_hospedaje_ubi_departamento1_idx` (`id_departamento` ASC, `id_pais` ASC),
+  CONSTRAINT `fk_cup_hospedaje_cup_tipo_hospedaje1`
+    FOREIGN KEY (`cup_tipo_hospedaje_id_tipo`)
+    REFERENCES `buenisimo`.`cup_tipo_hospedaje` (`id_tipo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_cup_hospedaje_ubi_departamento1`
+    FOREIGN KEY (`id_departamento` , `id_pais`)
+    REFERENCES `buenisimo`.`ubi_departamento` (`id_departamento` , `id_pais`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `buenisimo`.`cup_tipo_adicional`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `buenisimo`.`cup_tipo_adicional` (
+  `id_tipo_adicional` INT NOT NULL,
+  `descripcion_tipo_adicional` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`id_tipo_adicional`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `buenisimo`.`cup_adicionales`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `buenisimo`.`cup_adicionales` (
+  `id_adicionales` INT NOT NULL AUTO_INCREMENT,
+  `id_tipo_adicional` INT NOT NULL,
+  `descripcion_adicionales` VARCHAR(150) NOT NULL,
+  `icono_adicional` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id_adicionales`),
+  INDEX `fk_cup_adicionales_cup_tipo_adicional1_idx` (`cup_tipo_adicional_id_tipo_adicional` ASC),
+  CONSTRAINT `fk_cup_adicionales_cup_tipo_adicional1`
+    FOREIGN KEY (`cup_tipo_adicional_id_tipo_adicional`)
+    REFERENCES `buenisimo`.`cup_tipo_adicional` (`id_tipo_adicional`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `buenisimo`.`cup_hospedaje_adicionales`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `buenisimo`.`cup_hospedaje_adicionales` (
+  `id_hospedaje` INT NOT NULL,
+  `id_adicionales` INT NOT NULL,
+  `favorito` CHAR NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id_hospedaje`, `id_adicionales`),
+  INDEX `fk_cup_hospedaje_has_cup_adicionales_cup_adicionales1_idx` (`id_adicionales` ASC),
+  INDEX `fk_cup_hospedaje_has_cup_adicionales_cup_hospedaje1_idx` (`id_hospedaje` ASC),
+  CONSTRAINT `fk_cup_hospedaje_has_cup_adicionales_cup_hospedaje1`
+    FOREIGN KEY (`id_hospedaje`)
+    REFERENCES `buenisimo`.`cup_hospedaje` (`id_hospedaje`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_cup_hospedaje_has_cup_adicionales_cup_adicionales1`
+    FOREIGN KEY (`id_adicionales`)
+    REFERENCES `buenisimo`.`cup_adicionales` (`id_adicionales`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `buenisimo`.`cup_categoria_habitacion`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `buenisimo`.`cup_categoria_habitacion` (
+  `id_categoria` INT NOT NULL AUTO_INCREMENT,
+  `descripcion_categoria` VARCHAR(100) NOT NULL,
+  `personas_categoria` INT NOT NULL,
+  PRIMARY KEY (`id_categoria`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `buenisimo`.`cup_hospedaje_categoria`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `buenisimo`.`cup_hospedaje_categoria` (
+  `id_hospedaje` INT NOT NULL,
+  `id_categoria` INT NOT NULL,
+  `importe_habitacion` DECIMAL(12,2) NULL,
+  PRIMARY KEY (`id_hospedaje`, `id_categoria`),
+  INDEX `fk_cup_hospedaje_has_cup_categoria_habitacion_cup_categoria_idx` (`id_categoria` ASC),
+  INDEX `fk_cup_hospedaje_has_cup_categoria_habitacion_cup_hospedaje_idx` (`id_hospedaje` ASC),
+  CONSTRAINT `fk_cup_hospedaje_has_cup_categoria_habitacion_cup_hospedaje1`
+    FOREIGN KEY (`id_hospedaje`)
+    REFERENCES `buenisimo`.`cup_hospedaje` (`id_hospedaje`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_cup_hospedaje_has_cup_categoria_habitacion_cup_categoria_h1`
+    FOREIGN KEY (`id_categoria`)
+    REFERENCES `buenisimo`.`cup_categoria_habitacion` (`id_categoria`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `buenisimo`.`cup_habitacion_categoria`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `buenisimo`.`cup_habitacion_categoria` (
+  `cup_hospedaje_categoria_id_hospedaje` INT NOT NULL,
+  `cup_hospedaje_categoria_id_categoria` INT NOT NULL,
+  `cup_adicionales_id_adicionales` INT NOT NULL,
+  INDEX `fk_cup_habitacion_categoria_cup_hospedaje_categoria1_idx` (`cup_hospedaje_categoria_id_hospedaje` ASC, `cup_hospedaje_categoria_id_categoria` ASC),
+  INDEX `fk_cup_habitacion_categoria_cup_adicionales1_idx` (`cup_adicionales_id_adicionales` ASC),
+  PRIMARY KEY (`cup_hospedaje_categoria_id_hospedaje`, `cup_hospedaje_categoria_id_categoria`, `cup_adicionales_id_adicionales`),
+  CONSTRAINT `fk_cup_habitacion_categoria_cup_hospedaje_categoria1`
+    FOREIGN KEY (`cup_hospedaje_categoria_id_hospedaje` , `cup_hospedaje_categoria_id_categoria`)
+    REFERENCES `buenisimo`.`cup_hospedaje_categoria` (`id_hospedaje` , `id_categoria`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_cup_habitacion_categoria_cup_adicionales1`
+    FOREIGN KEY (`cup_adicionales_id_adicionales`)
+    REFERENCES `buenisimo`.`cup_adicionales` (`id_adicionales`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+
+
+ALTER TABLE `buenisimo`.`con_contrato_anexo`   
+  ADD COLUMN `nombre_contacto_arte` VARCHAR(200) NULL AFTER `id_estado`,
+  ADD COLUMN `email_contacto_arte` VARCHAR(100) NULL AFTER `nombre_contacto_arte`,
+  ADD COLUMN `fecha_envio_arte` DATETIME NULL AFTER `email_contacto_arte`,
+  ADD COLUMN `id_estado_arte` INT(11) NULL AFTER `fecha_envio_arte`;
+  
+  
+  ALTER TABLE `buenisimo`.`con_contrato_anexo`  
+  ADD CONSTRAINT `fk_con_contrato_detalle_con_estado_anexo1` FOREIGN KEY (`id_estado_arte`) REFERENCES `buenisimo`.`con_estado_arte`(`id_estado_arte`) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+  

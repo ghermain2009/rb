@@ -205,7 +205,9 @@ class CupcampanaTable {
             'comision_campana'
         ))
         ->from('cup_campana')
-        ->where(array('id_campana' => $id_campana));
+        ->join('con_contrato_anexo', new Expression("cup_campana.id_campana = con_contrato_anexo.id_campana"),
+                array('id_estado_arte' => new Expression("ifnull(id_estado_arte,0)")),'left')
+        ->where(array('cup_campana.id_campana' => $id_campana));
 
         $statement = $sql->prepareStatementForSqlObject($select);
         $result = $statement->execute();
