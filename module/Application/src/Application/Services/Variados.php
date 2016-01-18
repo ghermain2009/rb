@@ -85,7 +85,7 @@ class Variados {
                     $email = $datos[$i]['email_cliente'];
                 }
                 
-                $ruta_imagen_pro = $directorio.$datos['id_campana'].$sep_path .'small2'.$sep_path.'image1.jpg';
+                $ruta_imagen_pro = $directorio.$datos[$i]['id_campana'].$sep_path .'small2'.$sep_path.'image1.jpg';
                 if (file_exists($ruta_imagen_pro)){
                     ob_start();
                     $resource_image = imagecreatefromjpeg($ruta_imagen_pro);

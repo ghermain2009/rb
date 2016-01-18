@@ -20,7 +20,7 @@ switch ($this->controllerName()) {
         break;
     case 'Dashboard\Controller\Pagobancario' :
         $titulo = "Administración de Pagos Bancarios";
-        $enlace = "Nuevo Pago Bancario";
+        $enlace = "";
         break;
     case 'Dashboard\Controller\Tipohospedaje' :
         $titulo = "Administración de Tipo de Hospedaje";
@@ -37,6 +37,10 @@ switch ($this->controllerName()) {
     case 'Dashboard\Controller\Hospedaje' :
         $titulo = "Administración de Hospedajes";
         $enlace = "Nuevo Hospedaje";
+        break;
+    case 'Dashboard\Controller\Voucher' :
+        $titulo = "Administración de Voucher de Hospedaje";
+        $enlace = "Nuevo Voucher de Hospedaje";
         break;
     default :
         $titulo = "";
@@ -129,6 +133,7 @@ switch ($this->controllerName()) {
     }
     
     function registrarpagobancario(cupon){
+    
         $.ajax({
             type: "POST",
             url: "/dashboard/pagobancario/prepagado",
@@ -137,11 +142,17 @@ switch ($this->controllerName()) {
                 var prepago = $.parseJSON(data);
                 if (prepago) {
                     if (prepago.pagado == -1) {
-                        $('#numero_operacion').val('');
-                        $('#fecha_operacion').val('');
+                        $('#numero_operacion').val(prepago.operacion);
+                        $('#numero_operacion').removeAttr('readonly');
+                        $('#fecha_operacion').val(prepago.fecha_operacion);
+                        $('#fecha_operacion').removeAttr('readonly');
+                        $('#generar_Pagobancario').removeAttr('disabled');
                     } else {
-                        $('#numero_operacion').val(prepago.prepagado[0]);
-                        $('#fecha_operacion').val(prepago.prepagado[1]);
+                        $('#numero_operacion').val(prepago.operacion);
+                        $('#numero_operacion').attr('readonly','true');
+                        $('#fecha_operacion').val(prepago.fecha_operacion);
+                        $('#fecha_operacion').attr('readonly','true');
+                        $('#generar_Pagobancario').attr('disabled','true');
                     } 
                     $('#id_cupon').val(cupon);
                     $('#modalPagobancario').modal('show');
@@ -207,23 +218,21 @@ switch ($this->controllerName()) {
         var id_cupon         = $("#id_cupon").val();
         var numero_operacion = $("#numero_operacion").val();
         var fecha_operacion  = $("#fecha_operacion").val();
-
+        
         $.ajax({
             type: "POST",
             url: "/dashboard/pagobancario/registrarpagobancario",
             data: {id_cupon:id_cupon, numero_operacion:numero_operacion, fecha_operacion:fecha_operacion},
             success: function (data) {
-                var contrato = $.parseJSON(data);
-                if (contrato) {
-                    if (contrato.id_contrato == -1) {
-                        $('#modalContrato').modal('hide');
+                var datos = $.parseJSON(data);
+                if (datos) {
+                    if (datos.respuesta == -1 ) {
+                        alert('No se puedo resgistrar el pago.');
                     } else {
-                        var form = $('<form method="post" action="/dashboard/empresa/editarcontrato">' +
-                                     '<input type="hidden" name="id_contrato" value="' + contrato.id_contrato + '">' +
-                                     '</form>');
-                        $(form).submit();
+                        alert('Se registro correctamente el pago.');
                     }
                 }
+                $('#modalPagobancario').modal('hide');
             }
         });
     } 

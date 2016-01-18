@@ -443,12 +443,15 @@ class CupcuponTable {
 
         $select->columns(array(
             'id_cupon',
+            'transaccion' => 'id_cupon',
             'id_campana',
             'id_campana_opcion',
             'cantidad',
             'precio_total',
             'fecha_compra' => new Expression("date_format(fecha_compra,'%d-%m-%Y')"),
-            'tipo' => new Expression("case when id_estado_compra = '1' then '0' else '1' end")
+            'tipo' => new Expression("case when id_estado_compra = '1' then '0' else '1' end"),
+            'fec_operacion' => new Expression("date_format(fecha_operacion,'%d-%m-%Y')"),
+            'num_operacion' => 'observacion'
         ))
         ->from('cup_cupon')
         ->join('cup_campana', new Expression("cup_cupon.id_campana = cup_campana.id_campana"),
@@ -469,8 +472,8 @@ class CupcuponTable {
                       'descripcion_empresa' => 'descripcion',
                       'direccion' => new Expression("case when ifnull(direccion_comercial,'') = '' then direccion_facturacion else direccion_comercial end ")
                     ))
-        ->where(array('cup_cupon.id_estado_compra' => '1',
-                      'cup_cupon.id_tarjeta' => '999'));
+        ->where(new In('cup_cupon.id_estado_compra', array('1','3')))
+        ->where(array('cup_cupon.id_tarjeta' => '999'));
         
         $statement = $sql->prepareStatementForSqlObject($select);
         $result = $statement->execute();
@@ -484,8 +487,8 @@ class CupcuponTable {
     
             $select = $sql->select();
 
-            $select->columns(array('observacion',
-                                   'fecha_compra' => new Expression("DATE_FORMAT(fecha_compra,'%d-%m-%Y')")))
+            $select->columns(array('operacion' => 'observacion',
+                                   'fecha_operacion' => new Expression("DATE_FORMAT(fecha_operacion,'%d-%m-%Y')")))
                     ->from('cup_cupon')
                     ->where(array('cup_cupon.id_cupon' => $id_cupon))
                     ->where(new In('cup_cupon.id_estado_compra', array('3','5','7')));
@@ -495,6 +498,24 @@ class CupcuponTable {
             $result = $stmt->execute();
             
             return ArrayUtils::iteratorToArray($result);
+    
+    }
+    
+    public function getDatosOrden($id_cupon) {
+    
+            $sql = new Sql($this->tableGateway->getAdapter());
+    
+            $select = $sql->select();
+
+            $select->columns(array('id_campana', 'id_campana_opcion', 'cantidad'))
+                    ->from(array('c' => 'cup_cupon'))
+                    ->where(array('c.id_cupon' => $id_cupon));
+
+            $stmt = $sql->prepareStatementForSqlObject($select);
+
+            $results = $stmt->execute();
+            
+            return ArrayUtils::iteratorToArray($results);
     
     }
     

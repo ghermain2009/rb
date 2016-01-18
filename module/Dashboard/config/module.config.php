@@ -295,6 +295,59 @@ return array(
                     ),
                 ),
             ),
+            'dash_voucher' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/dashboard/voucher',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Dashboard\Controller',
+                        'controller' => 'voucher',
+                        'action' => 'index',
+                    ),
+                ),
+            ),
+            'dash_voucher_list' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/dashboard/voucher/list/id[/:id]',
+                    'constraints' => array(
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Dashboard\Controller',
+                        'controller' => 'voucher',
+                        'action' => 'list',
+                    ),
+                ),
+            ),
+            'dash_voucher_edit' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/dashboard/voucher/edit/id[/:id]',
+                    'constraints' => array(
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Dashboard\Controller',
+                        'controller' => 'voucher',
+                        'action' => 'edit',
+                    ),
+                ),
+            ),
+            'dash_voucher_del' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/dashboard/voucher/delete/id[/:id]',
+                    'constraints' => array(
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Dashboard\Controller',
+                        'controller' => 'voucher',
+                        'action' => 'delete',
+                    ),
+                ),
+            ),
             'dash_categoriahabitacion' => array(
                 'type' => 'Literal',
                 'options' => array(
@@ -614,6 +667,7 @@ return array(
             'Dashboard\Controller\Adicionales' => 'Dashboard\Controller\AdicionalesController',
             'Dashboard\Controller\Categoriahabitacion' => 'Dashboard\Controller\CategoriahabitacionController',
             'Dashboard\Controller\Hospedaje' => 'Dashboard\Controller\HospedajeController',
+            'Dashboard\Controller\Voucher' => 'Dashboard\Controller\VoucherController',
             'Dashboard\Controller\Campana' => 'Dashboard\Controller\CampanaController',
             'Dashboard\Controller\Empresa' => 'Dashboard\Controller\EmpresaController',
             'Dashboard\Controller\Reporte' => 'Dashboard\Controller\ReporteController',

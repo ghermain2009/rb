@@ -193,15 +193,21 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="email" class="col-lg-5 control-label afiliacion">Fecha operación:</label>
-                                        <div class="col-xs-7 validacion"> 
-                                            <input type="text" class="form-control" name="fecha_operacion" id="fecha_operacion" value="" >
-                                            <span class="help-block with-errors"></span>
+                                        <label for="fecha_operacion" class="col-lg-5 control-label afiliacion">Fecha Operación :</label>
+                                        <div class="col-xs-7 validacion" >
+                                            <div class="input-group date">
+                                                <input type="text" class="form-control" name="fecha_operacion" id="fecha_operacion" value="" >
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="col-xs-12 total">
-                                            <button type="button" class="btn btn-rebueno" name="generar_Pagobancario" id="generar_Pagobancario" onclick="javascript:generarpagobancario();">Registrar Pago Bancario</button>
+                                        <div class="form-group">
+                                            <div class="col-lg-offset-5 col-xs-7">
+                                                <button type="button" class="btn btn-success" name="generar_Pagobancario" id="generar_Pagobancario" onclick="javascript:generarpagobancario();">Registrar Pago Bancario</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </form>
@@ -252,3 +258,21 @@
 <?php echo $this->inlineScript() ?>
     </body>
 </html>
+
+<script type="text/javascript">
+ $(document).ready(function() {
+
+        $('#fecha_operacion').datetimepicker({
+            format: 'yyyy-mm-dd',
+            language: 'es',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+
+        });
+  });
+  </script>

@@ -29,6 +29,12 @@ use Dashboard\Model\Hoscategoriahabitacion;
 use Dashboard\Model\HoscategoriahabitacionTable;
 use Dashboard\Model\Hoshospedaje;
 use Dashboard\Model\HoshospedajeTable;
+use Dashboard\Model\Hoshospedajecategoria;
+use Dashboard\Model\HoshospedajecategoriaTable;
+use Dashboard\Model\Hoshabitacionadicionales;
+use Dashboard\Model\HoshabitacionadicionalesTable;
+use Dashboard\Model\Hosvoucher;
+use Dashboard\Model\HosvoucherTable;
 use Dashboard\Model\User;
 use Dashboard\Model\UserTable;
 
@@ -194,6 +200,7 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
                         $tableGateway = new TableGateway('hos_tipo_hospedaje', $adapter, null, $rsPrototype);
                         return $tableGateway;
                     },
+                            
                     'Dashboard\Model\HosadicionalesTable' => function($sl){
                         $gateway = $sl->get('HosadicionalesTableGateway');
                         $table = new HosadicionalesTable($gateway);
@@ -243,6 +250,45 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
                         $tableGateway = new TableGateway('hos_hospedaje', $adapter, null, $rsPrototype);
                         return $tableGateway;
                     },
+                    
+                    'Dashboard\Model\HoshospedajecategoriaTable' => function($sl){
+                        $gateway = $sl->get('HoshospedajecategoriaTableGateway');
+                        $table = new HoshospedajecategoriaTable($gateway);
+                        return $table;
+                    },
+                    'HoshospedajecategoriaTableGateway' => function($sl) {
+                        $adapter = $sl->get('Zend\Db\Adapter\Adapter');
+                        $rsPrototype = new ResultSet();
+                        $rsPrototype->setArrayObjectPrototype(new Hoshospedajecategoria());
+                        $tableGateway = new TableGateway('hos_hospedaje_categoria', $adapter, null, $rsPrototype);
+                        return $tableGateway;
+                    },
+                    'Dashboard\Model\HoshabitacionadicionalesTable' => function($sl){
+                        $gateway = $sl->get('HoshabitacionadicionalesTableGateway');
+                        $table = new HoshabitacionadicionalesTable($gateway);
+                        return $table;
+                    },
+                    'HoshabitacionadicionalesTableGateway' => function($sl) {
+                        $adapter = $sl->get('Zend\Db\Adapter\Adapter');
+                        $rsPrototype = new ResultSet();
+                        $rsPrototype->setArrayObjectPrototype(new Hoshabitacionadicionales());
+                        $tableGateway = new TableGateway('hos_habitacion_adicionales', $adapter, null, $rsPrototype);
+                        return $tableGateway;
+                    },
+                    
+                    'Dashboard\Model\HosvoucherTable' => function($sl){
+                        $gateway = $sl->get('HosvoucherTableGateway');
+                        $table = new HosvoucherTable($gateway);
+                        return $table;
+                    },
+                    'HosvoucherTableGateway' => function($sl) {
+                        $adapter = $sl->get('Zend\Db\Adapter\Adapter');
+                        $rsPrototype = new ResultSet();
+                        $rsPrototype->setArrayObjectPrototype(new Hosvoucher());
+                        $tableGateway = new TableGateway('hos_voucher', $adapter, null, $rsPrototype);
+                        return $tableGateway;
+                    },
+                            
                     'Dashboard\Model\CupcampanaTable' => function($sl){
                         $gateway = $sl->get('CupcampanaTableGateway');
                         $table = new CupcampanaTable($gateway);

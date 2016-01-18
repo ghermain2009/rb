@@ -13,6 +13,7 @@ use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Expression;
 use Zend\Authentication\AuthenticationService;
 use Zend\Stdlib\ArrayUtils;
+use Zend\Db\Sql\Predicate\NotIn;
 /**
  * Description of HoshospedajeTable
  *
@@ -100,6 +101,66 @@ class HoshospedajeTable {
                     ->order('descripcion_adicionales');
         
         $stmt = $sql->prepareStatementForSqlObject($select);
+        $results = $stmt->execute(); 
+        
+        return ArrayUtils::iteratorToArray($results);
+    }
+    
+    public function getCategoriasxHospedajeAll($idHospedaje) 
+    {
+        $sql = new Sql($this->tableGateway->getAdapter());
+        $select =  $sql
+                    ->select()
+                    ->from(array('a' => 'hos_hospedaje_categoria'))
+                    ->join(array('b' => 'hos_categoria_habitacion'), 
+                           new Expression('a.id_categoria = b.id_categoria'),
+                           array('descripcion_categoria'))
+                    ->where(array('id_hospedaje' => $idHospedaje))
+                    ->order('descripcion_categoria');
+        
+        $stmt = $sql->prepareStatementForSqlObject($select);
+        $results = $stmt->execute(); 
+        
+        return ArrayUtils::iteratorToArray($results);
+    }
+    
+    public function getAdicionalesxHabitacion($idHospedaje, $idCategoria) 
+    {
+        $sql = new Sql($this->tableGateway->getAdapter());
+        $select =  $sql
+                    ->select()
+                    ->from(array('a' => 'hos_habitacion_adicionales'))
+                    ->join(array('b' => 'hos_adicionales'), 
+                           new Expression('a.id_adicionales = b.id_adicionales'),
+                           array('descripcion_adicionales'))
+                    ->where(array('a.id_hospedaje' => $idHospedaje,
+                                  'a.id_categoria' => $idCategoria));
+                    $select->order('b.id_tipo_adicional');
+                    $select->order('b.descripcion_adicionales');
+        
+        $stmt = $sql->prepareStatementForSqlObject($select);
+        
+        $results = $stmt->execute(); 
+        
+        return ArrayUtils::iteratorToArray($results);
+    }
+    
+    public function getAdicionalesxHabitacionAll($idHospedaje, $idCategoria) 
+    {
+        $sql = new Sql($this->tableGateway->getAdapter());
+        $select =  $sql
+                    ->select()
+                    ->from(array('a' => 'hos_adicionales'))
+                    ->join(array('b' => 'hos_habitacion_adicionales'), 
+                           new Expression('a.id_adicionales = b.id_adicionales and b.id_hospedaje = '.$idHospedaje.' and b.id_categoria = '.$idCategoria),
+                           array('seleccionado'  => new Expression("IFNULL(b.id_adicionales,0)")) ,
+                           'left');
+                    $select->where->notIn('id_tipo_adicional', array('1')); 
+                    $select->order('id_tipo_adicional');
+                    $select->order('descripcion_adicionales');
+        
+        $stmt = $sql->prepareStatementForSqlObject($select);
+        
         $results = $stmt->execute(); 
         
         return ArrayUtils::iteratorToArray($results);

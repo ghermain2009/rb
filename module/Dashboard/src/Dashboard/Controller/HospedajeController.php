@@ -191,6 +191,14 @@ class HospedajeController extends AbstractActionController {
             $adicionalesHospedaje[] = $adicional;
         }
         
+        $categorias = $hospedajeTable->getCategoriasxHospedajeAll($hospedajeId);
+        $categoriasHospedaje = array();
+        foreach ($categorias as $categoria) {
+            $adicionales_habitacion = $hospedajeTable->getAdicionalesxHabitacion($hospedajeId, $categoria['id_categoria']);
+            $categoria['adicionales'] = $adicionales_habitacion;
+            $categoriasHospedaje[] = $categoria;
+        }
+        
         $categoriasHabitacion = $categoriahabitacionTable->fetchAll();
         $categoriaHabitacion = array();
         foreach ($categoriasHabitacion as $categoria) {
@@ -199,10 +207,87 @@ class HospedajeController extends AbstractActionController {
 
         $viewmodel->form = $form;
         $viewmodel->setVariable('adicionalesHospedaje', $adicionalesHospedaje);
-        $viewmodel->setVariable('categoriaHabitacion', $categoriaHabitacion);
-        
-        
+        $viewmodel->setVariable('categoriasHospedaje',  $categoriasHospedaje);
+        $viewmodel->setVariable('categoriaHabitacion',  $categoriaHabitacion);
         
         return $viewmodel;
+    }
+    
+    public function adicionalesHabitacionAction()  {
+        
+        $hospedaje   = $this->params()->fromPost("id_hospedaje", null);
+        $categoria   = $this->params()->fromPost("id_categoria", null);
+        
+        if ( empty($hospedaje) || $hospedaje == '' ) $hospedaje = 0;
+        if ( empty($categoria) || $categoria == '' ) $categoria = 0;
+        
+        $serviceLocator = $this->getServiceLocator();
+   
+        $hospedajeTable = $serviceLocator->get('Dashboard\Model\HoshospedajeTable');
+        $adicionales = $hospedajeTable->getAdicionalesxHabitacionAll($hospedaje,$categoria);
+        
+        $viewmodel = new ViewModel(array('adicionales' => $adicionales));
+        $viewmodel->setTerminal(true);
+        
+        return $viewmodel;
+    }
+    
+    public function categoriasHospedajeAction()  {
+        
+        $hospedajeId   = $this->params()->fromPost("id_hospedaje", null);
+        if ( empty($hospedajeId) || $hospedajeId == '' ) $hospedajeId = 0;
+        
+        $serviceLocator = $this->getServiceLocator();
+   
+        $hospedajeTable = $serviceLocator->get('Dashboard\Model\HoshospedajeTable');
+        $categorias = $hospedajeTable->getCategoriasxHospedajeAll($hospedajeId);
+        
+        $viewmodel = new ViewModel(array('categorias' => $categorias));
+        $viewmodel->setTerminal(true);
+        
+        return $viewmodel;
+    }
+    
+    public function saveHabitacionAction()  {
+        
+        $hospedaje   = $this->params()->fromPost("id_hospedaje", null);
+        $categoria   = $this->params()->fromPost("id_categoria", null);
+        $importe     = $this->params()->fromPost("importe_habitacion", null);
+        $adicionales = $this->params()->fromPost("adicionales_habitacion", null);
+        $tipo        = $this->params()->fromPost("tipo_registro", null);
+        
+        
+        $serviceLocator = $this->getServiceLocator();
+        
+        $hospedajecategoriaTable = $serviceLocator->get('Dashboard\Model\HoshospedajecategoriaTable');
+        $hospedajeadicionalesTable = $serviceLocator->get('Dashboard\Model\HoshabitacionadicionalesTable');
+        
+        if( $tipo == 'N') {
+            $hospedajeCategoria = array('id_hospedaje' => $hospedaje,
+                                        'id_categoria' => $categoria,
+                                        'importe_habitacion' => $importe);
+
+            $hospedajecategoriaTable->addHospedajeCategoria($hospedajeCategoria);
+        } else {
+            $set   = array('importe_habitacion' => $importe);
+            
+            $where = array('id_hospedaje' => $hospedaje,
+                           'id_categoria' => $categoria);
+
+            $hospedajecategoriaTable->editHospedajeCategoria($set, $where);
+            
+            $hospedajeadicionalesTable->deleteHabitacionAdicionales($hospedaje, $categoria);
+        }
+        
+        foreach( $adicionales as $adicional) {
+            $habitacionAdicional = array('id_hospedaje'   => $hospedaje,
+                                         'id_categoria'   => $categoria,
+                                         'id_adicionales' => $adicional['value']);
+
+            $hospedajeadicionalesTable->addHabitacionAdicionales($habitacionAdicional);
+
+        }
+        
+        return $this->getResponse()->setContent(Json::encode(array('respuesta' => $tipo)));
     }
 }
