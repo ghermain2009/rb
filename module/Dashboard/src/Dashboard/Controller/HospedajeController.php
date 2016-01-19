@@ -39,17 +39,13 @@ class HospedajeController extends AbstractActionController {
         $form->get('submit');
         $message = ""; //Message
         
-        echo "hola";
-        
         if ($request->isPost()) {
             // @TODO addfilters
             //$form->setInputFilter($filters);
-            echo "hola2";
-            var_dump($request->getPost());
             $form->setData($request->getPost());
             if ($form->isValid()) {
                 $data = $form->getData();
-                var_dump($data);
+
                 unset($data['submit']);
                 unset($data['btn-regresar']);
                 $rs = $hospedajeTable->addHospedaje($data);
