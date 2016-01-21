@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <title>Documento PDF</title>
+        <style type="text/css">
+            body {
+                font-family: Helvetica;
+            }
+            
+            .letra-cupon{
+                font-size: 16px;
+                font-weight: bold;
+                text-align: right;
+            }
+
+            .letra-cupon-cabecera{
+                font-size: 16px;
+                font-weight: bold;
+                text-align: right;
+             }
+            
+            .letra-cupon-min {
+                font-size: 13px;
+                font-weight: bold;
+                text-align: right;
+
+            }
+
+            .borde-cupon-externo{
+                border-style:solid;
+                border-width: 1px;
+                width: 100%;
+                background-color: #ffffff;
+                padding: 10px;;
+            }
+
+            .separacion-cupon{
+                border-bottom-style:solid;
+                border-bottom-width:2px;
+                display: block;
+                width: 100%;
+                padding: 10px;
+            }
+            
+            .separacion-cupon.cabecera{
+                height:100px;
+            }
+
+            .separacion-empresa{
+                display: block;
+                width: 100%;
+                padding: 10px;
+            }
+
+            .en-linea {
+                display:inline-block;
+            }
+
+            .en-linea.logo-oferta-cabecera {
+                width: 15%
+            }
+            
+            .en-linea.texto-cabecera {
+                width: 25%;
+            }
+            
+            .en-linea.codigo-barra {
+                width: 40%;
+            }
+            
+            .en-linea.logo-oferta {
+                width: 40%
+            }
+            
+            .en-linea.logo-oferta img {
+                width: 316px;
+                height: 179px;
+            }
+
+            .en-linea.texto {
+                width: 59%
+            }
+
+            .en-linea.empresa {
+                width: 70%
+            }
+
+            .en-linea.mapa {
+                width: 29%;
+                vertical-align: top;
+            }
+            
+            .logo-fijo {
+                width: 100px; 
+                height: 35px;
+                background-image: url('<?php echo $localhost; ?>/img/logo_rebueno_cupon.png');
+            }
+            
+            .tabla-borde {
+                width:100%;
+                border-style:solid;
+                border-width:1.5px;
+                border-color:#000;
+            }
+            
+            .tabla-sinborde {
+                width:100%;
+            }
+            
+            .tabla-borde-redondo {
+                width:100%;
+                border-style:solid;
+                border-width:1.5px;
+                border-color:#000;
+                -webkit-border-radius:5px 5px 5px 5px;
+            }
+            
+            .tabla-arriba {
+                margin:5px;
+            }
+            
+        </style>
+    </head>
+    <body>
+    <div>
+    <div class="borde-cupon-externo">
+        <div class="separacion-cupon cabecera">
+            <div class="en-linea logo-oferta-cabecera">
+                <!--div class="logo-fijo"></div-->
+            </div>
+            <div class="en-linea">VOUCHER N° 678</div>
+        </div>
+        
+        <div class="separacion-cupon">
+            <table class="tabla-borde">
+                <tr>
+                    <td valign="top">
+                        <div class="tabla-arriba">
+                            <table>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>Check In : </td>
+                                </tr>
+                                <tr>
+                                    <td>Check Out : </td>
+                                </tr>
+                            </table>
+                        <div>
+                    </td>
+                    <td valign="top">
+                        <div class="tabla-arriba">
+                            <table>
+                                <tr>
+                                    <td>Descripci&oacute;n Habitaci&oacute;n</td>
+                                </tr>
+                                <tr>
+                                    <td>Tipo de Habitaci&oacute;n : </td>
+                                </tr>
+                                <tr>
+                                    <td>N&uacute;mero de noches : </td>
+                                </tr>
+                                <tr>
+                                    <td>Inclusiones por habitaci&oacute;n : </td>
+                                </tr>
+                                <tr>
+                                    <td>Direcci&oacute;n : </td>
+                                </tr>
+                                <tr>
+                                    <td>Tel&eacute;fono : </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="separacion-cupon">
+                <table class="tabla-sinborde">
+                    <tr>
+                        <td valign="top">
+                            <div class="tabla-borde-redondo">
+                                <table>
+                                    <tr>
+                                        <td>Estado :</td>
+                                        <td>Confirmado</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Còdigo Reserva : </td>
+                                        <td>23233434343434</td>
+                                    </tr>
+                                </table>
+                            <div>
+                        </td>
+                        <td valign="top">
+                            <div class="tabla-borde-redondo">
+                                <table>
+                                    <tr>
+                                        <td><p>Indispensable presentación tarjeta andina y pasaporte Hora check in: 11.30 am – Hora check out : 10.00 am Niño adicional: Pagará directamente en hotel </p></td>
+                                    </tr>
+                                </table>
+                            <div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+    </div>
+    
+</div>
+    </body>
+</html>

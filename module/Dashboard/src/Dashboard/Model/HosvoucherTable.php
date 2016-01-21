@@ -50,14 +50,38 @@ class HosvoucherTable {
     }
     
     
-    public function getVoucher($idTipo)
+    public function getVoucher($idVoucher)
     {
         $sql = new Sql($this->tableGateway->getAdapter());
         $select =  $sql
                     ->select()
                     ->from('hos_voucher')
-                    ->where(array('id_voucher' => $idTipo))
+                    ->where(array('id_voucher' => $idVoucher))
                     ->order('id_voucher');
+        
+        $stmt = $sql->prepareStatementForSqlObject($select);
+        $results = $stmt->execute(); 
+        return $results;
+    }
+    
+    public function getDatosVoucher($idVoucher)
+    {
+        $sql = new Sql($this->tableGateway->getAdapter());
+        $select =  $sql
+                    ->select()
+                    ->from('hos_voucher')
+                    ->join('hos_hospedaje', 
+                            new Expression("hos_voucher.id_hospedaje = hos_hospedaje.id_hospedaje"),
+                            array('descripcion_hospedaje' => 'descripcion_hospedaje',
+                                  'direccion_hospedaje'  => 'direccion_hospedaje',
+                                  'telefono_hospedaje'  => 'telefono_hospedaje'
+                    ))
+                    ->join('hos_categoria_habitacion', 
+                            new Expression("hos_voucher.id_categoria = hos_categoria_habitacion.id_categoria"),
+                            array('descripcion_categoria' => 'descripcion_categoria',
+                                  'personas_categoria'  => 'personas_categoria'
+                    ))
+                    ->where(array('id_voucher' => $idVoucher));
         
         $stmt = $sql->prepareStatementForSqlObject($select);
         $results = $stmt->execute(); 

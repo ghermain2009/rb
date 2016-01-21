@@ -11,6 +11,7 @@ use Dashboard\Form\VoucherForm;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use ZfcDatagrid\Column;
+use DOMPDFModule\View\Model\PdfModel;
 /**
  * Description of VoucherController
  *
@@ -169,5 +170,49 @@ class VoucherController extends AbstractActionController {
        
         $viewmodel->form = $form;
         return $viewmodel;
+    }
+    
+    public function descargaVoucherAction(){
+        
+        $id_voucher = $this->params()->fromPost("id_voucher", 1);
+        
+        $nombre_documento = 'VOU_67467378383';
+        
+        $serviceLocator = $this->getServiceLocator();
+        $contratoTable = $serviceLocator->get('Dashboard\Model\HosvoucherTable');
+        $datosVoucher = $contratoTable->getDatosVoucher($id_voucher);
+        
+        $config = $serviceLocator->get('Config');
+        $dir_image = $config['constantes']['dir_image'];
+        $sep_path  = $config['constantes']['sep_path'];
+        
+        $directorio = $dir_image.$sep_path."..".$sep_path."..".$sep_path."data".$sep_path."voucher-hospedaje".$sep_path;
+        
+        foreach( $datosVoucher as $voucher ) {
+            
+            $variables = array(
+                'datos_voucher' => $voucher
+            );
+        
+            $documentoPdf = new PdfModel();
+            $documentoPdf->setOption('filename', $nombre_documento.'.pdf');
+            $documentoPdf->setOption('paperOrientation', 'portrait');
+            $documentoPdf->setVariables($variables);
+
+            $documentoPdf->setTerminal(true);
+            $documentoPdf->setTemplate('dashboard/voucher/voucher-pdf.phtml');
+            $htmlPdf = $serviceLocator->get('viewPdfrenderer')->getHtmlRenderer()->render($documentoPdf);
+            $engine = $serviceLocator->get('viewPdfrenderer')->getEngine();
+            // Cargamos el HTML en DOMPDF
+            $engine->load_html($htmlPdf);
+            $engine->render();
+            // Obtenemos el PDF en memoria
+            $pdfCode = $engine->output();
+            
+            file_put_contents($directorio.$nombre_documento.'.pdf', $pdfCode);
+            
+        }
+        
+        
     }
 }
