@@ -35,62 +35,16 @@
                 padding: 10px;;
             }
 
-            .separacion-cupon{
-                border-bottom-style:solid;
-                border-bottom-width:2px;
+            .separacion-voucher{
                 display: block;
                 width: 100%;
                 padding: 10px;
             }
             
-            .separacion-cupon.cabecera{
+            .separacion-voucher.cabecera{
                 height:100px;
             }
 
-            .separacion-empresa{
-                display: block;
-                width: 100%;
-                padding: 10px;
-            }
-
-            .en-linea {
-                display:inline-block;
-            }
-
-            .en-linea.logo-oferta-cabecera {
-                width: 15%
-            }
-            
-            .en-linea.texto-cabecera {
-                width: 25%;
-            }
-            
-            .en-linea.codigo-barra {
-                width: 40%;
-            }
-            
-            .en-linea.logo-oferta {
-                width: 40%
-            }
-            
-            .en-linea.logo-oferta img {
-                width: 316px;
-                height: 179px;
-            }
-
-            .en-linea.texto {
-                width: 59%
-            }
-
-            .en-linea.empresa {
-                width: 70%
-            }
-
-            .en-linea.mapa {
-                width: 29%;
-                vertical-align: top;
-            }
-            
             .logo-fijo {
                 width: 100px; 
                 height: 35px;
@@ -110,14 +64,20 @@
             
             .tabla-borde-redondo {
                 width:100%;
+                min-height:50px;
                 border-style:solid;
                 border-width:1.5px;
                 border-color:#000;
                 -webkit-border-radius:5px 5px 5px 5px;
+                padding:5px;
             }
             
             .tabla-arriba {
                 margin:5px;
+            }
+            
+            .justificado {
+                 text-align:justify;
             }
             
         </style>
@@ -125,15 +85,57 @@
     <body>
     <div>
     <div class="borde-cupon-externo">
-        <div class="separacion-cupon cabecera">
+        <div class="separacion-voucher">
             <div class="en-linea logo-oferta-cabecera">
                 <!--div class="logo-fijo"></div-->
             </div>
-            <div class="en-linea">VOUCHER N° 678</div>
+            <div class="en-linea">
+                <table class="tabla-borde">
+                    <tr>
+                        <td>VOUCHER N° 678</td>
+                    </tr>
+                </table>
+            </div>
         </div>
-        
-        <div class="separacion-cupon">
-            <table class="tabla-borde">
+        <?php var_dump($datos_voucher);?>
+        <div class="separacion-voucher">
+            <table class="tabla-sinborde">
+                <tr>
+                    <td>Se&ntilde;ores :</td>
+                    <td colspan="3"><?php echo $datos_voucher['descripcion_hospedaje'];?></td>
+                </tr>
+                <tr>
+                    <td colspan="4">&nbsp;</td>
+                </tr>    
+                <tr>
+                    <td>Nombre Pasajero :</td>
+                    <td>&nbsp;</td>
+                    <td>Fecha Emisi&oacute;n :</td>
+                    <td>&nbsp;</td>
+                </tr>    
+                <tr>
+                    <td>Total Habitaciones :</td>
+                    <td>&nbsp;</td>
+                    <td>Pax :</td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>Niños :</td>
+                                <td>&nbsp;</td>
+                                <td>Infantes :</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>    
+            </table>
+        </div>
+        <div class="separacion-voucher">
+            <table class="tabla-borde" border="1">
+                <tr align="center">
+                    <td>FECHA</td>
+                    <td>SERVICIOS</td>
+                </tr>
                 <tr>
                     <td valign="top">
                         <div class="tabla-arriba">
@@ -177,10 +179,10 @@
                 </tr>
             </table>
         </div>
-        <div class="separacion-cupon">
+        <div class="separacion-voucher">
                 <table class="tabla-sinborde">
                     <tr>
-                        <td valign="top">
+                        <td valign="top" width='50%' style="padding-right: 5px">
                             <div class="tabla-borde-redondo">
                                 <table>
                                     <tr>
@@ -194,7 +196,7 @@
                                 </table>
                             <div>
                         </td>
-                        <td valign="top">
+                        <td valign="top"  width='50%' style="padding-left: 5px">
                             <div class="tabla-borde-redondo">
                                 <table>
                                     <tr>
@@ -203,6 +205,21 @@
                                 </table>
                             <div>
                         </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="separacion-voucher">
+                <table class="tabla-sinborde">
+                    <tr>
+                        <td style="padding-right: 5px">Importante!</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 5px">
+                            <p class="justificado">Rebueno actúa sólo como intermediario entre el hotel y el cliente colaborando con la gestión de reserva, sin embargo la operación propia del hotel es responsabilidad a integridad del proveedor del servico.</p>
+                            <p class="justificado">Los cambios o modificaciones pueden realizarse con 72 horas de anticipación y están sujetas a una nueva disponibilidad del hotel o cambios tarifarios propias de la temporada o nueva acomodación.</p>
+                            <p class="justificado">Las compras realizadas bajo la modalidad de cuponeras de descuento u otro canal promocional no tradicional está sujeto a una penalidad de 100% por no presentación en el hotel.</p>
+                            <p class="justificado">En caso el pasajero extranjero no residente, no cuente con tarjeta andina y pasaporte deberá abonar el 18% de IGV de acuerdo a la normativa peruana.</p>
+                        </td>    
                     </tr>
                 </table>
             </div>

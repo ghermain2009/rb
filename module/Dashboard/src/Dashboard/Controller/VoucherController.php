@@ -213,6 +213,7 @@ class VoucherController extends AbstractActionController {
             
         }
         
+        return new ViewModel($variables);
         
     }
 }
