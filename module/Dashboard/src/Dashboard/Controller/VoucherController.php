@@ -112,13 +112,13 @@ class VoucherController extends AbstractActionController {
         $editBtn->setAttribute('data-placement', 'left');
         $editBtn->setAttribute('title', 'Modificar Tipo Hospedaje');
         
-        $delBtn = new Column\Action\Button();
+        /*$delBtn = new Column\Action\Button();
         $delBtn->setLabel(' ');
         $delBtn->setAttribute('class', 'btn btn-danger glyphicon glyphicon-trash');
         $delBtn->setAttribute('href', '/dashboard/voucher/delete/id/' . $delBtn->getRowIdPlaceholder());
         $delBtn->setAttribute('data-toggle', 'tooltip');
         $delBtn->setAttribute('data-placement', 'left');
-        $delBtn->setAttribute('title', 'Eliminar Tipo Hospedaje');
+        $delBtn->setAttribute('title', 'Eliminar Tipo Hospedaje');*/
 
         
         $col = new Column\Action();
