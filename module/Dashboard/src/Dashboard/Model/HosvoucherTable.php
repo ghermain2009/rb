@@ -117,9 +117,40 @@ class HosvoucherTable {
     
     public function getVoucherList()
     {
-        $select = new Select();
-        $select->from('hos_voucher')
-                ->order('id_voucher');
+        $sql = new Sql($this->tableGateway->getAdapter());
+        
+        $campos = array('id_voucher',
+                        'nombre_voucher' => new Expression("LPAD(CAST(id_voucher AS CHAR), 7, '0')"),
+                        'codigo_cupon',
+                        'id_hospedaje',
+                        'id_categoria',
+                        'fecha_ingreso' => new Expression("date_format(fecha_ingreso,'%d/%m/%Y')"),
+                        'fecha_salida' => new Expression("date_format(fecha_salida,'%d/%m/%Y')"),
+                        'numero_dias',
+                        'cantidad_adultos',
+                        'cantidad_ninos',
+                        'cantidad_infantes',
+                        'observacion',
+                        'nombre_pasajero',
+                        'total_habitaciones',
+                        'codigo_reserva',
+                        'fecha_registro' => new Expression("date_format(fecha_registro,'%d/%m/%Y')"));
+        
+        $select =  $sql
+                    ->select()->columns($campos)
+                    ->from('hos_voucher')
+                    ->join('hos_hospedaje', 
+                            new Expression("hos_voucher.id_hospedaje = hos_hospedaje.id_hospedaje"),
+                            array('descripcion_hospedaje' => 'descripcion_hospedaje',
+                                  'direccion_hospedaje'  => 'direccion_hospedaje',
+                                  'telefono_hospedaje'  => 'telefono_hospedaje',
+                                  'observacion_check'  => 'observacion'
+                    ))
+                    ->join('hos_categoria_habitacion', 
+                            new Expression("hos_voucher.id_categoria = hos_categoria_habitacion.id_categoria"),
+                            array('descripcion_categoria' => 'descripcion_categoria',
+                                  'personas_categoria'  => 'personas_categoria'
+                    ));
         
         return $select;
     }

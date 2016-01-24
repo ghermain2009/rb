@@ -86,7 +86,22 @@ class VoucherController extends AbstractActionController {
         
         $col = new Column\Select('codigo_cupon');
         $col->setLabel('Numero Cupón');
-        $col->setWidth(75);
+        $col->setWidth(25);
+        $grid->addColumn($col);
+        
+        $col = new Column\Select('descripcion_hospedaje');
+        $col->setLabel('Hospedaje');
+        $col->setWidth(25);
+        $grid->addColumn($col);
+        
+        $col = new Column\Select('descripcion_categoria');
+        $col->setLabel('Habitación');
+        $col->setWidth(25);
+        $grid->addColumn($col);
+        
+        $col = new Column\Select('nombre_pasajero');
+        $col->setLabel('Pasajero');
+        $col->setWidth(25);
         $grid->addColumn($col);
         
         $editBtn = new Column\Action\Button();
