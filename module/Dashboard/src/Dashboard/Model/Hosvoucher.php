@@ -24,6 +24,9 @@ class Hosvoucher {
     public $cantidad_ninos;
     public $cantidad_infantes;
     public $observacion;
+    public $nombre_pasajero;
+    public $total_habitaciones;
+    public $codigo_reserva;
     public $fecha_registro;
     
     function getId_voucher() {
@@ -68,6 +71,18 @@ class Hosvoucher {
 
     function getObservacion() {
         return $this->observacion;
+    }
+    
+    function getNombre_pasajero() {
+        return $this->nombre_pasajero;
+    }
+
+    function getTotal_habitaciones() {
+        return $this->total_habitaciones;
+    }
+
+    function getCodigo_reserva() {
+        return $this->codigo_reserva;
     }
 
     function getFecha_registro() {
@@ -118,10 +133,22 @@ class Hosvoucher {
         $this->observacion = $observacion;
     }
 
+    function setNombre_pasajero($nombre_pasajero) {
+        $this->nombre_pasajero = $nombre_pasajero;
+    }
+
+    function setTotal_habitaciones($total_habitaciones) {
+        $this->total_habitaciones = $total_habitaciones;
+    }
+
+    function setCodigo_reserva($codigo_reserva) {
+        $this->codigo_reserva = $codigo_reserva;
+    }
+    
     function setFecha_registro($fecha_registro) {
         $this->fecha_registro = $fecha_registro;
     }
-
+    
     public function exchangeArray($data)
     {
         $this->id_voucher = (isset($data['id_voucher'])) ? $data['id_voucher'] : null;
@@ -135,10 +162,13 @@ class Hosvoucher {
         $this->cantidad_ninos = (isset($data['cantidad_ninos'])) ? $data['cantidad_ninos'] : null;
         $this->cantidad_infantes = (isset($data['cantidad_infantes'])) ? $data['cantidad_infantes'] : null;
         $this->observacion = (isset($data['observacion'])) ? $data['observacion'] : null;
+        $this->nombre_pasajero = (isset($data['nombre_pasajero'])) ? $data['nombre_pasajero'] : null;
+        $this->total_habitaciones = (isset($data['total_habitaciones'])) ? $data['total_habitaciones'] : null;
+        $this->codigo_reserva = (isset($data['codigo_reserva'])) ? $data['codigo_reserva'] : null;
         $this->fecha_registro = (isset($data['fecha_registro'])) ? $data['fecha_registro'] : null;
         
     }
- 
+    
     public function getArrayCopy()
     {
         return get_object_vars($this);

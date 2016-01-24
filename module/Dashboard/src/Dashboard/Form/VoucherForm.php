@@ -38,7 +38,8 @@ class VoucherForm extends Form
             'name' => 'id_voucher',
             'attributes' => array(
                 'type'  => 'hidden',
-                'class' => 'form-control input-sm'
+                'class' => 'form-control input-sm',
+                'id' => 'id_voucher'
             ),
         ));
         $this->add(array(
@@ -118,6 +119,28 @@ class VoucherForm extends Form
                 'type'  => 'textarea',
                 'class' => 'form-control input-sm',
                 'rows'=>'2'
+            ),
+        ));
+        
+        $this->add(array(
+            'name' => 'nombre_pasajero',
+            'attributes' => array(
+                'type'  => 'text',
+                'class' => 'form-control input-sm',
+            ),
+        ));
+        $this->add(array(
+            'name' => 'total_habitaciones',
+            'attributes' => array(
+                'type'  => 'text',
+                'class' => 'form-control input-sm',
+            ),
+        ));
+        $this->add(array(
+            'name' => 'codigo_reserva',
+            'attributes' => array(
+                'type'  => 'text',
+                'class' => 'form-control input-sm',
             ),
         ));
         

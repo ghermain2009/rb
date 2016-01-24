@@ -120,6 +120,23 @@ class HospedajeForm extends Form
             ),
         ));
         
+         $this->add(array(
+            'name' => 'observacion',
+            'attributes' => array(
+                'type'  => 'textarea',
+                'class' => 'form-control input-sm',
+                'rows'=>'3',
+            ),
+        ));
+         
+        $this->add(array(
+            'name' => 'email_confirmacion',
+            'attributes' => array(
+                'type'  => 'text',
+                'class' => 'form-control input-sm',
+            ),
+        ));
+        
         $this->add(array(
             'name' => 'submit',
             'attributes' => array(

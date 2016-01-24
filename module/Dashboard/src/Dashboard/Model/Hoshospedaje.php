@@ -21,6 +21,8 @@ class Hoshospedaje {
     public $categoria_hospedaje;
     public $direccion_hospedaje;
     public $telefono_hospedaje;     
+    public $observacion;
+    public $email_confirmacion;
     
     function getId_hospedaje() {
         return $this->id_hospedaje;
@@ -52,6 +54,14 @@ class Hoshospedaje {
 
     function getTelefono_hospedaje() {
         return $this->telefono_hospedaje;
+    }
+    
+    function getObservacion() {
+        return $this->observacion;
+    }
+    
+    function getEmail_confirmacion() {
+        return $this->email_confirmacion;
     }
 
     function setId_hospedaje($id_hospedaje) {
@@ -85,6 +95,14 @@ class Hoshospedaje {
     function setTelefono_hospedaje($telefono_hospedaje) {
         $this->telefono_hospedaje = $telefono_hospedaje;
     }
+    
+    function setObservacion($observacion) {
+        $this->observacion = $observacion;
+    }
+    
+    function setEmail_confirmacion($email_confirmacion) {
+        $this->email_confirmacion = $email_confirmacion;
+    }
 
     public function exchangeArray($data)
     {
@@ -96,6 +114,8 @@ class Hoshospedaje {
         $this->categoria_hospedaje = (isset($data['categoria_hospedaje'])) ? $data['categoria_hospedaje'] : null;
         $this->direccion_hospedaje = (isset($data['direccion_hospedaje'])) ? $data['direccion_hospedaje'] : null;
         $this->telefono_hospedaje = (isset($data['telefono_hospedaje'])) ? $data['telefono_hospedaje'] : null;
+        $this->observacion = (isset($data['observacion'])) ? $data['observacion'] : null;
+        $this->observacion = (isset($data['email_confirmacion'])) ? $data['email_confirmacion'] : null;
     }
  
     public function getArrayCopy()

@@ -124,6 +124,26 @@ class HoshospedajeTable {
         return ArrayUtils::iteratorToArray($results);
     }
     
+     public function getAdicionalesxHospedaje($idHospedaje) 
+    {
+        $sql = new Sql($this->tableGateway->getAdapter());
+        $select =  $sql
+                    ->select()
+                    ->from(array('a' => 'hos_hospedaje_adicionales'))
+                    ->join(array('b' => 'hos_adicionales'), 
+                           new Expression('a.id_adicionales = b.id_adicionales'),
+                           array('descripcion_adicionales'))
+                    ->where(array('a.id_hospedaje' => $idHospedaje));
+                    $select->order('b.id_tipo_adicional');
+                    $select->order('b.descripcion_adicionales');
+        
+        $stmt = $sql->prepareStatementForSqlObject($select);
+        
+        $results = $stmt->execute(); 
+        
+        return ArrayUtils::iteratorToArray($results);
+    }
+    
     public function getAdicionalesxHabitacion($idHospedaje, $idCategoria) 
     {
         $sql = new Sql($this->tableGateway->getAdapter());

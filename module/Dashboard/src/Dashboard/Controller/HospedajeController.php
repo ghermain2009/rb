@@ -178,6 +178,8 @@ class HospedajeController extends AbstractActionController {
                 $form->get('categoria_hospedaje')->setValue($hospedaje['categoria_hospedaje']);
                 $form->get('direccion_hospedaje')->setValue($hospedaje['direccion_hospedaje']);
                 $form->get('telefono_hospedaje')->setValue($hospedaje['telefono_hospedaje']);
+                $form->get('observacion')->setValue($hospedaje['observacion']);
+                $form->get('email_confirmacion')->setValue($hospedaje['email_confirmacion']);
             }
         }
        

@@ -50,6 +50,18 @@
             </div>
         </div>
         <div class="form-group">
+            <label for="observacion" class="col-lg-3 control-label">Información Check In/Out :</label>
+            <div class="col-lg-7">
+                <?php echo $this->formRow($this->form->get('observacion')); ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email_confirmacion" class="col-lg-3 control-label">Email Confirmación :</label>
+            <div class="col-lg-7">
+                <?php echo $this->formRow($this->form->get('email_confirmacion')); ?>
+            </div>
+        </div>
+        <div class="form-group">
             <div class="col-lg-offset-3 col-lg-7">
                 <?php echo $this->formRow($this->form->get('submit')); ?>&nbsp;&nbsp;&nbsp;&nbsp;
                 <?php echo $this->formRow($this->form->get('btn-regresar')); ?>

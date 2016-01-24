@@ -173,29 +173,61 @@ class VoucherController extends AbstractActionController {
     }
     
     public function descargaVoucherAction(){
+
+        set_time_limit(0);
         
-        $id_voucher = $this->params()->fromPost("id_voucher", 1);
+        $id_voucher = $this->params()->fromQuery("id_voucher", null);
+        $response = $this->getResponse();
         
-        $nombre_documento = 'VOU_67467378383';
+        $nombreDocumento = '';
         
         $serviceLocator = $this->getServiceLocator();
-        $contratoTable = $serviceLocator->get('Dashboard\Model\HosvoucherTable');
-        $datosVoucher = $contratoTable->getDatosVoucher($id_voucher);
+        $voucherTable = $serviceLocator->get('Dashboard\Model\HosvoucherTable');
+        $hospedajeTable = $serviceLocator->get('Dashboard\Model\HoshospedajeTable');
+        $datosVoucher = $voucherTable->getDatosVoucher($id_voucher);
         
         $config = $serviceLocator->get('Config');
         $dir_image = $config['constantes']['dir_image'];
         $sep_path  = $config['constantes']['sep_path'];
+        $localhost = $config['constantes']['localhost'];
         
-        $directorio = $dir_image.$sep_path."..".$sep_path."..".$sep_path."data".$sep_path."voucher-hospedaje".$sep_path;
+        //$directorio = $dir_image.$sep_path."..".$sep_path."..".$sep_path."data".$sep_path."voucher-hospedaje".$sep_path;
         
         foreach( $datosVoucher as $voucher ) {
             
+            $nombreDocumento = 'RE-'.$voucher['nombre_voucher'];
+            $adicionalesHospedaje  = $hospedajeTable->getAdicionalesxHospedaje($voucher['id_hospedaje']);
+            $adicionalesHabitacion = $hospedajeTable->getAdicionalesxHabitacion($voucher['id_hospedaje'], $voucher['id_categoria']);
+            
+            $cantidad = 0;
+            $adicionales = '';
+            foreach( $adicionalesHospedaje as $adicional ) {
+                $cantidad++;
+                if( $cantidad == 1 ) {
+                    $adicionales = $adicionales.$adicional['descripcion_adicionales'];
+                } else {
+                    $adicionales = $adicionales.' - '.$adicional['descripcion_adicionales'];
+                }
+            }
+            
+            foreach( $adicionalesHabitacion as $adicional ) {
+                $cantidad++;
+                if( $cantidad == 1 ) {
+                    $adicionales = $adicionales.$adicional['descripcion_adicionales'];
+                } else {
+                    $adicionales = $adicionales.' - '.$adicional['descripcion_adicionales'];
+                }
+            }
+            
+            
             $variables = array(
-                'datos_voucher' => $voucher
+                'datos_voucher' => $voucher,
+                'localhost' => $localhost,
+                'adicionales' => $adicionales
             );
         
             $documentoPdf = new PdfModel();
-            $documentoPdf->setOption('filename', $nombre_documento.'.pdf');
+            $documentoPdf->setOption('filename', $nombreDocumento.'.pdf');
             $documentoPdf->setOption('paperOrientation', 'portrait');
             $documentoPdf->setVariables($variables);
 
@@ -209,11 +241,17 @@ class VoucherController extends AbstractActionController {
             // Obtenemos el PDF en memoria
             $pdfCode = $engine->output();
             
-            file_put_contents($directorio.$nombre_documento.'.pdf', $pdfCode);
-            
         }
-        
-        return new ViewModel($variables);
+        $response->setContent($pdfCode);
+
+        $headers = $response->getHeaders();
+        $headers->clearHeaders()
+                ->addHeaderLine('Content-Type', 'application/pdf')
+                ->addHeaderLine('Content-Disposition', 'attachment; filename="'.$nombreDocumento.'.pdf"')
+                ->addHeaderLine('Content-Length', strlen($pdfCode));
+
+
+        return $this->response;
         
     }
 }
