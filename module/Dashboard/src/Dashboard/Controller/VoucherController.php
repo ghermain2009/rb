@@ -123,7 +123,7 @@ class VoucherController extends AbstractActionController {
         
         $col = new Column\Action();
         $col->addAction($editBtn);
-        $col->addAction($delBtn);
+        //$col->addAction($delBtn);
         $grid->addColumn($col);
         
         return $grid->getResponse();
