@@ -104,6 +104,79 @@ class CampanaController extends AbstractActionController {
             'directorio' => $ruta_int,
             ));
     }
+    
+    public function aprobacionAction() {
+        
+        //$identificador = $this->params()->fromPost("id", null);
+        $id = base64_decode($this->params()->fromRoute("id", null));
+        
+        $serviceLocator = $this->getServiceLocator();
+
+        $config = $serviceLocator->get('Config');
+        $dir_image = $config['constantes']['dir_image'];
+        $sep_path = $config['constantes']['sep_path'];
+        $localhost = $config['constantes']['localhost'];
+        $moneda = $config['moneda'];
+        
+        $dir_image = $config['constantes']['dir_image'];
+        $sep_path =  $config['constantes']['sep_path'];
+        $dir_imagenes = $config['rutas']['dir_principal'] .
+                        $sep_path .
+                        $config['rutas']['dir_imgcampanas'];
+        
+        $ruta_int = $dir_image . 
+                    $sep_path . 
+                    ".." .
+                    $sep_path .
+                    ".." .
+                    $sep_path .
+                    $dir_imagenes .
+                    $sep_path;
+        
+        $user_session = new Container('user');
+        $user_session->id_campana = $id;
+        $user_session->localhost = $localhost;
+
+        $campanaTable = $serviceLocator->get('Dashboard\Model\CupcampanaTable');
+        $empresaTable = $serviceLocator->get('Dashboard\Model\GenempresaTable');
+        
+        $data   = $campanaTable->getCampanaId($id);
+        $data_v = $campanaTable->getCampanaIdVendidos($id);
+        $data_o = $campanaTable->getCampanaOpciones($id);
+        $data_p = $campanaTable->getCampanasAllNotId($id);
+
+        $data_e = $empresaTable->getEmpresaByCampana($id);
+        
+        $pais = $config['id_pais'];
+        $capital = $config['id_capital'];
+        
+        $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
+        $departamentos = $departamentoTable->getDepartamentosxPaisFavoritos($pais);
+        
+        $provinciaTable = $serviceLocator->get('Dashboard\Model\UbiprovinciaTable');
+        $provincias = $provinciaTable->getProvinciasxDepartamento($pais, $capital);
+        
+        $this->layout()->pais = $pais;
+        $this->layout()->capital = $capital;
+        $this->layout()->departamentos = $departamentos;
+        $this->layout()->provincias = $provincias;
+        
+        $telefono_empresa = $config['empresa']['telefono'];
+        $this->layout()->telefono_empresa = $telefono_empresa;
+
+        return new ViewModel(array('data' => $data,
+            'data_o' => $data_o,
+            'data_p' => $data_p,
+            'data_e' => $data_e,
+            'data_v' => $data_v,
+            'id' => $id,
+            'dir_image' => $dir_image,
+            'sep_path' => $sep_path,
+            'moneda' => $moneda,
+            'localhost' => $localhost,
+            'directorio' => $ruta_int,
+            ));
+    }
 
     public function formulariopagoAction() {
 

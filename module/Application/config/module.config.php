@@ -111,6 +111,18 @@ return array(
                     )
                 )
             ),
+            'campana-aprobacion' => array(
+                'type' => 'Regex',
+                'options' => array(
+                    'regex' => '/campana/aprobacion/(?<titulo>.*)--(?<id>[a-zA-Z0-9_=\-]+)(?<formato>\.html)?',
+                    'spec'  => '/campana/aprobacion/%titulo%--%id%.%formato%',
+                    'defaults' => array(
+                      'controller' => 'Application\Controller\Campana',
+                      'action'     => 'aprobacion',
+                      'formato'    => 'html',
+                    )
+                )
+            ),
             'phpinfo' => array(
                 //'type' => 'Zend\Mvc\Router\Http\Literal',
                 'type' => 'Segment',
