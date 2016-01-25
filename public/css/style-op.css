@@ -2150,11 +2150,16 @@ section {
 }
 
 /* Eror 404*/
+.container.error {
+    background-color: #e6e6e6;
+}
+
 .error_404 {
-    width: 400px; 
-    height: 365px;
+    width: 600px; 
+    height: 564px;
     background-image: url('../img/error_404.jpg');
     background-size: 100% 100%;
+    margin: 0 auto;
 }
 
 .btn.btn-facerebueno {
