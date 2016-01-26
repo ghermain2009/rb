@@ -73,7 +73,7 @@ class MicampanaController extends AbstractActionController {
         $datosHistorialPagados = $cuponTable->getHistorialPagadosEmpresa($id_empresa);
         $datosHistorialDia = $cuponTable->getHistorialpordiaEmpresa($id_empresa);
         $datosLiquidacion = $liquidacionTable->getLiquidaciones($id_empresa,3);
-        $datosCampana = $campanaTable->getCampanaActiva($id_empresa);
+        $datosCampana = $campanaTable->getCampanaActiva($id_empresa,1);
         
         $nombre_empresa = $datosEmpresa[0]['razon_social'];
         

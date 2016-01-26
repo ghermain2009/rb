@@ -420,7 +420,7 @@ class CupcampanaTable {
     }*/
     
     
-    public function getCampanaActiva($id_empresa)
+    public function getCampanaActiva($id_empresa, $limit = 0)
     {
         $sql = new Sql($this->tableGateway->getAdapter());
         $select = $sql->select();
@@ -446,6 +446,7 @@ class CupcampanaTable {
         $select->group(array('cup_campana.fecha_inicio'));
         $select->group(array('cup_campana.fecha_final'));
         $select->group(array('cup_campana.descripcion'));
+        if( $limit > 0 ) $select->limit($limit);
         
         $stmt = $sql->prepareStatementForSqlObject($select);
         
