@@ -132,7 +132,7 @@
                                               } ?>
                                     </table>
                                     <div class="moduleFooter">
-                                        <a href="../../micampana/detallevalidado/<?php echo base64_encode($id_empresa);?>">Ver listado completo de CupoRebuenos validados</a>
+                                        <a href="/dashboard/micampana/detallevalidado/<?php echo base64_encode($id_empresa);?>">Ver listado completo de CupoRebuenos validados</a>
                                     </div>
 
                                 </div>
@@ -159,7 +159,7 @@
                                                  for($i=0; $i<$cantidadL; $i++ ) { ?>
                                                     <tr>
                                                         <td class="bttooltip">
-                                                            <a href="../../micampana/resumenliquidacion/<?php echo base64_encode($id_empresa);?>/<?php echo base64_encode($liquidaciones[$i]['id_liquidacion']);?>" data-toggle="tooltip" data-placement="right" data-original-title="Ver esta Liquidación"><?php echo $liquidaciones[$i]['id_liquidacion'];?></a>
+                                                            <a href="/dashboard/micampana/resumenliquidacion/<?php echo base64_encode($id_empresa);?>/<?php echo base64_encode($liquidaciones[$i]['id_liquidacion']);?>" data-toggle="tooltip" data-placement="right" data-original-title="Ver esta Liquidación"><?php echo $liquidaciones[$i]['id_liquidacion'];?></a>
                                                         </td>
                                                         <td class="bttooltip" data-toggle="tooltip" data-placement="top" data-original-title="Fecha de emisión"><?php echo $liquidaciones[$i]['fecha_liquidacion'];?></td>
                                                         <td class="bttooltip" data-toggle="tooltip" data-placement="top" data-original-title="Total">DOL $ <?php echo $liquidaciones[$i]['total_liquidacion'];?></td>
@@ -171,7 +171,7 @@
                                               } ?>
                                         </table>
                                         <div class="moduleFooter">
-                                            <a href="../../micampana/detalleliquidacion/<?php echo base64_encode($id_empresa);?>">Ver listado completo de Liquidaciones</a>
+                                            <a href="/dashboard/micampana/detalleliquidacion/<?php echo base64_encode($id_empresa);?>">Ver listado completo de Liquidaciones</a>
                                         </div>
 
                                     </div>
@@ -290,7 +290,7 @@
                                         } ?>
                                     </table>
                                     <div class="moduleFooter">
-                                        <a href="../../micampana/historiacampanas/<?php echo base64_encode($id_empresa);?>">Ver listado histórico de campañas</a>
+                                        <a href="/dashboard/micampana/historiacampanas/<?php echo base64_encode($id_empresa);?>">Ver listado histórico de campañas</a>
                                     </div>
                                 </div>
                             </div>
