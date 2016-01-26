@@ -156,18 +156,12 @@ class PagobancarioController extends AbstractActionController {
         
         $where = array('id_cupon' => $id_cupon);
         
-        $cuponTable->updCupon($set, $where);
+        $setDetalle = array('id_estado_cupon' => '3',
+                            'fecha_cancelacion' => new Expression("NOW()"));
         
-        /*
-        $cuponTable = $serviceLocator->get('Dashboard\Model\CupcuponTable');
-            $opcion_campana = $cuponTable->updEstadoVenta($orden, $estado);
-
-            
-
-            $campanaopcionTable = $serviceLocator->get('Dashboard\Model\CupcampanaopcionTable');
-            $campanaopcionTable->updCantidadVendidos($opcion_campana['id_campana'], $opcion_campana['id_campana_opcion'], $opcion_campana['cantidad']);
-            
-        */
+        $cuponTable->updCupon($set, $where);
+        $cuponTable->updCuponDetalle($setDetalle, $where);
+        
         $opcion_campana = $cuponTable->getDatosOrden($id_cupon);
         
         if (count($opcion_campana) > 0 ) {
