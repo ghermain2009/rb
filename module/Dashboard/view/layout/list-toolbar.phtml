@@ -161,6 +161,46 @@ switch ($this->controllerName()) {
         });
     }
     
+    function enviarcupones(cupon){
+    
+        $.ajax({
+            type: "POST",
+            url: "/dashboard/pagobancario/prepagado",
+            data: {id: cupon},
+            success: function (data) {
+                var prepago = $.parseJSON(data);
+                if (prepago) {
+                    if (prepago.pagado == -1) {
+                        alert('Voucher no ha sido pagado.');
+                    } else {
+                        $('#email_cupon').val('');
+                        $('#id_cupon').val(cupon);
+                        $('#modalVoucherbancario').modal('show');
+                    } 
+                }
+            }
+        });
+    }
+    
+    function enviarcuponesmail(){
+        var id_cupon = $("#id_cupon").val();
+        var email_cupon = $("#email_cupon").val();
+        
+        $.ajax({
+            type: "POST",
+            url: "/dashboard/pagobancario/reenviarvoucher",
+            data: {id_cupon:id_cupon, email:email_cupon},
+            success: function (data) {
+                var datos = $.parseJSON(data);
+                if (datos) {
+                    if (datos.respuesta == 1) {
+                        $('#modalVoucherbancario').modal('hide');
+                    } 
+                }
+            }
+        });
+    } 
+    
     function generarcontrato(){
         var id_empresa = $("#id_empresa").val();
         var nombre = $("#nombre").val();

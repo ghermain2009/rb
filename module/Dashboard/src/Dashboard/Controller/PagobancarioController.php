@@ -44,7 +44,7 @@ class PagobancarioController extends AbstractActionController {
         
         $col = new Column\Select('id_cupon');
         $col->setLabel('id');
-        $col->setWidth(25);
+        $col->setWidth(15);
         $col->setIdentity(true);
         $col->setSortDefault(1, 'ASC');
         $grid->addColumn($col);
@@ -69,7 +69,7 @@ class PagobancarioController extends AbstractActionController {
         
         $col = new Column\Select('campana_descripcion');
         $col->setLabel('Detalle Compra');
-        $col->setWidth(20);
+        $col->setWidth(15);
         $grid->addColumn($col);
         
         $col = new Column\Select('cantidad');
@@ -84,7 +84,7 @@ class PagobancarioController extends AbstractActionController {
 
         $col = new Column\Select('fecha_compra');
         $col->setLabel('Fecha Registro');
-        $col->setWidth(10);
+        $col->setWidth(7);
         $grid->addColumn($col);
         
         $col = new Column\Select('num_operacion');
@@ -94,7 +94,7 @@ class PagobancarioController extends AbstractActionController {
         
         $col = new Column\Select('fec_operacion');
         $col->setLabel('Fecha Operación');
-        $col->setWidth(10);
+        $col->setWidth(7);
         $grid->addColumn($col);
 
         $conBtn = new Column\Action\Button();
@@ -104,9 +104,18 @@ class PagobancarioController extends AbstractActionController {
         $conBtn->setAttribute('data-toggle', 'tooltip');
         $conBtn->setAttribute('data-placement', 'left');
         $conBtn->setAttribute('title', 'Confirmar Pago');
+        
+        $vouBtn = new Column\Action\Button();
+        $vouBtn->setLabel(' ');
+        $vouBtn->setAttribute('class', 'btn btn-info glyphicon glyphicon-envelope');
+        $vouBtn->setAttribute('href', 'javascript:enviarcupones('.$vouBtn->getRowIdPlaceholder().');');
+        $vouBtn->setAttribute('data-toggle', 'tooltip');
+        $vouBtn->setAttribute('data-placement', 'left');
+        $vouBtn->setAttribute('title', 'Enviar Cupones');
 
         $col = new Column\Action();
         $col->addAction($conBtn);
+        $col->addAction($vouBtn);
         $grid->addColumn($col);
 
         return $grid->getResponse();
@@ -184,4 +193,28 @@ class PagobancarioController extends AbstractActionController {
         }
         
     }
+    
+    public function reenviarvoucherAction() {
+        
+            $id_cupon = $this->params()->fromPost("id_cupon", null);
+            $email    = $this->params()->fromPost("email", null);
+            
+            $serviceLocator = $this->getServiceLocator();
+            $cuponTable = $serviceLocator->get('Dashboard\Model\CupcuponTable');
+        
+            /*Enviamos el correo*/
+            $datosCupon = $cuponTable->getCupon($id_cupon);
+            if( !empty($email) ) {
+                for($i=0;$i<count($datosCupon);$i++) {
+                     $datosCupon[$i]['email_cliente'] = $email;
+                }
+            }
+
+            $variados = new Variados($serviceLocator);
+            $variados->obtenerCuponPdf($datosCupon);
+            /********************/
+            
+            return $this->getResponse()->setContent(Json::encode(array('respuesta' => 1)));
+    }
+    
 }
