@@ -595,7 +595,7 @@ return array(
             'dash_detalleliquidacion' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route' => '/micampana/detalleliquidacion[/:empresa]',
+                    'route' => '/dashboard/micampana/detalleliquidacion[/:empresa]',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Dashboard\Controller',
                         'controller' => 'micampana',
@@ -606,7 +606,7 @@ return array(
             'dash_historiacampanas' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route' => '/micampana/historiacampanas[/:empresa]',
+                    'route' => '/dashboard/micampana/historiacampanas[/:empresa]',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Dashboard\Controller',
                         'controller' => 'micampana',
@@ -617,7 +617,7 @@ return array(
             'dash_resumenliquidacion' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route' => '/micampana/resumenliquidacion[/:empresa[/:liquidacion]]',
+                    'route' => '/dashboard/micampana/resumenliquidacion[/:empresa[/:liquidacion]]',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Dashboard\Controller',
                         'controller' => 'micampana',
