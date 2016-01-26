@@ -886,7 +886,8 @@ class EmpresaController extends AbstractActionController {
                   'password' => $passwordReset,
                   'full_name' => $nombre_contacto,
                   'email' => $email_contacto,
-                  'role_id' => 3);
+                  'role_id' => 3,
+                  'id_empresa' => $id_empresa);
             
             $usuarioTable->addUser($nuevo_usuario);
             
