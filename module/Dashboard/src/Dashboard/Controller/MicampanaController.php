@@ -151,7 +151,7 @@ class MicampanaController extends AbstractActionController {
         $grid->addColumn($col);
         
         $col = new Column\Select('precio_total');
-        $col->setLabel('Monto Pagado');
+        $col->setLabel('Monto por Pagar');
         $col->setWidth(23);
         $col->setUserSortDisabled();
         $grid->addColumn($col);
