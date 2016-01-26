@@ -115,6 +115,12 @@ foreach ($data as $detalle) {
                                            <button type="button" class="btn btn_buy_action" data-toggle="modal" data-target="#exampleModal" >Comprar</button>
                                        <?php }
                                         }
+                                    } else {
+                                        if ($total == 1) { ?>
+                                            <a data-id="10699" data-opcion="1" href="../../campana/formulariopago/<?php echo base64_encode($opciones['id_campana']); ?>/<?php echo base64_encode($opciones['id_campana_opcion']); ?>" title="Comprar" class="btn btn_buy_action">Comprar</a>
+                                        <?php } else { ?> 
+                                            <button type="button" class="btn btn_buy_action" data-toggle="modal" data-target="#exampleModal" >Comprar</button>
+                                        <?php } 
                                     }
                         } else {
                             if ($total == 1) { ?>
