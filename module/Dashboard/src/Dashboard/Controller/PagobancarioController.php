@@ -157,7 +157,7 @@ class PagobancarioController extends AbstractActionController {
         $where = array('id_cupon' => $id_cupon);
         
         $setDetalle = array('id_estado_cupon' => '3',
-                            'fecha_cancelacion' => new Expression("NOW()"));
+                            'fecha_cancelacion' => date('Y-m-d H:i:s'));
         
         $cuponTable->updCupon($set, $where);
         $cuponTable->updCuponDetalle($setDetalle, $where);
