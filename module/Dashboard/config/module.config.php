@@ -573,7 +573,7 @@ return array(
             'dash_micampanacupon' => array(
                 'type' => 'Literal',
                 'options' => array(
-                    'route' => '/micampana/cupon',
+                    'route' => '/dashboard/micampana/cupon',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Dashboard\Controller',
                         'controller' => 'micampana',
@@ -584,7 +584,7 @@ return array(
             'dash_detallevalidado' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route' => '/micampana/detallevalidado[/:empresa]',
+                    'route' => '/dashboard/micampana/detallevalidado[/:empresa]',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Dashboard\Controller',
                         'controller' => 'micampana',

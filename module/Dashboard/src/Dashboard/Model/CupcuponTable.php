@@ -221,7 +221,7 @@ class CupcuponTable {
                             array())        
                     ->join('cup_campana', new
                             Expression("cup_cupon.id_campana = cup_campana.id_campana and "
-                            . "cup_campana.id_empresa = $id_empresa"),
+                            . "cup_campana.id_empresa = ".$id_empresa),
                             array())        
                     ->where(array('cup_cupon_detalle.codigo_cupon' => $cupon));
 
@@ -289,7 +289,7 @@ class CupcuponTable {
                     'id_campana_opcion'
                 ))        
         ->join('cup_campana', new Expression("cup_cupon.id_campana = cup_campana.id_campana and "
-                                           . "cup_campana.id_empresa = $id_empresa"),
+                                           . "cup_campana.id_empresa = ".$id_empresa),
                 array(
                    'sobre_campana',
                    'saber' => 'observaciones',
@@ -488,7 +488,11 @@ class CupcuponTable {
             $select = $sql->select();
 
             $select->columns(array('operacion' => 'observacion',
-                                   'fecha_operacion' => new Expression("DATE_FORMAT(fecha_operacion,'%d-%m-%Y')")))
+                                   'fecha_operacion' => new Expression("DATE_FORMAT(fecha_operacion,'%d-%m-%Y')")),
+                                   'id_campana',
+                                   'id_campana_opcion',
+                                   'cantidad'
+                            )
                     ->from('cup_cupon')
                     ->where(array('cup_cupon.id_cupon' => $id_cupon))
                     ->where(new In('cup_cupon.id_estado_compra', array('3','5','7')));

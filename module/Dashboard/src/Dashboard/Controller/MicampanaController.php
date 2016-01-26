@@ -95,7 +95,7 @@ class MicampanaController extends AbstractActionController {
         $id_empresa = $this->params()->fromPost("empresa", null);
         $cupon = $this->params()->fromPost("cupon", null);
         $tipo = $this->params()->fromPost("tipo", null);
-
+        
         $serviceLocator = $this->getServiceLocator();
         $cuponTable = $serviceLocator->get('Dashboard\Model\CupcuponTable');
 

@@ -512,7 +512,7 @@
         var cupon = $('#cupon_unico').val();
         $.ajax({
             type: "POST",
-            url: "../micampana/cupon",
+            url: "/dashboard/micampana/cupon",
             data: {empresa: id_empresa, cupon: cupon, tipo: 'V'},
             success: function (data) {
                 $('#id_mensaje_valida').html(data);
@@ -522,9 +522,10 @@
 
     $("#consulta_unico").click(function () {
         var cupon = $('#cupon_unico').val();
+        
         $.ajax({
             type: "POST",
-            url: "../micampana/cupon",
+            url: "/dashboard/micampana/cupon",
             data: {empresa: id_empresa, cupon: cupon, tipo: 'C'},
             success: function (data) {
                 $('#id_mensaje_valida').html(data);
@@ -536,7 +537,7 @@
         var cupon = $('#cupon_multiple').val();
         $.ajax({
             type: "POST",
-            url: "../micampana/cupon",
+            url: "/dashboard/micampana/cupon",
             data: {empresa: id_empresa, cupon: cupon, tipo: 'V'},
             success: function (data) {
                 $('#id_mensaje_multiple').html(data);
