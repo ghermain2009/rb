@@ -134,7 +134,7 @@ class MicampanaController extends AbstractActionController {
         
         $col = new Column\Select('id_campana');
         $col->setLabel('N° Publicación');
-        $col->setWidth(23);
+        $col->setWidth(13);
         $col->setUserSortDisabled();
         $grid->addColumn($col);
         
