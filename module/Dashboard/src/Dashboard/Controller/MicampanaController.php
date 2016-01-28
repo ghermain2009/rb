@@ -140,19 +140,19 @@ class MicampanaController extends AbstractActionController {
         
         $col = new Column\Select('fecha_inicio');
         $col->setLabel('Fecha Publicación');
-        $col->setWidth(23);
+        $col->setWidth(13);
         $col->setUserSortDisabled();
         $grid->addColumn($col);
         
         $col = new Column\Select('precio_total');
         $col->setLabel('Precio Total');
-        $col->setWidth(23);
+        $col->setWidth(20);
         $col->setUserSortDisabled();
         $grid->addColumn($col);
         
         $col = new Column\Select('total_apagar');
         $col->setLabel('Monto por Pagar');
-        $col->setWidth(23);
+        $col->setWidth(20);
         $col->setUserSortDisabled();
         $grid->addColumn($col);
         
