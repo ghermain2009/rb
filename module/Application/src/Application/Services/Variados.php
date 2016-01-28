@@ -55,15 +55,6 @@ class Variados {
         
         $is_https = $config['is_https'];
         
-        $activo   = $config['correo']['envio-cupones']['activo'];
-        $name     = $config['correo']['envio-cupones']['name'];
-        $host     = $config['correo']['envio-cupones']['host'];
-        $port     = $config['correo']['envio-cupones']['port'];
-        $tls      = $config['correo']['envio-cupones']['tls'];
-        $username = $config['correo']['envio-cupones']['username'];
-        $password = $config['correo']['envio-cupones']['password'];
-        $cuenta   = $username;
-
         $body = new MimeMessage();
         
         $this->renderer = $sl->get('ViewRenderer');  
@@ -163,11 +154,20 @@ class Variados {
 
         }
         
-        //$user_session = new Container('user');
+        if( strpos(strtolower($email),'hotmail' ) >= 0 ) {
+            $fuente = 'cuenta-gmail';
+        } else {
+            $fuente = 'envio-cupones';
+        }
         
-        //$email = $user_session->username;
-        //$email = 'ghermain@gmail.com';
-        
+        $activo   = $config['correo'][$fuente]['activo'];
+        $name     = $config['correo'][$fuente]['name'];
+        $host     = $config['correo'][$fuente]['host'];
+        $port     = $config['correo'][$fuente]['port'];
+        $tls      = $config['correo'][$fuente]['tls'];
+        $username = $config['correo'][$fuente]['username'];
+        $password = $config['correo'][$fuente]['password'];
+        $cuenta   = $config['correo'][$fuente]['alias'];
 
         if($activo == '1') {
             
