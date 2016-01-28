@@ -155,16 +155,12 @@
             }
         });
         
-        /*$("td").each(function(i){
+        $("td").each(function(i){
             var columna = $(this).attr("data-columnuniqueid");
-            if( columna == 'id_campana' ) {
-                var htm = "<a class='display: inline-table !important;' href='' ";
-                    htm+= "data-toggle='tooltip' data-placement='right' data-original-title='Ver esta Publicación'>";
-                    htm+= $(this).html();
-                    htm+= "</a>"
-                $(this).html(htm);
+            if( columna == 'total_apagar' ) {
+                $(this).attr('align','right');
             }
-        });*/
+        });
         
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
