@@ -154,10 +154,20 @@ class Variados {
 
         }
         
-        if( strpos(strtolower($email),'outlook' ) === false ) {
-            $fuente = 'envio-cupones';
+        $excepcionDominios = $config['correo']['excepcion'];
+        
+        if( count($excepcionDominios) > 0) {
+            $dominioCompleto = explode('@', $email);   
+            $dominio = explode('.', $dominioCompleto[1]);
+            $verifica = strtolower($dominio[0]);
+
+            if (in_array($verifica, $excepcionDominios)) {
+                $fuente = 'cuenta-gmail';
+            } else {
+                $fuente = 'envio-cupones';
+            }
         } else {
-            $fuente = 'cuenta-gmail';
+            $fuente = 'envio-cupones';
         }
         
         $activo   = $config['correo'][$fuente]['activo'];
