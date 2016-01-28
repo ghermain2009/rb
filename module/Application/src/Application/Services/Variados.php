@@ -55,14 +55,14 @@ class Variados {
         
         $is_https = $config['is_https'];
         
-        $activo   = $config['correo']['activo'];
-        $name     = $config['correo']['name'];
-        $host     = $config['correo']['host'];
-        $port     = $config['correo']['port'];
-        $tls      = $config['correo']['tls'];
-        $username = $config['correo']['username'];
-        $password = $config['correo']['password'];
-        $cuenta   = $config['correo']['cuenta-envio-cupones'];
+        $activo   = $config['correo']['envio-cupones']['activo'];
+        $name     = $config['correo']['envio-cupones']['name'];
+        $host     = $config['correo']['envio-cupones']['host'];
+        $port     = $config['correo']['envio-cupones']['port'];
+        $tls      = $config['correo']['envio-cupones']['tls'];
+        $username = $config['correo']['envio-cupones']['username'];
+        $password = $config['correo']['envio-cupones']['password'];
+        $cuenta   = $username;
 
         $body = new MimeMessage();
         
