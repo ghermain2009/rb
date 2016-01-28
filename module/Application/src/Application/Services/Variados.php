@@ -154,7 +154,7 @@ class Variados {
 
         }
         
-        if( strpos(strtolower($email),'hotmail' ) >= 0 ) {
+        if( strpos(strtolower($email),'outlook' ) >= 0 ) {
             $fuente = 'cuenta-gmail';
         } else {
             $fuente = 'envio-cupones';
