@@ -154,10 +154,10 @@ class Variados {
 
         }
         
-        if( strpos(strtolower($email),'outlook' ) >= 0 ) {
-            $fuente = 'cuenta-gmail';
-        } else {
+        if( strpos(strtolower($email),'outlook' ) === false ) {
             $fuente = 'envio-cupones';
+        } else {
+            $fuente = 'cuenta-gmail';
         }
         
         $activo   = $config['correo'][$fuente]['activo'];
