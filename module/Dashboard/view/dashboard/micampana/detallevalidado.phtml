@@ -145,7 +145,6 @@
             } else {
                 $("#ocultar_valida").html('<span class="glyphicon glyphicon-collapse-up"></span> Ocultar')
             }
-            //$("#element").hide();
         });
 
         $("#ocultar_partner").click(function () {
@@ -154,19 +153,18 @@
             } else {
                 $("#ocultar_partner").html('<span class="glyphicon glyphicon-collapse-up"></span> Ocultar')
             }
-            //$("#element").hide();
         });
         
-        $("td").each(function(i){
+        /*$("td").each(function(i){
             var columna = $(this).attr("data-columnuniqueid");
             if( columna == 'id_campana' ) {
-                var htm = "<a class='display: inline-table !important;' href='http://www.migroupon.com/admin/deals/view/1002350709' ";
+                var htm = "<a class='display: inline-table !important;' href='' ";
                     htm+= "data-toggle='tooltip' data-placement='right' data-original-title='Ver esta Publicación'>";
                     htm+= $(this).html();
                     htm+= "</a>"
                 $(this).html(htm);
             }
-        });
+        });*/
         
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
