@@ -269,7 +269,7 @@ class CupcuponTable {
             'id_cupon',
             'cantidad' => new Expression("1"),
             'precio_total' => 'precio_unitario',
-            'total_apagar' => new Expression("round(((100 - ifnull(cup_campana.comision_campana,0)) * precio_unitario) / 100,2)"),
+            'total_apagar' => new Expression("round(((100 - ifnull(cup_campana.comision_campana,0)) * cup_cupon_detalle.precio_unitario) / 100,2)"),
             'codigo_cupon',
             'fecha_compra' => new Expression("date_format(fecha_compra,'%d-%m-%Y')"),
             'fecha_validacion' => new Expression("date_format(fecha_validacion,'%d-%m-%Y')")
