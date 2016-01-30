@@ -219,6 +219,37 @@ class Variados {
         return 1;
     }
     
+    public function datosLayout($layout, $config, $pedir) {
+        
+        $sl = $this->serviceLocator;
+        
+        $user_session = new Container('user');
+        
+        $pais             = $config['id_pais'];
+        $capital          = $config['id_capital'];
+        $telefono_empresa = $config['empresa']['telefono'];
+        
+        $departamentoTable = $sl->get('Dashboard\Model\UbidepartamentoTable');
+        $departamentos     = $departamentoTable->getDepartamentosxPaisFavoritos($pais);
+        
+        $provinciaTable    = $sl->get('Dashboard\Model\UbiprovinciaTable');
+        $provincias        = $provinciaTable->getProvinciasxDepartamento($pais, $capital);
+        
+        $layout->pais             = $pais;
+        $layout->capital          = $capital;
+        $layout->telefono_empresa = $telefono_empresa;
+        $layout->departamentos    = $departamentos;
+        $layout->provincias       = $provincias;
+        if( !empty($user_session->username) && $pedir == '1' ) {
+            $layout->pedir_registro   = '2';
+        } else {
+            $layout->pedir_registro   = $pedir;
+        }
+        
+        return 1;
+    }
+
+
     /**
      *  Accepts a signature created by signature pad in Json format
      *  Converts it to an image resource

@@ -34,7 +34,6 @@ class CampanaController extends AbstractActionController {
 
     public function detalleAction() {
         
-        //$identificador = $this->params()->fromPost("id", null);
         $id = base64_decode($this->params()->fromRoute("id", null));
         
         $serviceLocator = $this->getServiceLocator();
@@ -74,22 +73,8 @@ class CampanaController extends AbstractActionController {
 
         $data_e = $empresaTable->getEmpresaByCampana($id);
         
-        $pais = $config['id_pais'];
-        $capital = $config['id_capital'];
-        
-        $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
-        $departamentos = $departamentoTable->getDepartamentosxPaisFavoritos($pais);
-        
-        $provinciaTable = $serviceLocator->get('Dashboard\Model\UbiprovinciaTable');
-        $provincias = $provinciaTable->getProvinciasxDepartamento($pais, $capital);
-        
-        $this->layout()->pais = $pais;
-        $this->layout()->capital = $capital;
-        $this->layout()->departamentos = $departamentos;
-        $this->layout()->provincias = $provincias;
-        
-        $telefono_empresa = $config['empresa']['telefono'];
-        $this->layout()->telefono_empresa = $telefono_empresa;
+        $variados = new Variados($serviceLocator);
+        $variados->datosLayout($this->layout(), $config, '2');
 
         return new ViewModel(array('data' => $data,
             'data_o' => $data_o,
@@ -107,7 +92,6 @@ class CampanaController extends AbstractActionController {
     
     public function aprobacionAction() {
         
-        //$identificador = $this->params()->fromPost("id", null);
         $id = base64_decode($this->params()->fromRoute("id", null));
         
         $serviceLocator = $this->getServiceLocator();
@@ -118,8 +102,6 @@ class CampanaController extends AbstractActionController {
         $localhost = $config['constantes']['localhost'];
         $moneda = $config['moneda'];
         
-        $dir_image = $config['constantes']['dir_image'];
-        $sep_path =  $config['constantes']['sep_path'];
         $dir_imagenes = $config['rutas']['dir_principal'] .
                         $sep_path .
                         $config['rutas']['dir_imgcampanas'];
@@ -147,22 +129,8 @@ class CampanaController extends AbstractActionController {
 
         $data_e = $empresaTable->getEmpresaByCampana($id);
         
-        $pais = $config['id_pais'];
-        $capital = $config['id_capital'];
-        
-        $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
-        $departamentos = $departamentoTable->getDepartamentosxPaisFavoritos($pais);
-        
-        $provinciaTable = $serviceLocator->get('Dashboard\Model\UbiprovinciaTable');
-        $provincias = $provinciaTable->getProvinciasxDepartamento($pais, $capital);
-        
-        $this->layout()->pais = $pais;
-        $this->layout()->capital = $capital;
-        $this->layout()->departamentos = $departamentos;
-        $this->layout()->provincias = $provincias;
-        
-        $telefono_empresa = $config['empresa']['telefono'];
-        $this->layout()->telefono_empresa = $telefono_empresa;
+        $variados = new Variados($serviceLocator);
+        $variados->datosLayout($this->layout(), $config, '2');
 
         return new ViewModel(array('data' => $data,
             'data_o' => $data_o,
@@ -219,28 +187,9 @@ class CampanaController extends AbstractActionController {
 
         $user_session = new Container('user');
         
-        $pais = $config['id_pais'];
-        $capital = $config['id_capital'];
+        $variados = new Variados($serviceLocator);
+        $variados->datosLayout($this->layout(), $config, '2');
         
-        $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
-        $departamentos = $departamentoTable->getDepartamentosxPaisFavoritos($pais);
-        
-        $provinciaTable = $serviceLocator->get('Dashboard\Model\UbiprovinciaTable');
-        $provincias = $provinciaTable->getProvinciasxDepartamento($pais, $capital);
-        
-        $this->layout()->pais = $pais;
-        $this->layout()->capital = $capital;
-        $this->layout()->departamentos = $departamentos;
-        $this->layout()->provincias = $provincias;
-        
-        $telefono_empresa = $config['empresa']['telefono'];
-        $this->layout()->telefono_empresa = $telefono_empresa;
-
-        /* if ($fl == null) {
-          return new ViewModel(array('id' => $id,
-          'op' => $op,
-          'data_o' => $data_o));
-          } else { */
         return new ViewModel(array('id' => $id,
             'op' => $op,
             'fl' => $fl,
@@ -250,8 +199,7 @@ class CampanaController extends AbstractActionController {
             'moneda' => $moneda,
             'directorio' => $ruta_int,
             'sep_path' => $sep_path
-                ));
-        //}
+        ));
     }
     
     public function pagopaymeAction() {
@@ -260,22 +208,8 @@ class CampanaController extends AbstractActionController {
         
         $config = $serviceLocator->get('Config');
         
-        $pais = $config['id_pais'];
-        $capital = $config['id_capital'];
-        
-        $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
-        $departamentos = $departamentoTable->getDepartamentosxPaisFavoritos($pais);
-        
-        $provinciaTable = $serviceLocator->get('Dashboard\Model\UbiprovinciaTable');
-        $provincias = $provinciaTable->getProvinciasxDepartamento($pais, $capital);
-        
-        $this->layout()->pais = $pais;
-        $this->layout()->capital = $capital;
-        $this->layout()->departamentos = $departamentos;
-        $this->layout()->provincias = $provincias;
-        
-        $telefono_empresa = $config['empresa']['telefono'];
-        $this->layout()->telefono_empresa = $telefono_empresa;
+        $variados = new Variados($serviceLocator);
+        $variados->datosLayout($this->layout(), $config, '2');
            
         $user_session = new Container('datos_payme');
         $datos_payme = $user_session->solicitud;
@@ -283,7 +217,7 @@ class CampanaController extends AbstractActionController {
         $form = new \Application\Form\EnviopaymeForm($datos_payme);
         
         $viewModel = new ViewModel(array('form' => $form));        
-        //$viewModel->setTerminal(true);
+
         return $viewModel;
     }
 
@@ -617,22 +551,8 @@ class CampanaController extends AbstractActionController {
         
         $moneda = $config['moneda'];
         
-        $pais = $config['id_pais'];
-        $capital = $config['id_capital'];
-        
-        $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
-        $departamentos = $departamentoTable->getDepartamentosxPaisFavoritos($pais);
-        
-        $provinciaTable = $serviceLocator->get('Dashboard\Model\UbiprovinciaTable');
-        $provincias = $provinciaTable->getProvinciasxDepartamento($pais, $capital);
-        
-        $this->layout()->pais = $pais;
-        $this->layout()->capital = $capital;
-        $this->layout()->departamentos = $departamentos;
-        $this->layout()->provincias = $provincias;
-        
-        $telefono_empresa = $config['empresa']['telefono'];
-        $this->layout()->telefono_empresa = $telefono_empresa;
+        $variados = new Variados($serviceLocator);
+        $variados->datosLayout($this->layout(), $config, '2');
 
         return new ViewModel(array('data' => $data, 
                                    'subcategoria' => $op,
@@ -684,7 +604,7 @@ class CampanaController extends AbstractActionController {
             $user_session->apellido = $lnombre;
             $user_session->nombres = $fnombre.' '.$lnombre;
             $user_session->genero = $sexo;
-            $user_session->facebook = 'S';
+            $user_session->facebook['login'] = 'S';
 
             return $this->getResponse()->setContent(Json::encode($data));
         }
@@ -709,7 +629,7 @@ class CampanaController extends AbstractActionController {
                     $user_session->telefono = $data[0]['telefono'];
                     $user_session->celular = $data[0]['celular'];
                     $user_session->genero = $data[0]['id_sexo'];
-                    $user_session->facebook = 'N';
+                    $user_session->facebook['login'] = 'N';
                 } else {
                     $data[0]['validar'] = '2';
                     $user_session->getManager()->getStorage()->clear('user');
@@ -871,46 +791,19 @@ class CampanaController extends AbstractActionController {
     public function recuperarAction() {
         $serviceLocator = $this->getServiceLocator();
         $config = $serviceLocator->get('config');
-        $telefono_empresa = $config['empresa']['telefono'];
         
-        $pais = $config['id_pais'];
-        $capital = $config['id_capital'];
+        $variados = new Variados($serviceLocator);
+        $variados->datosLayout($this->layout(), $config, '2');
         
-        $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
-        $departamentos = $departamentoTable->getDepartamentosxPaisFavoritos($pais);
-        
-        $provinciaTable = $serviceLocator->get('Dashboard\Model\UbiprovinciaTable');
-        $provincias = $provinciaTable->getProvinciasxDepartamento($pais, $capital);
-        
-        $this->layout()->pais = $pais;
-        $this->layout()->capital = $capital;
-        $this->layout()->departamentos = $departamentos;
-        $this->layout()->provincias = $provincias;
-        
-        $this->layout()->telefono_empresa = $telefono_empresa;
         return new ViewModel();
     }
 
     public function registrarAction() {
         $serviceLocator = $this->getServiceLocator();
         $config = $serviceLocator->get('config');
-        $telefono_empresa = $config['empresa']['telefono'];
         
-        $pais = $config['id_pais'];
-        $capital = $config['id_capital'];
-        
-        $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
-        $departamentos = $departamentoTable->getDepartamentosxPaisFavoritos($pais);
-        
-        $provinciaTable = $serviceLocator->get('Dashboard\Model\UbiprovinciaTable');
-        $provincias = $provinciaTable->getProvinciasxDepartamento($pais, $capital);
-        
-        $this->layout()->pais = $pais;
-        $this->layout()->capital = $capital;
-        $this->layout()->departamentos = $departamentos;
-        $this->layout()->provincias = $provincias;
-        
-        $this->layout()->telefono_empresa = $telefono_empresa;
+        $variados = new Variados($serviceLocator);
+        $variados->datosLayout($this->layout(), $config, '2');
         
         $flag = $this->params()->fromPost('id',null);
         return new ViewModel(array('flag' => $flag));
@@ -935,7 +828,7 @@ class CampanaController extends AbstractActionController {
         $user_session->telefono = $datos['telefono'];
         $user_session->celular = $datos['celular'];
         $user_session->genero = $datos['genero'];
-        $user_session->facebook = 'N';
+        $user_session->facebook['login'] = 'N';
         
         return $this->redirect()->toRoute('home');
     }

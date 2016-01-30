@@ -7,11 +7,11 @@
     <div class="section_payment">
         <?php if (($fl != null && $fl == '2') || isset($user_session->username) ) { ?>
             <h3>Tus Datos</h3>
-            <?php if($user_session->facebook == 'S') {?>
+            <?php if($user_session->facebook['login'] == 'S') {?>
             <div class="form-group">
                 <label class="col-lg-2 control-label"></label>
                 <div class="col-xs-7">
-                <input type="hidden" class="form-control" name="facebook" id="facebook" value="<?php echo $user_session->facebook;?>">
+                <input type="hidden" class="form-control" name="facebook" id="facebook" value="<?php echo $user_session->facebook['login'];?>">
                 <input type="hidden" class="form-control" name="email" id="email" value="<?php echo $user_session->username;?>">
                 <input type="hidden" class="form-control" name="nombre" id="email" value="<?php echo $user_session->nombre;?>">
                 <input type="hidden" class="form-control" name="apellido" id="email" value="<?php echo $user_session->apellido;?>">

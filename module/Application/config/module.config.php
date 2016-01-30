@@ -123,6 +123,16 @@ return array(
                     )
                 )
             ),
+            'mispedidos' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route'    => '/micuenta/mis-pedidos',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Micuenta',
+                        'action'     => 'mispedidos',
+                    ),
+                ),
+            ),
             'phpinfo' => array(
                 //'type' => 'Zend\Mvc\Router\Http\Literal',
                 'type' => 'Segment',
@@ -188,6 +198,7 @@ return array(
             'Application\Controller\Interes' => 'Application\Controller\InteresController',
             'Application\Controller\Cliente' => 'Application\Controller\ClienteController',
             'Application\Controller\Empresa' => 'Application\Controller\EmpresaController',
+            'Application\Controller\Micuenta' => 'Application\Controller\MicuentaController',
             ),
     ),
     'view_manager' => array(

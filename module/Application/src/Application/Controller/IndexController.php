@@ -14,6 +14,7 @@ use Zend\View\Model\ViewModel;
 use Zend\Session\Container;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Json\Json;
+use Application\Services\Variados;
 
 class IndexController extends AbstractActionController
 {
@@ -47,21 +48,8 @@ class IndexController extends AbstractActionController
         $user_session->facebook = array('id' => $constantes["id_facebook"],
                                         've' => $constantes["ve_facebook"]);
         
-        $pais = $config['id_pais'];
-        $capital = $config['id_capital'];
-        
-        $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
-        $departamentos = $departamentoTable->getDepartamentosxPaisFavoritos($pais);
-        
-        $provinciaTable = $serviceLocator->get('Dashboard\Model\UbiprovinciaTable');
-        $provincias = $provinciaTable->getProvinciasxDepartamento($pais, $capital);
-        
-        $this->layout()->pais = $pais;
-        $this->layout()->capital = $capital;
-        $this->layout()->departamentos = $departamentos;
-        $this->layout()->provincias = $provincias;
-        $this->layout()->telefono_empresa = $telefono_empresa;
-        $this->layout()->pedir_registro = '1';
+        $variados = new Variados($serviceLocator);
+        $variados->datosLayout($this->layout(), $config, '1');
         
         $campanaTable = $serviceLocator->get('Dashboard\Model\CupcampanaTable');
 

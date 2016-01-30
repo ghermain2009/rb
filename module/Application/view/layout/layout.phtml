@@ -126,6 +126,10 @@ $user_session = new Container('user');
                                             </div>
                                             <hr>
                                             <div class="form-group">
+                                                <a href="/micuenta/mis-pedidos" id="mis_cupones">Mis pedidos</a>
+                                            </div>
+                                            <hr>
+                                            <div class="form-group">
                                                 <a class="btn btn-danger btn-sm" id="cerrar_session">Cerrar Sessión</a>
                                             </div>
 
@@ -424,7 +428,7 @@ $user_session = new Container('user');
             }
             ;
         });
-
+        
         $("#cerrar_session").click(function () {
             $.ajax({
                 type: "POST",
