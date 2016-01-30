@@ -8,7 +8,9 @@
     src: url('../fonts/gotham-book-webfont.woff') format("truetype");
 }
 
-
+p.justificado {
+    text-align: justify;
+}
 
 .img_container_pago {
      height: 50px;
