@@ -121,7 +121,7 @@ class MicampanaController extends AbstractActionController {
         $grid->setDataSource($datosCuponV);
         
         $col = new Column\Select('codigo_cupon');
-        $col->setLabel('Código CupoRebueno');
+        $col->setLabel('Código Cupón');
         $col->setWidth(23);
         $col->setUserSortDisabled();
         $grid->addColumn($col);
@@ -133,7 +133,7 @@ class MicampanaController extends AbstractActionController {
         $grid->addColumn($col);
         
         $col = new Column\Select('id_campana');
-        $col->setLabel('N° Publicación');
+        $col->setLabel('Código Campaña');
         $col->setWidth(13);
         $col->setUserSortDisabled();
         $grid->addColumn($col);
@@ -145,14 +145,26 @@ class MicampanaController extends AbstractActionController {
         $grid->addColumn($col);
         
         $col = new Column\Select('precio_total');
-        $col->setLabel('Precio Total');
-        $col->setWidth(20);
+        $col->setLabel('Precio Rebueno');
+        $col->setWidth(13);
+        $col->setUserSortDisabled();
+        $grid->addColumn($col);
+        
+        $col = new Column\Select('comision_total');
+        $col->setLabel('Comisión Rebueno');
+        $col->setWidth(13);
         $col->setUserSortDisabled();
         $grid->addColumn($col);
         
         $col = new Column\Select('total_apagar');
-        $col->setLabel('Monto por Pagar');
-        $col->setWidth(20);
+        $col->setLabel('Mi Ingreso');
+        $col->setWidth(13);
+        $col->setUserSortDisabled();
+        $grid->addColumn($col);
+        
+        $col = new Column\Select('fecha_liquidacion');
+        $col->setLabel('Fecha Liquidación');
+        $col->setWidth(13);
         $col->setUserSortDisabled();
         $grid->addColumn($col);
         
@@ -191,20 +203,32 @@ class MicampanaController extends AbstractActionController {
         $grid->addColumn($col);
         
         $col = new Column\Select('fecha_liquidacion');
-        $col->setLabel('Fecha Emisión');
+        $col->setLabel('Fecha Liquidación');
         $col->setWidth(23);
         $col->setUserSortDisabled();
         $grid->addColumn($col);
         
         $col = new Column\Select('cantidad_cupones');
-        $col->setLabel('Cantidad de CupoRebuenos');
-        $col->setWidth(23);
+        $col->setLabel('Cantidad de Cupones');
+        $col->setWidth(13);
+        $col->setUserSortDisabled();
+        $grid->addColumn($col);
+        
+        $col = new Column\Select('total_importe');
+        $col->setLabel('Precio Rebueno');
+        $col->setWidth(13);
+        $col->setUserSortDisabled();
+        $grid->addColumn($col);
+        
+        $col = new Column\Select('comision');
+        $col->setLabel('Comisión Rebueno');
+        $col->setWidth(13);
         $col->setUserSortDisabled();
         $grid->addColumn($col);
         
         $col = new Column\Select('total_liquidacion');
-        $col->setLabel('Total');
-        $col->setWidth(23);
+        $col->setLabel('Mi Ingreso');
+        $col->setWidth(13);
         $col->setUserSortDisabled();
         $grid->addColumn($col);
         

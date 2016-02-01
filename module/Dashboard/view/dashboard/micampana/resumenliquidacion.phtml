@@ -103,7 +103,10 @@
                         </div>
                     </div>
                 </div>
-                <h3><b>Detalles de la liquidación</b></h3>&nbsp;&nbsp;<button id="btn_regresar" class="btn btn-primary" type="button"><span class="glyphicon glyphicon-triangle-left"></span> Regresar</button>
+                <div>
+                    <div style="display: inline-block;"><h3><b>Detalles de la liquidación</b></h3></div>
+                    <div style="position: relative; display: inline-block; float: right; padding-right: 50px; top:15px"><button id="btn_regresar" class="btn btn-success" type="button"><span class="glyphicon glyphicon-triangle-left"></span> Regresar</button></div>
+                </div>
                 <div class="paneles">   
                     <div class="panel-group grafico" id="accordionTree" role="tablist" aria-multiselectable="true">
                         <div class="panel panel-default">
@@ -118,9 +121,9 @@
                                         <tr>
                                             <td class="text-title">Nro. de Publicación</td>
                                             <td class="text-title">Ubicación</td>
-                                            <td class="text-title">CupoRebuenos liquidados</td>
+                                            <td class="text-title">Cupones liquidados</td>
                                             <td class="text-title">Fecha Liquidación</td>
-                                            <td colspan="3"  class="text-title">Precio de Compra</td>
+                                            <td colspan="3"  class="text-title">Precio Rebueno</td>
                                         </tr>
                                         <?php $liquidacion = $this->datos_liquidacion;
                                          if(count($liquidacion) > 0) {
@@ -136,13 +139,20 @@
                                         </tr>
                                          <?php } ?>
                                         <tr class="warning">
-                                            <td colspan='4' class="text-right">Subtotal:</td>
+                                            <td colspan='4' class="text-right">Total Venta:</td>
                                             <td class="text-right rightdelete">DOL</td>
                                             <td class="text-right rightdelete"><?php echo $liquidacion[0]['total_importe'];?></td>
                                             <td>&nbsp;</td>
                                         </tr>
+                                        <tr>
+                                            <td colspan='7' class="text-right">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan='6' class="text-right rightdelete">FACTURA POR RECIBIR</td>
+                                            <td>&nbsp;</td>
+                                        </tr >
                                         <tr class="warning">
-                                            <td colspan='4' class="text-right">Comisión - IVA:</td>
+                                            <td colspan='4' class="text-right">Comisión Rebueno:</td>
                                             <td class="text-right rightdelete">DOL</td>
                                             <td class="text-right rightdelete"><?php echo $liquidacion[0]['comision_sin_impuesto'];?></td>
                                             <td>( 35% )</td>
@@ -154,7 +164,16 @@
                                             <td>( 12% )</td>
                                         </tr>
                                         <tr class="info">
-                                            <td colspan='4' class="text-right">Total:</td>
+                                            <td colspan='4' class="text-right">Factura Comisión:</td>
+                                            <td class="text-right rightdelete">DOL</td>
+                                            <td class="text-right rightdelete"><?php echo $liquidacion[0]['comision'];?></td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan='7' class="text-right">&nbsp;</td>
+                                        </tr>
+                                        <tr class="info">
+                                            <td colspan='4' class="text-right">Mi Ingreso:</td>
                                             <td class="text-right rightdelete">DOL</td>
                                             <td class="text-right rightdelete"><?php echo $liquidacion[0]['total_liquidacion'];?></td>
                                             <td>&nbsp;</td>

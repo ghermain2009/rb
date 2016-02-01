@@ -157,7 +157,7 @@
         
         $("td").each(function(i){
             var columna = $(this).attr("data-columnuniqueid");
-            if( columna == 'total_apagar' ) {
+            if( columna == 'total_apagar' || columna == 'comision_total' ) {
                 $(this).attr('align','right');
             }
         });
