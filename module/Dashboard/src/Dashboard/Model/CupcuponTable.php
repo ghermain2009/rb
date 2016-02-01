@@ -274,7 +274,7 @@ class CupcuponTable {
             'codigo_cupon',
             'fecha_compra' => new Expression("date_format(fecha_compra,'%d-%m-%Y')"),
             'fecha_validacion' => new Expression("date_format(fecha_validacion,'%d-%m-%Y')"),
-            'fecha_liquidacion' => new Expression("date_format(CASE WHEN DAYOFWEEK(fecha_validacion) > 1 THEN ADDDATE(fecha_validacion, 19 - DAYOFWEEK(NOW())) ELSE ADDDATE(fecha_validacion, 12) END,'%d-%m-%Y')")
+            'fecha_liquidacion' => new Expression("date_format(CASE WHEN DAYOFWEEK(fecha_validacion) > 1 THEN ADDDATE(fecha_validacion, 19 - DAYOFWEEK(fecha_validacion)) ELSE ADDDATE(fecha_validacion, 12) END,'%d-%m-%Y')")
         ))
         ->from('cup_cupon_detalle');
         
