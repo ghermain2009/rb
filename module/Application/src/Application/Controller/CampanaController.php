@@ -428,32 +428,36 @@ class CampanaController extends AbstractActionController {
             //Pago en banco
             default :
                 
-                $pais = $config['id_pais'];
-                $capital = $config['id_capital'];
+                $email = $datos['email'];
+                $excepcionDominios = $config['correo']['excepcion'];
+        
+                if( count($excepcionDominios) > 0) {
+                    $dominioCompleto = explode('@', $email);   
+                    $dominio = explode('.', $dominioCompleto[1]);
+                    $verifica = strtolower($dominio[0]);
 
-                $departamentoTable = $serviceLocator->get('Dashboard\Model\UbidepartamentoTable');
-                $departamentos = $departamentoTable->getDepartamentosxPaisFavoritos($pais);
+                    if (in_array($verifica, $excepcionDominios)) {
+                        $fuente = 'cuenta-gmail';
+                    } else {
+                        $fuente = 'envio-cupones';
+                    }
+                } else {
+                    $fuente = 'envio-cupones';
+                }
 
-                $provinciaTable = $serviceLocator->get('Dashboard\Model\UbiprovinciaTable');
-                $provincias = $provinciaTable->getProvinciasxDepartamento($pais, $capital);
-                
-                $telefono_empresa = $config['empresa']['telefono'];
-                
-                $activo   = $config['correo']['activo'];
-                $name     = $config['correo']['name'];
-                $host     = $config['correo']['host'];
-                $port     = $config['correo']['port'];
-                $tls      = $config['correo']['tls'];
-                $username = $config['correo']['username'];
-                $password = $config['correo']['password'];
-                $cuenta   = $config['correo']['cuenta-envio-cupones'];
+                $activo   = $config['correo'][$fuente]['activo'];
+                $name     = $config['correo'][$fuente]['name'];
+                $host     = $config['correo'][$fuente]['host'];
+                $port     = $config['correo'][$fuente]['port'];
+                $tls      = $config['correo'][$fuente]['tls'];
+                $username = $config['correo'][$fuente]['username'];
+                $password = $config['correo'][$fuente]['password'];
+                $cuenta   = $config['correo'][$fuente]['alias'];
                 $localhost = $config['constantes']['localhost'];
-                $telefono = $config['empresa']['telefono'];
+                $telefono  = $config['empresa']['telefono'];
                 
                 if( $activo == '1' ) {
 
-                    $email = $datos['email'];
-                    
                     $message = new Message();
                     $message->addTo($email)
                             ->addFrom($cuenta)
@@ -511,11 +515,8 @@ class CampanaController extends AbstractActionController {
                     $transport->send($message);
                 }
 
-                $this->layout()->pais = $pais;
-                $this->layout()->capital = $capital;
-                $this->layout()->departamentos = $departamentos;
-                $this->layout()->provincias = $provincias;
-                $this->layout()->telefono_empresa = $telefono_empresa;
+                $variados = new Variados($serviceLocator);
+                $variados->datosLayout($this->layout(), $config, '2');
 
                 return  new ViewModel(array('operacion' => $idTransaccion,
                                             'peciototal' => $datos['PriceTotal']));

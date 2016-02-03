@@ -45,8 +45,11 @@ class IndexController extends AbstractActionController
         $moneda = $config['moneda'];
 
         $user_session = new Container('user');
-        $user_session->facebook = array('id' => $constantes["id_facebook"],
+        
+        if( !isset($user_session->facebook)) {
+            $user_session->facebook = array('id' => $constantes["id_facebook"],
                                         've' => $constantes["ve_facebook"]);
+        }
         
         $variados = new Variados($serviceLocator);
         $variados->datosLayout($this->layout(), $config, '1');
