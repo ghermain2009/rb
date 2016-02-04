@@ -57,7 +57,7 @@ class CupcampanaTable {
         ->join('cup_campana_opcion', new Expression("cup_campana.id_campana = cup_campana_opcion.id_campana"),
                 array('precio_regular' => new Expression("MIN(precio_regular)") ,
                       'precio_especial'  => new Expression("MIN(precio_especial)") ,
-                      'vendidos'  => new Expression("SUM(IFNULL(vendidos,0))") ,
+                      'vendidos'  => new Expression("SUM(IFNULL(vendidos,0) + IFNULL(apertura,0))") ,
                       'descuento'  => new Expression("100-ROUND(MIN(precio_especial)*100/MIN(precio_regular))") ,
                     ))
         ->where("NOW() >= CONCAT(DATE_FORMAT(cup_campana.fecha_inicio,'%Y-%m-%d'),' ',TIME_FORMAT(cup_campana.hora_inicio,'%H:%i:%s'))")
@@ -92,7 +92,7 @@ class CupcampanaTable {
         ->join('cup_campana_opcion', new Expression("cup_campana.id_campana = cup_campana_opcion.id_campana"),
                 array('precio_regular' => new Expression("MIN(precio_regular)") ,
                       'precio_especial'  => new Expression("MIN(precio_especial)") ,
-                      'vendidos'  => new Expression("SUM(IFNULL(vendidos,0))") ,
+                      'vendidos'  => new Expression("SUM(IFNULL(vendidos,0) + IFNULL(apertura,0))") ,
                       'descuento'  => new Expression("100-ROUND(MIN(precio_especial)*100/MIN(precio_regular))") ,
                     ));
       
@@ -125,7 +125,7 @@ class CupcampanaTable {
         ->join('cup_campana_opcion', new Expression("cup_campana.id_campana = cup_campana_opcion.id_campana"),
                 array('precio_regular' => new Expression("MIN(precio_regular)") ,
                       'precio_especial'  => new Expression("MIN(precio_especial)") ,
-                      'vendidos'  => new Expression("SUM(IFNULL(vendidos,0))") ,
+                      'vendidos'  => new Expression("SUM(IFNULL(vendidos,0),IFNULL(apertura,0))") ,
                       'descuento'  => new Expression("100-ROUND(MIN(precio_especial)*100/MIN(precio_regular))") ,
                     ))
         ->join('cup_campana_categoria', new Expression("cup_campana.id_campana = cup_campana_categoria.id_campana"), array())
@@ -261,7 +261,7 @@ class CupcampanaTable {
         ))
         ->from('cup_campana')
         ->join('cup_campana_opcion', new Expression("cup_campana.id_campana = cup_campana_opcion.id_campana"),
-                array('vendidos'  => new Expression("SUM(IFNULL(vendidos,0))") ))
+                array('vendidos'  => new Expression("SUM(IFNULL(vendidos,0) + IFNULL(apertura,0))") ))
         ->where(array('cup_campana.id_campana' => $id_campana));
         $select->group(array('cup_campana.id_campana'));
         
@@ -283,7 +283,7 @@ class CupcampanaTable {
             'descripcion',
             'precio_regular',
             'precio_especial',
-            'vendidos' => new Expression("IFNULL(vendidos,0)"),
+            'vendidos' => new Expression("IFNULL(vendidos,0) + IFNULL(apertura,0)"),
             'ahorro' => new Expression("precio_regular - precio_especial"),
             'descuento' => new Expression("100-ROUND(precio_especial*100/precio_regular)"),
             'cantidad'
