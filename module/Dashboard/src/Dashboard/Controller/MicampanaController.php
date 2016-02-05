@@ -251,7 +251,7 @@ class MicampanaController extends AbstractActionController {
         $grid = $serviceLocator->get('ZfcDatagrid\Datagrid');
         $grid->setUserFilterDisabled();
         $grid->setToolbarTemplate(null);
-        $grid->setDefaultItemsPerPage(9);
+        $grid->setDefaultItemsPerPage(3);
         $grid->setDataSource($datosCampana);
         
         $col = new Column\Select('descripcion');
