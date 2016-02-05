@@ -272,6 +272,12 @@ class MicampanaController extends AbstractActionController {
         $col->setUserSortDisabled();
         $grid->addColumn($col);
         
+        $col = new Column\Select('motivadores');
+        $col->setLabel('Cantidad Motivadores');
+        $col->setWidth(13);
+        $col->setUserSortDisabled();
+        $grid->addColumn($col);
+        
         $col = new Column\Select('vendidos');
         $col->setLabel('Cantidad Vendidos');
         $col->setWidth(13);

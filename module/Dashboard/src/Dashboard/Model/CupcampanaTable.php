@@ -430,7 +430,8 @@ class CupcampanaTable {
                     'fecha_inicio' => new Expression("date_format(fecha_inicio,'%d-%m-%Y')"),
                     'fecha_final' => new Expression("date_format(fecha_final,'%d-%m-%Y')"),
                     'descripcion' => 'titulo',
-                    'vendidos' => new Expression("count(1)"),
+                    'motivadores' => new Expression("(select sum(IFNULL(apertura,0)) from cup_campana_opcion where id_campana = cup_campana.id_campana )"),
+                    'vendidos' => new Expression("sum(case when cup_cupon_detalle.id_estado_cupon in ('3','5','7') then 1 else 0 end)"),
                     'validados' => new Expression("sum(case when cup_cupon_detalle.id_estado_cupon in ('5','7') then 1 else 0 end)"), 
                     'pagados' => new Expression("sum(case when cup_cupon_detalle.id_estado_cupon in ('7') then 1 else 0 end)")
                 ))

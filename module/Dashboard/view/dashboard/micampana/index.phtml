@@ -276,7 +276,8 @@
                                             <td class="bttooltipp cabecera">Activa desde</td>
                                             <td class="bttooltipp cabecera">Activa hasta</td>
                                             <td class="bttooltipp cabecera">Ubicación</td>
-                                            <td class="bttooltipp cabecera">CupoRebuenos vendidos</td>
+                                            <td class="bttooltipp cabecera">Cupones motivadores</td>
+                                            <td class="bttooltipp cabecera">Cupones vendidos</td>
                                         </tr>
                                         <?php if( $cantidadC > 0 ) { 
                                                  for($i=0; $i<2; $i++ ) { ?>
@@ -284,6 +285,7 @@
                                             <td class="bttooltipp"><?php echo $datosCampana[0]['fecha_inicio'];?></td>
                                             <td class="bttooltipp"><?php echo $datosCampana[0]['fecha_final'];?></td>
                                             <td class="bttooltipp">Guayaquil</td>
+                                            <td class="bttooltipp"><?php echo $datosCampana[0]['motivadores'];?></td>
                                             <td class="bttooltipp"><?php echo $datosCampana[0]['vendidos'];?></td>
                                         </tr>
                                                  <?php } 
