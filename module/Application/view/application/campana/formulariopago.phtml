@@ -227,7 +227,7 @@
                         <span id="lblPriceUnit" class="price_subtotal"><?php echo $moneda['simbolo'];?> <?php echo $dato['precio_especial']; ?></span>
                         <span class="form_quantity">
                             <span>Cant: </span>
-                            <input class="text_cantidad" type="text" name="cantidad" id="txtQuantity" value="1" required="" data-parsley-trigger="change focusin keyup" data-parsley-min="1" data-parsley-min-message="Debe comprar un mínimo de 1" data-parsley-max="10" data-parsley-max-message="Debe comprar un máximo de 10" maxlength="3" data-parsley-type="digits" data-parsley-required-message="Ingrese una cantidad." data-parsley-errors-container=".error_quantity">                </span>
+                            <input class="text_cantidad" type="text" name="cantidad" id="txtQuantity" value="1" required="" data-parsley-trigger="change focusin keyup" data-parsley-min="1" data-parsley-min-message="Debe comprar un mínimo de 1" data-parsley-max="10" data-parsley-max-message="Debe comprar un máximo de 10" maxlength="3" data-parsley-type="digits" data-parsley-required-message="Ingrese una cantidad." data-parsley-errors-container=".error_quantity" <?php if( $dato['precio_especial'] == '0.00' ) { ?>readonly<?php } ?>>                </span>
                     </span><br><br>
                 </div>
                 <div id="boxStockError" class="box_info error hide">
@@ -253,6 +253,14 @@
                     <div class="cb">Paga con Tarjeta de Crédito Visa</div>
                 </label>
             </div-->
+            <?php if( $dato['precio_especial'] == '0.00' ) { ?>
+            <div class="metodo_pago">
+                <label for="radPayBanco" class="ioption">
+                    <input id="radPayBanco" name="metodo" type="radio" value="OFE" checked><span><img src="/img/tarjetas/especial.jpg"></span>
+                    <div class="cb">Costo cero</div>
+                </label>
+            </div>
+            <?php } else { ?>
             <div class="metodo_pago">
                 <label for="radPayPayme" class="ioption">
                     <input id="radPayPayme" name="metodo" type="radio" value="PAY" checked><span><img src="/img/tarjetas/aceptadas.jpg"></span>
@@ -266,6 +274,7 @@
                     <div class="cb">Paga con transferencia o depósito Bancario</div>
                 </label>
             </div>
+            <?php } ?>
             <div class="metodo_pago terminos">
                 <input type="hidden" name="terminospay" value="0"><input type="checkbox" name="terminospay" id="chkTermsPay" value="1" checked="checked" required="" data-parsley-trigger="change" data-parsley-errors-container=".terms_error_pay">
                 Acepto los <a href="/interes/terminosycondiciones" target="_blank" title="Términos y Condiciones">Términos y Condiciones</a>, y <a href="/interes/politicasdeprivacidad" title="Políticas de Privacidad" target="_blank">Políticas de Privacidad</a>

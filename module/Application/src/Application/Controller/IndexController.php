@@ -24,7 +24,7 @@ class IndexController extends AbstractActionController
         $serviceLocator = $this->getServiceLocator();
         $config = $serviceLocator->get('config');
         $en_produccion = $config['en_produccion'];
-        $telefono_empresa = $config['empresa']['telefono'];
+        $empresa_promocion = $config['empresa']['cod_empresa_promocion'];
         
         $dir_image = $config['constantes']['dir_image'];
         $sep_path = $config['constantes']['sep_path'];
@@ -56,7 +56,7 @@ class IndexController extends AbstractActionController
         
         $campanaTable = $serviceLocator->get('Dashboard\Model\CupcampanaTable');
 
-        $data = $campanaTable->getCampanasAll();
+        $data = $campanaTable->getCampanasAll($empresa_promocion);
         $dataG = $campanaTable->getCampanaGrupo();
 
         return new ViewModel(array('data' => $data, 

@@ -508,6 +508,32 @@ class CupcuponTable {
     
     }
     
+    public function getCuponPromocion($email, $id_campana, $id_opcion) {
+    
+            $sql = new Sql($this->tableGateway->getAdapter());
+    
+            $select = $sql->select();
+
+            $select->columns(array('operacion' => 'observacion',
+                                   'fecha_operacion' => new Expression("DATE_FORMAT(fecha_operacion,'%d-%m-%Y')")),
+                                   'id_campana',
+                                   'id_campana_opcion',
+                                   'cantidad'
+                            )
+                    ->from('cup_cupon')
+                    ->where(array('cup_cupon.email_cliente' => $email,
+                                  'cup_cupon.id_campana' => $id_campana,
+                                  'cup_cupon.id_campana_opcion' => $id_opcion))
+                    ->where(new In('cup_cupon.id_estado_compra', array('3','5','7')));
+
+            $stmt = $sql->prepareStatementForSqlObject($select);
+
+            $result = $stmt->execute();
+            
+            return ArrayUtils::iteratorToArray($result);
+    
+    }
+       
     public function getDatosOrden($id_cupon) {
     
             $sql = new Sql($this->tableGateway->getAdapter());

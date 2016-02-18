@@ -228,18 +228,119 @@ class CampanaController extends AbstractActionController {
         $serviceLocator = $this->getServiceLocator();
 
         $clienteTable = $serviceLocator->get('Dashboard\Model\CupclienteTable');
-        $clienteTable->addCliente($datos);
-
         $cuponTable = $serviceLocator->get('Dashboard\Model\CupcuponTable');
-        $idTransaccion = $cuponTable->addCupon($datos,$serviceLocator);
+        
+        $datosCupon = $cuponTable->getCuponPromocion($datos['email'], base64_decode($datos['IdCampana']), base64_decode($datos['IdOpcion']));
+        
+        if( !($datos['metodo'] == 'OFE' && count($datosCupon) > 0) ) { 
+            $clienteTable->addCliente($datos);
+            $idTransaccion = $cuponTable->addCupon($datos,$serviceLocator);
+        }
         //$idTransaccion = 171;
-        
-        
         $config = $serviceLocator->get('config');
-        
+        $localhost = $config['constantes']['localhost'];
         //var_dump($datos);
         
         switch($datos['metodo']) {
+            //Promocionales con costo cero
+            case 'OFE':
+                
+                if ( count($datosCupon) == 0 ) {
+                    set_time_limit(0);
+
+                    $estado = '3';
+
+                    $set = array('fecha_compra'     => date('Y-m-d H:i:s'),
+                                 'id_estado_compra' => $estado
+                                      );
+
+                    $where = array('id_cupon' => $idTransaccion);
+
+                    $setDetalle = array('id_estado_cupon' => $estado,
+                                        'fecha_cancelacion' => date('Y-m-d H:i:s'));
+
+                    $cuponTable->updCupon($set, $where);
+                    $cuponTable->updCuponDetalle($setDetalle, $where);
+
+                    $opcion_campana = $cuponTable->getDatosOrden($idTransaccion);
+
+                    if (count($opcion_campana) > 0 ) {
+
+                        $campanaopcionTable = $serviceLocator->get('Dashboard\Model\CupcampanaopcionTable');
+                        $campanaopcionTable->updCantidadVendidos($opcion_campana[0]['id_campana'], $opcion_campana[0]['id_campana_opcion'], $opcion_campana[0]['cantidad']);
+
+                        /*Enviamos el correo*/
+                        $datosCupon = $cuponTable->getCupon($idTransaccion);
+                        $variados = new Variados($serviceLocator);
+                        $variados->obtenerCuponPdf($datosCupon);
+                        /********************/
+
+                        $url = $localhost."/campana/cuponbuenaso";
+
+                        $request = new Request;
+                        $request->getHeaders()->addHeaders([
+                            'Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8'
+                        ]);
+                        $request->setUri($url);
+                        $request->setMethod('POST'); 
+                        $request->getPost()->set('orden', $idTransaccion);
+                        $request->getPost()->set('estado', $estado);
+
+                        $confCurl = array(
+                            'adapter'   => 'Zend\Http\Client\Adapter\Curl',
+                            'curloptions' => array(CURLOPT_CONNECTTIMEOUT => 0)
+                        );
+
+                    } else {
+
+                        $mensaje = 'Opción no configurada.';
+
+                        //Mostramos Mensaje de error en caso la compra no sea satisfactoria
+                        $url = $localhost."/campana/errorpagopayme";
+
+                        $request = new Request;
+                        $request->getHeaders()->addHeaders([
+                            'Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8'
+                        ]);
+                        $request->setUri($url);
+                        $request->setMethod('POST'); 
+                        $request->getPost()->set('orden', $idTransaccion);
+                        $request->getPost()->set('mensaje', $mensaje);
+
+                        $confCurl = array(
+                            'adapter'   => 'Zend\Http\Client\Adapter\Curl',
+                            'curloptions' => array(CURLOPT_CONNECTTIMEOUT => 0)
+                        );
+
+                    }
+                } else {
+                    
+                    $mensaje = 'Usted ya se encuentra registrado en esta promoción.';
+
+                    //Mostramos Mensaje de error en caso la compra no sea satisfactoria
+                    $url = $localhost."/campana/errorpagopayme";
+
+                    $request = new Request;
+                    $request->getHeaders()->addHeaders([
+                        'Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8'
+                    ]);
+                    $request->setUri($url);
+                    $request->setMethod('POST'); 
+                    $request->getPost()->set('orden', '');
+                    $request->getPost()->set('mensaje', $mensaje);
+
+                    $confCurl = array(
+                        'adapter'   => 'Zend\Http\Client\Adapter\Curl',
+                        'curloptions' => array(CURLOPT_CONNECTTIMEOUT => 0)
+                    );
+                }
+
+                $client = new Client($url, $confCurl);
+
+                $response = $client->dispatch($request);
+
+                return $response;
+                
             //Tarjetas Independientes
             case '001':
 

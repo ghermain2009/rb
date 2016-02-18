@@ -39,15 +39,16 @@ class CupcampanaTable {
         return $resultSet;
     }
     
-    public function getCampanasAll()
+    public function getCampanasAll($empresa_promocion)
     {
+        
         $sql = new Sql($this->tableGateway->adapter);
-                
                 
         $select = $sql->select();
 
         $select->columns(array(
             'categoria' => new Expression("'Lo más nuevo'"),
+            'prioridad' => new Expression("CASE WHEN id_empresa = ".$empresa_promocion." THEN 0 ELSE 1 END"),
             'id_campana',
             'subtitulo',
             'maximo_cupones' => new Expression("IFNULL(cantidad_cupones,0)"),
@@ -63,11 +64,13 @@ class CupcampanaTable {
         ->where("NOW() >= CONCAT(DATE_FORMAT(cup_campana.fecha_inicio,'%Y-%m-%d'),' ',TIME_FORMAT(cup_campana.hora_inicio,'%H:%i:%s'))")
         ->where("NOW() <= CONCAT(DATE_FORMAT(cup_campana.fecha_final,'%Y-%m-%d'),' ',TIME_FORMAT(cup_campana.hora_final,'%H:%i:%s'))");
         
+        $select->group(array('prioridad'));
         $select->group(array('cup_campana.id_campana'));
         $select->group(array('cup_campana.subtitulo'));
-        $select->order('cup_campana.fecha_inicio DES');
+        $select->order('prioridad ASC');
+        $select->order('cup_campana.fecha_inicio DESC');
+        $select->order('cup_campana_opcion.precio_especial ASC');
         $select->limit(6);
-        
         
         $statement = $sql->prepareStatementForSqlObject($select);
         $result = $statement->execute();
