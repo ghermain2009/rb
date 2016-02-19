@@ -107,4 +107,10 @@ class GeneraliquidacionController extends AbstractActionController
        
        return $view;
     }
+    
+    public function aumentarPromocionesAction()
+    {
+        echo "hola";
+        return new ViewModel();
+    }
 }
