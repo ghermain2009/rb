@@ -696,15 +696,6 @@ return array(
     'console' => array(
         'router' => array(
             'routes' => array(
-                'tomar-promocion' => array(
-                    'options' => array(
-                        'route'    => 'tomar promociones [all|disabled]:mode [--verbose|-v]',
-                        'defaults' => array(
-                            'controller' => 'Dashboard\Cron\Controller\Generaliquidacion',
-                            'action'     => 'aumentar-promociones'
-                        )
-                    )
-                )
             ),
         ),
     ),

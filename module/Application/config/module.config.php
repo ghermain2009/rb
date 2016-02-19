@@ -199,6 +199,7 @@ return array(
             'Application\Controller\Cliente' => 'Application\Controller\ClienteController',
             'Application\Controller\Empresa' => 'Application\Controller\EmpresaController',
             'Application\Controller\Micuenta' => 'Application\Controller\MicuentaController',
+            'Application\Cron\Controller\Generaliquidacion' => 'Application\Cron\Controller\GeneraliquidacionController',
             ),
     ),
     'view_manager' => array(
@@ -225,6 +226,15 @@ return array(
     'console' => array(
         'router' => array(
             'routes' => array(
+                'tomar-promocion' => array(
+                    'options' => array(
+                        'route'    => 'tomarpromociones [all|disabled]:mode [--verbose|-v]',
+                        'defaults' => array(
+                            'controller' => 'Application\Cron\Controller\Generaliquidacion',
+                            'action'     => 'aumentar-promociones'
+                        )
+                    )
+                )
             ),
         ),
     ),
