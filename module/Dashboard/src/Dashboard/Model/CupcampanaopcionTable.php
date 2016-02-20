@@ -152,4 +152,17 @@ class CupcampanaopcionTable {
 
         return $result;
     }
+    
+    public function setIncremenarApertura($campana_opcion, $cantidad = 5) {
+        
+        $sql = new Sql($this->tableGateway->getAdapter());
+        
+        $update = $sql->update('cup_campana_opcion');
+        $update->set(array('apertura' => new Expression("IFNULL(apertura,0) + ".$cantidad)));
+        $update->where(array('id_campana' => $campana_opcion));
+        
+        $sql->prepareStatementForSqlObject($update)->execute();
+        
+        return true;
+    }
 }

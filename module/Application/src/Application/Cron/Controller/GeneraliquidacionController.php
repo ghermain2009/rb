@@ -110,7 +110,18 @@ class GeneraliquidacionController extends AbstractActionController
     
     public function aumentarPromocionesAction()
     {
-        echo "hola";
+        $serviceLocator = $this->getServiceLocator();
+        $config = $serviceLocator->get('Config');
+        $promociones = $config['promociones'];
+        
+        $campanaopcionTable = $serviceLocator->get('Dashboard\Model\CupcampanaopcionTable');
+        
+        foreach( $promociones as $promocion) {
+            $id = $promocion['id_promocion'];
+            $cantidad = $promocion['cantidad_aumento'];
+            $campanaopcionTable->setIncremenarApertura($id, $cantidad);
+        } 
+        
         return new ViewModel();
     }
 }
