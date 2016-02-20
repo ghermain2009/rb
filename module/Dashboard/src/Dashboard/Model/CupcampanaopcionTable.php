@@ -159,7 +159,7 @@ class CupcampanaopcionTable {
         
         $update = $sql->update('cup_campana_opcion');
         $update->set(array('apertura' => new Expression("IFNULL(apertura,0) + ".$cantidad)));
-        $update->where(array('id_campana' => $campana_opcion));
+        $update->where(array('id_campana_opcion' => $campana_opcion));
         
         $sql->prepareStatementForSqlObject($update)->execute();
         
