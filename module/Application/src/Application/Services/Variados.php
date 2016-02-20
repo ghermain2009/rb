@@ -184,7 +184,7 @@ class Variados {
             $message = new Message();
             $message->addTo($email)
                     ->addFrom($cuenta)
-                    ->setSubject('Un cuponazo Rebueno ...‏');
+                    ->setSubject('Felicidades acaba de recibir un cupón Rebueno ...‏');
 
             $transport = new SmtpTransport();
             
