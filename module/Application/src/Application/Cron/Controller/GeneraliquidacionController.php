@@ -1,6 +1,6 @@
 <?php
 
-namespace Dashboard\Cron\Controller;
+namespace Application\Cron\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
