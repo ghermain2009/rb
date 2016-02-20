@@ -117,6 +117,7 @@ class GeneraliquidacionController extends AbstractActionController
         $campanaopcionTable = $serviceLocator->get('Dashboard\Model\CupcampanaopcionTable');
         
         foreach( $promociones as $promocion) {
+            var_dump(print_r($promocion,true));
             $id = $promocion['id_promocion'];
             $cantidad = $promocion['cantidad_aumento'];
             $campanaopcionTable->setIncremenarApertura($id, $cantidad);
