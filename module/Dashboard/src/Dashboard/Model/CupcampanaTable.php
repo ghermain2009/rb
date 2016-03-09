@@ -164,7 +164,7 @@ class CupcampanaTable {
         ->join('cup_campana_opcion', new Expression("cup_campana.id_campana = cup_campana_opcion.id_campana"),
                 array('precio_regular' => new Expression("MIN(precio_regular)") ,
                       'precio_especial'  => new Expression("MIN(precio_especial)") ,
-                      'vendidos'  => new Expression("SUM(IFNULL(vendidos,0))") ,
+                      'vendidos'  => new Expression("SUM(IFNULL(vendidos,0) + IFNULL(apertura,0))") ,
                       'descuento'  => new Expression("100-ROUND(MIN(precio_especial)*100/MIN(precio_regular))") ,
                     ))
         ->join('cup_campana_categoria', new Expression("cup_campana.id_campana = cup_campana_categoria.id_campana"), array())
