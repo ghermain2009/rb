@@ -156,7 +156,7 @@ foreach ($data as $detalle) {
                     <div id="tabempresa">
                         <h2><ta class="btn btn-google-plus"><i class="glyphicon glyphicon-home"></i></ta>  <fo>La Empresa</fo></h2>
                         <?php foreach ($data_e as $empresa) { ?>
-                            <h2><?php echo $empresa["razon_social"]; ?></h2>
+                            <h2><?php echo $empresa["nombre_comercial"]; ?></h2>
                             <ul class="company_hasMap">
                                 <li>
                                     <p class="company_value"><?php echo $empresa["descripcion"]; ?></p>
@@ -170,7 +170,7 @@ foreach ($data as $detalle) {
                                         <li>
                                             <div class="company_title">Sitio Web:</div>                               
                                             <div class="company_value">
-                                                <a href="<?php echo $empresa["web_site"]; ?>" title="<?php echo $empresa["razon_social"]; ?>" target="_blank"><?php echo $empresa["web_site"]; ?></a>
+                                                <a href="<?php echo $empresa["web_site"]; ?>" title="<?php echo $empresa["nombre_comercial"]; ?>" target="_blank"><?php echo $empresa["web_site"]; ?></a>
                                             </div>
                                         </li>
                                     </ul>
