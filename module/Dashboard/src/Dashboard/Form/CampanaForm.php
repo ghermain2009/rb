@@ -17,7 +17,7 @@ class CampanaForm extends Form
         foreach($empresas as $empresa) {
             //var_dump($empresa);
             $id = $empresa->getId_empresa();
-            $selEmpresa[$id] = $empresa->getRazon_social();
+            $selEmpresa[$id] = $empresa->getNombre_comercial();
         }
         
         
