@@ -83,7 +83,7 @@ class CampanaController extends AbstractActionController {
         $col->setWidth(20);
         $grid->addColumn($col);
 
-        $col = new Column\Select('razon_social', 'e');
+        $col = new Column\Select('nombre_comercial', 'e');
         $col->setLabel('Empresa');
         $col->setWidth(15);
         $grid->addColumn($col);
