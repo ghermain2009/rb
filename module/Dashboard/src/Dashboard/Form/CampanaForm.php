@@ -99,6 +99,7 @@ class CampanaForm extends Form
         $this->add(array(
             'name' => 'fecha_inicio',
             'attributes' => array(
+                'id'    => 'fecha_inicio',
                 'type'  => 'text',
                 'class' => 'form-control input-sm'
             ),
@@ -106,6 +107,7 @@ class CampanaForm extends Form
         $this->add(array(
             'name' => 'hora_inicio',
             'attributes' => array(
+                'id'    => 'hora_inicio',
                 'type'  => 'text',
                 'class' => 'form-control input-sm',
                 'data-format' => 'hh:mm:ss'
@@ -114,6 +116,7 @@ class CampanaForm extends Form
         $this->add(array(
             'name' => 'fecha_final',
             'attributes' => array(
+                'id'    => 'fecha_final',
                 'type'  => 'text',
                 'class' => 'form-control input-sm'
             ),
@@ -121,6 +124,7 @@ class CampanaForm extends Form
         $this->add(array(
             'name' => 'hora_final',
             'attributes' => array(
+                'id'    => 'hora_final',
                 'type'  => 'text',
                 'class' => 'form-control input-sm',
                 'data-format' => 'hh:mm:ss'
@@ -129,6 +133,7 @@ class CampanaForm extends Form
         $this->add(array(
             'name' => 'fecha_validez',
             'attributes' => array(
+                'id'    => 'fecha_validez',
                 'type'  => 'text',
                 'class' => 'form-control input-sm'
             ),

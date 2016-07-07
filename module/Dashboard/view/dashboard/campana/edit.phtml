@@ -72,10 +72,10 @@ $contador = -1;
         <div class="form-group">
             <label for="fecha_inicio" class="col-lg-2 control-label">Fecha Inicio :</label>
             <div class="col-lg-2">
-                <div class="input-group date" id='fecha_inicio'>
+                <div class="input-group date">
                     <?php echo $this->formRow($this->form->get('fecha_inicio')); ?>
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
+                    <span class="input-group-addon" id='fecha_inicio_addon'>
+                        <span class="glyphicon glyphicon-calendar" ></span>
                     </span>
                 </div>
             </div>
@@ -83,10 +83,10 @@ $contador = -1;
         <div class="form-group">
             <label for="hora_inicio" class="col-lg-2 control-label">Hora Inicio :</label>
             <div class="col-lg-2">
-                <div class="input-group date" id='hora_inicio'>
+                <div class="input-group date">
                     <?php echo $this->formRow($this->form->get('hora_inicio')); ?>
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-time"></span>
+                    <span class="input-group-addon" id="hora_inicio_addon">
+                        <span class="glyphicon glyphicon-time" ></span>
                     </span>
                 </div>
             </div>
@@ -94,10 +94,10 @@ $contador = -1;
         <div class="form-group">
             <label for="fecha_final" class="col-lg-2 control-label">Fecha Final :</label>
             <div class="col-lg-2">
-                <div class="input-group date" id='fecha_final'>
+                <div class="input-group date">
                     <?php echo $this->formRow($this->form->get('fecha_final')); ?>
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
+                    <span class="input-group-addon" id='fecha_final_addon'>
+                        <span class="glyphicon glyphicon-calendar" ></span>
                     </span>
                 </div>
             </div>
@@ -105,9 +105,9 @@ $contador = -1;
         <div class="form-group">
             <label for="hora_final" class="col-lg-2 control-label">Hora Final :</label>
             <div class="col-lg-2">
-                <div class="input-group date" id='hora_final'>
+                <div class="input-group date">
                     <?php echo $this->formRow($this->form->get('hora_final')); ?>
-                    <span class="input-group-addon">
+                    <span class="input-group-addon" id="hora_final_addon">
                         <span class="glyphicon glyphicon-time"></span>
                     </span>
                 </div>
@@ -116,10 +116,10 @@ $contador = -1;
         <div class="form-group">
             <label for="fecha_validez" class="col-lg-2 control-label">Fecha Validez :</label>
             <div class="col-lg-2">
-                <div class="input-group date" id='fecha_validez'>
+                <div class="input-group date">
                     <?php echo $this->formRow($this->form->get('fecha_validez')); ?>
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
+                    <span class="input-group-addon" id='fecha_validez_addon'>
+                        <span class="glyphicon glyphicon-calendar" ></span>
                     </span>
                 </div>
             </div>
@@ -416,32 +416,43 @@ foreach ($ficheros2 as $file) {
         
 
 
+        $.datetimepicker.setLocale('es');
+
         $('#fecha_inicio,#fecha_final,#fecha_validez').datetimepicker({
-            format: 'yyyy-mm-dd',
-            language: 'es',
-            weekStart: 1,
-            todayBtn: 1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 2,
-            minView: 2,
-            forceParse: 0
-
+            yearOffset:0,
+            lang:'es',
+            timepicker:false,
+            format:'Y-m-d',
+            formatDate:'Y/m/d'
         });
-
+        
         $('#hora_inicio,#hora_final').datetimepicker({
-            format: 'hh:ii:ss',
-            language: 'es',
-            weekStart: 1,
-            todayBtn: 1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 1,
-            minView: 0,
-            maxView: 1,
-            forceParse: 0
-
+            datepicker:false,
+            format:'H:i',
+            step:5
         });
+        
+        $("#hora_inicio_addon").click(function () {
+            $('#hora_inicio').datetimepicker('show');
+        });
+        
+        $("#hora_final_addon").click(function () {
+            $('#hora_final').datetimepicker('show');
+        });
+        
+        $("#fecha_inicio_addon").click(function () {
+            $('#fecha_inicio').datetimepicker('show');
+        });
+        
+        $("#fecha_final_addon").click(function () {
+            $('#fecha_final').datetimepicker('show');
+        });
+        
+        $("#fecha_validez_addon").click(function () {
+            $('#fecha_validez').datetimepicker('show');
+        });
+        
+        $('#fecha_inicio,#fecha_final').css('text-align','left');
 
         $('#content').liveEdit({
             modal_id: 'divEditor',
